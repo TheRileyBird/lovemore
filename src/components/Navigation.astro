@@ -4,33 +4,27 @@ import Button from './Button.astro';
 ---
 
 <nav
-	class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-warm-gray-200 shadow-sm py-4"
+	x-data="{ scrolled: false }"
+	@scroll.window="scrolled = window.pageYOffset > 50"
+	:class="scrolled ? 'py-2' : 'py-4'"
+	class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-warm-gray-200 shadow-sm transition-all duration-300"
 	role="navigation"
 	aria-label="Main navigation"
 >
 	<div class="container mx-auto px-6">
-		<div class="flex items-center justify-between">
-			<!-- Logo -->
-			<a href="/" class="flex items-center hover:opacity-90 transition-all duration-300">
-				<img
-					src={logoImage.src}
-					alt="Love More - Movement, Community, Connection"
-					class="w-auto h-11"
-				/>
-			</a>
-
-			<!-- Desktop Navigation -->
+		<div class="grid grid-cols-3 items-center gap-8">
+			<!-- Left: Navigation Links -->
 			<div class="hidden md:flex items-center gap-8">
 				<!-- Classes Dropdown -->
 				<div x-data="{ open: false }" class="relative">
 					<button
-						@click="open = !open"
-						@click.away="open = false"
+						@mouseenter="open = true"
+						@mouseleave="open = false"
 						@keydown.escape="open = false"
 						:aria-expanded="open"
 						aria-haspopup="true"
 						aria-controls="classes-menu"
-						class="text-sm font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1"
+						class="text-xs font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1 uppercase tracking-wider"
 					>
 						Classes
 						<svg class="inline-block w-4 h-4 ml-1" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,6 +33,8 @@ import Button from './Button.astro';
 					</button>
 					<div
 						x-show="open"
+						@mouseenter="open = true"
+						@mouseleave="open = false"
 						x-transition:enter="transition ease-out duration-200"
 						x-transition:enter-start="opacity-0 scale-95"
 						x-transition:enter-end="opacity-100 scale-100"
@@ -61,13 +57,13 @@ import Button from './Button.astro';
 				<!-- Teachers Dropdown -->
 				<div x-data="{ open: false }" class="relative">
 					<button
-						@click="open = !open"
-						@click.away="open = false"
+						@mouseenter="open = true"
+						@mouseleave="open = false"
 						@keydown.escape="open = false"
 						:aria-expanded="open"
 						aria-haspopup="true"
 						aria-controls="teachers-menu"
-						class="text-sm font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1"
+						class="text-xs font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1 uppercase tracking-wider"
 					>
 						Teachers
 						<svg class="inline-block w-4 h-4 ml-1" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,6 +72,8 @@ import Button from './Button.astro';
 					</button>
 					<div
 						x-show="open"
+						@mouseenter="open = true"
+						@mouseleave="open = false"
 						x-transition:enter="transition ease-out duration-200"
 						x-transition:enter-start="opacity-0 scale-95"
 						x-transition:enter-end="opacity-100 scale-100"
@@ -92,10 +90,27 @@ import Button from './Button.astro';
 						<a href="/contact" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Contact</a>
 					</div>
 				</div>
+			</div>
 
-				<Button href="#get-started" size="small">
-					Get Started for $56
-				</Button>
+			<!-- Center: Logo -->
+			<div class="flex justify-center">
+				<a href="/" class="flex items-center hover:opacity-90 transition-all duration-300">
+					<img
+						src={logoImage.src}
+						alt="Love More - Movement, Community, Connection"
+						:class="scrolled ? 'h-8' : 'h-11'"
+						class="w-auto transition-all duration-300"
+					/>
+				</a>
+			</div>
+
+			<!-- Right: Button -->
+			<div class="hidden md:flex items-center justify-end">
+				<div :class="scrolled ? 'scale-90' : 'scale-100'" class="transition-transform duration-300">
+					<Button href="#get-started" size="small">
+						Get Started for $56
+					</Button>
+				</div>
 			</div>
 
 			<!-- Mobile Menu Button -->
@@ -105,7 +120,7 @@ import Button from './Button.astro';
 				aria-label="Toggle mobile menu"
 				:aria-expanded="open"
 				aria-controls="mobile-menu"
-				class="md:hidden p-2 text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded"
+				class="md:hidden p-2 text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded col-start-3 justify-self-end"
 			>
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -136,7 +151,7 @@ import Button from './Button.astro';
 				<button
 					@click="expanded = !expanded"
 					:aria-expanded="expanded"
-					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-600 hover:text-brand py-2"
+					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-600 hover:text-brand py-2 uppercase tracking-wider"
 				>
 					Classes
 					<svg class="w-4 h-4" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,7 +173,7 @@ import Button from './Button.astro';
 				<button
 					@click="expanded = !expanded"
 					:aria-expanded="expanded"
-					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-600 hover:text-brand py-2"
+					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-600 hover:text-brand py-2 uppercase tracking-wider"
 				>
 					Teachers
 					<svg class="w-4 h-4" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
