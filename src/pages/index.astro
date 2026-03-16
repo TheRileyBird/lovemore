@@ -130,12 +130,25 @@ const pillars = [
 			</div>
 		</section>
 
-		<!-- Quote Section -->
-		<section class="py-20 bg-cream-100">
-			<div class="container mx-auto px-8 max-w-3xl text-center">
-				<blockquote class="text-2xl md:text-3xl font-display font-light text-charcoal leading-relaxed">
-					"Where natural beauty meets intentional practice"
-				</blockquote>
+		<!-- Nature Spa Divider -->
+		<section class="relative py-40 overflow-hidden">
+			<div class="absolute inset-0">
+				<img
+					src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80"
+					alt=""
+					role="presentation"
+					class="w-full h-full object-cover"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/40 via-emerald/30 to-emerald-dark/40"></div>
+				<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.2)_100%)]"></div>
+			</div>
+			<div class="container mx-auto px-6 relative z-10 text-center">
+				<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase opacity-90">Nature • Wellness • Serenity</p>
+				<h2 class="text-5xl md:text-6xl font-display font-light text-white mt-6 mb-8 tracking-wide leading-tight max-w-4xl mx-auto">
+					Where natural beauty meets<br class="hidden md:block" />
+					<span class="italic text-gold">intentional practice</span>
+				</h2>
+				<Divider width="medium" />
 			</div>
 		</section>
 
@@ -166,16 +179,24 @@ const pillars = [
 		</section>
 
 		<!-- Virtual Studio Banner -->
-		<section class="py-20 bg-white" aria-labelledby="virtual-heading">
-			<div class="container mx-auto px-8 max-w-4xl">
-				<div class="bg-cream-200 rounded-2xl p-12 text-center">
-					<Calendar class="w-12 h-12 text-brand mx-auto mb-4" aria-hidden="true" />
-					<h2 id="virtual-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mb-4">
-						Join Our Virtual Studio
-					</h2>
-					<p class="text-lg text-neutral-600 mb-8">
-						Practice with us from anywhere with our curated online classes
-					</p>
+		<section class="relative py-24 overflow-hidden" aria-labelledby="virtual-heading">
+			<div class="absolute inset-0">
+				<img
+					src="https://images.unsplash.com/photo-1696937525057-efcb5dbc84e3?w=1600&q=80"
+					alt=""
+					role="presentation"
+					class="w-full h-full object-cover"
+				/>
+				<div class="absolute inset-0 bg-neutral-900/50"></div>
+				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/30 via-emerald-dark/80 to-emerald-dark/30"></div>
+			</div>
+			<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="text-center">
+					<Calendar class="w-14 h-14 text-gold mx-auto mb-6" aria-hidden="true" />
+					<h2 id="virtual-heading" class="text-4xl md:text-5xl font-display font-light text-white mb-4 tracking-wide">Join Our Virtual Studio</h2>
+					<Divider width="short" class="mb-6 h-0.5" />
+					<p class="text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Practice with us from anywhere with our curated online classes</p>
 					<Button href="/virtual" variant="primary">
 						Explore Virtual Classes
 					</Button>

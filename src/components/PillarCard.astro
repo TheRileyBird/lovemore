@@ -1,6 +1,7 @@
 ---
 import { LucideIcon } from 'lucide-astro';
 import { ArrowRight } from 'lucide-astro';
+import Divider from './Divider.astro';
 
 interface Props {
 	icon: typeof LucideIcon;
@@ -14,38 +15,37 @@ interface Props {
 const { icon: Icon, title, description, link, image } = Astro.props;
 ---
 
-<div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 group">
-	<!-- Image section -->
-	<div class="relative h-64 overflow-hidden">
+<div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)] transition-all duration-700 hover:-translate-y-3">
+	<div class="absolute inset-0">
 		<img
 			src={image}
 			alt={title}
 			loading="lazy"
-			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+			class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
 		/>
+		<div class="absolute inset-0 bg-gradient-to-t from-neutral-900/95 via-neutral-900/60 to-transparent"></div>
+		<!-- Subtle gold overlay on hover -->
+		<div class="absolute inset-0 bg-gradient-to-t from-gold/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 	</div>
-
-	<!-- Content section -->
-	<div class="p-8">
-		<!-- Icon -->
-		<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand to-brand-dark flex items-center justify-center mb-4">
-			<Icon class="w-6 h-6 text-white" />
+	<div class="relative p-10 min-h-[550px] flex flex-col justify-end">
+		<!-- Icon with gold accent -->
+		<div class="relative w-16 h-16 mb-6">
+			<div class="absolute inset-0 bg-gradient-to-br from-brand to-brand-dark rounded-2xl shadow-lg"></div>
+			<div class="absolute inset-0 bg-gold/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+			<div class="relative w-full h-full flex items-center justify-center">
+				<Icon class="w-8 h-8 text-white" />
+			</div>
 		</div>
 
-		<!-- Title -->
-		<h3 class="text-3xl font-display font-light text-charcoal mb-3 tracking-wide">
-			{title}
-		</h3>
-
-		<!-- Description -->
-		<p class="text-neutral-600 leading-relaxed mb-6">
-			{description}
-		</p>
-
-		<!-- Link -->
-		<a href={link} class="inline-flex items-center gap-2 text-brand font-medium hover:gap-3 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded">
-			Discover More
-			<ArrowRight class="w-4 h-4" />
+		<h3 class="text-4xl md:text-5xl font-display font-light text-white mb-4 tracking-wide">{title}</h3>
+		<div class="w-12 h-0.5 bg-gradient-to-r from-gold/0 via-gold/80 to-gold/0 mb-4 group-hover:w-24 transition-all duration-500"></div>
+		<p class="text-white/90 mb-8 leading-relaxed text-lg font-light">{description}</p>
+		<a
+			href={link}
+			class="inline-flex items-center gap-2 text-white font-medium tracking-luxury hover:gap-4 transition-all duration-300 group/link focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded"
+		>
+			<span class="border-b border-gold/50 group-hover/link:border-gold">Discover More</span>
+			<ArrowRight class="w-5 h-5 text-gold group-hover/link:translate-x-1 transition-transform duration-300" />
 		</a>
 	</div>
 </div>
