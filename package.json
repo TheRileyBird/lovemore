@@ -1,0 +1,24 @@
+{
+  "name": "zany-zero",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@alpinejs/collapse": "^3.15.8",
+    "@alpinejs/intersect": "^3.15.8",
+    "@astrojs/netlify": "^7.0.2",
+    "@tailwindcss/vite": "^4.2.1",
+    "alpinejs": "^3.15.8",
+    "astro": "^6.0.4",
+    "lucide-astro": "^0.556.0",
+    "tailwindcss": "^4.2.1"
+  }
+}

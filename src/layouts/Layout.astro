@@ -1,0 +1,333 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	canonicalURL?: string;
+}
+
+const {
+	title = 'Love More | Movement • Community • Connection',
+	description = 'Love More is a warm-hearted yoga community in Covington, LA focused on your self-love journey through movement, community, and connection.',
+	image = '/og-image.jpg',
+	canonicalURL = 'https://lovemoremcc.com'
+} = Astro.props;
+
+const fullTitle = title;
+const fullImage = new URL(image, Astro.site || 'https://lovemoremcc.com').toString();
+
+// Structured Data for LocalBusiness
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "YogaStudio",
+	"name": "Love More",
+	"description": description,
+	"url": "https://lovemoremcc.com",
+	"telephone": "+1-985-900-2468",
+	"email": "JoEllen@lovemoremcc.com",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "234 Lee Lane, Second Floor",
+		"addressLocality": "Covington",
+		"addressRegion": "LA",
+		"postalCode": "70433",
+		"addressCountry": "US"
+	},
+	"geo": {
+		"@type": "GeoCoordinates",
+		"latitude": "30.4755",
+		"longitude": "-90.1009"
+	},
+	"openingHoursSpecification": [
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Monday",
+			"opens": "08:00",
+			"closes": "20:00"
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Tuesday",
+			"opens": "05:00",
+			"closes": "06:30"
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Wednesday",
+			"opens": "06:00",
+			"closes": "20:00"
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Thursday",
+			"opens": "05:00",
+			"closes": "19:00"
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Friday",
+			"opens": "06:00",
+			"closes": "20:00"
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Saturday",
+			"opens": "09:00",
+			"closes": "12:00"
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": "Sunday",
+			"opens": "09:00",
+			"closes": "10:30"
+		}
+	],
+	"sameAs": [
+		"https://instagram.com/lovemore_covington",
+		"https://facebook.com/lovemorecovington"
+	]
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Primary Meta Tags -->
+		<title>{fullTitle}</title>
+		<meta name="title" content={fullTitle} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={fullImage} />
+		<meta property="og:site_name" content="Love More" />
+		<meta property="og:locale" content="en_US" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={fullTitle} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={fullImage} />
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+		<!-- Luxury Fonts - Optimized with font-display swap -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Gilda+Display&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+		<title>{fullTitle}</title>
+	</head>
+	<body class="antialiased bg-cream text-charcoal">
+		<slot />
+
+		<!-- Alpine.js with Intersect and Collapse plugins -->
+		<script>
+			import Alpine from 'alpinejs';
+			import intersect from '@alpinejs/intersect';
+			import collapse from '@alpinejs/collapse';
+
+			// Register plugins BEFORE starting Alpine
+			Alpine.plugin(intersect);
+			Alpine.plugin(collapse);
+
+			// Make Alpine available globally
+			window.Alpine = Alpine;
+
+			// Start Alpine
+			Alpine.start();
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	@import '../styles/global.css';
+
+	/* CSS Custom Properties - Luxury Design System */
+	:root {
+		/* Typography - Luxury Serif + Modern Sans */
+		--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+		--font-display: 'Cormorant Garamond', 'Gilda Display', Georgia, serif;
+		--font-accent: 'Gilda Display', serif;
+
+		/* Brand Colors - Rich & Sophisticated */
+		--color-brand: #ca2317;
+		--color-brand-dark: #8b1810;
+		--color-brand-light: #e02919;
+
+		/* Luxury Accents */
+		--color-gold: #d4af37;
+		--color-gold-dark: #b8941f;
+		--color-gold-light: #f4e4b5;
+		--color-bronze: #cd7f32;
+
+		/* Nature Spa Tones */
+		--color-emerald: #0f5747;
+		--color-emerald-dark: #0a3d32;
+		--color-sage: #9caf88;
+		--color-forest: #1a4d2e;
+
+		/* Refined Neutrals */
+		--color-cream: #faf8f4;
+		--color-charcoal: #2c2c2c;
+
+		/* Animation Timing - Elegant & Smooth */
+		--transition-fast: 200ms;
+		--transition-base: 400ms;
+		--transition-slow: 600ms;
+		--ease-luxury: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* Apply custom properties via Tailwind @layer */
+	@layer base {
+		body {
+			font-family: var(--font-sans);
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			font-family: var(--font-display);
+		}
+	}
+
+	/* Tailwind utilities for luxury design system */
+	@layer utilities {
+		/* Brand Colors */
+		.text-brand { color: var(--color-brand); }
+		.bg-brand { background-color: var(--color-brand); }
+		.border-brand { border-color: var(--color-brand); }
+		.bg-brand-dark { background-color: var(--color-brand-dark); }
+		.hover\:bg-brand-dark:hover { background-color: var(--color-brand-dark); }
+		.fill-brand { fill: var(--color-brand); }
+		.ring-brand { --tw-ring-color: var(--color-brand); }
+
+		/* Brand Gradient Stops */
+		.from-brand { --tw-gradient-from: var(--color-brand) var(--tw-gradient-from-position); --tw-gradient-to: rgb(202 35 23 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+		.to-brand { --tw-gradient-to: var(--color-brand) var(--tw-gradient-to-position); }
+		.to-brand-dark { --tw-gradient-to: var(--color-brand-dark) var(--tw-gradient-to-position); }
+		.via-brand { --tw-gradient-to: rgb(202 35 23 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--color-brand) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+
+		/* Gold/Luxury Accents */
+		.text-gold { color: var(--color-gold); }
+		.bg-gold { background-color: var(--color-gold); }
+		.border-gold { border-color: var(--color-gold); }
+		.fill-gold { fill: var(--color-gold); }
+		.ring-gold { --tw-ring-color: var(--color-gold); }
+
+		/* Gold Gradient Stops */
+		.from-gold { --tw-gradient-from: var(--color-gold) var(--tw-gradient-from-position); --tw-gradient-to: rgb(212 175 55 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+		.via-gold { --tw-gradient-to: rgb(212 175 55 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--color-gold) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+		.to-gold { --tw-gradient-to: var(--color-gold) var(--tw-gradient-to-position); }
+
+		/* Nature Spa Accents */
+		.text-emerald { color: var(--color-emerald); }
+		.bg-emerald { background-color: var(--color-emerald); }
+		.bg-emerald-dark { background-color: var(--color-emerald-dark); }
+		.border-emerald { border-color: var(--color-emerald); }
+		.bg-forest { background-color: var(--color-forest); }
+
+		/* Emerald/Forest Gradient Stops */
+		.from-emerald-dark { --tw-gradient-from: var(--color-emerald-dark) var(--tw-gradient-from-position); --tw-gradient-to: rgb(10 61 50 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+		.via-emerald { --tw-gradient-to: rgb(15 87 71 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--color-emerald) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+		.via-forest { --tw-gradient-to: rgb(26 77 46 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--color-forest) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+		.to-emerald-dark { --tw-gradient-to: var(--color-emerald-dark) var(--tw-gradient-to-position); }
+
+		/* Refined Backgrounds */
+		.bg-cream { background-color: var(--color-cream); }
+		.bg-charcoal { background-color: var(--color-charcoal); }
+		.text-charcoal { color: var(--color-charcoal); }
+
+		/* Luxury Shadows */
+		.shadow-brand\/30 { --tw-shadow-color: rgb(202 35 23 / 0.3); }
+		.shadow-brand\/40 { --tw-shadow-color: rgb(202 35 23 / 0.4); }
+		.shadow-gold\/20 { --tw-shadow-color: rgb(212 175 55 / 0.2); }
+		.shadow-gold\/30 { --tw-shadow-color: rgb(212 175 55 / 0.3); }
+		.shadow-gold\/40 { --tw-shadow-color: rgb(212 175 55 / 0.4); }
+		.shadow-luxury {
+			box-shadow:
+				0 4px 6px -1px rgba(0, 0, 0, 0.05),
+				0 10px 20px -5px rgba(202, 35, 23, 0.1),
+				0 0 40px -10px rgba(212, 175, 55, 0.15);
+		}
+		.hover\:shadow-brand\/40:hover { --tw-shadow-color: rgb(202 35 23 / 0.4); }
+		.hover\:shadow-gold\/30:hover { --tw-shadow-color: rgb(212 175 55 / 0.3); }
+		.hover\:shadow-gold\/40:hover { --tw-shadow-color: rgb(212 175 55 / 0.4); }
+
+		/* Premium Typography */
+		.font-display { font-family: var(--font-display); }
+		.font-accent { font-family: var(--font-accent); }
+
+		/* Letter Spacing - Luxury */
+		.tracking-luxury { letter-spacing: 0.05em; }
+		.tracking-luxury-wide { letter-spacing: 0.1em; }
+
+		/* Elegant Transitions */
+		.transition-luxury {
+			transition-duration: var(--transition-base);
+			transition-timing-function: var(--ease-luxury);
+		}
+	}
+
+	/* Smooth scroll behavior */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Focus visible for accessibility - using CSS custom property */
+	*:focus-visible {
+		outline: 2px solid var(--color-brand);
+		outline-offset: 2px;
+	}
+
+	/* Screen reader only utility */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+
+	.focus\:not-sr-only:focus {
+		position: static;
+		width: auto;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		overflow: visible;
+		clip: auto;
+		white-space: normal;
+	}
+
+	/* Font display optimization for Google Fonts */
+	@font-face {
+		font-family: 'Inter';
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Playfair Display';
+		font-display: swap;
+	}
+</style>

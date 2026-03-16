@@ -1,0 +1,16 @@
+---
+interface Props {
+	width?: 'short' | 'medium' | 'long';
+	class?: string;
+}
+
+const { width = 'short', class: className = '' } = Astro.props;
+
+const widthClasses = {
+	short: 'w-16',
+	medium: 'w-24',
+	long: 'w-32'
+};
+---
+
+<div class:list={[widthClasses[width], 'h-1 bg-gradient-to-r from-gold/0 via-gold to-gold/0 mx-auto', className]}></div>

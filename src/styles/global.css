@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+	/* Brand Colors */
+	--color-brand: #ca2317;
+	--color-brand-dark: #8b1810;
+	--color-brand-light: #e02919;
+
+	/* Gold/Luxury */
+	--color-gold: #d4af37;
+	--color-gold-dark: #b8941f;
+	--color-gold-light: #f4e4b5;
+
+	/* Nature Spa */
+	--color-emerald: #0f5747;
+	--color-emerald-dark: #0a3d32;
+	--color-forest: #1a4d2e;
+	--color-sage: #9caf88;
+
+	/* Refined Neutrals */
+	--color-cream: #faf8f4;
+	--color-charcoal: #2c2c2c;
+
+	/* Letter Spacing */
+	--tracking-luxury: 0.05em;
+	--tracking-luxury-wide: 0.1em;
+
+	/* Fonts */
+	--font-display: 'Cormorant Garamond', 'Gilda Display', Georgia, serif;
+	--font-accent: 'Gilda Display', serif;
+}

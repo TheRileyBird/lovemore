@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { Heart, CheckCircle } from 'lucide-astro';
+---
+
+<Layout title="Thank You | Love More" description="Thank you for subscribing to Love More updates.">
+	<Navigation />
+
+	<main id="main-content" class="min-h-screen flex items-center justify-center py-24 px-6">
+		<div class="max-w-2xl mx-auto text-center">
+			<div class="mb-8">
+				<CheckCircle class="w-20 h-20 text-brand mx-auto mb-6" aria-hidden="true" />
+				<Heart class="w-12 h-12 text-brand fill-brand mx-auto mb-8" aria-hidden="true" />
+			</div>
+
+			<h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+				Thank You!
+			</h1>
+
+			<p class="text-xl text-neutral-600 mb-8 leading-relaxed">
+				We're excited to have you as part of the Love More community. You'll start receiving updates, class schedules, and special offers from us soon.
+			</p>
+
+			<p class="text-lg text-neutral-600 mb-12">
+				In the meantime, explore our classes or reach out if you have any questions.
+			</p>
+
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<a
+					href="/schedule"
+					class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand text-white font-semibold rounded-full hover:shadow-lg hover:shadow-brand/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+				>
+					View Schedule
+				</a>
+				<a
+					href="/"
+					class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-neutral-100 text-neutral-900 font-semibold rounded-full hover:bg-neutral-200 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+				>
+					Back to Home
+				</a>
+			</div>
+		</div>
+	</main>
+
+	<Footer />
+</Layout>

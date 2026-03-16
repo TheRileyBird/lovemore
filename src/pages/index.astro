@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import StepCard from '../components/StepCard.astro';
+import PillarCard from '../components/PillarCard.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro';
+
+const steps = [
+	{ number: 1, title: 'Buy Your 3 Week Intro Pass', description: 'Purchase your intro pass online or in person' },
+	{ number: 2, title: 'Show Up 15 Minutes Before Class Starts', description: 'Arrive early to get settled and meet your instructors' },
+	{ number: 3, title: 'Feel The Love & Try Your Best', description: 'Connect with our welcoming community and begin your transformation' }
+];
+
+const pillars = [
+	{
+		icon: Heart,
+		title: 'Movement',
+		description: 'Meet us on the mat to unlock your inner strength and zen. Embark on the personal journey of connecting your mind, body, and spirit through movement.',
+		link: '/movement',
+		image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=1000&fit=crop&q=80'
+	},
+	{
+		icon: Users,
+		title: 'Community',
+		description: 'Here is where play and unity come alive! Gather, as we share and explore classes, events, retreats, and trainings.',
+		link: '/community',
+		image: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&h=1000&fit=crop&q=80'
+	},
+	{
+		icon: Sparkles,
+		title: 'Connection',
+		description: 'Find home in our healing services, where a range of offerings awaits to bring harmony and rejuvenation to both your physical and spiritual selves.',
+		link: '/connection',
+		image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=1000&fit=crop&q=80'
+	}
+];
+---
+
+<Layout>
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-labelledby="hero-heading">
+			<div class="absolute inset-0 z-0">
+				<img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=1600&h=1200&fit=crop&q=80" alt="" role="presentation" loading="eager" class="w-full h-full object-cover" />
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/40 to-neutral-900/70"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<div
+					x-data="{
+						phrases: ['Love the Journey', 'Trust the Process', 'Give Gratitude', 'Receive More'],
+						current: 0,
+						interval: null,
+						init() { this.interval = setInterval(() => { this.current = (this.current + 1) % this.phrases.length; }, 4000); },
+						destroy() { if (this.interval) clearInterval(this.interval); }
+					}"
+					@destroy.window="destroy()"
+					class="mb-12"
+				>
+					<h1 x-text="phrases[current]" id="hero-heading" class="text-7xl md:text-9xl font-display font-light text-white mb-8 tracking-wide drop-shadow-2xl leading-tight">Love the Journey</h1>
+					<Divider width="medium" class="mb-8" />
+				</div>
+
+				<p class="text-2xl md:text-3xl text-white/95 mb-16 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-lg tracking-wide">
+					A refined sanctuary for your self-love journey through<br class="hidden md:block" />
+					<span class="font-accent italic">movement, community, and connection.</span>
+				</p>
+
+				<Button href="#get-started" variant="primary" size="large">
+					Begin Your Journey — $56
+				</Button>
+			</div>
+		</section>
+
+		<!-- Getting Started Section -->
+		<section id="get-started" class="py-32 bg-white" aria-labelledby="getting-started-heading">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-20">
+					<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase">Your Path Awaits</p>
+					<h2 id="getting-started-heading" class="text-5xl md:text-6xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Getting Started</h2>
+					<Divider width="short" class="mb-6" />
+					<p class="text-xl text-neutral-600 max-w-2xl mx-auto font-light leading-relaxed">Begin your journey with us in three refined steps</p>
+				</div>
+				<div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+					{steps.map((step) => <StepCard {...step} />)}
+				</div>
+			</div>
+		</section>
+
+		<!-- Core Pillars Section -->
+		<section class="py-32 bg-cream" aria-labelledby="pillars-heading">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-20">
+					<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase">Our Foundation</p>
+					<h2 id="pillars-heading" class="text-5xl md:text-6xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Three Pillars</h2>
+					<Divider width="short" />
+				</div>
+				<div class="grid md:grid-cols-3 gap-10">
+					{pillars.map((pillar) => <PillarCard {...pillar} />)}
+				</div>
+			</div>
+		</section>
+
+		<!-- Nature Spa Divider -->
+		<section class="relative py-40 overflow-hidden">
+			<div class="absolute inset-0">
+				<img
+					src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80"
+					alt=""
+					role="presentation"
+					class="w-full h-full object-cover"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/95 via-emerald/90 to-emerald-dark/95"></div>
+				<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.4)_100%)]"></div>
+			</div>
+			<div class="container mx-auto px-6 relative z-10 text-center">
+				<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase opacity-90">Nature • Wellness • Serenity</p>
+				<h2 class="text-5xl md:text-6xl font-display font-light text-white mt-6 mb-8 tracking-wide leading-tight max-w-4xl mx-auto">
+					Where natural beauty meets<br class="hidden md:block" />
+					<span class="italic text-gold">intentional practice</span>
+				</h2>
+				<Divider width="medium" />
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section class="py-32 bg-white" aria-labelledby="about-heading">
+			<div class="container mx-auto px-6">
+				<div class="grid md:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
+					<div class="relative group">
+						<div class="absolute -inset-6 bg-gradient-to-br from-gold/20 via-brand/10 to-transparent rounded-3xl blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" aria-hidden="true"></div>
+						<img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=1000&fit=crop&q=80" alt="Yoga studio atmosphere" loading="lazy" class="relative rounded-3xl shadow-luxury border border-gold/20" />
+					</div>
+
+					<div>
+						<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase">Our Story</p>
+						<h2 id="about-heading" class="text-5xl md:text-6xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Who is Love More?</h2>
+						<Divider width="short" class="mb-8" />
+						<p class="text-xl text-neutral-600 mb-6 leading-relaxed font-light">
+							We're a refined community dedicated to guiding you on a transformative self-love journey through <span class="font-accent italic text-charcoal">movement, community, and connection.</span>
+						</p>
+						<p class="text-lg text-neutral-600 mb-10 leading-relaxed font-light">
+							Through our curated classes, intimate events, specialized trainings, transformative retreats, and healing services, our mission is to embrace the art of learning to LOVE MORE.
+						</p>
+						<Button href="/about" variant="primary">
+							Discover Our Story
+						</Button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Virtual Studio Banner -->
+		<section class="relative py-24 overflow-hidden" aria-labelledby="virtual-heading">
+			<div class="absolute inset-0">
+				<img
+					src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80"
+					alt=""
+					role="presentation"
+					class="w-full h-full object-cover"
+				/>
+				<div class="absolute inset-0 bg-neutral-900/85"></div>
+				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/60 via-forest/50 to-emerald-dark/60"></div>
+			</div>
+			<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="text-center">
+					<Calendar class="w-14 h-14 text-gold mx-auto mb-6" aria-hidden="true" />
+					<h2 id="virtual-heading" class="text-4xl md:text-5xl font-display font-light text-white mb-4 tracking-wide">Join Our Virtual Studio</h2>
+					<Divider width="short" class="mb-6 h-0.5" />
+					<p class="text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Practice with us from anywhere with our curated online classes</p>
+					<Button href="/virtual" variant="primary">
+						Explore Virtual Classes
+					</Button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Email Signup Section -->
+		<section class="py-32 bg-cream" aria-labelledby="newsletter-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto">
+					<div class="relative bg-white p-16 rounded-3xl shadow-luxury border border-gold/20 overflow-hidden">
+						<div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-gold/10 to-transparent rounded-full blur-3xl"></div>
+						<div class="relative text-center mb-10">
+							<Mail class="w-14 h-14 text-gold mx-auto mb-6" aria-hidden="true" />
+							<h2 id="newsletter-heading" class="text-4xl md:text-5xl font-display font-light text-charcoal mb-4 tracking-wide">Let's Stay Connected</h2>
+							<Divider width="short" class="mb-6 h-0.5" />
+							<p class="text-lg text-neutral-600 font-light">Join our refined community for exclusive updates, curated events, and inspiration.</p>
+						</div>
+
+						<form name="newsletter" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+							<input type="hidden" name="form-name" value="newsletter" />
+							<p class="hidden" aria-hidden="true"><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+							<div>
+								<label for="email" class="sr-only">Email address</label>
+								<input type="email" id="email" name="email" placeholder="Your email address" required aria-required="true" class="w-full px-8 py-5 rounded-full border-2 border-gold/30 focus:border-gold focus:ring-4 focus:ring-gold/20 outline-none transition-all text-lg font-light bg-white/50 backdrop-blur-sm" />
+							</div>
+							<Button type="submit" class="w-full">
+								Join Our Community
+							</Button>
+						</form>
+
+						<p class="text-sm text-neutral-500 text-center mt-8 font-light">We respect your privacy. We will never share your email or spam you.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>

@@ -1,0 +1,179 @@
+---
+import logoImage from '../assets/images/logo.webp';
+import Button from './Button.astro';
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-md border-b border-gold/20 shadow-luxury" role="navigation" aria-label="Main navigation">
+	<div class="container mx-auto px-6 py-4">
+		<div class="flex items-center justify-between">
+			<!-- Logo -->
+			<a href="/" class="flex items-center hover:opacity-90 transition-luxury">
+				<img src={logoImage.src} alt="Love More - Movement, Community, Connection" class="h-16 w-auto" />
+			</a>
+
+			<!-- Desktop Navigation -->
+			<div class="hidden md:flex items-center gap-8">
+				<!-- Classes Dropdown -->
+				<div x-data="{ open: false }" class="relative">
+					<button
+						@click="open = !open"
+						@click.away="open = false"
+						@keydown.escape="open = false"
+						:aria-expanded="open"
+						aria-haspopup="true"
+						aria-controls="classes-menu"
+						class="text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded px-2 py-1"
+					>
+						Classes
+						<svg class="inline-block w-4 h-4 ml-1" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</button>
+					<div
+						x-show="open"
+						x-transition:enter="transition ease-out duration-200"
+						x-transition:enter-start="opacity-0 scale-95"
+						x-transition:enter-end="opacity-100 scale-100"
+						x-transition:leave="transition ease-in duration-150"
+						x-transition:leave-start="opacity-100 scale-100"
+						x-transition:leave-end="opacity-0 scale-95"
+						id="classes-menu"
+						class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-neutral-100 py-2 z-50"
+						style="display: none;"
+					>
+						<a href="/studio-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Studio Classes</a>
+						<a href="/schedule" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Schedule</a>
+						<a href="/pricing" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Pricing Options</a>
+						<a href="/specialty-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Specialty Classes</a>
+						<a href="/events" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Events</a>
+						<a href="/virtual" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Virtual Studio</a>
+					</div>
+				</div>
+
+				<!-- Teachers Dropdown -->
+				<div x-data="{ open: false }" class="relative">
+					<button
+						@click="open = !open"
+						@click.away="open = false"
+						@keydown.escape="open = false"
+						:aria-expanded="open"
+						aria-haspopup="true"
+						aria-controls="teachers-menu"
+						class="text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded px-2 py-1"
+					>
+						Teachers
+						<svg class="inline-block w-4 h-4 ml-1" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</button>
+					<div
+						x-show="open"
+						x-transition:enter="transition ease-out duration-200"
+						x-transition:enter-start="opacity-0 scale-95"
+						x-transition:enter-end="opacity-100 scale-100"
+						x-transition:leave="transition ease-in duration-150"
+						x-transition:leave-start="opacity-100 scale-100"
+						x-transition:leave-end="opacity-0 scale-95"
+						id="teachers-menu"
+						class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-neutral-100 py-2 z-50"
+						style="display: none;"
+					>
+						<a href="/team" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Team</a>
+						<a href="/teacher-training" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Teacher Training</a>
+						<a href="/retreats" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Retreats</a>
+						<a href="/contact" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Contact</a>
+					</div>
+				</div>
+
+				<Button href="#get-started" size="small">
+					Get Started for $56
+				</Button>
+			</div>
+
+			<!-- Mobile Menu Button -->
+			<button
+				x-data="{ open: false }"
+				@click="open = !open; $dispatch('mobile-menu-toggle', { open })"
+				aria-label="Toggle mobile menu"
+				:aria-expanded="open"
+				aria-controls="mobile-menu"
+				class="md:hidden p-2 text-neutral-700 hover:text-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
+			>
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+				</svg>
+			</button>
+		</div>
+	</div>
+
+	<!-- Mobile Menu Panel -->
+	<div
+		x-data="{ open: false }"
+		@mobile-menu-toggle.window="open = $event.detail.open"
+		@keydown.escape.window="open = false"
+		x-show="open"
+		x-transition:enter="transition ease-out duration-200"
+		x-transition:enter-start="opacity-0 -translate-y-4"
+		x-transition:enter-end="opacity-100 translate-y-0"
+		x-transition:leave="transition ease-in duration-150"
+		x-transition:leave-start="opacity-100 translate-y-0"
+		x-transition:leave-end="opacity-0 -translate-y-4"
+		id="mobile-menu"
+		class="md:hidden bg-white border-t border-neutral-200 shadow-lg"
+		style="display: none;"
+	>
+		<div class="container mx-auto px-6 py-4 space-y-4">
+			<!-- Mobile Classes Section -->
+			<div x-data="{ expanded: false }">
+				<button
+					@click="expanded = !expanded"
+					:aria-expanded="expanded"
+					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 py-2"
+				>
+					Classes
+					<svg class="w-4 h-4" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+					</svg>
+				</button>
+				<div x-show="expanded" x-collapse class="pl-4 space-y-2 mt-2">
+					<a href="/studio-classes" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Studio Classes</a>
+					<a href="/schedule" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Schedule</a>
+					<a href="/pricing" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Pricing Options</a>
+					<a href="/specialty-classes" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Specialty Classes</a>
+					<a href="/events" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Events</a>
+					<a href="/virtual" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Virtual Studio</a>
+				</div>
+			</div>
+
+			<!-- Mobile Teachers Section -->
+			<div x-data="{ expanded: false }">
+				<button
+					@click="expanded = !expanded"
+					:aria-expanded="expanded"
+					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 py-2"
+				>
+					Teachers
+					<svg class="w-4 h-4" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+					</svg>
+				</button>
+				<div x-show="expanded" x-collapse class="pl-4 space-y-2 mt-2">
+					<a href="/team" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Team</a>
+					<a href="/teacher-training" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Teacher Training</a>
+					<a href="/retreats" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Retreats</a>
+					<a href="/contact" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Contact</a>
+				</div>
+			</div>
+
+			<!-- Mobile CTA -->
+			<Button href="#get-started" size="small" class="w-full">
+				Get Started for $56
+			</Button>
+		</div>
+	</div>
+</nav>
+
+<!-- Skip to main content link for accessibility -->
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-red-700 focus:text-white focus:rounded focus:shadow-lg">
+	Skip to main content
+</a>
