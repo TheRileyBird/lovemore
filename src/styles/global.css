@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+	font-family: 'Elika';
+	src: url('/fonts/Elika Gorica Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme {
 	/* Brand Colors */
 	--color-brand: #ca2317;
@@ -28,4 +36,5 @@
 	/* Fonts */
 	--font-display: 'Cormorant Garamond', 'Gilda Display', Georgia, serif;
 	--font-accent: 'Gilda Display', serif;
+	--font-logo: 'Elika', Georgia, serif;
 }
