@@ -14,16 +14,12 @@ const { number, title, description } = Astro.props;
 	<div class="absolute -inset-2 bg-gradient-to-r from-gold/30 via-brand/20 to-gold/30 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
 
 	<div class="relative bg-white p-10 rounded-3xl shadow-luxury hover:shadow-2xl transition-all duration-500 border border-gold/10 hover:border-gold/30 hover:-translate-y-2 h-full flex flex-col">
-		<!-- Number Badge -->
-		<div class="relative w-20 h-20 mb-8">
-			<div class="absolute inset-0 bg-gradient-to-br from-brand to-brand-dark rounded-2xl shadow-lg shadow-brand/30"></div>
-			<div class="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-			<div class="relative w-full h-full flex items-center justify-center">
-				<span class="text-4xl font-display font-light text-white">{number}</span>
-			</div>
+		<!-- Number - Large and Centered -->
+		<div class="flex items-center justify-center mb-8">
+			<span class="text-8xl font-display font-light text-charcoal/20 group-hover:text-charcoal/30 transition-colors duration-500">{number}</span>
 		</div>
 
-		<h3 class="text-xs font-medium text-gold mb-4 uppercase tracking-luxury-wide">{title}</h3>
+		<h3 class="text-sm font-semibold text-charcoal mb-4 uppercase tracking-wider">{title}</h3>
 		<p class="text-neutral-600 leading-relaxed text-lg font-light flex-grow">{description}</p>
 	</div>
 </div>

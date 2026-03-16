@@ -47,7 +47,7 @@ const pillars = [
 		<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-labelledby="hero-heading">
 			<div class="absolute inset-0 z-0">
 				<img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=1600&h=1200&fit=crop&q=80" alt="" role="presentation" loading="eager" class="w-full h-full object-cover" />
-				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/40 to-neutral-900/70"></div>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/30 via-neutral-900/20 to-neutral-900/40"></div>
 			</div>
 
 			<div class="relative z-10 container mx-auto px-6 text-center">
@@ -55,20 +55,31 @@ const pillars = [
 					x-data="{
 						phrases: ['Love the Journey', 'Trust the Process', 'Give Gratitude', 'Receive More'],
 						current: 0,
+						opacity: 1,
 						interval: null,
-						init() { this.interval = setInterval(() => { this.current = (this.current + 1) % this.phrases.length; }, 4000); },
+						init() {
+							this.interval = setInterval(() => {
+								this.opacity = 0;
+								setTimeout(() => {
+									this.current = (this.current + 1) % this.phrases.length;
+									this.opacity = 1;
+								}, 600);
+							}, 4000);
+						},
 						destroy() { if (this.interval) clearInterval(this.interval); }
 					}"
 					@destroy.window="destroy()"
-					class="mb-12"
 				>
-					<h1 x-text="phrases[current]" id="hero-heading" class="text-7xl md:text-9xl font-display font-light text-white mb-8 tracking-wide drop-shadow-2xl leading-tight">Love the Journey</h1>
-					<Divider width="medium" class="mb-8" />
+					<h1
+						x-text="phrases[current]"
+						:style="`opacity: ${opacity}; transition: opacity 600ms ease-in-out;`"
+						id="hero-heading"
+						class="text-7xl md:text-9xl font-display font-bold text-white tracking-wide drop-shadow-2xl leading-tight"
+					>Love the Journey</h1>
 				</div>
 
 				<p class="text-2xl md:text-3xl text-white/95 mb-16 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-lg tracking-wide">
-					A refined sanctuary for your self-love journey through<br class="hidden md:block" />
-					<span class="font-accent italic">movement, community, and connection.</span>
+					movement • community • connection
 				</p>
 
 				<Button href="#get-started" variant="primary" size="large">
@@ -115,8 +126,8 @@ const pillars = [
 					role="presentation"
 					class="w-full h-full object-cover"
 				/>
-				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/95 via-emerald/90 to-emerald-dark/95"></div>
-				<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.4)_100%)]"></div>
+				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/40 via-emerald/30 to-emerald-dark/40"></div>
+				<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.2)_100%)]"></div>
 			</div>
 			<div class="container mx-auto px-6 relative z-10 text-center">
 				<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase opacity-90">Nature • Wellness • Serenity</p>
@@ -164,8 +175,8 @@ const pillars = [
 					role="presentation"
 					class="w-full h-full object-cover"
 				/>
-				<div class="absolute inset-0 bg-neutral-900/85"></div>
-				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/60 via-forest/50 to-emerald-dark/60"></div>
+				<div class="absolute inset-0 bg-neutral-900/50"></div>
+				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/30 via-forest/20 to-emerald-dark/30"></div>
 			</div>
 			<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
 			<div class="container mx-auto px-6 relative z-10">
