@@ -3,19 +3,19 @@ import { Heart, Mail, Instagram, Facebook, MapPin, Phone, Clock } from 'lucide-a
 import iconImage from '../assets/images/icon.webp';
 ---
 
-<footer class="bg-charcoal text-white py-20">
+<footer class="bg-cream-200 text-charcoal py-20">
 	<div class="container mx-auto px-6">
-		<!-- Elegant top border -->
-		<div class="w-full h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent mb-16"></div>
+		<!-- Top border -->
+		<div class="w-full h-px border-t border-warm-gray-200 mb-16"></div>
 
-		<div class="grid md:grid-cols-4 gap-16 mb-16">
+		<div class="grid md:grid-cols-4 gap-12 mb-16">
 			<!-- Brand -->
 			<div class="md:col-span-2">
 				<div class="flex flex-col items-start mb-8">
 					<img src={iconImage.src} alt="Love More" class="w-24 h-24 mb-4" aria-hidden="true" />
-					<p class="text-xs text-gold/90 font-medium tracking-luxury-wide uppercase mb-2">Movement • Community • Connection</p>
+					<p class="text-xs text-brand font-medium tracking-luxury-wide uppercase mb-2">Movement • Community • Connection</p>
 				</div>
-				<p class="text-neutral-400 leading-relaxed mb-8 max-w-md font-light text-lg">
+				<p class="text-neutral-600 leading-relaxed mb-8 max-w-md text-lg">
 					A refined sanctuary for your self-love journey in Covington, Louisiana.
 				</p>
 				<div class="flex items-center gap-4">
@@ -24,48 +24,48 @@ import iconImage from '../assets/images/icon.webp';
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label="Follow us on Instagram"
-						class="p-4 bg-white/5 backdrop-blur-sm rounded-full hover:bg-gold/20 border border-white/10 hover:border-gold/40 transition-all duration-300 group"
+						class="p-4 bg-cream-100 rounded-full hover:bg-brand hover:text-white transition-all duration-200 group"
 					>
-						<Instagram class="w-5 h-5 text-white/70 group-hover:text-gold transition-colors" aria-hidden="true" />
+						<Instagram class="w-5 h-5 text-charcoal group-hover:text-white transition-colors" aria-hidden="true" />
 					</a>
 					<a
 						href="https://facebook.com/lovemorecovington"
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label="Follow us on Facebook"
-						class="p-4 bg-white/5 backdrop-blur-sm rounded-full hover:bg-gold/20 border border-white/10 hover:border-gold/40 transition-all duration-300 group"
+						class="p-4 bg-cream-100 rounded-full hover:bg-brand hover:text-white transition-all duration-200 group"
 					>
-						<Facebook class="w-5 h-5 text-white/70 group-hover:text-gold transition-colors" aria-hidden="true" />
+						<Facebook class="w-5 h-5 text-charcoal group-hover:text-white transition-colors" aria-hidden="true" />
 					</a>
 				</div>
 			</div>
 
 			<!-- Contact Info -->
 			<div>
-				<h3 class="text-gold text-xs font-medium tracking-luxury-wide uppercase mb-6">Contact</h3>
-				<ul class="space-y-4 text-neutral-400 font-light">
+				<h3 class="text-brand text-xs font-medium tracking-luxury-wide uppercase mb-6">Contact</h3>
+				<ul class="space-y-4 text-neutral-600">
 					<li class="flex items-start gap-3 group">
-						<MapPin class="w-5 h-5 mt-1 flex-shrink-0 text-gold/70 group-hover:text-gold transition-colors" aria-hidden="true" />
+						<MapPin class="w-5 h-5 mt-1 flex-shrink-0 text-brand group-hover:text-brand-dark transition-colors" aria-hidden="true" />
 						<address class="text-sm not-italic leading-relaxed">234 Lee Lane, Second Floor<br />Covington, LA 70433</address>
 					</li>
 					<li class="flex items-center gap-3 group">
-						<Phone class="w-5 h-5 flex-shrink-0 text-gold/70 group-hover:text-gold transition-colors" aria-hidden="true" />
-						<a href="tel:9859002468" class="text-sm hover:text-white transition-colors">(985) 900-2468</a>
+						<Phone class="w-5 h-5 flex-shrink-0 text-brand group-hover:text-brand-dark transition-colors" aria-hidden="true" />
+						<a href="tel:9859002468" class="text-sm hover:text-brand-dark transition-colors">(985) 900-2468</a>
 					</li>
 					<li class="flex items-center gap-3 group">
-						<Mail class="w-5 h-5 flex-shrink-0 text-gold/70 group-hover:text-gold transition-colors" aria-hidden="true" />
-						<a href="mailto:JoEllen@lovemoremcc.com" class="text-sm hover:text-white transition-colors">JoEllen@lovemoremcc.com</a>
+						<Mail class="w-5 h-5 flex-shrink-0 text-brand group-hover:text-brand-dark transition-colors" aria-hidden="true" />
+						<a href="mailto:JoEllen@lovemoremcc.com" class="text-sm hover:text-brand-dark transition-colors">JoEllen@lovemoremcc.com</a>
 					</li>
 				</ul>
 			</div>
 
 			<!-- Hours -->
 			<div>
-				<h3 class="text-gold text-xs font-medium tracking-luxury-wide uppercase mb-6 flex items-center gap-2">
+				<h3 class="text-brand text-xs font-medium tracking-luxury-wide uppercase mb-6 flex items-center gap-2">
 					<Clock class="w-4 h-4" aria-hidden="true" />
 					Studio Hours
 				</h3>
-				<ul class="space-y-2 text-sm text-neutral-400 font-light">
+				<ul class="space-y-2 text-sm text-neutral-600">
 					<li class="flex justify-between gap-4">
 						<span class="text-neutral-500">Monday</span>
 						<span>8am-12pm, 3pm-8pm</span>
@@ -99,11 +99,11 @@ import iconImage from '../assets/images/icon.webp';
 		</div>
 
 		<!-- Bottom Bar -->
-		<div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-			<p class="text-sm text-neutral-500 font-light">&copy; {new Date().getFullYear()} Love More. All rights reserved.</p>
-			<div class="flex items-center gap-2 text-xs text-neutral-600 font-light">
+		<div class="pt-8 border-t border-warm-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+			<p class="text-sm text-neutral-500">&copy; {new Date().getFullYear()} Love More. All rights reserved.</p>
+			<div class="flex items-center gap-2 text-xs text-neutral-600">
 				<span>Crafted with</span>
-				<Heart class="w-3 h-3 text-gold fill-gold" aria-hidden="true" />
+				<Heart class="w-3 h-3 text-brand fill-brand" aria-hidden="true" />
 				<span>in Louisiana</span>
 			</div>
 		</div>

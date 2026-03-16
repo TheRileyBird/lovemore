@@ -9,12 +9,12 @@ interface Props {
 const { number, title, description } = Astro.props;
 ---
 
-<div class="text-center">
-	<!-- Large Number -->
-	<div>
+<div class="bg-white rounded-2xl p-10 shadow-sm hover:shadow-md transition-all duration-200">
+	<div class="text-center">
+		<!-- Large Number -->
 		<span class="text-[12rem] md:text-[16rem] font-light text-charcoal/80 leading-none block" style="font-family: var(--font-logo);">{number}</span>
-	</div>
 
-	<!-- Description Text -->
-	<p class="text-xl md:text-2xl text-charcoal font-bold leading-relaxed uppercase max-w-xs mx-auto">{title}</p>
+		<!-- Description Text -->
+		<p class="text-lg md:text-xl text-charcoal font-semibold leading-relaxed max-w-xs mx-auto">{title}</p>
+	</div>
 </div>

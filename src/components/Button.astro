@@ -2,19 +2,19 @@
 interface Props {
 	href?: string;
 	type?: 'button' | 'submit' | 'reset';
-	variant?: 'primary' | 'secondary' | 'white';
+	variant?: 'primary' | 'secondary' | 'outline';
 	size?: 'default' | 'large' | 'small';
 	class?: string;
 }
 
 const { href, type = 'button', variant = 'primary', size = 'default', class: className = '' } = Astro.props;
 
-const baseClasses = 'relative inline-flex items-center justify-center gap-2 font-medium tracking-luxury rounded-full transition-all duration-900 group overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2';
+const baseClasses = 'inline-flex items-center justify-center gap-2 font-medium tracking-luxury rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2';
 
 const variantClasses = {
-	primary: 'bg-gradient-to-br from-red-900 via-red-700 to-red-900 text-white shadow-lg hover:shadow-xl hover:shadow-red-500/20',
-	secondary: 'bg-gradient-to-br from-red-700 via-red-800 to-red-900 text-white shadow-lg hover:shadow-xl hover:shadow-red-500/20',
-	white: 'bg-gradient-to-br from-red-700 via-red-800 to-red-900 text-white shadow-lg hover:shadow-xl hover:shadow-red-500/20'
+	primary: 'bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md hover:translate-y-[-1px]',
+	secondary: 'bg-cream-200 text-charcoal hover:bg-beige-200 shadow-sm hover:shadow',
+	outline: 'bg-transparent border-2 border-brand text-brand hover:bg-brand-pale'
 };
 
 const sizeClasses = {
@@ -28,7 +28,5 @@ const elementProps = href ? { href } : { type };
 ---
 
 <Element {...elementProps} class:list={[baseClasses, variantClasses[variant], sizeClasses[size], className]}>
-	<span class="absolute inset-0 bg-linear-to-br from-red-950/80 via-red-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-900"></span>
-	<!--<span class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent via-white/15 via-transparent to-transparent blur-lg translate-x-[-150%] translate-y-[-150%] group-hover:translate-x-[150%] group-hover:translate-y-[150%] transition-transform duration-[2500ms] ease-in-out"></span>-->
-	<span class="relative"><slot /></span>
+	<slot />
 </Element>

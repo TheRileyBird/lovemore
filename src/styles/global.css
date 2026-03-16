@@ -37,6 +37,9 @@
 	--color-brand: #ca2317;
 	--color-brand-dark: #8b1810;
 	--color-brand-light: #e02919;
+	--color-brand-soft: #d64438;
+	--color-brand-muted: #e8695f;
+	--color-brand-pale: #fae8e6;
 
 	/* Gold/Luxury */
 	--color-gold: #d4af37;
@@ -48,6 +51,13 @@
 	--color-emerald-dark: #0a3d32;
 	--color-forest: #1a4d2e;
 	--color-sage: #9caf88;
+
+	/* MYA-Inspired Neutral Palette */
+	--color-cream-50: #fdfcfb;
+	--color-cream-200: #f5f2eb;
+	--color-beige-100: #f0ede6;
+	--color-beige-200: #e8e4db;
+	--color-warm-gray-200: #d1cec7;
 
 	/* Refined Neutrals */
 	--color-cream: #faf8f4;
@@ -61,4 +71,39 @@
 	--font-display: 'Cormorant Garamond', 'Gilda Display', Georgia, serif;
 	--font-accent: 'Gilda Display', serif;
 	--font-logo: 'Elika', Georgia, serif;
+}
+
+/* Typography Defaults */
+@layer base {
+	body {
+		font-size: 17px;
+		line-height: 1.7;
+	}
+}
+
+/* Custom Utilities */
+@layer utilities {
+	.bg-cream-50 {
+		background-color: var(--color-cream-50);
+	}
+
+	.bg-cream-200 {
+		background-color: var(--color-cream-200);
+	}
+
+	.bg-beige-100 {
+		background-color: var(--color-beige-100);
+	}
+
+	.bg-beige-200 {
+		background-color: var(--color-beige-200);
+	}
+
+	.border-warm-gray-200 {
+		border-color: var(--color-warm-gray-200);
+	}
+
+	.text-warm-gray-200 {
+		color: var(--color-warm-gray-200);
+	}
 }

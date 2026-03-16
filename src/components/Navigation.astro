@@ -4,10 +4,7 @@ import Button from './Button.astro';
 ---
 
 <nav
-	x-data="{ scrolled: false }"
-	@scroll.window="scrolled = window.scrollY > 50"
-	class="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-md border-b border-gold/20 shadow-luxury transition-all duration-300"
-	:class="scrolled ? 'py-2' : 'py-4'"
+	class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-warm-gray-200 shadow-sm py-4"
 	role="navigation"
 	aria-label="Main navigation"
 >
@@ -18,8 +15,7 @@ import Button from './Button.astro';
 				<img
 					src={logoImage.src}
 					alt="Love More - Movement, Community, Connection"
-					class="w-auto transition-all duration-300"
-					:class="scrolled ? 'h-10' : 'h-12'"
+					class="w-auto h-11"
 				/>
 			</a>
 
@@ -34,7 +30,7 @@ import Button from './Button.astro';
 						:aria-expanded="open"
 						aria-haspopup="true"
 						aria-controls="classes-menu"
-						class="text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded px-2 py-1"
+						class="text-sm font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1"
 					>
 						Classes
 						<svg class="inline-block w-4 h-4 ml-1" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,15 +46,15 @@ import Button from './Button.astro';
 						x-transition:leave-start="opacity-100 scale-100"
 						x-transition:leave-end="opacity-0 scale-95"
 						id="classes-menu"
-						class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-neutral-100 py-2 z-50"
+						class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-warm-gray-200 py-2 z-50"
 						style="display: none;"
 					>
-						<a href="/studio-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Studio Classes</a>
-						<a href="/schedule" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Schedule</a>
-						<a href="/pricing" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Pricing Options</a>
-						<a href="/specialty-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Specialty Classes</a>
-						<a href="/events" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Events</a>
-						<a href="/virtual" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Virtual Studio</a>
+						<a href="/studio-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Studio Classes</a>
+						<a href="/schedule" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Schedule</a>
+						<a href="/pricing" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Pricing Options</a>
+						<a href="/specialty-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Specialty Classes</a>
+						<a href="/events" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Events</a>
+						<a href="/virtual" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Virtual Studio</a>
 					</div>
 				</div>
 
@@ -71,7 +67,7 @@ import Button from './Button.astro';
 						:aria-expanded="open"
 						aria-haspopup="true"
 						aria-controls="teachers-menu"
-						class="text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded px-2 py-1"
+						class="text-sm font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1"
 					>
 						Teachers
 						<svg class="inline-block w-4 h-4 ml-1" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,13 +83,13 @@ import Button from './Button.astro';
 						x-transition:leave-start="opacity-100 scale-100"
 						x-transition:leave-end="opacity-0 scale-95"
 						id="teachers-menu"
-						class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-neutral-100 py-2 z-50"
+						class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-warm-gray-200 py-2 z-50"
 						style="display: none;"
 					>
-						<a href="/team" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Team</a>
-						<a href="/teacher-training" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Teacher Training</a>
-						<a href="/retreats" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Retreats</a>
-						<a href="/contact" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-red-700 transition-colors">Contact</a>
+						<a href="/team" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Team</a>
+						<a href="/teacher-training" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Teacher Training</a>
+						<a href="/retreats" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Retreats</a>
+						<a href="/contact" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Contact</a>
 					</div>
 				</div>
 
@@ -109,7 +105,7 @@ import Button from './Button.astro';
 				aria-label="Toggle mobile menu"
 				:aria-expanded="open"
 				aria-controls="mobile-menu"
-				class="md:hidden p-2 text-neutral-700 hover:text-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
+				class="md:hidden p-2 text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded"
 			>
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -131,7 +127,7 @@ import Button from './Button.astro';
 		x-transition:leave-start="opacity-100 translate-y-0"
 		x-transition:leave-end="opacity-0 -translate-y-4"
 		id="mobile-menu"
-		class="md:hidden bg-white border-t border-neutral-200 shadow-lg"
+		class="md:hidden bg-cream-100 border-t border-warm-gray-200 shadow-md"
 		style="display: none;"
 	>
 		<div class="container mx-auto px-6 py-4 space-y-4">
@@ -140,7 +136,7 @@ import Button from './Button.astro';
 				<button
 					@click="expanded = !expanded"
 					:aria-expanded="expanded"
-					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 py-2"
+					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-600 hover:text-brand py-2"
 				>
 					Classes
 					<svg class="w-4 h-4" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,12 +144,12 @@ import Button from './Button.astro';
 					</svg>
 				</button>
 				<div x-show="expanded" x-collapse class="pl-4 space-y-2 mt-2">
-					<a href="/studio-classes" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Studio Classes</a>
-					<a href="/schedule" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Schedule</a>
-					<a href="/pricing" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Pricing Options</a>
-					<a href="/specialty-classes" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Specialty Classes</a>
-					<a href="/events" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Events</a>
-					<a href="/virtual" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Virtual Studio</a>
+					<a href="/studio-classes" class="block py-2 text-sm text-neutral-600 hover:text-brand">Studio Classes</a>
+					<a href="/schedule" class="block py-2 text-sm text-neutral-600 hover:text-brand">Schedule</a>
+					<a href="/pricing" class="block py-2 text-sm text-neutral-600 hover:text-brand">Pricing Options</a>
+					<a href="/specialty-classes" class="block py-2 text-sm text-neutral-600 hover:text-brand">Specialty Classes</a>
+					<a href="/events" class="block py-2 text-sm text-neutral-600 hover:text-brand">Events</a>
+					<a href="/virtual" class="block py-2 text-sm text-neutral-600 hover:text-brand">Virtual Studio</a>
 				</div>
 			</div>
 
@@ -162,7 +158,7 @@ import Button from './Button.astro';
 				<button
 					@click="expanded = !expanded"
 					:aria-expanded="expanded"
-					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-700 hover:text-neutral-900 py-2"
+					class="flex items-center justify-between w-full text-left text-sm font-medium text-neutral-600 hover:text-brand py-2"
 				>
 					Teachers
 					<svg class="w-4 h-4" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,10 +166,10 @@ import Button from './Button.astro';
 					</svg>
 				</button>
 				<div x-show="expanded" x-collapse class="pl-4 space-y-2 mt-2">
-					<a href="/team" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Team</a>
-					<a href="/teacher-training" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Teacher Training</a>
-					<a href="/retreats" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Retreats</a>
-					<a href="/contact" class="block py-2 text-sm text-neutral-600 hover:text-red-700">Contact</a>
+					<a href="/team" class="block py-2 text-sm text-neutral-600 hover:text-brand">Team</a>
+					<a href="/teacher-training" class="block py-2 text-sm text-neutral-600 hover:text-brand">Teacher Training</a>
+					<a href="/retreats" class="block py-2 text-sm text-neutral-600 hover:text-brand">Retreats</a>
+					<a href="/contact" class="block py-2 text-sm text-neutral-600 hover:text-brand">Contact</a>
 				</div>
 			</div>
 
