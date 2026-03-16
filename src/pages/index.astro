@@ -10,7 +10,7 @@ import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro
 
 const steps = [
 	{ number: 1, title: 'Buy Your 3 Week Intro Pass', description: 'Purchase your intro pass online or in person' },
-	{ number: 2, title: 'Show Up 15 Minutes Before Class Starts', description: 'Arrive early to get settled and meet your instructors' },
+	{ number: 2, title: 'Show Up 15 Minutes Early', description: 'Arrive early to get settled and meet your instructors' },
 	{ number: 3, title: 'Feel The Love & Try Your Best', description: 'Connect with our welcoming community and begin your transformation' }
 ];
 
@@ -100,16 +100,23 @@ const pillars = [
 		</section>
 
 		<!-- Getting Started Section -->
-		<section id="get-started" class="py-24 bg-cream-50" aria-labelledby="getting-started-heading">
+		<section id="get-started" class="py-32 bg-cream" aria-labelledby="getting-started-heading">
 			<div class="container mx-auto px-6">
-				<div class="text-center mb-12">
-					<h2 id="getting-started-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal tracking-wide">Getting Started Is Easy!</h2>
+				<div class="grid md:grid-cols-1 gap-6 max-w-4xl mx-auto text-center mb-16">
+					<div>
+						<h2 id="getting-started-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal tracking-wide mb-4">
+							Getting Started Is Easy!
+						</h2>
+						<p class="text-lg md:text-xl text-neutral-600 font-light leading-relaxed">
+							Join our community and begin your journey of self-love through mindful movement.
+						</p>
+					</div>
 				</div>
-				<div class="grid md:grid-cols-3 gap-10 md:gap-14 max-w-7xl mx-auto mb-12">
+				<div class="grid md:grid-cols-3 gap-8 md:gap-10 max-w-7xl mx-auto mb-16">
 					{steps.map((step) => <StepCard {...step} />)}
 				</div>
 				<div class="text-center">
-					<Button href="#get-started" variant="primary" size="large">
+					<Button href="/start" variant="primary" size="large">
 						3 Week Intro for $56
 					</Button>
 				</div>

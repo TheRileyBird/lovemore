@@ -15,7 +15,10 @@ interface Props {
 const { icon: Icon, title, description, link, image } = Astro.props;
 ---
 
-<div class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)] transition-all duration-700 hover:-translate-y-3">
+<a
+	href={link}
+	class="group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.4)] transition-all duration-700 hover:-translate-y-3 block focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+>
 	<div class="absolute inset-0">
 		<img
 			src={image}
@@ -31,7 +34,7 @@ const { icon: Icon, title, description, link, image } = Astro.props;
 		<!-- Icon with gold accent -->
 		<div class="relative w-16 h-16 mb-6">
 			<div class="absolute inset-0 bg-gradient-to-br from-brand to-brand-dark rounded-2xl shadow-lg"></div>
-			<div class="absolute inset-0 bg-gold/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+			<div class="absolute inset-0 bg-brand/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 			<div class="relative w-full h-full flex items-center justify-center">
 				<Icon class="w-8 h-8 text-white" />
 			</div>
@@ -40,12 +43,9 @@ const { icon: Icon, title, description, link, image } = Astro.props;
 		<h3 class="text-4xl md:text-5xl font-display font-light text-white mb-4 tracking-wide">{title}</h3>
 		<div class="w-12 h-0.5 bg-gradient-to-r from-gold/0 via-gold/80 to-gold/0 mb-4 group-hover:w-24 transition-all duration-500"></div>
 		<p class="text-white/90 mb-8 leading-relaxed text-lg font-light">{description}</p>
-		<a
-			href={link}
-			class="inline-flex items-center gap-2 text-white font-medium tracking-luxury hover:gap-4 transition-all duration-300 group/link focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded"
-		>
-			<span class="border-b border-gold/50 group-hover/link:border-gold">Discover More</span>
-			<ArrowRight class="w-5 h-5 text-gold group-hover/link:translate-x-1 transition-transform duration-300" />
-		</a>
+		<div class="inline-flex items-center gap-2 text-white font-medium tracking-luxury group-hover:gap-4 transition-all duration-300">
+			<span class="border-b border-gold/50 group-hover:border-gold">Discover More</span>
+			<ArrowRight class="w-5 h-5 text-brand group-hover:translate-x-1 transition-transform duration-300" />
+		</div>
 	</div>
-</div>
+</a>
