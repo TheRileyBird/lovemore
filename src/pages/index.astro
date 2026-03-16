@@ -90,7 +90,7 @@ const pillars = [
 				</div>
 
 				<p class="text-xl md:text-2xl text-white/95 mb-16 max-w-3xl mx-auto font-light leading-relaxed tracking-wide" style="text-shadow: 0 0 30px rgba(0,0,0,0.85), 0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.6);">
-					movement <span class="text-gold">•</span> community <span class="text-gold">•</span> connection
+					movement <span class="text-brand">•</span> community <span class="text-brand">•</span> connection
 				</p>
 
 				<Button href="#get-started" variant="primary" size="large">
@@ -123,67 +123,6 @@ const pillars = [
 			</div>
 		</section>
 
-		<!-- Core Pillars Section -->
-		<section class="py-24 bg-white" aria-labelledby="pillars-heading">
-			<div class="container mx-auto px-6">
-				<div class="text-center mb-16">
-					<p class="text-neutral-500 text-sm font-medium tracking-luxury-wide uppercase">Our Foundation</p>
-					<h2 id="pillars-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Three Pillars</h2>
-					<Divider width="short" />
-				</div>
-				<div class="grid md:grid-cols-3 gap-8">
-					{pillars.map((pillar) => <PillarCard {...pillar} />)}
-				</div>
-			</div>
-		</section>
-
-		<!-- Nature Spa Divider -->
-		<section class="relative py-40 overflow-hidden">
-			<div class="absolute inset-0">
-				<img
-					src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80"
-					alt=""
-					role="presentation"
-					class="w-full h-full object-cover"
-				/>
-				<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/40 via-emerald/30 to-emerald-dark/40"></div>
-				<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.2)_100%)]"></div>
-			</div>
-			<div class="container mx-auto px-6 relative z-10 text-center">
-				<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase opacity-90">Nature • Wellness • Serenity</p>
-				<h2 class="text-5xl md:text-6xl font-display font-light text-white mt-6 mb-8 tracking-wide leading-tight max-w-4xl mx-auto">
-					Where natural beauty meets<br class="hidden md:block" />
-					<span class="italic text-gold">intentional practice</span>
-				</h2>
-				<Divider width="medium" />
-			</div>
-		</section>
-
-		<!-- About Section -->
-		<section class="py-24 bg-cream-100" aria-labelledby="about-heading">
-			<div class="container mx-auto px-6">
-				<div class="grid md:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
-					<div>
-						<img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=1000&fit=crop&q=80" alt="Yoga studio atmosphere" loading="lazy" class="rounded-2xl shadow-md border border-warm-gray-200" />
-					</div>
-
-					<div>
-						<p class="text-neutral-500 text-sm font-medium tracking-luxury-wide uppercase">Our Story</p>
-						<h2 id="about-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Who is Love More?</h2>
-						<Divider width="short" class="mb-8" />
-						<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
-							We're a refined community dedicated to guiding you on a transformative self-love journey through movement, community, and connection.
-						</p>
-						<p class="text-base text-neutral-600 mb-10 leading-relaxed">
-							Through our curated classes, intimate events, specialized trainings, transformative retreats, and healing services, our mission is to embrace the art of learning to LOVE MORE.
-						</p>
-						<Button href="/about" variant="primary">
-							Discover Our Story
-						</Button>
-					</div>
-				</div>
-			</div>
-		</section>
 
 		<!-- Virtual Studio Banner -->
 		<section class="relative py-24 overflow-hidden" aria-labelledby="virtual-heading">
@@ -200,10 +139,10 @@ const pillars = [
 			<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
 			<div class="container mx-auto px-6 relative z-10">
 				<div class="text-center">
-					<Calendar class="w-14 h-14 text-gold mx-auto mb-6" aria-hidden="true" />
-					<h2 id="virtual-heading" class="text-4xl md:text-5xl font-display font-light text-white mb-4 tracking-wide">Join Our Virtual Studio</h2>
+					<Calendar class="w-14 h-14 text-brand mx-auto mb-6" aria-hidden="true" />
+					<h2 id="virtual-heading" class="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-wide">Join Our Virtual Studio</h2>
 					<Divider width="short" class="mb-6 h-0.5" />
-					<p class="text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Practice with us from anywhere with our curated online classes</p>
+					<p class="text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Premium wellness on your schedule</p>
 					<Button href="/virtual" variant="primary">
 						Explore Virtual Classes
 					</Button>
@@ -211,6 +150,68 @@ const pillars = [
 			</div>
 		</section>
 
+		<!-- About Section -->
+		<section class="py-24 bg-cream-100" aria-labelledby="about-heading">
+			<div class="container mx-auto px-6">
+				<div class="grid md:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
+					<div>
+						<img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=1000&fit=crop&q=80" alt="Yoga studio atmosphere" loading="lazy" class="rounded-2xl shadow-md border border-warm-gray-200" />
+					</div>
+
+					<div>
+						<p class="text-brand-dark text-sm font-bold tracking-luxury-wide uppercase">Our Story</p>
+						<h2 id="about-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">Who is Love More?</h2>
+						<!--<Divider width="short" class="mb-8" />-->
+						<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
+							We're a warm-hearted community here to lead you on a self-love journey through movement, community, and connection. Through our classes, events, trainings, retreats, and healing services, our mission is to embrace the art of learning to LOVE MORE.
+						</p>
+						<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
+							So welcome to the Love More family! It’s about finding your people, rooting into your authentic self, and exploring your potential. We’re here to support you every step of the way!
+						</p>
+						<Button href="/about" variant="primary">
+							Discover Our Story
+						</Button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Core Pillars Section -->
+		<section class="py-24 bg-white" aria-labelledby="pillars-heading">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<p class="text-neutral-500 text-sm font-medium tracking-luxury-wide uppercase">Our Foundation</p>
+					<h2 id="pillars-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Three Pillars</h2>
+					<Divider width="short" />
+				</div>
+				<div class="grid md:grid-cols-3 gap-8">
+					{pillars.map((pillar) => <PillarCard {...pillar} />)}
+				</div>
+			</div>
+		</section>
+
+		<!--&lt;!&ndash; Nature Spa Divider &ndash;&gt;-->
+		<!--<section class="relative py-40 overflow-hidden">-->
+		<!--	<div class="absolute inset-0">-->
+		<!--		<img-->
+		<!--			src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80"-->
+		<!--			alt=""-->
+		<!--			role="presentation"-->
+		<!--			class="w-full h-full object-cover"-->
+		<!--		/>-->
+		<!--		<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/40 via-emerald/30 to-emerald-dark/40"></div>-->
+		<!--		<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.2)_100%)]"></div>-->
+		<!--	</div>-->
+		<!--	<div class="container mx-auto px-6 relative z-10 text-center">-->
+		<!--		<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase opacity-90">Nature • Wellness • Serenity</p>-->
+		<!--		<h2 class="text-5xl md:text-6xl font-display font-light text-white mt-6 mb-8 tracking-wide leading-tight max-w-4xl mx-auto">-->
+		<!--			Where natural beauty meets<br class="hidden md:block" />-->
+		<!--			<span class="italic text-gold">intentional practice</span>-->
+		<!--		</h2>-->
+		<!--		<Divider width="medium" />-->
+		<!--	</div>-->
+		<!--</section>-->
+		
 		<!-- Email Signup Section -->
 		<section class="py-24 bg-cream-50" aria-labelledby="newsletter-heading">
 			<div class="container mx-auto px-6">

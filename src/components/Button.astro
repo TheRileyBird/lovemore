@@ -9,7 +9,7 @@ interface Props {
 
 const { href, type = 'button', variant = 'primary', size = 'default', class: className = '' } = Astro.props;
 
-const baseClasses = 'inline-flex items-center justify-center gap-2 font-medium tracking-luxury rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2';
+const baseClasses = 'inline-flex items-center justify-center gap-2 font-medium tracking-luxury uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2';
 
 const variantClasses = {
 	primary: 'bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md hover:translate-y-[-1px]',
@@ -18,9 +18,9 @@ const variantClasses = {
 };
 
 const sizeClasses = {
-	small: 'px-6 py-3 text-sm',
-	default: 'px-8 py-5 text-base',
-	large: 'px-12 py-6 text-lg'
+	small: 'px-5 py-2 text-xs',
+	default: 'px-6 py-3 text-sm',
+	large: 'px-8 py-4 text-base'
 };
 
 const Element = href ? 'a' : 'button';
