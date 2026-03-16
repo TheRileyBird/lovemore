@@ -12,9 +12,9 @@ import Button from './Button.astro';
 	aria-label="Main navigation"
 >
 	<div class="container mx-auto px-6">
-		<div class="grid grid-cols-3 items-center gap-8">
+		<div class="flex md:grid md:grid-cols-3 items-center gap-8">
 			<!-- Left: Navigation Links -->
-			<div class="hidden md:flex items-center gap-8">
+			<div class="hidden md:flex items-center gap-8 md:col-span-1">
 				<!-- Classes Dropdown -->
 				<div x-data="{ open: false }" class="relative">
 					<button
@@ -93,7 +93,7 @@ import Button from './Button.astro';
 			</div>
 
 			<!-- Center: Logo -->
-			<div class="flex justify-center">
+			<div class="flex justify-start md:justify-center flex-1 md:flex-none md:col-span-1">
 				<a href="/" class="flex items-center hover:opacity-90 transition-all duration-300">
 					<img
 						src={logoImage.src}
@@ -105,7 +105,7 @@ import Button from './Button.astro';
 			</div>
 
 			<!-- Right: Button -->
-			<div class="hidden md:flex items-center justify-end">
+			<div class="hidden md:flex items-center justify-end md:col-span-1">
 				<div :class="scrolled ? 'scale-90' : 'scale-100'" class="transition-transform duration-300">
 					<Button href="/start" size="small">
 						Get Started for $56

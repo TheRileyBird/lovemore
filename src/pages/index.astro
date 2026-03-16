@@ -159,7 +159,7 @@ const pillars = [
 					</div>
 
 					<div>
-						<p class="text-brand-dark text-sm font-bold tracking-luxury-wide uppercase">Our Story</p>
+						<p class="text-neutral-500 mb-2 text-sm font-medium tracking-luxury-wide uppercase">Our Story</p>
 						<h2 id="about-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">Who is Love More?</h2>
 						<!--<Divider width="short" class="mb-8" />-->
 						<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
@@ -181,8 +181,8 @@ const pillars = [
 			<div class="container mx-auto px-6">
 				<div class="text-center mb-16">
 					<p class="text-neutral-500 text-sm font-medium tracking-luxury-wide uppercase">Our Foundation</p>
-					<h2 id="pillars-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mt-4 mb-6 tracking-wide">Three Pillars</h2>
-					<Divider width="short" />
+					<h2 id="pillars-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mt-2 mb-6 tracking-wide">Three Pillars</h2>
+					<Divider width="long" />
 				</div>
 				<div class="grid md:grid-cols-3 gap-8">
 					{pillars.map((pillar) => <PillarCard {...pillar} />)}
@@ -211,7 +211,7 @@ const pillars = [
 		<!--		<Divider width="medium" />-->
 		<!--	</div>-->
 		<!--</section>-->
-		
+
 		<!-- Email Signup Section -->
 		<section class="py-24 bg-cream-50" aria-labelledby="newsletter-heading">
 			<div class="container mx-auto px-6">
@@ -220,7 +220,7 @@ const pillars = [
 						<div class="text-center mb-10">
 							<Mail class="w-12 h-12 text-brand mx-auto mb-6" aria-hidden="true" />
 							<h2 id="newsletter-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mb-4 tracking-wide">Let's Stay Connected</h2>
-							<p class="text-lg text-neutral-600">Join our refined community for exclusive updates, curated events, and inspiration.</p>
+							<p class="text-lg text-neutral-600">Join our community for exclusive updates, curated events, and inspiration.</p>
 						</div>
 
 						<form name="newsletter" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
