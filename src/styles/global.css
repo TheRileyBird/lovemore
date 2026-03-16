@@ -8,6 +8,30 @@
 	font-display: swap;
 }
 
+.animated-gradient-text {
+	font-family: var(--font-logo);
+	background: linear-gradient(90deg, #ffffff 0%, #ca2317 20%, #ff4444 40%, #ff6b6b 60%, #460a08 80%, #ffffff 100%);
+	background-size: 300% 100%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+	filter: drop-shadow(0 0 40px rgba(255,215,0,0.3)) drop-shadow(0 0 20px rgba(0,0,0,0.8));
+	animation: gradient-shift 10s ease infinite;
+}
+
+@keyframes gradient-shift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 @theme {
 	/* Brand Colors */
 	--color-brand: #ca2317;
