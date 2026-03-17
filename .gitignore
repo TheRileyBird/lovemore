@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Gas Town runtime
+.beads/
+.claude/
+.runtime/
