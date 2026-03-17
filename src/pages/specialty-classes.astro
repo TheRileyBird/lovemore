@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+import { Sparkles } from 'lucide-astro';
+
+const specialtyOfferings = [
+	{
+		name: 'Aerial Yoga',
+		description: 'Defy gravity and explore yoga in a whole new dimension using suspended silk hammocks. Build strength, increase flexibility, and experience the therapeutic benefits of inversion.'
+	},
+	{
+		name: 'Sound Healing',
+		description: 'Immerse yourself in the therapeutic vibrations of crystal singing bowls, gongs, and other sound instruments. Experience deep relaxation and energetic alignment.'
+	},
+	{
+		name: 'Inversion Workshops',
+		description: 'Learn the foundations and progressions of arm balances, handstands, and headstands in a safe, supportive environment. Build confidence while developing strength and body awareness.'
+	},
+	{
+		name: 'Outdoor Classes & Charity Events',
+		description: 'Join us for special outdoor yoga sessions and community charity events. Practice in nature while giving back to our community.'
+	},
+	{
+		name: 'Teacher Training',
+		description: 'Deepen your practice and share your passion with our comprehensive yoga teacher training programs. Transform your life while preparing to guide others.'
+	}
+];
+---
+
+<Layout title="Specialty Classes — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="specialty-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<Sparkles class="w-16 h-16 text-brand mx-auto mb-6" aria-hidden="true" />
+				<h1 id="specialty-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
+					Specialty Classes
+				</h1>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-16 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						Explore Beyond the Mat
+					</h2>
+					<Divider width="short" class="mb-6" />
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Expand your practice with our unique specialty offerings. From aerial yoga to sound healing, these special classes and workshops provide opportunities to deepen your connection and explore new dimensions of wellness.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Specialty Offerings -->
+		<section class="py-24 bg-white" aria-labelledby="offerings-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-5xl mx-auto">
+					<h2 id="offerings-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
+						Special Offerings
+					</h2>
+
+					<div class="grid md:grid-cols-2 gap-8">
+						{specialtyOfferings.map((offering) => (
+							<div class="bg-cream-50 rounded-2xl p-8 shadow-sm border border-warm-gray-200 hover:shadow-md transition-shadow">
+								<h3 class="text-2xl font-display font-bold text-charcoal mb-4">{offering.name}</h3>
+								<p class="text-neutral-600 leading-relaxed">
+									{offering.description}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready to Explore?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Check our events calendar for upcoming specialty classes and workshops, or reach out to learn more about our offerings.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/events" variant="primary" size="large">
+							View Events
+						</Button>
+						<a
+							href="/contact"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							Contact Us
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>

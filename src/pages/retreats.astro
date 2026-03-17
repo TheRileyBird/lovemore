@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+import { Palmtree } from 'lucide-astro';
+
+const upcomingRetreats = [
+	{
+		name: 'Costa Rica Retreat',
+		location: 'Costa Rica',
+		description: 'Join us for an unforgettable journey to the lush rainforests and pristine beaches of Costa Rica. Immerse yourself in daily yoga practice, meditation, and adventure while surrounded by natural beauty.',
+		highlights: [
+			'Daily yoga and meditation sessions',
+			'Beachfront accommodations',
+			'Excursions to waterfalls and wildlife reserves',
+			'Nourishing farm-to-table meals',
+			'Optional surf lessons and zip-lining'
+		]
+	},
+	{
+		name: 'Sedona Retreat',
+		location: 'Sedona, Arizona',
+		description: 'Experience the powerful energy vortexes and stunning red rock landscapes of Sedona. This transformative retreat combines yoga, hiking, and spiritual exploration in one of the world\'s most sacred destinations.',
+		highlights: [
+			'Vortex site visits and energy work',
+			'Sunrise yoga in the red rocks',
+			'Guided meditation and sound healing',
+			'Hiking through breathtaking canyons',
+			'Spa treatments and wellness services'
+		]
+	}
+];
+---
+
+<Layout title="Retreats - Elevate — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="retreats-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<Palmtree class="w-16 h-16 text-brand mx-auto mb-6" aria-hidden="true" />
+				<h1 id="retreats-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
+					Retreats
+				</h1>
+				<p class="text-2xl text-white/95 max-w-2xl mx-auto font-light">
+					Elevate Your Practice in Paradise
+				</p>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-20 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto text-center">
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						Journey Beyond the Studio
+					</h2>
+					<Divider width="short" class="mb-8" />
+					<p class="text-lg text-neutral-600 leading-relaxed mb-6">
+						Escape the everyday and immerse yourself in transformative yoga retreats in some of the world's most beautiful destinations. Our carefully curated retreats offer the perfect blend of practice, adventure, relaxation, and community.
+					</p>
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Whether you're seeking spiritual renewal in the red rocks of Sedona or tropical bliss in Costa Rica, our retreats provide space to deepen your practice, connect with like-minded souls, and return home renewed.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Upcoming Retreats -->
+		<section class="py-24 bg-white" aria-labelledby="upcoming-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="upcoming-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
+						Upcoming Retreats
+					</h2>
+
+					<div class="space-y-12">
+						{upcomingRetreats.map((retreat) => (
+							<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200">
+								<div class="grid md:grid-cols-5 gap-0">
+									<div class="md:col-span-2 relative h-64 md:h-auto">
+										<div class="absolute inset-0 bg-gradient-to-br from-emerald-dark to-brand"></div>
+										<div class="absolute inset-0 flex items-center justify-center">
+											<div class="text-center text-white p-8">
+												<Palmtree class="w-16 h-16 mx-auto mb-4" aria-hidden="true" />
+												<h3 class="text-3xl font-display font-bold mb-2">{retreat.name}</h3>
+												<p class="text-xl opacity-90">{retreat.location}</p>
+											</div>
+										</div>
+									</div>
+
+									<div class="md:col-span-3 p-8 md:p-10">
+										<p class="text-lg text-neutral-600 leading-relaxed mb-6">
+											{retreat.description}
+										</p>
+
+										<h4 class="text-xl font-semibold text-charcoal mb-4">Experience Includes:</h4>
+										<ul class="space-y-2 mb-8">
+											{retreat.highlights.map((highlight) => (
+												<li class="flex items-start gap-3">
+													<span class="text-brand mt-1">•</span>
+													<span class="text-neutral-600">{highlight}</span>
+												</li>
+											))}
+										</ul>
+
+										<Button href="/contact" variant="primary">
+											Request More Information
+										</Button>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready for Your Next Adventure?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Spaces are limited and fill quickly. Contact us today to learn more about our upcoming retreats, pricing, and availability.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/contact" variant="primary" size="large">
+							Get in Touch
+						</Button>
+						<a
+							href="/events"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							View All Events
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
