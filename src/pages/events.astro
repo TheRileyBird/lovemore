@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Divider from '../components/Divider.astro';
+import { Sparkles } from 'lucide-astro';
+---
+
+<Layout title="Events — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="events-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/4a7fdc49-fa4d-43b4-8c03-a4a01d52f00d/8N7A8454.jpg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 30%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="events-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
+					EVENTS
+				</h1>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-16 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<Sparkles class="w-12 h-12 text-brand mx-auto mb-6" aria-hidden="true" />
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						We would <strong>love</strong> to see you
+					</h2>
+					<Divider width="short" class="mb-6" />
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Join us for special events, workshops, and community gatherings throughout the year. From sound healing to teacher trainings, there's always something happening at Love More.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Events Widget Section -->
+		<section class="py-16 bg-white" aria-labelledby="upcoming-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="upcoming-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
+						Upcoming Events
+					</h2>
+
+					<!-- WellnessLiving Events Widget -->
+					<div class="wl-widget" data="k_skin=199162&url_page=-Ci1wHmoMPSorFhoqfa4zK4BqJE%3Ahttps%3A%2F%2Fwww.lovemorehotyoga.com%2Fevents"></div>
+
+					<noscript>
+						<div class="bg-cream-50 p-12 rounded-2xl text-center mt-8">
+							<p class="text-lg text-neutral-600 mb-6">
+								JavaScript is required to view upcoming events. Please enable JavaScript in your browser.
+							</p>
+							<p class="text-neutral-600">
+								Or contact us directly to learn about upcoming events and workshops.
+							</p>
+						</div>
+					</noscript>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Stay in the Loop
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Don't miss out on upcoming events and special offerings. Join our community to receive updates on workshops, retreats, and special events.
+					</p>
+					<a
+						href="/contact"
+						class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-charcoal text-white hover:bg-brand hover:shadow-lg px-8 py-4 text-base"
+					>
+						Get in Touch
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<script>
+	// Load WellnessLiving widget script
+	const script = document.createElement('script');
+	script.src = 'https://widgets.wellnessliving.com/static/js/widget.js';
+	script.async = true;
+	document.body.appendChild(script);
+</script>
