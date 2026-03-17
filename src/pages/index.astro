@@ -3,10 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import StepCard from '../components/StepCard.astro';
 import PillarCard from '../components/PillarCard.astro';
+import TeacherCard from '../components/TeacherCard.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro';
+import { teachers } from '../data/teachers';
 
 const steps = [
 	{ number: 1, title: 'Buy Your 3 Week Intro Pass', description: 'Purchase your intro pass online or in person' },
@@ -190,6 +192,33 @@ const pillars = [
 			</div>
 		</section>
 
+		<!-- Meet Our Teachers Section -->
+		<section class="py-32 bg-cream" aria-labelledby="teachers-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center mb-16">
+					<h2 id="teachers-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Meet Our Teachers
+					</h2>
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Warm, uplifting and embodied wellness experts dedicated to guiding you on your journey. Our teachers are selected for their ability to inspire, educate and support your wellbeing goals.
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+					{teachers.map((teacher) => <TeacherCard {...teacher} />)}
+				</div>
+
+				<div class="text-center">
+					<a
+						href="/team"
+						class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-6 py-3 text-sm"
+					>
+						Get to Know Us
+					</a>
+				</div>
+			</div>
+		</section>
+
 		<!--&lt;!&ndash; Nature Spa Divider &ndash;&gt;-->
 		<!--<section class="relative py-40 overflow-hidden">-->
 		<!--	<div class="absolute inset-0">-->
@@ -219,7 +248,7 @@ const pillars = [
 					<div class="bg-white p-12 rounded-2xl shadow-md border border-warm-gray-200">
 						<div class="text-center mb-10">
 							<Mail class="w-12 h-12 text-brand mx-auto mb-6" aria-hidden="true" />
-							<h2 id="newsletter-heading" class="text-3xl md:text-4xl font-display font-light text-charcoal mb-4 tracking-wide">Let's Stay Connected</h2>
+							<h2 id="newsletter-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">Let's Stay Connected</h2>
 							<p class="text-lg text-neutral-600">Join our community for exclusive updates, curated events, and inspiration.</p>
 						</div>
 

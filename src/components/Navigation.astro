@@ -86,10 +86,18 @@ import Button from './Button.astro';
 					>
 						<a href="/team" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Team</a>
 						<a href="/teacher-training" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Teacher Training</a>
-						<a href="/retreats" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Retreats</a>
-						<a href="/contact" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Contact</a>
 					</div>
 				</div>
+
+				<!-- Retreats Link -->
+				<a href="/retreats" class="text-xs font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1 uppercase tracking-wider">
+					Retreats
+				</a>
+
+				<!-- Contact Link -->
+				<a href="/contact" class="text-xs font-medium text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded px-2 py-1 uppercase tracking-wider">
+					Contact
+				</a>
 			</div>
 
 			<!-- Center: Logo -->
@@ -183,10 +191,18 @@ import Button from './Button.astro';
 				<div x-show="expanded" x-collapse class="pl-4 space-y-2 mt-2">
 					<a href="/team" class="block py-2 text-sm text-neutral-600 hover:text-brand">Team</a>
 					<a href="/teacher-training" class="block py-2 text-sm text-neutral-600 hover:text-brand">Teacher Training</a>
-					<a href="/retreats" class="block py-2 text-sm text-neutral-600 hover:text-brand">Retreats</a>
-					<a href="/contact" class="block py-2 text-sm text-neutral-600 hover:text-brand">Contact</a>
 				</div>
 			</div>
+
+			<!-- Mobile Retreats Link -->
+			<a href="/retreats" class="block text-sm font-medium text-neutral-600 hover:text-brand py-2 uppercase tracking-wider">
+				Retreats
+			</a>
+
+			<!-- Mobile Contact Link -->
+			<a href="/contact" class="block text-sm font-medium text-neutral-600 hover:text-brand py-2 uppercase tracking-wider">
+				Contact
+			</a>
 
 			<!-- Mobile CTA -->
 			<Button href="#get-started" size="small" class="w-full">
