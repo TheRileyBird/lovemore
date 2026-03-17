@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import { Flame, Heart } from 'lucide-astro';
+---
+
+<Layout title="Studio Classes — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="classes-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="classes-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
+					Studio Classes
+				</h1>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-20 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto text-center">
+					<p class="text-lg text-neutral-600 leading-relaxed mb-12">
+						Our studio is dedicated to providing holistic and enriching movement experiences that nurture the mind, body, and spirit. With a diverse range of classes led by experienced instructors, we invite you to explore the myriad paths of yoga, sculpting, and dance each tailored to meet your unique journey. Whether you're a seasoned yogi or just beginning to explore moving your body in new ways, our classes are designed to guide you toward a deeper connection with yourself, fostering self-love, mindfulness, and inner harmony. Step onto your mat and embark on a voyage of self-discovery and growth.
+					</p>
+
+					<div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+						<a
+							href="/heated-classes"
+							class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-warm-gray-200 hover:border-brand"
+						>
+							<div class="p-8 text-center">
+								<Flame class="w-16 h-16 text-brand mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+								<h2 class="text-2xl font-display font-bold text-charcoal mb-2 tracking-wide">
+									Heated Classes
+								</h2>
+								<p class="text-neutral-600">
+									Experience the transformative power of heat in our signature hot yoga classes.
+								</p>
+							</div>
+						</a>
+
+						<a
+							href="/specialty-classes"
+							class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-warm-gray-200 hover:border-brand"
+						>
+							<div class="p-8 text-center">
+								<Heart class="w-16 h-16 text-brand mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+								<h2 class="text-2xl font-display font-bold text-charcoal mb-2 tracking-wide">
+									Specialty Classes
+								</h2>
+								<p class="text-neutral-600">
+									Explore unique offerings including aerial yoga, sound healing, and more.
+								</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready to Begin?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						New to Love More? Start with our 3-week intro pass and discover the practice that's right for you.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/start" variant="primary" size="large">
+							3 Week Intro — $56
+						</Button>
+						<a
+							href="/schedule"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							View Schedule
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
