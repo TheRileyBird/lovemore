@@ -4,18 +4,64 @@ import { Instagram, Facebook, Heart } from 'lucide-astro';
 ---
 
 <footer class="text-charcoal">
+	<!-- Newsletter Section -->
+	<section class="py-16 bg-white border-t border-warm-gray-200">
+		<div class="container mx-auto px-6">
+			<div class="max-w-2xl mx-auto text-center">
+				<h2 class="text-2xl font-display font-normal mb-4">Let's Stay Connected</h2>
+				<p class="text-neutral-600 mb-8">Add your email address to be part of the community.</p>
+				<form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+					<input
+						type="email"
+						placeholder="Your email address"
+						required
+						class="flex-1 px-4 py-3 border border-warm-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+					/>
+					<button
+						type="submit"
+						class="px-6 py-3 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors font-medium"
+					>
+						Subscribe
+					</button>
+				</form>
+				<p class="text-xs text-neutral-500 mt-4">We respect your privacy. We will never share your email or spam you.</p>
+			</div>
+		</div>
+	</section>
+
 	<!-- Main Footer - Cream Background -->
 	<section class="py-16 bg-cream-200 border-t border-warm-gray-200">
 		<div class="container mx-auto px-6">
 			<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-				<!-- Left 50% - Icon and Social Only -->
-				<div class="flex flex-col justify-between items-center md:items-start">
+				<!-- Left 50% - Icon, Contact Info, and Social -->
+				<div class="flex flex-col justify-between items-center md:items-start space-y-8">
 					<div>
 						<img
 							src={iconImage.src}
 							alt="Love More"
 							class="w-56"
 						/>
+					</div>
+
+					<!-- Contact Info -->
+					<div class="text-center md:text-left space-y-2">
+						<p class="text-sm text-neutral-600">
+							<a href="tel:985-900-2468" class="hover:text-brand transition-colors">985-900-2468</a>
+						</p>
+						<p class="text-sm text-neutral-600">
+							234 Lee Lane<br />
+							Covington, LA
+						</p>
+					</div>
+
+					<!-- Social Links -->
+					<div class="flex items-center gap-4">
+						<a href="https://facebook.com/lovemorecovington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Facebook">
+							<Facebook class="w-5 h-5" />
+						</a>
+						<a href="https://instagram.com/lovemore_covington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Instagram">
+							<Instagram class="w-5 h-5" />
+						</a>
 					</div>
 				</div>
 
@@ -26,9 +72,9 @@ import { Instagram, Facebook, Heart } from 'lucide-astro';
 						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Explore</h3>
 						<ul class="space-y-3">
 							<li><a href="/" class="text-sm text-neutral-600 hover:text-brand transition-colors">Home</a></li>
-							<li><a href="/about" class="text-sm text-neutral-600 hover:text-brand transition-colors">About</a></li>
+							<li><a href="/team" class="text-sm text-neutral-600 hover:text-brand transition-colors">Team</a></li>
 							<li><a href="/events" class="text-sm text-neutral-600 hover:text-brand transition-colors">Events</a></li>
-							<li><a href="/virtual" class="text-sm text-neutral-600 hover:text-brand transition-colors">Virtual Studio</a></li>
+							<li><a href="/virtual-studio" class="text-sm text-neutral-600 hover:text-brand transition-colors">Virtual Studio</a></li>
 						</ul>
 					</div>
 
@@ -37,20 +83,20 @@ import { Instagram, Facebook, Heart } from 'lucide-astro';
 						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Practice</h3>
 						<ul class="space-y-3">
 							<li><a href="/studio-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Studio Classes</a></li>
-							<li><a href="/movement" class="text-sm text-neutral-600 hover:text-brand transition-colors">Movement</a></li>
+							<li><a href="/heated-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Heated Classes</a></li>
+							<li><a href="/specialty-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Specialty Classes</a></li>
 							<li><a href="/schedule" class="text-sm text-neutral-600 hover:text-brand transition-colors">Schedule</a></li>
-							<li><a href="/start" class="text-sm text-neutral-600 hover:text-brand transition-colors">Start for $56</a></li>
 						</ul>
 					</div>
 
 					<!-- Customer Care Column -->
 					<div>
-						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Care</h3>
+						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Connect</h3>
 						<ul class="space-y-3">
-							<li><a href="/faqs" class="text-sm text-neutral-600 hover:text-brand transition-colors">FAQs</a></li>
+							<li><a href="/pricing-options" class="text-sm text-neutral-600 hover:text-brand transition-colors">Pricing</a></li>
+							<li><a href="/retreats" class="text-sm text-neutral-600 hover:text-brand transition-colors">Retreats</a></li>
 							<li><a href="/contact" class="text-sm text-neutral-600 hover:text-brand transition-colors">Contact</a></li>
-							<li><a href="/terms" class="text-sm text-neutral-600 hover:text-brand transition-colors">Terms of service</a></li>
-							<li><a href="/privacy" class="text-sm text-neutral-600 hover:text-brand transition-colors">Privacy</a></li>
+							<li><a href="/start" class="text-sm text-neutral-600 hover:text-brand transition-colors">Get Started</a></li>
 						</ul>
 					</div>
 				</div>
@@ -62,15 +108,7 @@ import { Instagram, Facebook, Heart } from 'lucide-astro';
 	<section class="py-8 bg-white border-t border-warm-gray-200">
 		<div class="container mx-auto px-6">
 			<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-600">
-				<div class="flex flex-col md:flex-row items-center gap-4">
-					<div class="flex items-center gap-4">
-						<a href="https://facebook.com/lovemorecovington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Facebook">
-							<Facebook class="w-5 h-5" />
-						</a>
-						<a href="https://instagram.com/lovemore_covington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Instagram">
-							<Instagram class="w-5 h-5" />
-						</a>
-					</div>
+				<div class="flex items-center">
 					<span class="tracking-wider uppercase">Movement • Community • Connection</span>
 				</div>
 				<div>
