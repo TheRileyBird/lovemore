@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Divider from '../components/Divider.astro';
+
+const faqCategories = [
+	{
+		category: 'Getting Started',
+		questions: [
+			{
+				question: 'Do I need to have practiced yoga before?',
+				answer: 'Not at all! We welcome students of all experience levels, from complete beginners to advanced practitioners. Our instructors are skilled at providing modifications and variations to meet you where you are in your practice.'
+			},
+			{
+				question: 'What should I bring to my first class?',
+				answer: 'Just bring yourself and an open mind! We provide everything you need including mats, towels, and props. We recommend wearing comfortable, breathable clothing that allows for movement. Arrive 10-15 minutes early for your first class so we can show you around and answer any questions.'
+			},
+			{
+				question: 'What is the 3 Week Intro offer?',
+				answer: 'Our 3 Week Intro pass gives new students unlimited access to classes for just $56. It\'s the perfect way to explore our different class styles, meet our teachers, and find what works best for you. This offer is available to new students who haven\'t practiced at Love More before.'
+			}
+		]
+	},
+	{
+		category: 'Classes',
+		questions: [
+			{
+				question: 'What types of classes do you offer?',
+				answer: 'We offer a diverse range of classes including heated Power Flow, warm Flow, Functional Flow, Bikram, Yoga Sculpt, Yin, Restorative, Gentle Flow, and Hatha. We also host specialty workshops and events throughout the year including aerial yoga, sound healing, and inversion workshops.'
+			},
+			{
+				question: 'How hot are the heated classes?',
+				answer: 'Our heated classes vary in temperature. Hot classes (like Power Flow and Bikram) are heated to above body temperature (around 95-105°F) with approximately 40% humidity. Warm classes are heated to below body temperature for a gentler experience. All heated rooms are equipped with a state-of-the-art HVAC system to ensure proper ventilation.'
+			},
+			{
+				question: 'Can I try different class styles with my membership?',
+				answer: 'Yes! All unlimited memberships include access to our full class schedule. We encourage students to explore different styles and teachers to find what resonates with them. Drop-in passes and limited class packages may have some restrictions on specialty classes.'
+			}
+		]
+	},
+	{
+		category: 'Pricing & Membership',
+		questions: [
+			{
+				question: 'What membership options do you offer?',
+				answer: 'We offer four membership tiers: Movement (8 classes per month), Community (unlimited classes), Connection (unlimited classes plus wellness session), and Family (unlimited for up to 5 family members). We also offer drop-in rates and class packages for those who prefer more flexibility.'
+			},
+			{
+				question: 'Do memberships auto-renew?',
+				answer: 'Yes, memberships auto-renew monthly to ensure uninterrupted access to classes. You can cancel or modify your membership anytime with notice before your next billing cycle. There are no long-term contracts or cancellation fees.'
+			},
+			{
+				question: 'Can I freeze my membership?',
+				answer: 'Yes! We understand life happens. Members can freeze their membership for up to 3 months per year. A small administrative fee may apply. Contact us or manage your membership through your online account.'
+			}
+		]
+	},
+	{
+		category: 'Studio Policies',
+		questions: [
+			{
+				question: 'What is your cancellation policy?',
+				answer: 'We ask that you cancel your class reservation at least 4 hours in advance through our booking system. Late cancellations or no-shows may result in a charge to your account for unlimited members or loss of a class for package holders.'
+			},
+			{
+				question: 'Do you offer private sessions?',
+				answer: 'Yes! Private and semi-private sessions are available with our instructors. These personalized sessions are perfect for beginners, those recovering from injury, or anyone looking to deepen their practice. Contact us to schedule and for pricing information.'
+			},
+			{
+				question: 'What are your COVID-19 safety protocols?',
+				answer: 'We follow all local health guidelines and maintain rigorous cleaning protocols. Our studio features excellent ventilation, and we provide hand sanitizer throughout the space. We ask that students stay home if feeling unwell. Check our website or contact us for current capacity limits and mask policies.'
+			}
+		]
+	}
+];
+---
+
+<Layout title="Frequently Asked Questions — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="faqs-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="faqs-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
+					Frequently Asked Questions
+				</h1>
+				<p class="text-xl text-white/95 max-w-2xl mx-auto font-light">
+					Everything you need to know about practicing at Love More
+				</p>
+			</div>
+		</section>
+
+		<!-- FAQs Section -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto">
+					{faqCategories.map((category, categoryIndex) => (
+						<div class={categoryIndex > 0 ? 'mt-16' : ''}>
+							<h2 class="text-2xl md:text-3xl font-display font-bold text-charcoal mb-8 tracking-wide">
+								{category.category}
+							</h2>
+
+							<div class="space-y-4">
+								{category.questions.map((faq, faqIndex) => (
+									<div
+										x-data="{expanded: false}"
+										class="bg-white rounded-xl shadow-sm border border-warm-gray-200 overflow-hidden"
+									>
+										<button
+											@click="expanded = !expanded"
+											:aria-expanded="expanded"
+											class="w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-cream-50 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-inset"
+										>
+											<span class="text-lg font-semibold text-charcoal pr-8">
+												{faq.question}
+											</span>
+											<svg
+												x-show="!expanded"
+												class="w-5 h-5 text-brand flex-shrink-0"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+											>
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+											</svg>
+											<svg
+												x-show="expanded"
+												class="w-5 h-5 text-brand flex-shrink-0"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+												style="display: none;"
+											>
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+											</svg>
+										</button>
+										<div
+											x-show="expanded"
+											x-collapse
+											class="px-6 pb-6"
+										>
+											<p class="text-neutral-600 leading-relaxed">
+												{faq.answer}
+											</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Still Have Questions Section -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Still Have Questions?
+					</h2>
+					<Divider width="short" class="mb-8" />
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						We're here to help! Reach out to our team and we'll be happy to answer any questions you have about classes, memberships, or anything else.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<a
+							href="/contact"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-charcoal text-white hover:bg-brand hover:shadow-lg px-8 py-4 text-base"
+						>
+							Contact Us
+						</a>
+						<a
+							href="/start"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							Start Your Practice
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>

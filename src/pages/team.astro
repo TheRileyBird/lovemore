@@ -3,19 +3,27 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
+import TeamMemberModal from '../components/TeamMemberModal.astro';
 
 // Import team data from scraped content
 import teamData from '../../scraped-content/team.json';
 
-// Extract team members from sections
+// Extract team members from sections and add placeholder bios
 const teamMembers = teamData.sections
 	.filter((section: any) => section.type === 'image' && section.image)
 	.map((section: any) => {
 		const lines = section.text.split('\n').filter((line: string) => line.trim());
+		const name = lines[0] || '';
+		const title = lines[1] || '';
+
+		// Placeholder bio text (to be replaced with actual content via CMS)
+		const bio = `${name} is a passionate yoga instructor dedicated to helping students discover the transformative power of movement and mindfulness. With years of experience and a deep commitment to the Love More community, ${name.split(' ')[0]} creates a welcoming and supportive environment for practitioners of all levels. Their classes blend traditional wisdom with modern approaches, emphasizing the connection between breath, body, and spirit.`;
+
 		return {
-			name: lines[0] || '',
-			title: lines[1] || '',
-			image: section.image.src
+			name,
+			title,
+			image: section.image.src,
+			bio
 		};
 	});
 ---
@@ -67,22 +75,34 @@ const teamMembers = teamData.sections
 						Our Instructors
 					</h2>
 
-					<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
+					<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
 						{teamMembers.map((member: any) => (
-							<div class="group">
-								<div class="relative overflow-hidden rounded-2xl shadow-md border border-warm-gray-200 mb-4 aspect-[3/4]">
-									<img
-										src={member.image}
-										alt={member.name}
-										loading="lazy"
-										class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-									/>
+							<div
+								class="group cursor-pointer"
+								@click={`$dispatch('modal-open', ${JSON.stringify(member)})`}
+							>
+								<div class="relative">
+									<div class="relative overflow-hidden rounded-2xl shadow-md aspect-square mb-10">
+										<img
+											src={member.image}
+											alt={member.name}
+											loading="lazy"
+											class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+										/>
+									</div>
+
+									<!-- Overlapping Name/Title Box -->
+									<div class="absolute left-4 right-4 -bottom-8 bg-cream/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-warm-gray-200 transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
+										<h3 class="font-sans font-semibold text-lg text-charcoal leading-tight">{member.name}</h3>
+										{member.title && (
+											<p class="text-sm text-neutral-600 mt-1">{member.title}</p>
+										)}
+									</div>
 								</div>
-								<div class="text-center">
-									<h3 class="text-xl font-semibold text-charcoal mb-1">{member.name}</h3>
-									{member.title && (
-										<p class="text-sm text-neutral-600">{member.title}</p>
-									)}
+
+								<!-- Read Bio hint (appears on hover) -->
+								<div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+									<span class="text-brand text-sm font-medium">Read Bio →</span>
 								</div>
 							</div>
 						))}
@@ -90,6 +110,9 @@ const teamMembers = teamData.sections
 				</div>
 			</div>
 		</section>
+
+		<!-- Team Member Modal -->
+		<TeamMemberModal />
 
 		<!-- CTA Section -->
 		<section class="py-20 bg-cream">

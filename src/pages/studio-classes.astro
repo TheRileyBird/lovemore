@@ -3,10 +3,81 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
-import { Flame, Heart } from 'lucide-astro';
+
+// Import scraped content
+import heatedClasses from '../../scraped-content/heated-classes.json';
+import specialtyClasses from '../../scraped-content/specialty-classes.json';
+
+// Extract heated class data from sections
+const heatedClassData = [
+	{
+		name: "Power Flow (Hot)",
+		description: "Power Flow is a vinyasa yoga class that focuses on building strength, alignment, flexibility, core, and stamina. This faster paced class combines traditional yoga postures with more intense movements and cardiovascular exercises while promoting focused breathing and mindfulness. Power Flow includes a series of challenging sequences designed to challenge both the body and the mind. It'll help build muscle tone, aid in stress relief, and mental clarity. Each class will end with an extended period of relaxation (savasana) and cool lavender cloths. Power Flow (hot) is heated to above body temperature and approximately 40% humidity to maximize your flow, increase oxygen levels and improve the mind and body connection.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/42328285-f262-4c19-8a9d-9dcb021513f0/8N7A9310.jpg"
+	},
+	{
+		name: "Flow (Warm)",
+		description: "Flow (warm) is a yoga class that typically focuses on slow and smooth movements combined with deep breathing and relaxation techniques. It is great for all levels, including beginners, and those looking for a more soothing and grounding practice. You can expect gentle stretches, poses, and sequences that promote flexibility, balance, and stress relief. This class is a great way to unwind, release tensions, and connect with your body and breath. Each class will end with an extended period of relaxation (savasana) and cool lavender cloths. Flow (warm) is heated to below body temperature and approximately 40% humidity to maximize your flow, increase oxygen levels, and improve the mind and body connection.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/7a370992-6f9d-46cf-8ee0-9a864a5fc181/8N7A8115.jpg"
+	},
+	{
+		name: "Functional Flow (Warm)",
+		description: "Come experience the combination of vinyasa, core, and mobility exercises to enhance balance, strength, and flexibility. Our Functional Flow practice focuses on creating stability and comfort through precise alignment and mindful movement. This class will help you further develop your physical stability which may positively impact your emotional and mental well-being. The practice encourages a dynamic yet grounded and expressive experience within each pose. Each class will end with an extended period of relaxation (savasana) and cool lavender cloths. (Warm) is heated to below body temperature.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/62967832-200e-42d3-87a8-9f5b4b31baf6/8N7A9056.jpg"
+	},
+	{
+		name: "Bikram (Hot)",
+		description: "This is your Classic 26/2 Hot Yoga (Bikram style) class. It is a set sequence of 26 asanas (postures) and 2 pranayamas (breathing exercises). This sequence is completed twice throughout the 90-minute class. Designed to warm and stretch your muscles, ligaments, and tendons in the order that is most beneficial to the body. This is a 90-minute class practiced in a room heated to 105° F with 40% humidity.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/afd67ec5-62c0-4a9b-bfd8-fd2b9c27c0c0/8N7A9098.jpg"
+	},
+	{
+		name: "Yoga Sculpt (Warm)",
+		description: "Yoga Sculpt is a dynamic class that includes yoga poses with strength training exercises for a full-body workout. You may use light weights (dumbbells) to tone and define targeted muscle groups. This class is set to an upbeat playlist and often includes cardio bursts to raise the heart rate and get the body moving. The practice ends with a cool-down and relaxation period to calm the body and mind. This class is perfect for anyone looking for a challenging, full-body workout that combines the benefits of yoga and strength training. Whether you're a beginner or an experienced yogi, our Yoga Sculpt class is sure to leave you feeling energized and empowered.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/3d490ee4-5e45-4c72-ab50-158b8b336d15/8N7A8590.jpg"
+	}
+];
+
+// Placeholder non-heated class data (to be replaced with scraped content)
+const nonHeatedClassData = [
+	{
+		name: "Yin Yoga",
+		description: "Yin Yoga is a slow-paced, meditative practice where poses are held for 3-5 minutes or longer. This gentle approach targets the deep connective tissues, fascia, and joints in the body rather than the muscles. Yin practice promotes relaxation, improves flexibility, and encourages mindfulness. It's perfect for all levels and especially beneficial for those seeking stress relief and deeper body awareness. The extended holds create space for introspection and help release physical and emotional tension.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1699569496366-JHZYN480TGL8N7KYUTEG/8N7A4838.jpg"
+	},
+	{
+		name: "Restorative Yoga",
+		description: "Restorative Yoga is a deeply relaxing practice that uses props like bolsters, blankets, and blocks to support the body in restful poses. Each pose is held for extended periods, allowing the nervous system to shift into a state of deep rest and repair. This practice reduces stress, improves sleep quality, and supports overall healing. It's ideal for those recovering from injury, experiencing stress or burnout, or simply seeking profound relaxation and rejuvenation.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1699569505528-EEFYCN1H8J3JOIZUSVWQ/8N7A4844.jpg"
+	},
+	{
+		name: "Gentle Flow",
+		description: "Gentle Flow is an accessible, beginner-friendly class that links breath with movement at a slower, more mindful pace. This practice emphasizes proper alignment, body awareness, and breath connection without the intensity of faster-paced classes. Perfect for those new to yoga, recovering from injury, or seeking a more meditative movement practice. You'll build strength and flexibility while maintaining a calm, centered mindset throughout the practice.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1699569520747-OF6A5SE1N357N0OD9O36/8N7A4846.jpg"
+	},
+	{
+		name: "Hatha Yoga",
+		description: "Hatha Yoga is a traditional practice that balances strength and flexibility through a sequence of foundational poses. This class moves at a moderate pace, allowing time to explore alignment, build stability, and develop body awareness. Hatha emphasizes the balance of effort and ease, combining physical postures with breathwork and relaxation. Suitable for all levels, this practice provides a solid foundation for any yoga journey while promoting physical health and mental clarity.",
+		image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1699569534239-ZN1O32T1G14XJU9N0M1M/8N7A4859.jpg"
+	}
+];
+
+// Extract specialty class data from sections
+const specialtyClassData = specialtyClasses.sections
+	.filter(section => section.type === 'image' && section.image && section.text)
+	.slice(0, 4)
+	.map(section => {
+		const lines = section.text.split('\n');
+		const titleLine = lines[0] || '';
+		const descLine = lines[lines.length - 1] || '';
+		return {
+			name: titleLine.replace(/\n/g, ' ').trim(),
+			description: descLine.trim(),
+			image: section.image.src
+		};
+	});
 ---
 
-<Layout title="Studio Classes — Love More">
+<Layout title="Class Descriptions — Love More">
 	<Navigation />
 
 	<main id="main-content">
@@ -25,7 +96,7 @@ import { Flame, Heart } from 'lucide-astro';
 
 			<div class="relative z-10 container mx-auto px-6 text-center">
 				<h1 id="classes-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
-					Studio Classes
+					Our Classes
 				</h1>
 			</div>
 		</section>
@@ -34,47 +105,126 @@ import { Flame, Heart } from 'lucide-astro';
 		<section class="py-20 bg-cream" aria-labelledby="intro-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-4xl mx-auto text-center">
-					<p class="text-lg text-neutral-600 leading-relaxed mb-12">
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Explore Movement Experiences That Nurture Mind, Body, and Spirit
+					</h2>
+					<p class="text-lg text-neutral-600 leading-relaxed">
 						Our studio is dedicated to providing holistic and enriching movement experiences that nurture the mind, body, and spirit. With a diverse range of classes led by experienced instructors, we invite you to explore the myriad paths of yoga, sculpting, and dance each tailored to meet your unique journey. Whether you're a seasoned yogi or just beginning to explore moving your body in new ways, our classes are designed to guide you toward a deeper connection with yourself, fostering self-love, mindfulness, and inner harmony. Step onto your mat and embark on a voyage of self-discovery and growth.
 					</p>
+				</div>
+			</div>
+		</section>
 
-					<div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-						<a
-							href="/heated-classes"
-							class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-warm-gray-200 hover:border-brand"
-						>
-							<div class="p-8 text-center">
-								<Flame class="w-16 h-16 text-brand mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-								<h2 class="text-2xl font-display font-bold text-charcoal mb-2 tracking-wide">
-									Heated Classes
-								</h2>
-								<p class="text-neutral-600">
-									Experience the transformative power of heat in our signature hot yoga classes.
-								</p>
-							</div>
-						</a>
+		<!-- Heated Classes Section -->
+		<section class="py-20 bg-white" aria-labelledby="heated-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="heated-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-4 tracking-wide text-center">
+						Heated Classes
+					</h2>
+					<p class="text-center text-lg text-neutral-600 mb-16 max-w-3xl mx-auto">
+						Experience the many benefits of heat. Our heated classes maximize your flow, increase oxygen levels, and improve the mind-body connection.
+					</p>
 
-						<a
-							href="/specialty-classes"
-							class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-warm-gray-200 hover:border-brand"
-						>
-							<div class="p-8 text-center">
-								<Heart class="w-16 h-16 text-brand mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-								<h2 class="text-2xl font-display font-bold text-charcoal mb-2 tracking-wide">
-									Specialty Classes
-								</h2>
-								<p class="text-neutral-600">
-									Explore unique offerings including aerial yoga, sound healing, and more.
-								</p>
+					<div class="space-y-24">
+						{heatedClassData.map((classItem, index) => (
+							<div class={`grid md:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+								<div class={`${index % 2 === 1 ? 'md:order-2' : ''}`}>
+									<img
+										src={classItem.image}
+										alt=""
+										class="w-full h-full object-cover rounded-3xl shadow-lg aspect-[3/4]"
+									/>
+								</div>
+								<div class={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
+									<h3 class="text-3xl font-display font-bold text-charcoal mb-4 tracking-wide">
+										{classItem.name}
+									</h3>
+									<p class="text-neutral-600 leading-relaxed text-lg">
+										{classItem.description}
+									</p>
+								</div>
 							</div>
-						</a>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Non-Heated Classes Section -->
+		<section class="py-20 bg-cream" aria-labelledby="nonheated-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="nonheated-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-4 tracking-wide text-center">
+						Non-Heated Classes
+					</h2>
+					<p class="text-center text-lg text-neutral-600 mb-16 max-w-3xl mx-auto">
+						Gentle, restorative practices that promote relaxation, flexibility, and mindfulness without the added heat.
+					</p>
+
+					<div class="space-y-24">
+						{nonHeatedClassData.map((classItem, index) => (
+							<div class={`grid md:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+								<div class={`${index % 2 === 1 ? 'md:order-2' : ''}`}>
+									<img
+										src={classItem.image}
+										alt=""
+										class="w-full h-full object-cover rounded-3xl shadow-lg aspect-[3/4]"
+									/>
+								</div>
+								<div class={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
+									<h3 class="text-3xl font-display font-bold text-charcoal mb-4 tracking-wide">
+										{classItem.name}
+									</h3>
+									<p class="text-neutral-600 leading-relaxed text-lg">
+										{classItem.description}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Specialty Classes Section -->
+		<section class="py-20 bg-white" aria-labelledby="specialty-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="specialty-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-4 tracking-wide text-center">
+						Specialty Events & Workshops
+					</h2>
+					<p class="text-center text-lg text-neutral-600 mb-16 max-w-3xl mx-auto">
+						Unique offerings including aerial yoga, sound healing, and special community events throughout the year.
+					</p>
+
+					<div class="space-y-24">
+						{specialtyClassData.map((classItem, index) => (
+							<div class={`grid md:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+								<div class={`${index % 2 === 1 ? 'md:order-2' : ''}`}>
+									<img
+										src={classItem.image}
+										alt=""
+										class="w-full h-full object-cover rounded-3xl shadow-lg aspect-[3/4]"
+									/>
+								</div>
+								<div class={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
+									<h3 class="text-3xl font-display font-bold text-charcoal mb-4 tracking-wide">
+										{classItem.name}
+									</h3>
+									<p class="text-neutral-600 leading-relaxed text-lg">
+										{classItem.description}
+									</p>
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Call to Action -->
-		<section class="py-20 bg-white">
+		<section class="py-20 bg-cream">
 			<div class="container mx-auto px-6">
 				<div class="max-w-3xl mx-auto text-center">
 					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">

@@ -1,0 +1,74 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+
+# Uncomment to use local backend for development
+# local_backend: true
+
+media_folder: "public/images/uploads" # Media files will be stored in the repo under public/images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "team"
+    label: "Team Members"
+    folder: "src/content/team"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Bio", name: "bio", widget: "markdown" }
+      - { label: "Display Order", name: "order", widget: "number", default: 100 }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+
+  - name: "classes"
+    label: "Classes"
+    folder: "src/content/classes"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Class Name", name: "name", widget: "string" }
+      - {
+          label: "Type",
+          name: "type",
+          widget: "select",
+          options: ["heated", "non-heated", "specialty"],
+        }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Display Order", name: "order", widget: "number", default: 100 }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+
+  - name: "retreats"
+    label: "Retreats"
+    folder: "src/content/retreats"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Retreat Name", name: "name", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Highlights", name: "highlights", widget: "list" }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+
+  - name: "pages"
+    label: "Page Content"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string" }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string" }
+          - { label: "Hero Image", name: "heroImage", widget: "image" }
+          - { label: "Intro Text", name: "intro", widget: "markdown" }
+
+      - label: "About Page"
+        name: "about"
+        file: "src/content/pages/about.md"
+        fields:
+          - { label: "Story Title", name: "storyTitle", widget: "string" }
+          - { label: "Story Content", name: "storyContent", widget: "markdown" }
+          - { label: "Mission Statement", name: "mission", widget: "text" }

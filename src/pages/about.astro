@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+import { Heart, Users, Sparkles } from 'lucide-astro';
+
+const pillars = [
+	{
+		icon: Heart,
+		title: 'Movement',
+		description: 'We believe in the transformative power of mindful movement. Through diverse yoga practices, we help you build strength, flexibility, and awareness while honoring your body\'s unique needs and capabilities.'
+	},
+	{
+		icon: Users,
+		title: 'Community',
+		description: 'Love More is more than a studio—it\'s a welcoming community where authentic connections flourish. We create a safe, inclusive space where everyone belongs and can grow together on their wellness journey.'
+	},
+	{
+		icon: Sparkles,
+		title: 'Connection',
+		description: 'We foster deep connection to self, to others, and to something greater. Through yoga, meditation, and mindfulness practices, we guide you toward inner peace, self-love, and meaningful relationships.'
+	}
+];
+---
+
+<Layout title="Our Story — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="about-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="about-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
+					Our Story
+				</h1>
+				<p class="text-2xl text-white/95 max-w-2xl mx-auto font-light">
+					Movement, Community, Connection
+				</p>
+			</div>
+		</section>
+
+		<!-- Our Story Section -->
+		<section class="py-20 bg-cream" aria-labelledby="story-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto">
+					<h2 id="story-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 text-center tracking-wide">
+						Welcome to Love More
+					</h2>
+					<Divider width="short" class="mb-12" />
+
+					<div class="space-y-6 text-lg text-neutral-600 leading-relaxed">
+						<p>
+							Love More began with a simple yet profound vision: to create a sanctuary where people could come together to move, connect, and grow. Founded in the heart of our community, our studio has become a home for seekers of all backgrounds and experience levels who share a common desire for wellness, self-discovery, and authentic connection.
+						</p>
+
+						<p>
+							What started as a small yoga space has blossomed into a thriving wellness community. We've grown not just in size, but in the depth of our offerings and the strength of our bonds. Today, Love More stands as a testament to the power of collective intention and the transformative impact of mindful movement.
+						</p>
+
+						<p>
+							Our name reflects our core belief: that through yoga and mindfulness practices, we can cultivate more love—for ourselves, for each other, and for the world around us. Every class, workshop, and gathering is an invitation to expand your capacity for compassion, presence, and joy.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- The Three Pillars Section -->
+		<section class="py-24 bg-white" aria-labelledby="pillars-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="pillars-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 text-center tracking-wide">
+						The Three Pillars
+					</h2>
+					<p class="text-center text-lg text-neutral-600 mb-16 max-w-3xl mx-auto">
+						Our studio is built on three foundational principles that guide everything we do
+					</p>
+
+					<div class="grid md:grid-cols-3 gap-8">
+						{pillars.map((pillar) => {
+							const Icon = pillar.icon;
+							return (
+								<div class="bg-cream-50 rounded-2xl p-8 border border-warm-gray-200">
+									<Icon class="w-12 h-12 text-brand mx-auto mb-4" aria-hidden="true" />
+									<h3 class="text-2xl font-display font-bold text-charcoal mb-4 text-center tracking-wide">
+										{pillar.title}
+									</h3>
+									<p class="text-neutral-600 leading-relaxed text-center">
+										{pillar.description}
+									</p>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Mission Section -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Our Mission
+					</h2>
+					<Divider width="short" class="mb-8" />
+					<p class="text-xl text-neutral-600 leading-relaxed mb-12">
+						To provide a welcoming, inclusive space where students of all levels can explore the transformative practices of yoga and mindfulness, cultivate self-love and compassion, build meaningful connections with others, and discover their fullest potential.
+					</p>
+
+					<div class="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-warm-gray-200">
+						<blockquote class="text-2xl md:text-3xl font-display text-charcoal leading-relaxed">
+							"We believe that when you love yourself more, you naturally love others more—and together, we create a more loving world."
+						</blockquote>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Community Section -->
+		<section class="py-24 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-8 text-center tracking-wide">
+						Join Our Community
+					</h2>
+
+					<div class="grid md:grid-cols-2 gap-6">
+						<div class="bg-cream-50 p-6 rounded-xl border border-warm-gray-200">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">All Levels Welcome</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Whether you're stepping onto a mat for the first time or you're an experienced practitioner, you'll find your place here.
+							</p>
+						</div>
+
+						<div class="bg-cream-50 p-6 rounded-xl border border-warm-gray-200">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Experienced Teachers</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Our instructors bring diverse backgrounds, training, and perspectives to create rich, authentic experiences.
+							</p>
+						</div>
+
+						<div class="bg-cream-50 p-6 rounded-xl border border-warm-gray-200">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Beautiful Space</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Our thoughtfully designed studio provides a peaceful sanctuary where you can leave the outside world behind.
+							</p>
+						</div>
+
+						<div class="bg-cream-50 p-6 rounded-xl border border-warm-gray-200">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Inclusive Environment</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								We celebrate diversity and create a safe, welcoming space for all bodies, identities, and backgrounds.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready to Begin?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Join us on the mat and become part of the Love More family. Your journey toward greater wellness, connection, and self-love starts here.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/start" variant="primary" size="large">
+							Start Your Practice
+						</Button>
+						<a
+							href="/team"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							Meet Our Team
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>

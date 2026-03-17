@@ -10,6 +10,7 @@ const upcomingRetreats = [
 	{
 		name: 'Costa Rica Retreat',
 		location: 'Costa Rica',
+		image: 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80',
 		description: 'Join us for an unforgettable journey to the lush rainforests and pristine beaches of Costa Rica. Immerse yourself in daily yoga practice, meditation, and adventure while surrounded by natural beauty.',
 		highlights: [
 			'Daily yoga and meditation sessions',
@@ -22,6 +23,7 @@ const upcomingRetreats = [
 	{
 		name: 'Sedona Retreat',
 		location: 'Sedona, Arizona',
+		image: 'https://images.unsplash.com/photo-1580508174046-170816f65662?w=1200&auto=format&fit=crop&q=80',
 		description: 'Experience the powerful energy vortexes and stunning red rock landscapes of Sedona. This transformative retreat combines yoga, hiking, and spiritual exploration in one of the world\'s most sacred destinations.',
 		highlights: [
 			'Vortex site visits and energy work',
@@ -93,7 +95,12 @@ const upcomingRetreats = [
 							<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200">
 								<div class="grid md:grid-cols-5 gap-0">
 									<div class="md:col-span-2 relative h-64 md:h-auto">
-										<div class="absolute inset-0 bg-gradient-to-br from-emerald-dark to-brand"></div>
+										<img
+											src={retreat.image}
+											alt={retreat.name}
+											class="absolute inset-0 w-full h-full object-cover"
+										/>
+										<div class="absolute inset-0 bg-neutral-900/40"></div>
 										<div class="absolute inset-0 flex items-center justify-center">
 											<div class="text-center text-white p-8">
 												<Palmtree class="w-16 h-16 mx-auto mb-4" aria-hidden="true" />

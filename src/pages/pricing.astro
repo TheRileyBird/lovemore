@@ -110,44 +110,46 @@ const memberships = [
 		<!-- Membership Cards -->
 		<section class="py-24 bg-white" aria-labelledby="memberships-heading">
 			<div class="container mx-auto px-6">
-				<div class="max-w-7xl mx-auto">
+				<div class="max-w-6xl mx-auto">
 					<h2 id="memberships-heading" class="sr-only">Membership Options</h2>
 
-					<div class="grid md:grid-cols-2 gap-10 lg:gap-12">
-						{memberships.map((membership, index) => {
+					<div class="space-y-12">
+						{memberships.map((membership) => {
 							const Icon = membership.icon;
 							return (
-								<div class={`bg-white rounded-2xl shadow-lg border-2 border-warm-gray-200 overflow-hidden ${index === 1 || index === 2 ? 'md:transform md:scale-105' : ''}`}>
-									<div class="aspect-[4/3] relative overflow-hidden">
-										<img
-											src={membership.image}
-											alt=""
-											loading="lazy"
-											class="absolute inset-0 w-full h-full object-cover"
-										/>
-										<div class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent"></div>
-									</div>
-
-									<div class="p-8">
-										<div class="flex items-center gap-3 mb-4">
-											<Icon class="w-8 h-8 text-brand" aria-hidden="true" />
-											<h3 class="text-2xl font-display font-bold text-charcoal tracking-wide">
-												{membership.name} MEMBERSHIP
-											</h3>
+								<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200">
+									<div class="grid md:grid-cols-5 gap-0">
+										<div class="md:col-span-2 relative h-64 md:h-auto">
+											<img
+												src={membership.image}
+												alt=""
+												loading="lazy"
+												class="absolute inset-0 w-full h-full object-cover"
+											/>
 										</div>
 
-										<ul class="space-y-3 mb-8">
-											{membership.features.map((feature) => (
-												<li class="flex items-start gap-3">
-													<span class="text-brand mt-1">•</span>
-													<span class="text-neutral-600 leading-relaxed">{feature}</span>
-												</li>
-											))}
-										</ul>
+										<div class="md:col-span-3 p-8 md:p-10">
+											<div class="flex items-center gap-3 mb-6">
+												<Icon class="w-8 h-8 text-brand" aria-hidden="true" />
+												<h3 class="text-2xl md:text-3xl font-display font-bold text-charcoal tracking-wide">
+													{membership.name} MEMBERSHIP
+												</h3>
+											</div>
 
-										<Button href="/start" variant="primary" class="w-full">
-											Get Started
-										</Button>
+											<h4 class="text-lg font-semibold text-charcoal mb-4">Membership Includes:</h4>
+											<ul class="space-y-2 mb-8">
+												{membership.features.map((feature) => (
+													<li class="flex items-start gap-3">
+														<span class="text-brand mt-1">•</span>
+														<span class="text-neutral-600">{feature}</span>
+													</li>
+												))}
+											</ul>
+
+											<Button href="/start" variant="primary">
+												Get Started
+											</Button>
+										</div>
 									</div>
 								</div>
 							);

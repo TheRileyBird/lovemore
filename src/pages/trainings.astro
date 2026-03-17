@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+---
+
+<Layout title="Teacher Training & Workshops — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="trainings-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="trainings-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
+					Teacher Training & Workshops
+				</h1>
+				<p class="text-2xl text-white/95 max-w-3xl mx-auto font-light">
+					Deepen Your Practice, Transform Your Teaching
+				</p>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-20 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto text-center">
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						Become a Certified Yoga Teacher
+					</h2>
+					<Divider width="short" class="mb-8" />
+					<p class="text-lg text-neutral-600 leading-relaxed mb-6">
+						Whether you're looking to deepen your personal practice or embark on a journey to share yoga with others, our teacher training programs provide comprehensive education, hands-on experience, and mentorship from experienced instructors.
+					</p>
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Our programs are registered with Yoga Alliance and taught by experienced E-RYT® certified instructors who are passionate about supporting the next generation of yoga teachers.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Programs Section -->
+		<section class="py-24 bg-white" aria-labelledby="programs-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto">
+					<h2 id="programs-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
+						Training Programs
+					</h2>
+
+					<div class="space-y-8">
+						<div class="bg-cream-50 p-8 rounded-2xl border border-warm-gray-200">
+							<h3 class="text-2xl font-display font-bold text-charcoal mb-4 tracking-wide">
+								200-Hour Yoga Teacher Training
+							</h3>
+							<p class="text-neutral-600 leading-relaxed mb-4">
+								Our foundational training program provides a comprehensive introduction to teaching yoga. You'll learn anatomy, philosophy, teaching methodology, and develop your personal practice while building the confidence to lead your own classes.
+							</p>
+							<ul class="space-y-2 mb-6">
+								<li class="flex items-start gap-3">
+									<span class="text-brand mt-1">•</span>
+									<span class="text-neutral-600">Comprehensive study of yoga asana, pranayama, and meditation</span>
+								</li>
+								<li class="flex items-start gap-3">
+									<span class="text-brand mt-1">•</span>
+									<span class="text-neutral-600">Anatomy and physiology for yoga teachers</span>
+								</li>
+								<li class="flex items-start gap-3">
+									<span class="text-brand mt-1">•</span>
+									<span class="text-neutral-600">Teaching methodology and class sequencing</span>
+								</li>
+								<li class="flex items-start gap-3">
+									<span class="text-brand mt-1">•</span>
+									<span class="text-neutral-600">Yoga philosophy and history</span>
+								</li>
+								<li class="flex items-start gap-3">
+									<span class="text-brand mt-1">•</span>
+									<span class="text-neutral-600">Hands-on teaching practice and feedback</span>
+								</li>
+							</ul>
+							<p class="text-sm text-neutral-500 mb-4">
+								Yoga Alliance Certified RYT® 200
+							</p>
+							<Button href="/contact" variant="primary">
+								Learn More
+							</Button>
+						</div>
+
+						<div class="bg-cream-50 p-8 rounded-2xl border border-warm-gray-200">
+							<h3 class="text-2xl font-display font-bold text-charcoal mb-4 tracking-wide">
+								Advanced Training & Workshops
+							</h3>
+							<p class="text-neutral-600 leading-relaxed mb-6">
+								Continue your education with specialized workshops and advanced training modules. Topics include advanced asana, adjustments and assists, specialty class formats, and business skills for yoga teachers.
+							</p>
+							<Button href="/contact" variant="secondary">
+								View Upcoming Workshops
+							</Button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Why Choose Us Section -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
+						Why Train With Us?
+					</h2>
+
+					<div class="grid md:grid-cols-2 gap-8">
+						<div class="bg-white p-6 rounded-xl">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Experienced Faculty</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Learn from E-RYT® 500 certified teachers with years of teaching and training experience.
+							</p>
+						</div>
+
+						<div class="bg-white p-6 rounded-xl">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Small Class Sizes</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Benefit from personalized attention and mentorship in intimate training groups.
+							</p>
+						</div>
+
+						<div class="bg-white p-6 rounded-xl">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Comprehensive Curriculum</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Our programs exceed Yoga Alliance standards with additional hours of study and practice.
+							</p>
+						</div>
+
+						<div class="bg-white p-6 rounded-xl">
+							<h3 class="text-xl font-semibold text-charcoal mb-3">Community Support</h3>
+							<p class="text-neutral-600 leading-relaxed">
+								Join a supportive community of teachers and continue learning through our ongoing education programs.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready to Begin Your Teaching Journey?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Contact us to learn more about upcoming training dates, tuition, and enrollment. We're here to answer all your questions and help you take the next step.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/contact" variant="primary" size="large">
+							Request Information
+						</Button>
+						<a
+							href="/schedule"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							View Class Schedule
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
