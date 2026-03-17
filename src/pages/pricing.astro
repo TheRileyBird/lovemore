@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+import { Heart, Users, Sparkles, Home } from 'lucide-astro';
+
+const memberships = [
+	{
+		name: 'MOVEMENT',
+		icon: Heart,
+		features: [
+			'Access to 8 classes per month',
+			'Diverse range of movement modalities',
+			'15% discount on retail items'
+		],
+		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/44e2950c-f9cb-479f-8e9a-a14f63c23261/8N7A8750+%282%29.jpg'
+	},
+	{
+		name: 'COMMUNITY',
+		icon: Users,
+		features: [
+			'Unlimited access to classes',
+			'Complimentary mat rental and sweat towel use',
+			'Free mat storage service',
+			'Free refills of Stealth Detox Water',
+			'One free specialty class per month',
+			'15% discount on retail items',
+			'10% discount on Teacher Training programs',
+			'One Buddy Pass per month for new students'
+		],
+		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/a9289884-74dd-4261-a7ac-5c48768c119c/8N7A8829.jpg'
+	},
+	{
+		name: 'CONNECTION',
+		icon: Sparkles,
+		features: [
+			'Unlimited access to classes',
+			'Complimentary mat rental and sweat towel use',
+			'Free mat storage service',
+			'Free refills of Stealth Detox Water',
+			'One free specialty class per month',
+			'15% discount on retail items',
+			'10% discount on Teacher Training programs',
+			'One free 30-minute session: Performance coaching, Energy Reading, Reiki, or private yoga',
+			'Two Buddy Passes per month for new students'
+		],
+		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1694187213051-7OARL5X5LN5L9CY84V03/8N7A8805.jpg'
+	},
+	{
+		name: 'FAMILY',
+		icon: Home,
+		features: [
+			'Add up to 5 family members',
+			'Unlimited access to classes',
+			'Complimentary mat rental and sweat towel use',
+			'Free mat storage service',
+			'Free refills of Stealth Detox Water',
+			'One free specialty class per month',
+			'15% discount on retail items',
+			'10% discount on Teacher Training programs',
+			'One free 30-minute session: Performance coaching, Energy Reading, Reiki, or private yoga',
+			'Two Buddy Passes per month for new students'
+		],
+		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/0834eef3-45d7-42ab-9917-a76e01bd2a59/MBPL4917.jpg'
+	}
+];
+---
+
+<Layout title="Pricing Options — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="pricing-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 100% 40%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="pricing-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
+					Pricing Options
+				</h1>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-16 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						Find the Right Membership For You
+					</h2>
+					<Divider width="short" class="mb-6" />
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Choose the membership that fits your lifestyle and goals. From occasional practice to daily commitment, we have options designed to support your journey.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Membership Cards -->
+		<section class="py-24 bg-white" aria-labelledby="memberships-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-7xl mx-auto">
+					<h2 id="memberships-heading" class="sr-only">Membership Options</h2>
+
+					<div class="grid md:grid-cols-2 gap-10 lg:gap-12">
+						{memberships.map((membership, index) => {
+							const Icon = membership.icon;
+							return (
+								<div class={`bg-white rounded-2xl shadow-lg border-2 border-warm-gray-200 overflow-hidden ${index === 1 || index === 2 ? 'md:transform md:scale-105' : ''}`}>
+									<div class="aspect-[4/3] relative overflow-hidden">
+										<img
+											src={membership.image}
+											alt=""
+											loading="lazy"
+											class="absolute inset-0 w-full h-full object-cover"
+										/>
+										<div class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent"></div>
+									</div>
+
+									<div class="p-8">
+										<div class="flex items-center gap-3 mb-4">
+											<Icon class="w-8 h-8 text-brand" aria-hidden="true" />
+											<h3 class="text-2xl font-display font-bold text-charcoal tracking-wide">
+												{membership.name} MEMBERSHIP
+											</h3>
+										</div>
+
+										<ul class="space-y-3 mb-8">
+											{membership.features.map((feature) => (
+												<li class="flex items-start gap-3">
+													<span class="text-brand mt-1">•</span>
+													<span class="text-neutral-600 leading-relaxed">{feature}</span>
+												</li>
+											))}
+										</ul>
+
+										<Button href="/start" variant="primary" class="w-full">
+											Get Started
+										</Button>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Drop-in Option -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-5xl mx-auto">
+					<div class="text-center mb-10">
+						<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+							Just Visiting?
+						</h2>
+						<p class="text-lg text-neutral-600 leading-relaxed">
+							Try a single class or get started with our intro offer.
+						</p>
+					</div>
+
+					<div class="bg-white rounded-2xl shadow-md overflow-hidden">
+						<img
+							src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/9733f3b2-310d-47f8-89fb-bb292ea6ecac/Drop+In+Rate+.jpg"
+							alt="Drop-in rates and intro offers"
+							loading="lazy"
+							class="w-full"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready to Join?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Have questions about which membership is right for you? Get in touch with us and we'll help you find the perfect fit.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/start" variant="primary" size="large">
+							Start Your Journey
+						</Button>
+						<a
+							href="/contact"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							Contact Us
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
