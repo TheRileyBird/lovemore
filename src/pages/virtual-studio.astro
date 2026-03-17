@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import { Video, Calendar } from 'lucide-astro';
+---
+
+<Layout title="Virtual Studio — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Banner Section -->
+		<section class="py-20 pt-24 bg-cream" aria-labelledby="virtual-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-5xl mx-auto">
+					<img
+						src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/94a3bccf-cecf-4131-a827-06e4a5699c7b/Campaign+Website+Assets+%5B2024%5D+%282%29.png"
+						alt="Virtual Studio"
+						loading="eager"
+						class="w-full rounded-2xl shadow-lg"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-12 bg-white" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h1 id="intro-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Practice Anywhere, Anytime
+					</h1>
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Can't make it to the studio? No problem. Our virtual studio brings the Love More experience directly to you, wherever you are.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Video Library Section -->
+		<section class="py-16 bg-cream-50" aria-labelledby="videos-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<div class="text-center mb-8">
+						<Video class="w-12 h-12 text-brand mx-auto mb-4" aria-hidden="true" />
+						<h2 id="videos-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+							On-Demand Videos
+						</h2>
+						<p class="text-lg text-neutral-600">
+							Access our library of recorded classes and practice at your own pace.
+						</p>
+					</div>
+
+					<div class="bg-white rounded-2xl shadow-md overflow-hidden" style="min-height: 600px;">
+						<iframe
+							id="videoLibraryIframe"
+							src="https://app.arketa.co/iframe/theinvitation/videos?showFeatured=true"
+							width="100%"
+							style="height: 600px; border: none;"
+							frameborder="0"
+							allow="payment;fullscreen"
+							allowfullscreen
+							title="Virtual Studio Video Library"
+						></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Live Schedule Section -->
+		<section class="py-16 bg-white" aria-labelledby="schedule-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<div class="text-center mb-8">
+						<Calendar class="w-12 h-12 text-brand mx-auto mb-4" aria-hidden="true" />
+						<h2 id="schedule-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+							Live Virtual Classes
+						</h2>
+						<p class="text-lg text-neutral-600">
+							Join us for live-streamed classes and connect with our community in real-time.
+						</p>
+					</div>
+
+					<div class="bg-white rounded-2xl shadow-md overflow-hidden" style="min-height: 800px;">
+						<iframe
+							id="virtualScheduleIframe"
+							src="https://app.arketa.co/iframe/theinvitation/schedule"
+							width="100%"
+							style="height: 800px; border: none;"
+							frameborder="0"
+							allow="payment"
+							allowfullscreen
+							title="Virtual Studio Live Schedule"
+						></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Prefer In-Person?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Nothing beats the energy of practicing together in our studio. Check out our in-studio schedule and join us on the mat.
+					</p>
+					<a
+						href="/schedule"
+						class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-charcoal text-white hover:bg-brand hover:shadow-lg px-8 py-4 text-base"
+					>
+						View Studio Schedule
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
