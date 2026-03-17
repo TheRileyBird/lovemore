@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import { Calendar } from 'lucide-astro';
+---
+
+<Layout title="Schedule — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="schedule-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<h1 id="schedule-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
+					Schedule
+				</h1>
+			</div>
+		</section>
+
+		<!-- Intro Section -->
+		<section class="py-12 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<Calendar class="w-12 h-12 text-brand mx-auto mb-6" aria-hidden="true" />
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						We'll save a place just for you
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8">
+						Can't make it into the studio? Check out our virtual studio with the button below!
+					</p>
+					<Button href="/virtual-studio" variant="primary">
+						Virtual Studio
+					</Button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Schedule Widget Section -->
+		<section class="py-16 bg-white" aria-labelledby="booking-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="booking-heading" class="sr-only">Book Your Class</h2>
+
+					<!-- WellnessLiving Schedule Widget -->
+					<div class="wl-widget" data="k_skin=199159&k_business=288067"></div>
+
+					<noscript>
+						<div class="bg-cream-50 p-12 rounded-2xl text-center">
+							<p class="text-lg text-neutral-600 mb-6">
+								JavaScript is required to view and book classes. Please enable JavaScript in your browser.
+							</p>
+							<p class="text-neutral-600">
+								Or visit our studio directly to register for classes.
+							</p>
+						</div>
+					</noscript>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action -->
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						New to Love More?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Start your journey with our 3-week intro pass. Perfect for beginners and experienced yogis alike.
+					</p>
+					<Button href="/start" variant="primary" size="large">
+						Get Started — $56
+					</Button>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<script>
+	// Load WellnessLiving widget script
+	const script = document.createElement('script');
+	script.src = 'https://widgets.wellnessliving.com/static/js/widget.js';
+	script.async = true;
+	document.body.appendChild(script);
+</script>
