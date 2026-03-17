@@ -1,0 +1,67 @@
+{
+  "name": "studio-classes",
+  "url": "https://lovemoremcc.com/studio-classes",
+  "path": "/studio-classes",
+  "scrapedAt": "2026-03-17T17:25:26.733Z",
+  "title": "Studio Classes — Love More",
+  "metaDescription": "",
+  "headings": [
+    {
+      "level": 1,
+      "text": "Studio Classes"
+    }
+  ],
+  "sections": [
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\"><div class=\"sqs-code-container\" data-localized=\"{&quot;enableSafeModeTitle&quot;:&quot;Embedded Scripts&quot;,&quot;exitSafeModeButton&quot;:&quot;Exit safe preview&quot;,&quot;enableSafeModeText&quot;:&quot;This block contains embedded scripts. Embedded scripts are disabled while you're logged in and editing your site.&quot;,&quot;enableSafeModeButton&quot;:&quot;Preview in safe mode&quot;,&quot;exitSafeModeTitle&quot;:&quot;Safe Preview&quot;,&quot;exitSafeModeText&quot;:&quot;Please view the page after logging out for accurate rendering.&quot;,&quot;globalSafeMode&quot;:&quot;Embedded Code: This block contains embedded code that has been disabled.&quot;,&quot;scriptDisabled&quot;:&quot;Script Disabled&quot;}\">\n  \n    <div class=\"page-header\">\n  <img src=\"https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w\" style=\"object-position: 100% 40%;\">\n  <h1>Studio Classes</h1>\n</div>\n  \n</div>\n</div>",
+      "text": "Studio Classes"
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\"><div class=\"sqs-code-container\" data-localized=\"{&quot;enableSafeModeTitle&quot;:&quot;Embedded Scripts&quot;,&quot;exitSafeModeButton&quot;:&quot;Exit safe preview&quot;,&quot;enableSafeModeText&quot;:&quot;This block contains embedded scripts. Embedded scripts are disabled while you're logged in and editing your site.&quot;,&quot;enableSafeModeButton&quot;:&quot;Preview in safe mode&quot;,&quot;exitSafeModeTitle&quot;:&quot;Safe Preview&quot;,&quot;exitSafeModeText&quot;:&quot;Please view the page after logging out for accurate rendering.&quot;,&quot;globalSafeMode&quot;:&quot;Embedded Code: This block contains embedded code that has been disabled.&quot;,&quot;scriptDisabled&quot;:&quot;Script Disabled&quot;}\">\n  \n    <div class=\"landing-buttons\" style=\"text-align:center;\">\n  <a class=\"btn\" href=\"/heated-classes\">Heated Classes</a> \n  <a class=\"btn\" href=\"/non-heated-classes\">Non-Heated Classes</a> \n</div>\n  \n</div>\n</div>",
+      "text": "Heated Classes \n  Non-Heated Classes"
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\">&nbsp;</div>",
+      "text": ""
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\">&nbsp;</div>",
+      "text": ""
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\"><div class=\"sqs-text-block-container\">\n  \n  <div class=\"sqs-html-content\" data-sqsp-text-block-content=\"\"><p class=\"\" style=\"white-space:pre-wrap;\">Our studio is dedicated to providing holistic and enriching movement experiences that nurture the mind, body, and spirit. With a diverse range of classes led by experienced instructors, we invite you to explore the myriad paths of yoga, sculpting, and dance each tailored to meet your unique journey. Whether you're a seasoned yogi or just beginning to explore moving your body in new ways, our classes are designed to guide you toward a deeper connection with yourself, fostering self-love, mindfulness, and inner harmony. Step onto your mat and embark on a voyage of self-discovery and growth.</p></div>\n\n  \n</div></div>",
+      "text": "Our studio is dedicated to providing holistic and enriching movement experiences that nurture the mind, body, and spirit. With a diverse range of classes led by experienced instructors, we invite you to explore the myriad paths of yoga, sculpting, and dance each tailored to meet your unique journey. Whether you're a seasoned yogi or just beginning to explore moving your body in new ways, our classes are designed to guide you toward a deeper connection with yourself, fostering self-love, mindfulness, and inner harmony. Step onto your mat and embark on a voyage of self-discovery and growth."
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\">&nbsp;</div>",
+      "text": ""
+    }
+  ],
+  "images": [
+    {
+      "src": "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w",
+      "alt": "",
+      "title": ""
+    }
+  ],
+  "links": [
+    {
+      "href": "/cart",
+      "text": "0"
+    },
+    {
+      "href": "/heated-classes",
+      "text": "Heated Classes"
+    },
+    {
+      "href": "/non-heated-classes",
+      "text": "Non-Heated Classes"
+    }
+  ]
+}

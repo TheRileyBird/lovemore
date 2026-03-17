@@ -1,0 +1,58 @@
+{
+  "name": "events",
+  "url": "https://lovemoremcc.com/events",
+  "path": "/events",
+  "scrapedAt": "2026-03-17T17:25:33.235Z",
+  "title": "Events — Love More",
+  "metaDescription": "",
+  "headings": [
+    {
+      "level": 1,
+      "text": "EVENTS"
+    },
+    {
+      "level": 3,
+      "text": "We would love to see you"
+    }
+  ],
+  "sections": [
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\"><div class=\"sqs-code-container\" data-localized=\"{&quot;enableSafeModeTitle&quot;:&quot;Embedded Scripts&quot;,&quot;exitSafeModeButton&quot;:&quot;Exit safe preview&quot;,&quot;enableSafeModeText&quot;:&quot;This block contains embedded scripts. Embedded scripts are disabled while you're logged in and editing your site.&quot;,&quot;enableSafeModeButton&quot;:&quot;Preview in safe mode&quot;,&quot;exitSafeModeTitle&quot;:&quot;Safe Preview&quot;,&quot;exitSafeModeText&quot;:&quot;Please view the page after logging out for accurate rendering.&quot;,&quot;globalSafeMode&quot;:&quot;Embedded Code: This block contains embedded code that has been disabled.&quot;,&quot;scriptDisabled&quot;:&quot;Script Disabled&quot;}\">\n  \n    <div class=\"page-header\">\n  <img src=\"https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/4a7fdc49-fa4d-43b4-8c03-a4a01d52f00d/8N7A8454.jpg?format=1600w\" style=\"object-position: 100% 30%;\">\n  <h1>EVENTS</h1>\n</div>\n  \n</div>\n</div>",
+      "text": "EVENTS"
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\"><div class=\"sqs-text-block-container\">\n  \n  <div class=\"sqs-html-content\" data-sqsp-text-block-content=\"\"><h3 style=\"text-align:center;white-space:pre-wrap;\">We would <strong>love </strong>to see you</h3></div>\n\n  \n</div></div>",
+      "text": "We would love to see you"
+    },
+    {
+      "type": "horizontalrule",
+      "html": "<div class=\"sqs-block-content\"><hr></div>",
+      "text": ""
+    },
+    {
+      "type": "website",
+      "html": "<div class=\"sqs-block-content\"><div class=\"sqs-code-container\" data-localized=\"{&quot;enableSafeModeTitle&quot;:&quot;Embedded Scripts&quot;,&quot;exitSafeModeButton&quot;:&quot;Exit safe preview&quot;,&quot;enableSafeModeText&quot;:&quot;This block contains embedded scripts. Embedded scripts are disabled while you're logged in and editing your site.&quot;,&quot;enableSafeModeButton&quot;:&quot;Preview in safe mode&quot;,&quot;exitSafeModeTitle&quot;:&quot;Safe Preview&quot;,&quot;exitSafeModeText&quot;:&quot;Please view the page after logging out for accurate rendering.&quot;,&quot;globalSafeMode&quot;:&quot;Embedded Code: This block contains embedded code that has been disabled.&quot;,&quot;scriptDisabled&quot;:&quot;Script Disabled&quot;}\">\n  \n    <!-- BEGIN WELLNESSLIVING CODE -->\n  <div class=\"wl-widget\" data=\"k_skin=199162&amp;url_page=-Ci1wHmoMPSorFhoqfa4zK4BqJE%3Ahttps%3A%2F%2Fwww.lovemorehotyoga.com%2Fevents\"></div>\n  \n  \n  \n    <a href=\"https://www.wellnessliving.com/yoga/\" rel=\"nofollow\" style=\"float:right;\"><img src=\"https://s3.amazonaws.com/wl-static/file/J.png\" alt=\"Yoga management software\" height=\"39\" width=\"135\"></a>\n  \n  <br clear=\"both\">\n\n  <!-- END WELLNESSLIVING CODE -->\n  \n</div>\n</div>",
+      "text": ""
+    }
+  ],
+  "images": [
+    {
+      "src": "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/4a7fdc49-fa4d-43b4-8c03-a4a01d52f00d/8N7A8454.jpg?format=1600w",
+      "alt": "",
+      "title": ""
+    },
+    {
+      "src": "https://s3.amazonaws.com/wl-static/file/J.png",
+      "alt": "Yoga management software",
+      "title": ""
+    }
+  ],
+  "links": [
+    {
+      "href": "/cart",
+      "text": "0"
+    }
+  ]
+}
