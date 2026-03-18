@@ -3,12 +3,20 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import StepCard from '../components/StepCard.astro';
 import PillarCard from '../components/PillarCard.astro';
-import TeacherCard from '../components/TeacherCard.astro';
+import TeamMemberCard from '../components/TeamMemberCard.astro';
+import TeamMemberModal from '../components/TeamMemberModal.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro';
 import { teachers } from '../data/teachers';
+
+// Transform teachers data to include bios and convert image to string
+const teamMembers = teachers.map((teacher) => ({
+	...teacher,
+	image: teacher.image.src,
+	bio: teacher.bio || `${teacher.name} is a passionate yoga instructor dedicated to helping students discover the transformative power of movement and mindfulness. With years of experience and a deep commitment to the Love More community, ${teacher.name.split(' ')[0]} creates a welcoming and supportive environment for practitioners of all levels. Their classes blend traditional wisdom with modern approaches, emphasizing the connection between breath, body, and spirit.`
+}));
 
 const steps = [
 	{ number: 1, title: 'Buy Your 3 Week Intro Pass', description: 'Purchase your intro pass online or in person' },
@@ -47,7 +55,7 @@ const pillars = [
 	<main id="main-content">
 		<!-- Hero Section -->
 		<section class="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-labelledby="hero-heading">
-			<div class="absolute inset-0 z-0 bg-cream">
+			<div class="absolute inset-0 z-0 ">
 				<!-- Fallback image -->
 				<img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=1600&h=1200&fit=crop&q=80" alt="" role="presentation" loading="eager" class="absolute inset-0 w-full h-full object-cover" />
 				<!-- Vimeo video background -->
@@ -60,7 +68,7 @@ const pillars = [
 					title="Hero Background Video"
 				></iframe>
 				<!-- Cream overlay gradient -->
-				<div class="absolute inset-0 bg-gradient-to-b from-cream/60 via-cream/80 to-cream z-20"></div>
+				<div class="absolute inset-0 bg-gradient-to-b from-cream/05 via-cream/50 to-cream z-20"></div>
 			</div>
 
 			<div class="relative z-10 container mx-auto px-6 text-center">
@@ -91,7 +99,7 @@ const pillars = [
 					>Love the Journey</h1>
 				</div>
 
-				<p class="text-xl md:text-2xl text-white/95 mb-16 max-w-3xl mx-auto font-light leading-relaxed tracking-wide" style="text-shadow: 0 0 30px rgba(0,0,0,0.85), 0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.6);">
+				<p class="text-xl md:text-2xl text-black mb-16 max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
 					movement <span class="text-brand">•</span> community <span class="text-brand">•</span> connection
 				</p>
 
@@ -204,8 +212,15 @@ const pillars = [
 					</p>
 				</div>
 
-				<div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
-					{teachers.map((teacher) => <TeacherCard {...teacher} />)}
+				<div class="grid md:grid-cols-3 gap-x-6 gap-y-16 max-w-5xl mx-auto mb-12">
+					{teamMembers.map((member, index) => (
+						<TeamMemberCard
+							name={member.name}
+							title={member.title}
+							image={member.image}
+							index={index}
+						/>
+					))}
 				</div>
 
 				<div class="text-center">
@@ -269,7 +284,31 @@ const pillars = [
 				</div>
 			</div>
 		</section>
+
+		<!-- Team Member Modal -->
+		<TeamMemberModal />
 	</main>
 
 	<Footer />
 </Layout>
+
+<script define:vars={{ teamMembers }}>
+	// Store team members data in JavaScript
+	const members = teamMembers;
+
+	// Add click handlers after DOM loads
+	document.addEventListener('alpine:init', () => {
+		// Wait for Alpine to be ready
+		setTimeout(() => {
+			const cards = document.querySelectorAll('[data-member-index]');
+			cards.forEach((card) => {
+				card.addEventListener('click', () => {
+					const index = parseInt(card.getAttribute('data-member-index'));
+					const member = members[index];
+					// Dispatch custom event with member data
+					window.dispatchEvent(new CustomEvent('modal-open', { detail: member }));
+				});
+			});
+		}, 100);
+	});
+</script>

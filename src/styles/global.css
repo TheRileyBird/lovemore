@@ -8,15 +8,18 @@
 	font-display: swap;
 }
 
+/*--color-brand: #ca2317;*/
+/*--color-brand-dark: #8b1810;*/
+/*--color-brand-light: #e02919;*/
 .animated-gradient-text {
 	font-family: var(--font-logo);
-	background: linear-gradient(90deg, #fff 0%, #ca2317 20%, #ff4444 40%, #ff6b6b 60%, #460a08 80%, #fff 100%);
+	background: linear-gradient(90deg, #8b1810 0%, #ca2317 40%,  #ff4444 60%, #e02919 80%, #8b1810 100%);
 	background-size: 300% 100%;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
-	filter: drop-shadow(0 0 40px rgba(255,215,0,0.3)) drop-shadow(0 0 20px rgba(0,0,0,0.8));
+	/*filter: drop-shadow(0 0 40px rgba(255,215,0,0.3)) drop-shadow(0 0 20px rgba(0,0,0,0.8));*/
 	animation: gradient-shift 10s ease infinite;
 }
 
