@@ -9,7 +9,11 @@
       "Bash(npm run dev:*)",
       "Bash(find:*)",
       "WebFetch(domain:myawellbeing.com)",
-      "Bash(convert:*)"
+      "Bash(convert:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(netlify init:*)",
+      "Bash(netlify sites:create:*)"
     ]
   }
 }
