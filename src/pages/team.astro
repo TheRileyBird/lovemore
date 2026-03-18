@@ -76,10 +76,10 @@ const teamMembers = teamData.sections
 					</h2>
 
 					<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
-						{teamMembers.map((member: any) => (
+						{teamMembers.map((member: any, index: number) => (
 							<div
 								class="group cursor-pointer"
-								@click={`$dispatch('modal-open', ${JSON.stringify(member)})`}
+								data-member-index={index}
 							>
 								<div class="relative">
 									<div class="relative overflow-hidden rounded-2xl shadow-md aspect-square mb-10">
@@ -137,3 +137,24 @@ const teamMembers = teamData.sections
 
 	<Footer />
 </Layout>
+
+<script define:vars={{ teamMembers }}>
+	// Store team members data in JavaScript
+	const members = teamMembers;
+
+	// Add click handlers after DOM loads
+	document.addEventListener('alpine:init', () => {
+		// Wait for Alpine to be ready
+		setTimeout(() => {
+			const cards = document.querySelectorAll('[data-member-index]');
+			cards.forEach((card) => {
+				card.addEventListener('click', () => {
+					const index = parseInt(card.getAttribute('data-member-index'));
+					const member = members[index];
+					// Dispatch custom event with member data
+					window.dispatchEvent(new CustomEvent('modal-open', { detail: member }));
+				});
+			});
+		}, 100);
+	});
+</script>
