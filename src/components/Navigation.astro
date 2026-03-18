@@ -12,9 +12,9 @@ import Button from './Button.astro';
 	aria-label="Main navigation"
 >
 	<div class="container mx-auto px-6">
-		<div class="flex md:grid md:grid-cols-3 items-center gap-8">
+		<div class="flex xl:grid xl:grid-cols-3 items-center gap-8">
 			<!-- Left: Navigation Links -->
-			<div class="hidden md:flex items-center gap-8 md:col-span-1">
+			<div class="hidden xl:flex items-center gap-8 xl:col-span-1">
 				<!-- Schedule Dropdown -->
 				<div x-data="{ open: false }" class="relative">
 					<button
@@ -69,7 +69,7 @@ import Button from './Button.astro';
 			</div>
 
 			<!-- Center: Logo -->
-			<div class="flex justify-start md:justify-center flex-1 md:flex-none md:col-span-1">
+			<div class="flex justify-start xl:justify-center flex-1 xl:flex-none xl:col-span-1">
 				<a href="/" class="flex items-center hover:opacity-90 transition-all duration-300">
 					<img
 						src={logoImage.src}
@@ -81,7 +81,7 @@ import Button from './Button.astro';
 			</div>
 
 			<!-- Right: About, Contact, and Button -->
-			<div class="hidden md:flex items-center justify-end gap-8 md:col-span-1">
+			<div class="hidden xl:flex items-center justify-end gap-8 xl:col-span-1">
 				<!-- About Dropdown -->
 				<div x-data="{ open: false }" class="relative">
 					<button
@@ -126,7 +126,8 @@ import Button from './Button.astro';
 
 				<div :class="scrolled ? 'scale-90' : 'scale-100'" class="transition-transform duration-300">
 					<Button href="/start" size="small">
-						Get Started for $56
+						<span class="hidden 2xl:inline">Get Started for $56</span>
+						<span class="inline 2xl:hidden">Start for $56</span>
 					</Button>
 				</div>
 			</div>
@@ -138,7 +139,7 @@ import Button from './Button.astro';
 				aria-label="Toggle mobile menu"
 				:aria-expanded="open"
 				aria-controls="mobile-menu"
-				class="md:hidden p-2 text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded col-start-3 justify-self-end"
+				class="xl:hidden p-2 text-neutral-600 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded col-start-3 justify-self-end"
 			>
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -160,7 +161,7 @@ import Button from './Button.astro';
 		x-transition:leave-start="opacity-100 translate-y-0"
 		x-transition:leave-end="opacity-0 -translate-y-4"
 		id="mobile-menu"
-		class="md:hidden bg-cream-100 border-t border-warm-gray-200 shadow-md"
+		class="xl:hidden bg-cream-100 border-t border-warm-gray-200 shadow-md"
 		style="display: none;"
 	>
 		<div class="container mx-auto px-6 py-4 space-y-4">
