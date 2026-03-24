@@ -134,34 +134,10 @@ const structuredData = {
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-		<!-- Netlify Identity Widget for CMS authentication -->
-		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
 		<title>{fullTitle}</title>
 	</head>
 	<body class="antialiased bg-cream text-charcoal">
 		<slot />
-
-		<!-- Netlify Identity redirect handler -->
-		<script is:inline>
-			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on("init", user => {
-					if (!user) {
-						window.netlifyIdentity.on("login", () => {
-							document.location.href = "/admin/";
-						});
-					}
-				});
-
-				// Explicitly handle invite and recovery tokens
-				window.addEventListener('DOMContentLoaded', function() {
-					const hash = window.location.hash;
-					if (hash && (hash.includes('invite_token') || hash.includes('recovery_token') || hash.includes('confirmation_token'))) {
-						window.netlifyIdentity.open();
-					}
-				});
-			}
-		</script>
 
 		<!-- Alpine.js with Intersect and Collapse plugins -->
 		<script>
