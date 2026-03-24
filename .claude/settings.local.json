@@ -14,7 +14,10 @@
       "Bash(git commit:*)",
       "Bash(netlify init:*)",
       "Bash(netlify sites:create:*)",
-      "Bash(git push)"
+      "WebFetch(domain:github.com)",
+      "Bash(claude:*)",
+      "mcp__netlify__netlify-project-services-reader",
+      "mcp__netlify__netlify-deploy-services-reader"
     ]
   }
 }
