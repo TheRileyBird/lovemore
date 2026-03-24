@@ -134,10 +134,26 @@ const structuredData = {
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
+		<!-- Netlify Identity Widget for CMS authentication -->
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 		<title>{fullTitle}</title>
 	</head>
 	<body class="antialiased bg-cream text-charcoal">
 		<slot />
+
+		<!-- Netlify Identity redirect handler -->
+		<script>
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", user => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
 
 		<!-- Alpine.js with Intersect and Collapse plugins -->
 		<script>
