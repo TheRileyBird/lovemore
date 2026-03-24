@@ -155,6 +155,27 @@ const structuredData = {
 			// Start Alpine
 			Alpine.start();
 		</script>
+
+		<!-- Netlify Identity authentication handling -->
+		<script>
+			import { handleAuthCallback, getUser } from '@netlify/identity';
+
+			// Handle authentication callbacks (invite links, email confirmation, password recovery, OAuth)
+			async function initAuth() {
+				const result = await handleAuthCallback();
+
+				if (result) {
+					// User authenticated via callback (invite, confirmation, recovery, or OAuth)
+					console.log('Auth callback completed:', result.type);
+
+					// Redirect to admin panel after successful authentication
+					window.location.href = '/admin/';
+				}
+			}
+
+			// Initialize on page load
+			initAuth();
+		</script>
 	</body>
 </html>
 

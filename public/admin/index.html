@@ -9,5 +9,23 @@
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- Netlify Identity authentication handling for CMS -->
+  <script type="module">
+    import { handleAuthCallback, getUser } from 'https://cdn.jsdelivr.net/npm/@netlify/identity@1/+esm';
+
+    // Handle authentication callbacks on the admin page
+    async function initCMSAuth() {
+      const result = await handleAuthCallback();
+
+      if (result) {
+        // Authentication completed via callback
+        console.log('CMS auth callback completed:', result.type);
+        // Decap CMS will automatically detect the authenticated user
+      }
+    }
+
+    initCMSAuth();
+  </script>
 </body>
 </html>
