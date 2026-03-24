@@ -1,6 +1,6 @@
 # Love More Yoga Studio
 
-A modern, professionally redesigned website for Love More yoga studio in Covington, LA, built with Astro, Tailwind CSS, and Alpine.js.
+A modern, professionally redesigned website for Love More yoga studio in Covington, LA, built with Astro, Tailwind CSS, and Alpine.js
 
 ## Tech Stack
 
