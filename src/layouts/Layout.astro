@@ -152,6 +152,14 @@ const structuredData = {
 						});
 					}
 				});
+
+				// Explicitly handle invite and recovery tokens
+				window.addEventListener('DOMContentLoaded', function() {
+					const hash = window.location.hash;
+					if (hash && (hash.includes('invite_token') || hash.includes('recovery_token') || hash.includes('confirmation_token'))) {
+						window.netlifyIdentity.open();
+					}
+				});
 			}
 		</script>
 
