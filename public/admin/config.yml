@@ -18,9 +18,9 @@ collections:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Photo", name: "image", widget: "image" }
-      - { label: "Bio", name: "bio", widget: "markdown" }
       - { label: "Display Order", name: "order", widget: "number", default: 100 }
       - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "Bio", name: "body", widget: "markdown" }
 
   - name: "classes"
     label: "Classes"
@@ -36,9 +36,9 @@ collections:
           options: ["heated", "non-heated", "specialty"],
         }
       - { label: "Photo", name: "image", widget: "image" }
-      - { label: "Description", name: "description", widget: "markdown" }
       - { label: "Display Order", name: "order", widget: "number", default: 100 }
       - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "Description", name: "body", widget: "markdown" }
 
   - name: "retreats"
     label: "Retreats"
@@ -49,6 +49,6 @@ collections:
       - { label: "Retreat Name", name: "name", widget: "string" }
       - { label: "Location", name: "location", widget: "string" }
       - { label: "Photo", name: "image", widget: "image" }
-      - { label: "Description", name: "description", widget: "markdown" }
       - { label: "Highlights", name: "highlights", widget: "list" }
       - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "Description", name: "body", widget: "markdown" }
