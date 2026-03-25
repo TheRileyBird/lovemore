@@ -5,21 +5,25 @@ import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
 import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
-import { getCollection } from 'astro:content';
+import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 
-// Get team members from content collections (managed by CMS)
-const allTeamMembers = await getCollection('team');
+// Fetch team page with ordered team members from Strapi
+const teamPageResponse = await fetchAPI<any>({
+	endpoint: 'team-page',
+	query: {
+		'populate[team_members][populate]': 'image'
+	},
+	wrappedByKey: 'data'
+});
 
-// Filter active members and sort by order
-const teamMembers = allTeamMembers
-	.filter(member => member.data.active)
-	.sort((a, b) => a.data.order - b.data.order)
-	.map(member => ({
-		name: member.data.name,
-		title: member.data.title,
-		image: member.data.image,
-		bio: member.body
-	}));
+// Map Strapi data to match existing structure
+// The order comes from the drag-and-drop in CMS
+const teamMembers = teamPageResponse?.team_members?.map((member: any) => ({
+	name: member.name,
+	title: member.title,
+	image: member.image?.url ? getStrapiMedia(member.image.url) : null,
+	bio: member.bio
+})) || [];
 ---
 
 <Layout title="Team — Love More">
