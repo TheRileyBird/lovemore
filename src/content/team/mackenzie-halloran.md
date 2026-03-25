@@ -1,7 +1,7 @@
 ---
-name: "Mackenzie Halloran"
-title: "Yoga Instructor"
-image: "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857026829-W1FZTHXFGDGLBKJMNP4D/Mackenzie+Halloran+%281%29.JPG"
+name: Mackenzie Halloran
+title: Yoga Instructor
+image: /images/uploads/imgi_46_mackenzie-halloran.jpg
 order: 2
 active: true
 ---
