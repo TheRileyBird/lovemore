@@ -131,6 +131,9 @@ const structuredData = {
 			rel="stylesheet"
 		/>
 
+		<!-- Netlify Identity Widget -->
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
@@ -138,6 +141,19 @@ const structuredData = {
 	</head>
 	<body class="antialiased bg-cream text-charcoal">
 		<slot />
+
+		<!-- Netlify Identity redirect handler -->
+		<script is:inline>
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", user => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
 
 		<!-- Alpine.js with Intersect and Collapse plugins -->
 		<script>
@@ -154,40 +170,6 @@ const structuredData = {
 
 			// Start Alpine
 			Alpine.start();
-		</script>
-
-		<!-- Netlify Identity authentication handling -->
-		<script>
-			import { handleAuthCallback } from '@netlify/identity';
-
-			// Handle authentication callbacks (invite links, email confirmation, password recovery, OAuth)
-			async function initAuth() {
-				try {
-					const result = await handleAuthCallback();
-
-					if (result) {
-						// For password recovery, store state and redirect to admin page
-						// The admin page will show the password reset form
-						if (result.type === 'recovery') {
-							sessionStorage.setItem('netlify_recovery', 'true');
-							window.location.href = '/admin/';
-							return;
-						}
-
-						// For other callback types (invite, confirmation, OAuth), user is now logged in
-						// Redirect to admin panel
-						if (result.user) {
-							window.location.href = '/admin/';
-						}
-					}
-				} catch (error) {
-					// Silently fail - user can still navigate to admin and log in manually
-					// Error will be properly handled on the admin page
-				}
-			}
-
-			// Initialize on page load
-			initAuth();
 		</script>
 	</body>
 </html>
