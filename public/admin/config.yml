@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: master # Branch to update (optional; defaults to master)
 
+# Enable editorial workflow for drafts and immediate image preview
+publish_mode: editorial_workflow
+
 # Uncomment to use local backend for development
 # local_backend: true
 
@@ -17,7 +20,7 @@ collections:
     fields:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Photo", name: "image", widget: "image", hint: "Upload an image. It will appear on the live site after you publish and the site rebuilds (~2 minutes)." }
       - { label: "Display Order", name: "order", widget: "number", default: 100 }
       - { label: "Active", name: "active", widget: "boolean", default: true }
       - { label: "Bio", name: "body", widget: "markdown" }
@@ -35,7 +38,7 @@ collections:
           widget: "select",
           options: ["heated", "non-heated", "specialty"],
         }
-      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Photo", name: "image", widget: "image", hint: "Upload an image. It will appear on the live site after you publish and the site rebuilds (~2 minutes)." }
       - { label: "Display Order", name: "order", widget: "number", default: 100 }
       - { label: "Active", name: "active", widget: "boolean", default: true }
       - { label: "Description", name: "body", widget: "markdown" }
@@ -48,7 +51,7 @@ collections:
     fields:
       - { label: "Retreat Name", name: "name", widget: "string" }
       - { label: "Location", name: "location", widget: "string" }
-      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Photo", name: "image", widget: "image", hint: "Upload an image. It will appear on the live site after you publish and the site rebuilds (~2 minutes)." }
       - { label: "Highlights", name: "highlights", widget: "list" }
       - { label: "Active", name: "active", widget: "boolean", default: true }
       - { label: "Description", name: "body", widget: "markdown" }
