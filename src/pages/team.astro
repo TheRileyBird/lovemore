@@ -11,7 +11,7 @@ import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 const teamPageResponse = await fetchAPI<any>({
 	endpoint: 'team-page',
 	query: {
-		'populate[team_members][populate]': 'image'
+		'populate[team_members][populate][0]': 'image'
 	},
 	wrappedByKey: 'data'
 });

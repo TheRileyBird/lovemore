@@ -17,7 +17,14 @@
       "WebFetch(domain:github.com)",
       "Bash(claude:*)",
       "mcp__netlify__netlify-project-services-reader",
-      "mcp__netlify__netlify-deploy-services-reader"
+      "mcp__netlify__netlify-deploy-services-reader",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:decapcms.org)",
+      "WebSearch",
+      "WebFetch(domain:docs.astro.build)",
+      "WebFetch(domain:neon.com)",
+      "Bash(git push:*)"
     ]
   }
 }
