@@ -158,28 +158,31 @@ const structuredData = {
 
 		<!-- Netlify Identity authentication handling -->
 		<script>
-			import { handleAuthCallback, getUser } from '@netlify/identity';
+			import { handleAuthCallback } from '@netlify/identity';
 
 			// Handle authentication callbacks (invite links, email confirmation, password recovery, OAuth)
 			async function initAuth() {
-				const result = await handleAuthCallback();
+				try {
+					const result = await handleAuthCallback();
 
-				if (result) {
-					console.log('Auth callback completed:', result.type);
+					if (result) {
+						// For password recovery, store state and redirect to admin page
+						// The admin page will show the password reset form
+						if (result.type === 'recovery') {
+							sessionStorage.setItem('netlify_recovery', 'true');
+							window.location.href = '/admin/';
+							return;
+						}
 
-					// For password recovery, store state and redirect to admin page
-					// The admin page will show the password reset form
-					if (result.type === 'recovery') {
-						sessionStorage.setItem('netlify_recovery', 'true');
-						window.location.href = '/admin/';
-						return;
+						// For other callback types (invite, confirmation, OAuth), user is now logged in
+						// Redirect to admin panel
+						if (result.user) {
+							window.location.href = '/admin/';
+						}
 					}
-
-					// For other callback types (invite, confirmation, OAuth), user is now logged in
-					// Redirect to admin panel
-					if (result.user) {
-						window.location.href = '/admin/';
-					}
+				} catch (error) {
+					// Silently fail - user can still navigate to admin and log in manually
+					// Error will be properly handled on the admin page
 				}
 			}
 
