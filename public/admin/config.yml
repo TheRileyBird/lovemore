@@ -2,9 +2,6 @@ backend:
   name: git-gateway
   branch: master # Branch to update (optional; defaults to master)
 
-# Enable editorial workflow for drafts and immediate image preview
-publish_mode: editorial_workflow
-
 # Uncomment to use local backend for development
 # local_backend: true
 
