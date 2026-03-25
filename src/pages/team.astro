@@ -5,28 +5,21 @@ import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
 import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
+import { getCollection } from 'astro:content';
 
-// Import team data from scraped content
-import teamData from '../../scraped-content/team.json';
+// Get team members from content collections (managed by CMS)
+const allTeamMembers = await getCollection('team');
 
-// Extract team members from sections and add placeholder bios
-const teamMembers = teamData.sections
-	.filter((section: any) => section.type === 'image' && section.image)
-	.map((section: any) => {
-		const lines = section.text.split('\n').filter((line: string) => line.trim());
-		const name = lines[0] || '';
-		const title = lines[1] || '';
-
-		// Placeholder bio text (to be replaced with actual content via CMS)
-		const bio = `${name} is a passionate yoga instructor dedicated to helping students discover the transformative power of movement and mindfulness. With years of experience and a deep commitment to the Love More community, ${name.split(' ')[0]} creates a welcoming and supportive environment for practitioners of all levels. Their classes blend traditional wisdom with modern approaches, emphasizing the connection between breath, body, and spirit.`;
-
-		return {
-			name,
-			title,
-			image: section.image.src,
-			bio
-		};
-	});
+// Filter active members and sort by order
+const teamMembers = allTeamMembers
+	.filter(member => member.data.active)
+	.sort((a, b) => a.data.order - b.data.order)
+	.map(member => ({
+		name: member.data.name,
+		title: member.data.title,
+		image: member.data.image,
+		bio: member.body
+	}));
 ---
 
 <Layout title="Team — Love More">
