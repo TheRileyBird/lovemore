@@ -5,29 +5,24 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Sparkles } from 'lucide-astro';
+import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 
-const specialtyOfferings = [
-	{
-		name: 'Aerial Yoga',
-		description: 'Defy gravity and explore yoga in a whole new dimension using suspended silk hammocks. Build strength, increase flexibility, and experience the therapeutic benefits of inversion.'
+// Fetch specialty classes from Strapi
+const specialtyClassesResponse = await fetchAPI<any>({
+	endpoint: 'classes',
+	query: {
+		'filters[type][$eq]': 'specialty',
+		'populate': 'image',
+		'sort': 'order:asc'
 	},
-	{
-		name: 'Sound Healing',
-		description: 'Immerse yourself in the therapeutic vibrations of crystal singing bowls, gongs, and other sound instruments. Experience deep relaxation and energetic alignment.'
-	},
-	{
-		name: 'Inversion Workshops',
-		description: 'Learn the foundations and progressions of arm balances, handstands, and headstands in a safe, supportive environment. Build confidence while developing strength and body awareness.'
-	},
-	{
-		name: 'Outdoor Classes & Charity Events',
-		description: 'Join us for special outdoor yoga sessions and community charity events. Practice in nature while giving back to our community.'
-	},
-	{
-		name: 'Teacher Training',
-		description: 'Deepen your practice and share your passion with our comprehensive yoga teacher training programs. Transform your life while preparing to guide others.'
-	}
-];
+	wrappedByKey: 'data'
+});
+
+const specialtyOfferings = specialtyClassesResponse.map((classItem: any) => ({
+	name: classItem.name,
+	description: classItem.description,
+	image: classItem.image?.url ? getStrapiMedia(classItem.image.url) : null
+}));
 ---
 
 <Layout title="Specialty Classes — Love More">
@@ -73,18 +68,46 @@ const specialtyOfferings = [
 		<!-- Specialty Offerings -->
 		<section class="py-24 bg-white" aria-labelledby="offerings-heading">
 			<div class="container mx-auto px-6">
-				<div class="max-w-5xl mx-auto">
-					<h2 id="offerings-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="offerings-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-4 tracking-wide text-center">
 						Special Offerings
 					</h2>
+					<p class="text-center text-lg text-neutral-600 mb-16 max-w-3xl mx-auto">
+						Unique experiences designed to deepen your practice, expand your skills, and connect with our community in meaningful ways.
+					</p>
 
-					<div class="grid md:grid-cols-2 gap-8">
-						{specialtyOfferings.map((offering) => (
-							<div class="bg-cream-50 rounded-2xl p-8 shadow-sm border border-warm-gray-200 hover:shadow-md transition-shadow">
-								<h3 class="text-2xl font-display font-bold text-charcoal mb-4">{offering.name}</h3>
-								<p class="text-neutral-600 leading-relaxed">
-									{offering.description}
-								</p>
+					<div class="flex flex-col gap-y-8">
+						{specialtyOfferings.map((offering, index) => (
+							<div class={`grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+								<div class={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+									<header class="flex items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
+										<h3 class="text-xl font-bold text-charcoal">
+											{offering.name}
+										</h3>
+										<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm shrink-0">
+											<Sparkles class="w-4 h-4 text-purple-500" aria-hidden="true" />
+											Special
+										</span>
+									</header>
+									<div class="flex flex-col place-items-start gap-y-6 p-10">
+										<p class="text-neutral-600 leading-relaxed">
+											{offering.description}
+										</p>
+									</div>
+								</div>
+								<div class={`relative select-none bg-neutral-50 h-full ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+									{offering.image ? (
+										<img
+											src={offering.image}
+											alt=""
+											class="absolute inset-0 w-full h-full object-cover"
+										/>
+									) : (
+										<div class="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-50">
+											<Sparkles class="w-24 h-24 text-purple-300" aria-hidden="true" />
+										</div>
+									)}
+								</div>
 							</div>
 						))}
 					</div>
