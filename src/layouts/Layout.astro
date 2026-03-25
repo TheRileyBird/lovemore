@@ -165,11 +165,21 @@ const structuredData = {
 				const result = await handleAuthCallback();
 
 				if (result) {
-					// User authenticated via callback (invite, confirmation, recovery, or OAuth)
 					console.log('Auth callback completed:', result.type);
 
-					// Redirect to admin panel after successful authentication
-					window.location.href = '/admin/';
+					// For password recovery, store state and redirect to admin page
+					// The admin page will show the password reset form
+					if (result.type === 'recovery') {
+						sessionStorage.setItem('netlify_recovery', 'true');
+						window.location.href = '/admin/';
+						return;
+					}
+
+					// For other callback types (invite, confirmation, OAuth), user is now logged in
+					// Redirect to admin panel
+					if (result.user) {
+						window.location.href = '/admin/';
+					}
 				}
 			}
 
