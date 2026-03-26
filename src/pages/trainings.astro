@@ -83,10 +83,10 @@ const trainings = trainingsResponse || [];
 								</p>
 								{training.features && training.features.length > 0 && (
 									<ul class="space-y-2 mb-6">
-										{training.features.map((feature: string) => (
+										{training.features.map((feature: any) => (
 											<li class="flex items-start gap-3">
 												<span class="text-brand mt-1">•</span>
-												<span class="text-neutral-600">{feature}</span>
+												<span class="text-neutral-600">{feature.text}</span>
 											</li>
 										))}
 									</ul>

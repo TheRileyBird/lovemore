@@ -6,11 +6,11 @@ const trainings = [
     title: '200-Hour Yoga Teacher Training',
     description: 'Our foundational training program provides a comprehensive introduction to teaching yoga. You\'ll learn anatomy, philosophy, teaching methodology, and develop your personal practice while building the confidence to lead your own classes.',
     features: [
-      'Comprehensive study of yoga asana, pranayama, and meditation',
-      'Anatomy and physiology for yoga teachers',
-      'Teaching methodology and class sequencing',
-      'Yoga philosophy and history',
-      'Hands-on teaching practice and feedback'
+      { text: 'Comprehensive study of yoga asana, pranayama, and meditation' },
+      { text: 'Anatomy and physiology for yoga teachers' },
+      { text: 'Teaching methodology and class sequencing' },
+      { text: 'Yoga philosophy and history' },
+      { text: 'Hands-on teaching practice and feedback' }
     ],
     type: 'ryt200',
     certification: 'Yoga Alliance Certified RYT® 200',
