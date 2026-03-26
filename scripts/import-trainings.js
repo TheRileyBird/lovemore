@@ -4,14 +4,15 @@ const STRAPI_URL = process.env.STRAPI_URL || 'https://lovemore-cms.onrender.com'
 const trainings = [
   {
     title: '200-Hour Yoga Teacher Training',
-    description: 'Our foundational training program provides a comprehensive introduction to teaching yoga. You\'ll learn anatomy, philosophy, teaching methodology, and develop your personal practice while building the confidence to lead your own classes.',
-    features: [
-      { text: 'Comprehensive study of yoga asana, pranayama, and meditation' },
-      { text: 'Anatomy and physiology for yoga teachers' },
-      { text: 'Teaching methodology and class sequencing' },
-      { text: 'Yoga philosophy and history' },
-      { text: 'Hands-on teaching practice and feedback' }
-    ],
+    body: `<p>Our foundational training program provides a comprehensive introduction to teaching yoga. You'll learn anatomy, philosophy, teaching methodology, and develop your personal practice while building the confidence to lead your own classes.</p>
+
+<ul>
+<li>Comprehensive study of yoga asana, pranayama, and meditation</li>
+<li>Anatomy and physiology for yoga teachers</li>
+<li>Teaching methodology and class sequencing</li>
+<li>Yoga philosophy and history</li>
+<li>Hands-on teaching practice and feedback</li>
+</ul>`,
     type: 'ryt200',
     certification: 'Yoga Alliance Certified RYT® 200',
     ctaText: 'Learn More',
@@ -22,8 +23,7 @@ const trainings = [
   },
   {
     title: 'Advanced Training & Workshops',
-    description: 'Continue your education with specialized workshops and advanced training modules. Topics include advanced asana, adjustments and assists, specialty class formats, and business skills for yoga teachers.',
-    features: [],
+    body: '<p>Continue your education with specialized workshops and advanced training modules. Topics include advanced asana, adjustments and assists, specialty class formats, and business skills for yoga teachers.</p>',
     type: 'advanced',
     certification: null,
     ctaText: 'View Upcoming Workshops',
