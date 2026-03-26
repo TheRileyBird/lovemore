@@ -11,19 +11,22 @@ import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 const teamPageResponse = await fetchAPI<any>({
 	endpoint: 'team-page',
 	query: {
-		'populate[team_members][populate][0]': 'image'
+		'populate[team_members][populate][team_member][populate][0]': 'image'
 	},
 	wrappedByKey: 'data'
 });
 
 // Map Strapi data to match existing structure
-// The order comes from the drag-and-drop in CMS
-const teamMembers = teamPageResponse?.team_members?.map((member: any) => ({
-	name: member.name,
-	title: member.title,
-	image: member.image?.url ? getStrapiMedia(member.image.url) : null,
-	bio: member.bio
-})) || [];
+// The order comes from the drag-and-drop in CMS (component array order)
+const teamMembers = teamPageResponse?.team_members?.map((link: any) => {
+	const member = link.team_member;
+	return {
+		name: member?.name,
+		title: member?.title,
+		image: member?.image?.url ? getStrapiMedia(member.image.url) : null,
+		bio: member?.bio
+	};
+}).filter((member: any) => member.name) || [];
 ---
 
 <Layout title="Team — Love More">
