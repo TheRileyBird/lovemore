@@ -12,7 +12,7 @@ const trainings = [
       'Yoga philosophy and history',
       'Hands-on teaching practice and feedback'
     ],
-    type: '200-hour',
+    type: 'ryt200',
     certification: 'Yoga Alliance Certified RYT® 200',
     ctaText: 'Learn More',
     ctaLink: '/contact',
