@@ -26,7 +26,8 @@
       "WebFetch(domain:neon.com)",
       "Bash(git push:*)",
       "Bash(ls:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(jq:*)"
     ]
   }
 }
