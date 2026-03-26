@@ -20,7 +20,15 @@ export async function getStaticPaths() {
 			return [];
 		}
 
-		return trainingsResponse.map((training: any) => ({
+		// Filter out trainings without slugs
+		const validTrainings = trainingsResponse.filter((training: any) => training.slug);
+
+		if (validTrainings.length === 0) {
+			console.warn('No trainings with valid slugs found - returning empty array');
+			return [];
+		}
+
+		return validTrainings.map((training: any) => ({
 			params: { slug: training.slug },
 			props: { training }
 		}));

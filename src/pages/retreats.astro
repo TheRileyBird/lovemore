@@ -18,7 +18,7 @@ const retreatsResponse = await fetchAPI<any>({
 	wrappedByKey: 'data'
 });
 
-const upcomingRetreats = retreatsResponse?.map((retreat: any) => ({
+const upcomingRetreats = retreatsResponse?.filter((retreat: any) => retreat.slug).map((retreat: any) => ({
 	name: retreat.name,
 	slug: retreat.slug,
 	location: retreat.location,

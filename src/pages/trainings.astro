@@ -16,7 +16,7 @@ const trainingsResponse = await fetchAPI<any>({
 	wrappedByKey: 'data'
 });
 
-const trainings = trainingsResponse || [];
+const trainings = trainingsResponse?.filter((training: any) => training.slug) || [];
 ---
 
 <Layout title="Teacher Training & Workshops — Love More">

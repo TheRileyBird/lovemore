@@ -22,7 +22,15 @@ export async function getStaticPaths() {
 			return [];
 		}
 
-		return retreatsResponse.map((retreat: any) => ({
+		// Filter out retreats without slugs
+		const validRetreats = retreatsResponse.filter((retreat: any) => retreat.slug);
+
+		if (validRetreats.length === 0) {
+			console.warn('No retreats with valid slugs found - returning empty array');
+			return [];
+		}
+
+		return validRetreats.map((retreat: any) => ({
 			params: { slug: retreat.slug },
 			props: {
 				retreat: {
