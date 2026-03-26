@@ -6,18 +6,28 @@ import Button from '../../components/Button.astro';
 import { fetchAPI } from '../../lib/strapi';
 
 export async function getStaticPaths() {
-	const trainingsResponse = await fetchAPI<any>({
-		endpoint: 'trainings',
-		query: {
-			'filters[active][$eq]': true
-		},
-		wrappedByKey: 'data'
-	});
+	try {
+		const trainingsResponse = await fetchAPI<any>({
+			endpoint: 'trainings',
+			query: {
+				'filters[active][$eq]': true
+			},
+			wrappedByKey: 'data'
+		});
 
-	return trainingsResponse?.map((training: any) => ({
-		params: { slug: training.slug },
-		props: { training }
-	})) || [];
+		if (!trainingsResponse || trainingsResponse.length === 0) {
+			console.warn('No trainings found in Strapi - returning empty array');
+			return [];
+		}
+
+		return trainingsResponse.map((training: any) => ({
+			params: { slug: training.slug },
+			props: { training }
+		}));
+	} catch (error) {
+		console.error('Error fetching trainings for static paths:', error);
+		return [];
+	}
 }
 
 const { training } = Astro.props;

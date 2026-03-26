@@ -7,24 +7,34 @@ import { Palmtree } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
 
 export async function getStaticPaths() {
-	const retreatsResponse = await fetchAPI<any>({
-		endpoint: 'retreats',
-		query: {
-			'filters[active][$eq]': true,
-			'populate': 'image'
-		},
-		wrappedByKey: 'data'
-	});
+	try {
+		const retreatsResponse = await fetchAPI<any>({
+			endpoint: 'retreats',
+			query: {
+				'filters[active][$eq]': true,
+				'populate': 'image'
+			},
+			wrappedByKey: 'data'
+		});
 
-	return retreatsResponse?.map((retreat: any) => ({
-		params: { slug: retreat.slug },
-		props: {
-			retreat: {
-				...retreat,
-				image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null
-			}
+		if (!retreatsResponse || retreatsResponse.length === 0) {
+			console.warn('No retreats found in Strapi - returning empty array');
+			return [];
 		}
-	})) || [];
+
+		return retreatsResponse.map((retreat: any) => ({
+			params: { slug: retreat.slug },
+			props: {
+				retreat: {
+					...retreat,
+					image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null
+				}
+			}
+		}));
+	} catch (error) {
+		console.error('Error fetching retreats for static paths:', error);
+		return [];
+	}
 }
 
 const { retreat } = Astro.props;
