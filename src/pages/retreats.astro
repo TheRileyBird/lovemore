@@ -5,35 +5,25 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Palmtree } from 'lucide-astro';
+import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 
-const upcomingRetreats = [
-	{
-		name: 'Costa Rica Retreat',
-		location: 'Costa Rica',
-		image: 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80',
-		description: 'Join us for an unforgettable journey to the lush rainforests and pristine beaches of Costa Rica. Immerse yourself in daily yoga practice, meditation, and adventure while surrounded by natural beauty.',
-		highlights: [
-			'Daily yoga and meditation sessions',
-			'Beachfront accommodations',
-			'Excursions to waterfalls and wildlife reserves',
-			'Nourishing farm-to-table meals',
-			'Optional surf lessons and zip-lining'
-		]
+// Fetch retreats from Strapi
+const retreatsResponse = await fetchAPI<any>({
+	endpoint: 'retreats',
+	query: {
+		sort: 'order:asc',
+		'filters[active][$eq]': true,
+		'populate': 'image'
 	},
-	{
-		name: 'Sedona Retreat',
-		location: 'Sedona, Arizona',
-		image: 'https://images.unsplash.com/photo-1580508174046-170816f65662?w=1200&auto=format&fit=crop&q=80',
-		description: 'Experience the powerful energy vortexes and stunning red rock landscapes of Sedona. This transformative retreat combines yoga, hiking, and spiritual exploration in one of the world\'s most sacred destinations.',
-		highlights: [
-			'Vortex site visits and energy work',
-			'Sunrise yoga in the red rocks',
-			'Guided meditation and sound healing',
-			'Hiking through breathtaking canyons',
-			'Spa treatments and wellness services'
-		]
-	}
-];
+	wrappedByKey: 'data'
+});
+
+const upcomingRetreats = retreatsResponse?.map((retreat: any) => ({
+	name: retreat.name,
+	location: retreat.location,
+	image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
+	body: retreat.body
+})) || [];
 ---
 
 <Layout title="Retreats - Elevate — Love More">
@@ -111,19 +101,7 @@ const upcomingRetreats = [
 									</div>
 
 									<div class="md:col-span-3 p-8 md:p-10">
-										<p class="text-lg text-neutral-600 leading-relaxed mb-6">
-											{retreat.description}
-										</p>
-
-										<h4 class="text-xl font-semibold text-charcoal mb-4">Experience Includes:</h4>
-										<ul class="space-y-2 mb-8">
-											{retreat.highlights.map((highlight) => (
-												<li class="flex items-start gap-3">
-													<span class="text-brand mt-1">•</span>
-													<span class="text-neutral-600">{highlight}</span>
-												</li>
-											))}
-										</ul>
+										<div class="prose prose-lg max-w-none text-neutral-600 leading-relaxed mb-8" set:html={retreat.body} />
 
 										<Button href="/contact" variant="primary">
 											Request More Information
