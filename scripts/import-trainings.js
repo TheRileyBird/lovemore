@@ -4,6 +4,7 @@ const STRAPI_URL = process.env.STRAPI_URL || 'https://lovemore-cms.onrender.com'
 const trainings = [
   {
     title: '200-Hour Yoga Teacher Training',
+    slug: '200-hour-yoga-teacher-training',
     body: `<p>Our foundational training program provides a comprehensive introduction to teaching yoga. You'll learn anatomy, philosophy, teaching methodology, and develop your personal practice while building the confidence to lead your own classes.</p>
 
 <ul>
@@ -23,6 +24,7 @@ const trainings = [
   },
   {
     title: 'Advanced Training & Workshops',
+    slug: 'advanced-training-workshops',
     body: '<p>Continue your education with specialized workshops and advanced training modules. Topics include advanced asana, adjustments and assists, specialty class formats, and business skills for yoga teachers.</p>',
     type: 'advanced',
     certification: null,

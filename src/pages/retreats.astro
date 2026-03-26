@@ -20,6 +20,7 @@ const retreatsResponse = await fetchAPI<any>({
 
 const upcomingRetreats = retreatsResponse?.map((retreat: any) => ({
 	name: retreat.name,
+	slug: retreat.slug,
 	location: retreat.location,
 	image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
 	body: retreat.body
@@ -81,35 +82,43 @@ const upcomingRetreats = retreatsResponse?.map((retreat: any) => ({
 					</h2>
 
 					<div class="space-y-12">
-						{upcomingRetreats.map((retreat) => (
-							<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200">
-								<div class="grid md:grid-cols-5 gap-0">
-									<div class="md:col-span-2 relative h-64 md:h-auto">
-										<img
-											src={retreat.image}
-											alt={retreat.name}
-											class="absolute inset-0 w-full h-full object-cover"
-										/>
-										<div class="absolute inset-0 bg-neutral-900/40"></div>
-										<div class="absolute inset-0 flex items-center justify-center">
-											<div class="text-center text-white p-8">
-												<Palmtree class="w-16 h-16 mx-auto mb-4" aria-hidden="true" />
-												<h3 class="text-3xl font-display font-bold mb-2">{retreat.name}</h3>
-												<p class="text-xl opacity-90">{retreat.location}</p>
+						{upcomingRetreats.map((retreat) => {
+							// Extract plain text from body for preview
+							const plainText = retreat.body?.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim() || '';
+							const preview = plainText.length > 250 ? plainText.substring(0, 250) + '...' : plainText;
+
+							return (
+								<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200 hover:shadow-xl transition-shadow">
+									<div class="grid md:grid-cols-5 gap-0">
+										<div class="md:col-span-2 relative h-64 md:h-auto">
+											<img
+												src={retreat.image || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
+												alt={retreat.name}
+												class="absolute inset-0 w-full h-full object-cover"
+											/>
+											<div class="absolute inset-0 bg-neutral-900/40"></div>
+											<div class="absolute inset-0 flex items-center justify-center">
+												<div class="text-center text-white p-8">
+													<Palmtree class="w-16 h-16 mx-auto mb-4" aria-hidden="true" />
+													<h3 class="text-3xl font-display font-bold mb-2">{retreat.name}</h3>
+													<p class="text-xl opacity-90">{retreat.location}</p>
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div class="md:col-span-3 p-8 md:p-10">
-										<div class="prose prose-lg max-w-none text-neutral-600 leading-relaxed mb-8" set:html={retreat.body} />
+										<div class="md:col-span-3 p-8 md:p-10">
+											<p class="text-lg text-neutral-600 leading-relaxed mb-8">
+												{preview}
+											</p>
 
-										<Button href="/contact" variant="primary">
-											Request More Information
-										</Button>
+											<Button href={`/retreats/${retreat.slug}`} variant="primary">
+												Learn More
+											</Button>
+										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 			</div>

@@ -4,6 +4,7 @@ const STRAPI_URL = process.env.STRAPI_URL || 'https://lovemore-cms.onrender.com'
 const retreats = [
   {
     name: 'Costa Rica Retreat',
+    slug: 'costa-rica-retreat',
     location: 'Costa Rica',
     body: `<p>Join us for an unforgettable journey to the lush rainforests and pristine beaches of Costa Rica. Immerse yourself in daily yoga practice, meditation, and adventure while surrounded by natural beauty.</p>
 
@@ -20,6 +21,7 @@ const retreats = [
   },
   {
     name: 'Sedona Retreat',
+    slug: 'sedona-retreat',
     location: 'Sedona, Arizona',
     body: `<p>Experience the powerful energy vortexes and stunning red rock landscapes of Sedona. This transformative retreat combines yoga, hiking, and spiritual exploration in one of the world's most sacred destinations.</p>
 
