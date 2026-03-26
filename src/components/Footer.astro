@@ -32,72 +32,76 @@ import { Instagram, Facebook, Heart } from 'lucide-astro';
 	<!-- Main Footer - Cream Background -->
 	<section class="py-16 bg-cream-200 border-t border-warm-gray-200">
 		<div class="container mx-auto px-6">
-			<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-				<!-- Left 50% - Icon, Contact Info, and Social -->
-				<div class="flex flex-col justify-between items-center md:items-start space-y-8">
-					<div>
+			<div class="max-w-6xl mx-auto">
+				<!-- Flex Layout: Logo left, Columns right -->
+				<div class="flex flex-col md:flex-row md:justify-between gap-12">
+					<!-- Logo on the left -->
+					<div class="flex justify-center md:justify-start">
 						<img
 							src={iconImage.src}
 							alt="Love More"
-							class="w-56"
+							class="w-40 md:w-48"
 						/>
 					</div>
 
-					<!-- Contact Info -->
-					<div class="text-center md:text-left space-y-2">
-						<p class="text-sm text-neutral-600">
-							<a href="tel:985-900-2468" class="hover:text-brand transition-colors">985-900-2468</a>
-						</p>
-						<p class="text-sm text-neutral-600">
-							234 Lee Lane<br />
-							Covington, LA
-						</p>
-					</div>
+					<!-- Four Link Columns on the right -->
+					<div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+						<!-- Explore Column -->
+						<div>
+							<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Explore</h3>
+							<ul class="space-y-3">
+								<li><a href="/" class="text-sm text-neutral-600 hover:text-brand transition-colors">Home</a></li>
+								<li><a href="/team" class="text-sm text-neutral-600 hover:text-brand transition-colors">Team</a></li>
+								<li><a href="/events" class="text-sm text-neutral-600 hover:text-brand transition-colors">Events</a></li>
+								<li><a href="/virtual-studio" class="text-sm text-neutral-600 hover:text-brand transition-colors">Virtual Studio</a></li>
+							</ul>
+						</div>
 
-					<!-- Social Links -->
-					<div class="flex items-center gap-4">
-						<a href="https://facebook.com/lovemorecovington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Facebook">
-							<Facebook class="w-5 h-5" />
-						</a>
-						<a href="https://instagram.com/lovemore_covington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Instagram">
-							<Instagram class="w-5 h-5" />
-						</a>
-					</div>
-				</div>
+						<!-- Practice Column -->
+						<div>
+							<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Practice</h3>
+							<ul class="space-y-3">
+								<li><a href="/studio-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Studio Classes</a></li>
+								<li><a href="/studio-classes#heated-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Heated Classes</a></li>
+								<li><a href="/specialty-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Events & Workshops</a></li>
+								<li><a href="/schedule" class="text-sm text-neutral-600 hover:text-brand transition-colors">Schedule</a></li>
+							</ul>
+						</div>
 
-				<!-- Right 50% - Three Columns of Links -->
-				<div class="grid grid-cols-3 gap-8">
-					<!-- Explore Column -->
-					<div>
-						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Explore</h3>
-						<ul class="space-y-3">
-							<li><a href="/" class="text-sm text-neutral-600 hover:text-brand transition-colors">Home</a></li>
-							<li><a href="/team" class="text-sm text-neutral-600 hover:text-brand transition-colors">Team</a></li>
-							<li><a href="/events" class="text-sm text-neutral-600 hover:text-brand transition-colors">Events</a></li>
-							<li><a href="/virtual-studio" class="text-sm text-neutral-600 hover:text-brand transition-colors">Virtual Studio</a></li>
-						</ul>
-					</div>
+						<!-- Connect Column -->
+						<div>
+							<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Connect</h3>
+							<ul class="space-y-3">
+								<li><a href="/pricing" class="text-sm text-neutral-600 hover:text-brand transition-colors">Pricing</a></li>
+								<li><a href="/retreats" class="text-sm text-neutral-600 hover:text-brand transition-colors">Retreats</a></li>
+								<li><a href="/contact" class="text-sm text-neutral-600 hover:text-brand transition-colors">Contact</a></li>
+								<li><a href="/start" class="text-sm text-neutral-600 hover:text-brand transition-colors">Get Started</a></li>
+							</ul>
+						</div>
 
-					<!-- Practice With Us Column -->
-					<div>
-						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Practice</h3>
-						<ul class="space-y-3">
-							<li><a href="/studio-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Studio Classes</a></li>
-							<li><a href="/heated-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Heated Classes</a></li>
-							<li><a href="/specialty-classes" class="text-sm text-neutral-600 hover:text-brand transition-colors">Specialty Classes</a></li>
-							<li><a href="/schedule" class="text-sm text-neutral-600 hover:text-brand transition-colors">Schedule</a></li>
-						</ul>
-					</div>
-
-					<!-- Customer Care Column -->
-					<div>
-						<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Connect</h3>
-						<ul class="space-y-3">
-							<li><a href="/pricing" class="text-sm text-neutral-600 hover:text-brand transition-colors">Pricing</a></li>
-							<li><a href="/retreats" class="text-sm text-neutral-600 hover:text-brand transition-colors">Retreats</a></li>
-							<li><a href="/contact" class="text-sm text-neutral-600 hover:text-brand transition-colors">Contact</a></li>
-							<li><a href="/start" class="text-sm text-neutral-600 hover:text-brand transition-colors">Get Started</a></li>
-						</ul>
+						<!-- Contact Column -->
+						<div>
+							<h3 class="text-sm font-bold tracking-wider uppercase text-charcoal mb-6">Visit Us</h3>
+							<ul class="space-y-3">
+								<li>
+									<a href="tel:985-900-2468" class="text-sm text-neutral-600 hover:text-brand transition-colors">985-900-2468</a>
+								</li>
+								<li class="text-sm text-neutral-600">
+									234 Lee Lane<br />
+									Covington, LA
+								</li>
+								<li>
+									<div class="flex items-center gap-4 pt-2">
+										<a href="https://facebook.com/lovemorecovington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Facebook">
+											<Facebook class="w-5 h-5" />
+										</a>
+										<a href="https://instagram.com/lovemore_covington" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-brand transition-colors" aria-label="Instagram">
+											<Instagram class="w-5 h-5" />
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

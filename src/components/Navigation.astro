@@ -17,7 +17,8 @@ import Button from './Button.astro';
 			<div class="hidden xl:flex items-center gap-8 xl:col-span-1">
 				<!-- Schedule Dropdown -->
 				<div x-data="{ open: false }" class="relative">
-					<button
+					<a
+						href="/schedule"
 						@mouseenter="open = true"
 						@mouseleave="open = false"
 						@keydown.escape="open = false"
@@ -30,7 +31,7 @@ import Button from './Button.astro';
 						<svg class="w-3 h-3" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
-					</button>
+					</a>
 					<div
 						x-show="open"
 						@mouseenter="open = true"
@@ -47,7 +48,7 @@ import Button from './Button.astro';
 					>
 						<a href="/schedule" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Book a Class</a>
 						<a href="/studio-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Class Descriptions</a>
-						<a href="/specialty-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Specialty Events & Workshops</a>
+						<a href="/specialty-classes" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Events & Workshops</a>
 						<a href="/virtual-studio" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-cream-200 hover:text-brand transition-colors">Virtual Studio</a>
 					</div>
 				</div>
@@ -84,7 +85,8 @@ import Button from './Button.astro';
 			<div class="hidden xl:flex items-center justify-end gap-8 xl:col-span-1">
 				<!-- About Dropdown -->
 				<div x-data="{ open: false }" class="relative">
-					<button
+					<a
+						href="/about"
 						@mouseenter="open = true"
 						@mouseleave="open = false"
 						@keydown.escape="open = false"
@@ -97,7 +99,7 @@ import Button from './Button.astro';
 						<svg class="w-3 h-3" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
-					</button>
+					</a>
 					<div
 						x-show="open"
 						@mouseenter="open = true"
