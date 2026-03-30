@@ -11,7 +11,7 @@ const classesResponse = await fetchAPI<any>({
 	endpoint: 'classes',
 	query: {
 		'populate': 'image',
-		'sort': 'order:asc'
+		'sort': 'sortOrder:asc'
 	},
 	wrappedByKey: 'data'
 });

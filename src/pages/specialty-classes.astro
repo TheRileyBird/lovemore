@@ -13,7 +13,7 @@ const specialtyClassesResponse = await fetchAPI<any>({
 	query: {
 		'filters[type][$eq]': 'specialty',
 		'populate': 'image',
-		'sort': 'order:asc'
+		'sort': 'sortOrder:asc'
 	},
 	wrappedByKey: 'data'
 });

@@ -11,7 +11,7 @@ import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 const retreatsResponse = await fetchAPI<any>({
 	endpoint: 'retreats',
 	query: {
-		sort: 'order:asc',
+		sort: 'sortOrder:asc',
 		'filters[active][$eq]': true,
 		'populate': 'image'
 	},
