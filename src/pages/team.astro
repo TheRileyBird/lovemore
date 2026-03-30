@@ -12,7 +12,7 @@ const teamMembersResponse = await fetchAPI<any>({
 	endpoint: 'team-members',
 	query: {
 		'sort': 'sortOrder:asc',
-		'populate': 'image'
+		'populate': ['image', 'socialLink']
 	},
 	wrappedByKey: 'data'
 });
@@ -24,7 +24,8 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		name: member?.name,
 		title: member?.title,
 		image: member?.image?.url ? getStrapiMedia(member.image.url) : null,
-		bio: member?.bio
+		bio: member?.bio,
+		socialLink: member?.socialLink || null
 	};
 }).filter((member: any) => member.name) || [];
 ---

@@ -83,8 +83,22 @@
 					<div x-show="member">
 						<h2 id="modal-title" x-text="member?.name" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-2 tracking-wide"></h2>
 						<p x-text="member?.title" class="text-lg text-brand font-medium mb-6"></p>
-						<div class="prose prose-lg max-w-none">
+						<div class="prose prose-lg max-w-none mb-6">
 							<p x-text="member?.bio" class="text-neutral-700 leading-relaxed"></p>
+						</div>
+						<!-- Social Link Button -->
+						<div x-show="member?.socialLink?.url">
+							<a
+								:href="member?.socialLink?.url"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-charcoal text-white hover:bg-brand hover:shadow-lg px-6 py-3 text-sm"
+							>
+								<span x-text="member?.socialLink?.label"></span>
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+								</svg>
+							</a>
 						</div>
 					</div>
 				</div>
