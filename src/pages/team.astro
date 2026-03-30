@@ -7,19 +7,19 @@ import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 
-// Fetch team page with ordered team members from Strapi
-const teamPageResponse = await fetchAPI<any>({
-	endpoint: 'team-page',
+// Fetch team members directly from Strapi, sorted by sortOrder
+const teamMembersResponse = await fetchAPI<any>({
+	endpoint: 'team-members',
 	query: {
-		'populate[team_members][populate][team_member][populate][0]': 'image'
+		'sort': 'sortOrder:asc',
+		'populate': 'image'
 	},
 	wrappedByKey: 'data'
 });
 
 // Map Strapi data to match existing structure
-// The order comes from the drag-and-drop in CMS (component array order)
-const teamMembers = teamPageResponse?.team_members?.map((link: any) => {
-	const member = link.team_member;
+// The order comes from the sortOrder field set via drag-and-drop in CMS
+const teamMembers = teamMembersResponse?.map((member: any) => {
 	return {
 		name: member?.name,
 		title: member?.title,
