@@ -6,7 +6,6 @@ import Divider from '../components/Divider.astro';
 import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
-import { marked } from 'marked';
 
 // Fetch team members directly from Strapi, sorted by sortOrder
 const teamMembersResponse = await fetchAPI<any>({
@@ -25,7 +24,7 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		name: member?.name,
 		title: member?.title,
 		image: member?.image?.url ? getStrapiMedia(member.image.url) : null,
-		bio: member?.bio ? marked(member.bio) : '',
+		bio: member?.bio || '',
 		socialLink: member?.socialLink || null
 	};
 }).filter((member: any) => member.name) || [];
