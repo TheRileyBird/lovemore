@@ -84,6 +84,9 @@ const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
 				<h1 id="retreat-heading" class="text-4xl md:text-6xl font-display font-bold text-white tracking-wide mb-4">
 					{retreat.name}
 				</h1>
+				{retreat.subtitle && (
+					<p class="text-xl md:text-2xl text-white/90 font-light mb-2">{retreat.subtitle}</p>
+				)}
 				<p class="text-2xl text-white/95 font-light">{retreat.location}</p>
 			</div>
 		</section>
