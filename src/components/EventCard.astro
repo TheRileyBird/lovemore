@@ -9,6 +9,7 @@ interface Props {
 	body: string;
 	startDate?: string;
 	endDate?: string;
+	price?: number;
 	index: number;
 	basePath: string;
 	ctaText?: string;
@@ -22,6 +23,7 @@ const {
 	body,
 	startDate,
 	endDate,
+	price,
 	index,
 	basePath,
 	ctaText = 'Learn More'
@@ -87,12 +89,19 @@ const cleanBody = stripHtml(body);
 			<h3 class="text-xl font-bold text-charcoal">
 				{title}
 			</h3>
-			{dateDisplay && (
-				<span class="inline-flex items-center gap-1 px-3 py-1 bg-cream rounded-full border border-neutral-200 text-sm shrink-0">
-					<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
-					{dateDisplay}
-				</span>
-			)}
+			<div class="flex items-center gap-2 shrink-0">
+				{dateDisplay && (
+					<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm">
+						<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
+						{dateDisplay}
+					</span>
+				)}
+				{price && (
+					<span class="inline-flex items-center px-3 py-1 bg-brand text-white rounded-full text-sm font-semibold">
+						${price}
+					</span>
+				)}
+			</div>
 		</header>
 		<div class="p-10 pb-20">
 			{subtitle && (

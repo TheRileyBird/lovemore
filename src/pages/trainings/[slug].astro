@@ -80,6 +80,7 @@ export async function getStaticPaths() {
 				training: {
 					...training,
 					image: training.image?.url ? getStrapiMedia(training.image.url) : null,
+					heroImage: training.heroImage?.url ? getStrapiMedia(training.heroImage.url) : (training.image?.url ? getStrapiMedia(training.image.url) : null),
 					body: processContent(training.body),
 					gallery: training.gallery?.map((img: any) => ({
 						url: getStrapiMedia(img.url),
@@ -108,7 +109,7 @@ const isPastEvent = training.endDate && new Date(training.endDate) < new Date();
 		<EventDetailHero
 			title={training.title}
 			subtitle={training.subtitle}
-			image={training.image}
+			image={training.heroImage}
 			icon={GraduationCap}
 			dateDisplay={training.dateDisplay}
 		/>

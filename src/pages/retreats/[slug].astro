@@ -80,6 +80,7 @@ export async function getStaticPaths() {
 				retreat: {
 					...retreat,
 					image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
+					heroImage: retreat.heroImage?.url ? getStrapiMedia(retreat.heroImage.url) : (retreat.image?.url ? getStrapiMedia(retreat.image.url) : null),
 					body: processContent(retreat.body),
 					gallery: retreat.gallery?.map((img: any) => ({
 						url: getStrapiMedia(img.url),
@@ -111,7 +112,7 @@ const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
 			title={retreat.name}
 			subtitle={retreat.subtitle}
 			location={retreat.location}
-			image={retreat.image}
+			image={retreat.heroImage}
 			icon={Palmtree}
 			dateDisplay={retreat.dateDisplay}
 		/>
