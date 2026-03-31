@@ -2,8 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
-import Button from '../../components/Button.astro';
-import { fetchAPI } from '../../lib/strapi';
+import EventDetailHero from '../../components/EventDetailHero.astro';
+import EventDetailLayout from '../../components/EventDetailLayout.astro';
+import { GraduationCap } from 'lucide-astro';
+import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
@@ -23,7 +25,7 @@ export async function getStaticPaths() {
 			endpoint: 'trainings',
 			query: {
 				// Fetch ALL trainings (past and future) to avoid 404s
-				'populate': 'image'
+				'populate': '*'
 			},
 			wrappedByKey: 'data'
 		});
@@ -46,7 +48,12 @@ export async function getStaticPaths() {
 			props: {
 				training: {
 					...training,
-					body: processContent(training.body)
+					image: training.image?.url ? getStrapiMedia(training.image.url) : null,
+					body: processContent(training.body),
+					gallery: training.gallery?.map((img: any) => ({
+						url: getStrapiMedia(img.url),
+						alternativeText: img.alternativeText || training.title
+					})) || []
 				}
 			}
 		}));
@@ -60,90 +67,46 @@ const { training } = Astro.props;
 
 // Check if training has passed
 const isPastEvent = training.endDate && new Date(training.endDate) < new Date();
+
+// Format dates for display
+const formatDate = (date: string) => {
+	return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
+const dateDisplay = training.startDate && training.endDate
+	? `${formatDate(training.startDate)} - ${formatDate(training.endDate)}`
+	: training.startDate
+		? formatDate(training.startDate)
+		: training.endDate
+			? formatDate(training.endDate)
+			: '';
 ---
 
 <Layout title={`${training.title} — Love More`}>
 	<Navigation />
 
 	<main id="main-content">
-		<!-- Hero Section -->
-		<section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="training-heading">
-			<div class="absolute inset-0 z-0">
-				<img
-					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
-					alt=""
-					role="presentation"
-					class="absolute inset-0 w-full h-full object-cover"
-					style="object-position: 100% 40%;"
-				/>
-				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
-			</div>
+		<EventDetailHero
+			title={training.title}
+			subtitle={training.subtitle}
+			image={training.image}
+			icon={GraduationCap}
+			dateDisplay={dateDisplay}
+		/>
 
-			<div class="relative z-10 container mx-auto px-6 text-center">
-				<h1 id="training-heading" class="text-4xl md:text-6xl font-display font-bold text-white tracking-wide mb-4">
-					{training.title}
-				</h1>
-			</div>
-		</section>
-
-		<!-- Content Section -->
-		<section class="py-20 bg-white">
-			<div class="container mx-auto px-6">
-				<div class="max-w-4xl mx-auto">
-					{/* Past Event Banner */}
-					{isPastEvent && (
-						<div class="mb-8 p-6 bg-neutral-100 border border-neutral-300 rounded-xl">
-							<p class="text-neutral-700 text-center font-medium">
-								⏰ This training has passed. Check out our <a href="/trainings" class="text-brand hover:underline">upcoming trainings</a>.
-							</p>
-						</div>
-					)}
-					<div class="prose prose-lg max-w-none text-neutral-700 leading-relaxed mb-12 [&_p]:mb-6" set:html={training.body} />
-
-					{training.certification && (
-						<div class="bg-cream-50 p-6 rounded-xl border border-warm-gray-200 mb-8">
-							<p class="text-sm font-semibold text-charcoal mb-1">Certification</p>
-							<p class="text-neutral-600">{training.certification}</p>
-						</div>
-					)}
-
-					{(training.startDate || training.endDate || training.price) && (
-						<div class="bg-cream-50 p-6 rounded-xl border border-warm-gray-200 mb-8">
-							<h3 class="text-xl font-semibold text-charcoal mb-4">Program Details</h3>
-							<div class="space-y-2">
-								{training.startDate && (
-									<p class="text-neutral-600">
-										<span class="font-semibold">Start Date:</span> {new Date(training.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-									</p>
-								)}
-								{training.endDate && (
-									<p class="text-neutral-600">
-										<span class="font-semibold">End Date:</span> {new Date(training.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-									</p>
-								)}
-								{training.price && (
-									<p class="text-neutral-600">
-										<span class="font-semibold">Investment:</span> ${training.price}
-									</p>
-								)}
-							</div>
-						</div>
-					)}
-
-					<div class="flex flex-col sm:flex-row gap-4 justify-center">
-						<Button href={training.ctaLink || '/contact'} variant={training.variant || 'primary'} size="large">
-							{training.ctaText || 'Request Information'}
-						</Button>
-						<a
-							href="/trainings"
-							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
-						>
-							View All Programs
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
+		<EventDetailLayout
+			title={training.title}
+			subtitle={training.subtitle}
+			image={training.image}
+			body={training.body}
+			gallery={training.gallery}
+			startDate={training.startDate}
+			endDate={training.endDate}
+			isPastEvent={isPastEvent}
+			ctaButtonLabel={training.ctaText}
+			ctaButtonUrl={training.ctaLink}
+			backLink="/trainings"
+			backLinkText="View All Programs"
+		/>
 	</main>
 
 	<Footer />

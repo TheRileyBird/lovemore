@@ -1,0 +1,47 @@
+---
+interface Props {
+	title: string;
+	subtitle?: string;
+	location?: string;
+	image: string | null;
+	icon?: any;
+	dateDisplay?: string;
+}
+
+const {
+	title,
+	subtitle,
+	location,
+	image,
+	icon: Icon,
+	dateDisplay
+} = Astro.props;
+---
+
+<!-- Hero Section with Image -->
+<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="event-heading">
+	<div class="absolute inset-0 z-0">
+		<img
+			src={image || 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w'}
+			alt={title}
+			class="absolute inset-0 w-full h-full object-cover"
+		/>
+		<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/70 via-neutral-900/60 to-neutral-900/70"></div>
+	</div>
+
+	<div class="relative z-10 container mx-auto px-6 text-center">
+		{Icon && <Icon class="w-16 h-16 text-brand mx-auto mb-6" aria-hidden="true" />}
+		<h1 id="event-heading" class="text-4xl md:text-6xl font-display font-bold text-white tracking-wide mb-4">
+			{title}
+		</h1>
+		{subtitle && (
+			<p class="text-xl md:text-2xl text-white/90 font-light mb-2">{subtitle}</p>
+		)}
+		{location && (
+			<p class="text-2xl text-white/95 font-light">{location}</p>
+		)}
+		{dateDisplay && (
+			<p class="text-lg md:text-xl text-white/85 font-light mt-2">{dateDisplay}</p>
+		)}
+	</div>
+</section>
