@@ -1,0 +1,65 @@
+---
+import { Calendar, ArrowRight } from 'lucide-astro';
+
+interface Props {
+	title: string;
+	subtitle?: string;
+	slug: string;
+	image: string | null;
+	body: string;
+	dateDisplay?: string;
+	index: number;
+	basePath: string;
+	ctaText?: string;
+}
+
+const {
+	title,
+	subtitle,
+	slug,
+	image,
+	body,
+	dateDisplay,
+	index,
+	basePath,
+	ctaText = 'Learn More'
+} = Astro.props;
+---
+
+<a
+	href={`${basePath}/${slug}`}
+	class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
+>
+	<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+		<header class="flex flex-nowrap items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
+			<h3 class="text-xl font-bold text-charcoal">
+				{title}
+			</h3>
+			{dateDisplay && (
+				<span class="inline-flex items-center gap-1 px-3 py-1 bg-cream rounded-full border border-neutral-200 text-sm shrink-0">
+					<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
+					{dateDisplay}
+				</span>
+			)}
+		</header>
+		<div class="p-10 pb-20">
+			{subtitle && (
+				<p class="text-lg text-neutral-600 font-medium mb-3">{subtitle}</p>
+			)}
+			<div class="prose line-clamp-6 max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4">{body}</div>
+		</div>
+		<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+			<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
+				{ctaText}
+				<ArrowRight class="w-4 h-4" aria-hidden="true" />
+			</span>
+		</div>
+	</div>
+	<div class={`relative select-none bg-neutral-50 h-full min-h-[300px] overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+		<img
+			src={image || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
+			alt={title}
+			class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+		/>
+	</div>
+</a>
