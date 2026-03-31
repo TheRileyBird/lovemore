@@ -24,8 +24,7 @@ const teamMembersResponse = await fetchAPI<any>({
 	endpoint: 'team-members',
 	query: {
 		'sort': 'sortOrder:asc',
-		'populate[image]': '*',
-		'populate[socialLink]': '*'
+		'populate': '*'
 	},
 	wrappedByKey: 'data'
 });
