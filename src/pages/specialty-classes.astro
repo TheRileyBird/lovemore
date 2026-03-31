@@ -25,7 +25,7 @@ const eventsResponse = await fetchAPI<any>({
 	query: {
 		'filters[active][$eq]': true,
 		'populate': 'image',
-		'sort': 'sortOrder:asc'
+		'sort': 'date:asc'
 	},
 	wrappedByKey: 'data'
 });

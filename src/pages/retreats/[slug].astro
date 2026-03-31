@@ -68,6 +68,18 @@ const { retreat } = Astro.props;
 
 // Check if retreat has passed
 const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
+
+// Format dates for display
+const formatDate = (date: string) => {
+	return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
+const dateDisplay = retreat.startDate && retreat.endDate
+	? `${formatDate(retreat.startDate)} - ${formatDate(retreat.endDate)}`
+	: retreat.startDate
+		? formatDate(retreat.startDate)
+		: retreat.endDate
+			? formatDate(retreat.endDate)
+			: '';
 ---
 
 <Layout title={`${retreat.name} — Love More`}>
@@ -93,6 +105,9 @@ const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
 					<p class="text-xl md:text-2xl text-white/90 font-light mb-2">{retreat.subtitle}</p>
 				)}
 				<p class="text-2xl text-white/95 font-light">{retreat.location}</p>
+				{dateDisplay && (
+					<p class="text-lg md:text-xl text-white/85 font-light mt-2">{dateDisplay}</p>
+				)}
 			</div>
 		</section>
 

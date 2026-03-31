@@ -38,7 +38,7 @@ function stripHtml(html: string): string {
 const retreatsResponse = await fetchAPI<any>({
 	endpoint: 'retreats',
 	query: {
-		sort: 'sortOrder:asc',
+		sort: 'startDate:asc',
 		'filters[active][$eq]': true,
 		'populate': 'image'
 	},

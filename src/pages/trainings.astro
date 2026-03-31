@@ -10,7 +10,7 @@ import { fetchAPI } from '../lib/strapi';
 const trainingsResponse = await fetchAPI<any>({
 	endpoint: 'trainings',
 	query: {
-		sort: 'sortOrder:asc',
+		sort: 'startDate:asc',
 		'filters[active][$eq]': true
 	},
 	wrappedByKey: 'data'
