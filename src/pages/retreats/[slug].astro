@@ -20,6 +20,37 @@ export async function getStaticPaths() {
 		return marked(content);
 	}
 
+	// Helper to format date ranges intelligently
+	function formatDateRange(startDate: string, endDate: string): string {
+		if (!startDate && !endDate) return '';
+		if (!endDate) return new Date(startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+		if (!startDate) return new Date(endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+		const start = new Date(startDate);
+		const end = new Date(endDate);
+
+		const startMonth = start.toLocaleDateString('en-US', { month: 'short' });
+		const startDay = start.getDate();
+		const startYear = start.getFullYear();
+
+		const endMonth = end.toLocaleDateString('en-US', { month: 'short' });
+		const endDay = end.getDate();
+		const endYear = end.getFullYear();
+
+		// Same month and year: "May 21-23, 2026"
+		if (startMonth === endMonth && startYear === endYear) {
+			return `${startMonth} ${startDay}-${endDay}, ${startYear}`;
+		}
+
+		// Same year, different months: "May 21 - Jun 3, 2026"
+		if (startYear === endYear) {
+			return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
+		}
+
+		// Different years: "Dec 21, 2025 - Jan 3, 2026"
+		return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+	}
+
 	try {
 		const retreatsResponse = await fetchAPI<any>({
 			endpoint: 'retreats',
@@ -55,7 +86,8 @@ export async function getStaticPaths() {
 						alternativeText: img.alternativeText || retreat.name
 					})) || [],
 					ctaButtonLabel: retreat.ctaButtonLabel,
-					ctaButtonUrl: retreat.ctaButtonUrl
+					ctaButtonUrl: retreat.ctaButtonUrl,
+					dateDisplay: formatDateRange(retreat.startDate, retreat.endDate)
 				}
 			}
 		}));
@@ -69,18 +101,6 @@ const { retreat } = Astro.props;
 
 // Check if retreat has passed
 const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
-
-// Format dates for display
-const formatDate = (date: string) => {
-	return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-};
-const dateDisplay = retreat.startDate && retreat.endDate
-	? `${formatDate(retreat.startDate)} - ${formatDate(retreat.endDate)}`
-	: retreat.startDate
-		? formatDate(retreat.startDate)
-		: retreat.endDate
-			? formatDate(retreat.endDate)
-			: '';
 ---
 
 <Layout title={`${retreat.name} — Love More`}>
@@ -93,7 +113,7 @@ const dateDisplay = retreat.startDate && retreat.endDate
 			location={retreat.location}
 			image={retreat.image}
 			icon={Palmtree}
-			dateDisplay={dateDisplay}
+			dateDisplay={retreat.dateDisplay}
 		/>
 
 		<EventDetailLayout
