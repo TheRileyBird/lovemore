@@ -16,7 +16,17 @@ const trainingsResponse = await fetchAPI<any>({
 	wrappedByKey: 'data'
 });
 
-const trainings = trainingsResponse?.filter((training: any) => training.slug) || [];
+// Filter for upcoming trainings only (not past events)
+const now = new Date();
+const trainings = trainingsResponse
+	?.filter((training: any) => {
+		// Must have a slug
+		if (!training.slug) return false;
+		// If no endDate, show it (assume upcoming)
+		if (!training.endDate) return true;
+		// Only show if endDate is in the future
+		return new Date(training.endDate) >= now;
+	}) || [];
 ---
 
 <Layout title="Teacher Training & Workshops — Love More">

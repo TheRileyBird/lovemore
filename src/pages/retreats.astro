@@ -4,8 +4,20 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
-import { Palmtree } from 'lucide-astro';
+import { Palmtree, Calendar, ArrowRight } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
+import { marked } from 'marked';
+
+// Helper to handle both HTML and Markdown content
+function processContent(content: string): string {
+	if (!content) return '';
+	// If content contains HTML tags, return as-is
+	if (content.includes('<p>') || content.includes('<strong>')) {
+		return content;
+	}
+	// Otherwise treat as Markdown
+	return marked(content);
+}
 
 // Fetch retreats from Strapi
 const retreatsResponse = await fetchAPI<any>({
@@ -18,13 +30,27 @@ const retreatsResponse = await fetchAPI<any>({
 	wrappedByKey: 'data'
 });
 
-const upcomingRetreats = retreatsResponse?.filter((retreat: any) => retreat.slug).map((retreat: any) => ({
-	name: retreat.name,
-	slug: retreat.slug,
-	location: retreat.location,
-	image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
-	body: retreat.body
-})) || [];
+// Filter for upcoming retreats only (not past events)
+const now = new Date();
+const upcomingRetreats = retreatsResponse
+	?.filter((retreat: any) => {
+		// Must have a slug
+		if (!retreat.slug) return false;
+		// If no endDate, show it (assume upcoming)
+		if (!retreat.endDate) return true;
+		// Only show if endDate is in the future
+		return new Date(retreat.endDate) >= now;
+	})
+	.map((retreat: any) => ({
+		name: retreat.name,
+		subtitle: retreat.subtitle,
+		slug: retreat.slug,
+		location: retreat.location,
+		image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
+		body: processContent(retreat.body),
+		startDate: retreat.startDate,
+		endDate: retreat.endDate
+	})) || [];
 ---
 
 <Layout title="Retreats - Elevate — Love More">
@@ -74,49 +100,67 @@ const upcomingRetreats = retreatsResponse?.filter((retreat: any) => retreat.slug
 		</section>
 
 		<!-- Upcoming Retreats -->
-		<section class="py-24 bg-white" aria-labelledby="upcoming-heading">
+		<section class="py-24 bg-cream" aria-labelledby="upcoming-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-6xl mx-auto">
 					<h2 id="upcoming-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
 						Upcoming Retreats
 					</h2>
 
-					<div class="space-y-12">
-						{upcomingRetreats.map((retreat) => {
-							// Extract plain text from body for preview
-							const plainText = retreat.body?.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim() || '';
-							const preview = plainText.length > 250 ? plainText.substring(0, 250) + '...' : plainText;
+					<div class="flex flex-col gap-y-8">
+						{upcomingRetreats.map((retreat, index) => {
+							// Format dates for display
+							const formatDate = (date: string) => {
+								return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+							};
+							const dateDisplay = retreat.startDate && retreat.endDate
+								? `${formatDate(retreat.startDate)} - ${formatDate(retreat.endDate)}`
+								: retreat.startDate
+									? formatDate(retreat.startDate)
+									: retreat.endDate
+										? formatDate(retreat.endDate)
+										: '';
 
 							return (
-								<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200 hover:shadow-xl transition-shadow">
-									<div class="grid md:grid-cols-5 gap-0">
-										<div class="md:col-span-2 relative h-64 md:h-auto">
-											<img
-												src={retreat.image || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
-												alt={retreat.name}
-												class="absolute inset-0 w-full h-full object-cover"
-											/>
-											<div class="absolute inset-0 bg-neutral-900/40"></div>
-											<div class="absolute inset-0 flex items-center justify-center">
-												<div class="text-center text-white p-8">
-													<Palmtree class="w-16 h-16 mx-auto mb-4" aria-hidden="true" />
-													<h3 class="text-3xl font-display font-bold mb-2">{retreat.name}</h3>
-													<p class="text-xl opacity-90">{retreat.location}</p>
-												</div>
+								<a
+									href={`/retreats/${retreat.slug}`}
+									class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-white lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
+								>
+									<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+										<header class="flex items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
+											<div>
+												<h3 class="text-xl font-bold text-charcoal">
+													{retreat.name}
+												</h3>
+												{retreat.subtitle && (
+													<p class="text-sm text-neutral-600 mt-1">{retreat.subtitle}</p>
+												)}
 											</div>
+											{dateDisplay && (
+												<span class="inline-flex items-center gap-1 px-3 py-1 bg-cream rounded-full border border-neutral-200 text-sm shrink-0">
+													<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
+													{dateDisplay}
+												</span>
+											)}
+										</header>
+										<div class="flex flex-col place-items-start gap-y-6 p-10 pb-20">
+											<div class="prose max-w-none text-neutral-600 leading-relaxed line-clamp-6 [&_p]:mb-4" set:html={retreat.body} />
 										</div>
-
-										<div class="md:col-span-3 p-8 md:p-10">
-											<p class="text-lg text-neutral-600 leading-relaxed mb-8">
-												{preview}
-											</p>
-
-											<Button href={`/retreats/${retreat.slug}`} variant="primary">
+										<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+											<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
 												Learn More
-											</Button>
+												<ArrowRight class="w-4 h-4" aria-hidden="true" />
+											</span>
 										</div>
 									</div>
-								</div>
+									<div class={`relative select-none bg-neutral-50 h-full min-h-[300px] overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+										<img
+											src={retreat.image || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
+											alt={retreat.name}
+											class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+										/>
+									</div>
+								</a>
 							);
 						})}
 					</div>
