@@ -27,7 +27,8 @@
       "Bash(git push:*)",
       "Bash(ls:*)",
       "Bash(python3:*)",
-      "Bash(jq:*)"
+      "Bash(jq:*)",
+      "Bash(netlify api:*)"
     ]
   }
 }
