@@ -23,19 +23,19 @@ function processContent(content: string): string {
 	return marked(content);
 }
 
-// Fetch specific featured teachers from Strapi
-const featuredTeacherIds = [65, 46, 63]; // JoEllen Luke (ID 65), Dom Luke (ID 46), Jacqueline Hurst (ID 63)
-
+// Fetch all team members from Strapi and filter for featured teachers
 const teamMembersResponse = await fetchAPI<any>({
 	endpoint: 'team-members',
 	query: {
-		'filters[id][$in]': featuredTeacherIds.join(','),
 		'populate': '*'
 	},
 	wrappedByKey: 'data'
 });
 
-// Sort by the order we want them displayed and process content
+// Featured teacher IDs: JoEllen Luke (65), Dom Luke (46), Jacqueline Hurst (63)
+const featuredTeacherIds = [65, 46, 63];
+
+// Filter and sort by the order we want them displayed
 const teamMembers = featuredTeacherIds
 	.map(id => teamMembersResponse?.find((member: any) => member.id === id))
 	.filter(Boolean)
