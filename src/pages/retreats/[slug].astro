@@ -5,6 +5,18 @@ import Footer from '../../components/Footer.astro';
 import Button from '../../components/Button.astro';
 import { Palmtree } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
+import { marked } from 'marked';
+
+// Helper to handle both HTML and Markdown content
+function processContent(content: string): string {
+	if (!content) return '';
+	// If content contains HTML tags, return as-is
+	if (content.includes('<p>') || content.includes('<strong>')) {
+		return content;
+	}
+	// Otherwise treat as Markdown
+	return marked(content);
+}
 
 export async function getStaticPaths() {
 	try {
@@ -35,7 +47,8 @@ export async function getStaticPaths() {
 			props: {
 				retreat: {
 					...retreat,
-					image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null
+					image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
+					body: processContent(retreat.body)
 				}
 			}
 		}));
@@ -76,7 +89,7 @@ const { retreat } = Astro.props;
 		<section class="py-20 bg-white">
 			<div class="container mx-auto px-6">
 				<div class="max-w-4xl mx-auto">
-					<div class="prose prose-lg max-w-none text-neutral-700 leading-relaxed mb-12" set:html={retreat.body} />
+					<div class="prose prose-lg max-w-none text-neutral-700 leading-relaxed mb-12 [&_p]:mb-6" set:html={retreat.body} />
 
 					<div class="flex flex-col sm:flex-row gap-4 justify-center">
 						<Button href="/contact" variant="primary" size="large">

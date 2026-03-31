@@ -6,6 +6,18 @@ import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Sparkles, ArrowRight } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
+import { marked } from 'marked';
+
+// Helper to handle both HTML and Markdown content
+function processContent(content: string): string {
+	if (!content) return '';
+	// If content contains HTML tags, return as-is
+	if (content.includes('<p>') || content.includes('<strong>')) {
+		return content;
+	}
+	// Otherwise treat as Markdown
+	return marked(content);
+}
 
 // Fetch specialty classes from Strapi
 const specialtyClassesResponse = await fetchAPI<any>({
@@ -20,7 +32,7 @@ const specialtyClassesResponse = await fetchAPI<any>({
 
 const specialtyOfferings = specialtyClassesResponse.map((classItem: any) => ({
 	name: classItem.name,
-	description: classItem.description,
+	description: processContent(classItem.description),
 	image: classItem.image?.url ? getStrapiMedia(classItem.image.url) : null
 }));
 ---
@@ -93,9 +105,7 @@ const specialtyOfferings = specialtyClassesResponse.map((classItem: any) => ({
 										</span>
 									</header>
 									<div class="flex flex-col place-items-start gap-y-6 p-10 pb-20">
-										<p class="text-neutral-600 leading-relaxed">
-											{offering.description}
-										</p>
+										<div class="prose max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4" set:html={offering.description} />
 									</div>
 									<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
 										<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
