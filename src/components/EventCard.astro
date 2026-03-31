@@ -7,7 +7,8 @@ interface Props {
 	slug: string;
 	image: string | null;
 	body: string;
-	dateDisplay?: string;
+	startDate?: string;
+	endDate?: string;
 	index: number;
 	basePath: string;
 	ctaText?: string;
@@ -19,11 +20,62 @@ const {
 	slug,
 	image,
 	body,
-	dateDisplay,
+	startDate,
+	endDate,
 	index,
 	basePath,
 	ctaText = 'Learn More'
 } = Astro.props;
+
+// Helper to strip HTML tags for plain text display
+function stripHtml(html: string): string {
+	if (!html) return '';
+	return html.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, (entity) => {
+		const entities: Record<string, string> = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#39;': "'"
+		};
+		return entities[entity] || entity;
+	});
+}
+
+// Helper to format date ranges intelligently
+function formatDateRange(startDate: string | undefined, endDate: string | undefined): string {
+	if (!startDate && !endDate) return '';
+	if (!endDate && startDate) return new Date(startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+	if (!startDate && endDate) return new Date(endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+	if (!startDate || !endDate) return '';
+
+	const start = new Date(startDate);
+	const end = new Date(endDate);
+
+	const startMonth = start.toLocaleDateString('en-US', { month: 'short' });
+	const startDay = start.getDate();
+	const startYear = start.getFullYear();
+
+	const endMonth = end.toLocaleDateString('en-US', { month: 'short' });
+	const endDay = end.getDate();
+	const endYear = end.getFullYear();
+
+	// Same month and year: "May 21-23, 2026"
+	if (startMonth === endMonth && startYear === endYear) {
+		return `${startMonth} ${startDay} - ${endDay}, ${startYear}`;
+	}
+
+	// Same year, different months: "May 21 - Jun 3, 2026"
+	if (startYear === endYear) {
+		return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
+	}
+
+	// Different years: "Dec 21, 2025 - Jan 3, 2026"
+	return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+}
+
+const dateDisplay = formatDateRange(startDate, endDate);
+const cleanBody = stripHtml(body);
 ---
 
 <a
@@ -46,7 +98,7 @@ const {
 			{subtitle && (
 				<p class="text-lg text-neutral-600 font-medium mb-3">{subtitle}</p>
 			)}
-			<div class="prose line-clamp-6 max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4">{body}</div>
+			<div class="prose line-clamp-6 max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4">{cleanBody}</div>
 		</div>
 		<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
 			<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
