@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 		const retreatsResponse = await fetchAPI<any>({
 			endpoint: 'retreats',
 			query: {
-				'filters[active][$eq]': true,
+				// Fetch ALL retreats (past and future) to avoid 404s
 				'populate': 'image'
 			},
 			wrappedByKey: 'data'
@@ -59,6 +59,9 @@ export async function getStaticPaths() {
 }
 
 const { retreat } = Astro.props;
+
+// Check if retreat has passed
+const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
 ---
 
 <Layout title={`${retreat.name} — Love More`}>
@@ -89,6 +92,14 @@ const { retreat } = Astro.props;
 		<section class="py-20 bg-white">
 			<div class="container mx-auto px-6">
 				<div class="max-w-4xl mx-auto">
+					{/* Past Event Banner */}
+					{isPastEvent && (
+						<div class="mb-8 p-6 bg-neutral-100 border border-neutral-300 rounded-xl">
+							<p class="text-neutral-700 text-center font-medium">
+								⏰ This retreat has passed. Check out our <a href="/retreats" class="text-brand hover:underline">upcoming retreats</a>.
+							</p>
+						</div>
+					)}
 					<div class="prose prose-lg max-w-none text-neutral-700 leading-relaxed mb-12 [&_p]:mb-6" set:html={retreat.body} />
 
 					<div class="flex flex-col sm:flex-row gap-4 justify-center">

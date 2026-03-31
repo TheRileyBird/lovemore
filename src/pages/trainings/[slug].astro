@@ -22,7 +22,8 @@ export async function getStaticPaths() {
 		const trainingsResponse = await fetchAPI<any>({
 			endpoint: 'trainings',
 			query: {
-				'filters[active][$eq]': true
+				// Fetch ALL trainings (past and future) to avoid 404s
+				'populate': 'image'
 			},
 			wrappedByKey: 'data'
 		});
@@ -56,6 +57,9 @@ export async function getStaticPaths() {
 }
 
 const { training } = Astro.props;
+
+// Check if training has passed
+const isPastEvent = training.endDate && new Date(training.endDate) < new Date();
 ---
 
 <Layout title={`${training.title} — Love More`}>
@@ -86,6 +90,14 @@ const { training } = Astro.props;
 		<section class="py-20 bg-white">
 			<div class="container mx-auto px-6">
 				<div class="max-w-4xl mx-auto">
+					{/* Past Event Banner */}
+					{isPastEvent && (
+						<div class="mb-8 p-6 bg-neutral-100 border border-neutral-300 rounded-xl">
+							<p class="text-neutral-700 text-center font-medium">
+								⏰ This training has passed. Check out our <a href="/trainings" class="text-brand hover:underline">upcoming trainings</a>.
+							</p>
+						</div>
+					)}
 					<div class="prose prose-lg max-w-none text-neutral-700 leading-relaxed mb-12 [&_p]:mb-6" set:html={training.body} />
 
 					{training.certification && (
