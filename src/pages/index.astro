@@ -9,14 +9,43 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro';
-import { teachers } from '../data/teachers';
+import { fetchAPI, getStrapiMedia } from '../lib/strapi';
+import { marked } from 'marked';
 
-// Transform teachers data to include bios and convert image to string
-const teamMembers = teachers.map((teacher) => ({
-	...teacher,
-	image: teacher.image.src,
-	bio: teacher.bio || `${teacher.name} is a passionate yoga instructor dedicated to helping students discover the transformative power of movement and mindfulness. With years of experience and a deep commitment to the Love More community, ${teacher.name.split(' ')[0]} creates a welcoming and supportive environment for practitioners of all levels. Their classes blend traditional wisdom with modern approaches, emphasizing the connection between breath, body, and spirit.`
-}));
+// Helper to handle both HTML and Markdown content
+function processContent(content: string): string {
+	if (!content) return '';
+	// If content contains HTML tags, return as-is
+	if (content.includes('<p>') || content.includes('<strong>')) {
+		return content;
+	}
+	// Otherwise treat as Markdown
+	return marked(content);
+}
+
+// Fetch specific featured teachers from Strapi
+const featuredTeacherIds = [65, 46, 63]; // JoEllen Luke (ID 65), Dom Luke (ID 46), Jacqueline Hurst (ID 63)
+
+const teamMembersResponse = await fetchAPI<any>({
+	endpoint: 'team-members',
+	query: {
+		'filters[id][$in]': featuredTeacherIds.join(','),
+		'populate': '*'
+	},
+	wrappedByKey: 'data'
+});
+
+// Sort by the order we want them displayed and process content
+const teamMembers = featuredTeacherIds
+	.map(id => teamMembersResponse?.find((member: any) => member.id === id))
+	.filter(Boolean)
+	.map((member: any) => ({
+		name: member?.name,
+		title: member?.title,
+		image: member?.image?.url ? getStrapiMedia(member.image.url) : null,
+		bio: processContent(member?.bio),
+		socialLink: member?.socialLink || null
+	}));
 
 const steps = [
 	{ number: 1, title: 'Buy Your 3 Week Intro Pass', description: 'Purchase your intro pass online or in person' },
