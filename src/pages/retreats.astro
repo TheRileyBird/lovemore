@@ -19,6 +19,21 @@ function processContent(content: string): string {
 	return marked(content);
 }
 
+// Helper to strip HTML tags for plain text display
+function stripHtml(html: string): string {
+	if (!html) return '';
+	return html.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, (entity) => {
+		const entities: Record<string, string> = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#39;': "'"
+		};
+		return entities[entity] || entity;
+	});
+}
+
 // Fetch retreats from Strapi
 const retreatsResponse = await fetchAPI<any>({
 	endpoint: 'retreats',
@@ -47,7 +62,7 @@ const upcomingRetreats = retreatsResponse
 		slug: retreat.slug,
 		location: retreat.location,
 		image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
-		body: processContent(retreat.body),
+		body: stripHtml(retreat.body),
 		startDate: retreat.startDate,
 		endDate: retreat.endDate
 	})) || [];
@@ -58,7 +73,7 @@ const upcomingRetreats = retreatsResponse
 
 	<main id="main-content">
 		<!-- Hero Section -->
-		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="retreats-heading">
+		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden" aria-labelledby="retreats-heading">
 			<div class="absolute inset-0 z-0">
 				<img
 					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
@@ -100,7 +115,7 @@ const upcomingRetreats = retreatsResponse
 		</section>
 
 		<!-- Upcoming Retreats -->
-		<section class="py-24 bg-cream" aria-labelledby="upcoming-heading">
+		<section class="py-24 bg-white" aria-labelledby="upcoming-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-6xl mx-auto">
 					<h2 id="upcoming-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
@@ -124,27 +139,23 @@ const upcomingRetreats = retreatsResponse
 							return (
 								<a
 									href={`/retreats/${retreat.slug}`}
-									class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-white lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
+									class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
 								>
 									<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-										<header class="flex items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
-											<div>
-												<h3 class="text-xl font-bold text-charcoal">
-													{retreat.name}
-												</h3>
-												{retreat.subtitle && (
-													<p class="text-sm text-neutral-600 mt-1">{retreat.subtitle}</p>
-												)}
-											</div>
-											{dateDisplay && (
-												<span class="inline-flex items-center gap-1 px-3 py-1 bg-cream rounded-full border border-neutral-200 text-sm shrink-0">
-													<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
-													{dateDisplay}
-												</span>
-											)}
+										<header class="flex flex-nowrap items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
+											<h3 class="text-xl font-bold text-charcoal">
+												{retreat.name}
+											</h3>
+											<span class="inline-flex items-center gap-1 px-3 py-1 bg-cream rounded-full border border-neutral-200 text-sm shrink-0">
+												<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
+												{dateDisplay || 'TBD'}
+											</span>
 										</header>
-										<div class="flex flex-col place-items-start gap-y-6 p-10 pb-20">
-											<div class="prose max-w-none text-neutral-600 leading-relaxed line-clamp-6 [&_p]:mb-4" set:html={retreat.body} />
+										<div class="p-10 pb-20">
+											{retreat.subtitle && (
+												<p class="text-lg text-neutral-600 font-medium mb-3">{retreat.subtitle}</p>
+											)}
+											<div class="prose line-clamp-6 max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4">{retreat.body}</div>
 										</div>
 										<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
 											<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
@@ -157,7 +168,7 @@ const upcomingRetreats = retreatsResponse
 										<img
 											src={retreat.image || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
 											alt={retreat.name}
-											class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+											class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
 										/>
 									</div>
 								</a>
