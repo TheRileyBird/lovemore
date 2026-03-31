@@ -48,7 +48,7 @@ const upcomingRetreats = retreatsResponse
 		slug: retreat.slug,
 		location: retreat.location,
 		image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
-		body: retreat.body,
+		body: processContent(retreat.body),
 		startDate: retreat.startDate,
 		endDate: retreat.endDate
 	})) || [];
