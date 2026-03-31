@@ -7,18 +7,18 @@ import { Palmtree } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
 import { marked } from 'marked';
 
-// Helper to handle both HTML and Markdown content
-function processContent(content: string): string {
-	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
-	return marked(content);
-}
-
 export async function getStaticPaths() {
+	// Helper to handle both HTML and Markdown content
+	function processContent(content: string): string {
+		if (!content) return '';
+		// If content contains HTML tags, return as-is
+		if (content.includes('<p>') || content.includes('<strong>')) {
+			return content;
+		}
+		// Otherwise treat as Markdown
+		return marked(content);
+	}
+
 	try {
 		const retreatsResponse = await fetchAPI<any>({
 			endpoint: 'retreats',
