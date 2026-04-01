@@ -5,7 +5,7 @@ interface Props {
 	title: string;
 	subtitle?: string;
 	slug: string;
-	image: string | null;
+	flyerImage: string | null;
 	body: string;
 	startDate?: string;
 	endDate?: string;
@@ -19,7 +19,7 @@ const {
 	title,
 	subtitle,
 	slug,
-	image,
+	flyerImage,
 	body,
 	startDate,
 	endDate,
@@ -118,7 +118,7 @@ const cleanBody = stripHtml(body);
 	</div>
 	<div class={`relative select-none bg-neutral-50 h-full min-h-[300px] overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
 		<img
-			src={image || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
+			src={flyerImage || 'https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=1200&auto=format&fit=crop&q=80'}
 			alt={title}
 			class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
 		/>

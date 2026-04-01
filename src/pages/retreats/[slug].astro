@@ -79,8 +79,8 @@ export async function getStaticPaths() {
 			props: {
 				retreat: {
 					...retreat,
-					image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
-					heroImage: retreat.heroImage?.url ? getStrapiMedia(retreat.heroImage.url) : (retreat.image?.url ? getStrapiMedia(retreat.image.url) : null),
+					flyerImage: retreat.flyerImage?.url ? getStrapiMedia(retreat.flyerImage.url) : null,
+					headerImage: retreat.headerImage?.url ? getStrapiMedia(retreat.headerImage.url) : (retreat.flyerImage?.url ? getStrapiMedia(retreat.flyerImage.url) : null),
 					body: processContent(retreat.body),
 					gallery: retreat.gallery?.map((img: any) => ({
 						url: getStrapiMedia(img.url),
@@ -112,7 +112,7 @@ const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
 			title={retreat.name}
 			subtitle={retreat.subtitle}
 			location={retreat.location}
-			image={retreat.heroImage}
+			image={retreat.headerImage}
 			icon={Palmtree}
 			dateDisplay={retreat.dateDisplay}
 		/>
@@ -121,7 +121,7 @@ const isPastEvent = retreat.endDate && new Date(retreat.endDate) < new Date();
 			title={retreat.name}
 			subtitle={retreat.subtitle}
 			location={retreat.location}
-			image={retreat.image}
+			image={retreat.flyerImage}
 			body={retreat.body}
 			gallery={retreat.gallery}
 			startDate={retreat.startDate}

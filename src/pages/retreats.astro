@@ -26,7 +26,7 @@ const retreatsResponse = await fetchAPI<any>({
 	query: {
 		sort: 'startDate:asc',
 		'filters[active][$eq]': true,
-		'populate': 'image'
+		'populate': 'flyerImage'
 	},
 	wrappedByKey: 'data'
 });
@@ -47,7 +47,7 @@ const upcomingRetreats = retreatsResponse
 		subtitle: retreat.subtitle,
 		slug: retreat.slug,
 		location: retreat.location,
-		image: retreat.image?.url ? getStrapiMedia(retreat.image.url) : null,
+		flyerImage: retreat.flyerImage?.url ? getStrapiMedia(retreat.flyerImage.url) : null,
 		body: processContent(retreat.body),
 		startDate: retreat.startDate,
 		endDate: retreat.endDate
@@ -111,7 +111,7 @@ const upcomingRetreats = retreatsResponse
 								title={retreat.name}
 								subtitle={retreat.subtitle}
 								slug={retreat.slug}
-								image={retreat.image}
+								flyerImage={retreat.flyerImage}
 								body={retreat.body}
 								startDate={retreat.startDate}
 								endDate={retreat.endDate}
