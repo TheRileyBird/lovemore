@@ -131,9 +131,6 @@ const structuredData = {
 			rel="stylesheet"
 		/>
 
-		<!-- Netlify Identity Widget -->
-		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
@@ -141,29 +138,6 @@ const structuredData = {
 	</head>
 	<body class="antialiased bg-cream text-charcoal">
 		<slot />
-
-		<!-- Netlify Identity widget handler -->
-		<script is:inline>
-			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on("init", user => {
-					// If there's a recovery token, invite token, or confirmation token in URL
-					// the widget should auto-open, but we redirect to /admin/ after to ensure it works
-					const hash = window.location.hash;
-					if (hash && (hash.includes('recovery_token') || hash.includes('invite_token') || hash.includes('confirmation_token'))) {
-						// If user is not on /admin/, redirect there with the token
-						if (!window.location.pathname.startsWith('/admin')) {
-							window.location.href = '/admin/' + hash;
-						}
-					}
-
-					if (!user) {
-						window.netlifyIdentity.on("login", () => {
-							document.location.href = "/admin/";
-						});
-					}
-				});
-			}
-		</script>
 
 		<!-- Alpine.js with Intersect and Collapse plugins -->
 		<script>
