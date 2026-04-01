@@ -1,4 +1,6 @@
 ---
+import heroImage from '../assets/images/porch.jpeg';
+
 interface Props {
 	title: string;
 	subtitle?: string;
@@ -22,7 +24,7 @@ const {
 <section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="event-heading">
 	<div class="absolute inset-0 z-0">
 		<img
-			src={image || 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w'}
+			src={image || heroImage.src}
 			alt={title}
 			class="absolute inset-0 w-full h-full object-cover"
 		/>

@@ -7,6 +7,7 @@ import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import heroImage from '../assets/images/porch.jpeg';
 
 // Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
@@ -50,7 +51,7 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="team-heading">
 			<div class="absolute inset-0 z-0">
 				<img
-					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					src={heroImage.src}
 					alt=""
 					role="presentation"
 					class="absolute inset-0 w-full h-full object-cover"
@@ -67,7 +68,7 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		</section>
 
 		<!-- Intro Section -->
-		<section class="py-20 bg-cream" aria-labelledby="intro-heading">
+		<section class="py-20 bg-linear-to-b from-cream to-white" aria-labelledby="intro-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-4xl mx-auto text-center">
 					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
@@ -82,13 +83,9 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		</section>
 
 		<!-- Team Grid Section -->
-		<section class="py-24 bg-white" aria-labelledby="instructors-heading">
+		<section class="pb-24 bg-linear-to-b from-white to cream" aria-labelledby="instructors-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-7xl mx-auto">
-					<h2 id="instructors-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
-						Our Instructors
-					</h2>
-
 					<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
 						{teamMembers.map((member: any, index: number) => (
 							<TeamMemberCard
@@ -107,7 +104,7 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		<TeamMemberModal />
 
 		<!-- CTA Section -->
-		<section class="py-20 bg-cream">
+		<section class="pb-20 bg-cream">
 			<div class="container mx-auto px-6">
 				<div class="max-w-3xl mx-auto text-center">
 					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">

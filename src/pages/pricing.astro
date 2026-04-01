@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Heart, Users, Sparkles, Home } from 'lucide-astro';
+import heroImage from '../assets/images/porch.jpeg';
 
 const memberships = [
 	{
@@ -84,7 +85,7 @@ const memberships = [
 		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="pricing-heading">
 			<div class="absolute inset-0 z-0">
 				<img
-					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					src={heroImage.src}
 					alt=""
 					role="presentation"
 					class="absolute inset-0 w-full h-full object-cover"
@@ -167,31 +168,6 @@ const memberships = [
 			</div>
 		</section>
 
-		<!-- Drop-in Option -->
-		<section class="py-20 bg-cream">
-			<div class="container mx-auto px-6">
-				<div class="max-w-5xl mx-auto">
-					<div class="text-center mb-10">
-						<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
-							Just Visiting?
-						</h2>
-						<p class="text-lg text-neutral-600 leading-relaxed">
-							Try a single class or get started with our intro offer.
-						</p>
-					</div>
-
-					<div class="bg-white rounded-2xl shadow-md overflow-hidden">
-						<img
-							src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/9733f3b2-310d-47f8-89fb-bb292ea6ecac/Drop+In+Rate+.jpg"
-							alt="Drop-in rates and intro offers"
-							loading="lazy"
-							class="w-full"
-						/>
-					</div>
-				</div>
-			</div>
-		</section>
-
 		<!-- Call to Action -->
 		<section class="py-20 bg-white">
 			<div class="container mx-auto px-6">
@@ -204,13 +180,14 @@ const memberships = [
 					</p>
 					<div class="flex flex-col sm:flex-row gap-4 justify-center">
 						<Button href="/start" variant="primary" size="large">
-							Start Your Journey
+							Get Started for $56
 						</Button>
 						<a
-							href="/contact"
+							href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035334"
+							target="_blank"
 							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
 						>
-							Contact Us
+							Drop-in for $28
 						</a>
 					</div>
 				</div>

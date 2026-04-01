@@ -11,6 +11,8 @@ import Divider from '../components/Divider.astro';
 import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import aboutImage from '../assets/images/team.webp';
+import heroFallbackImage from '../assets/images/downdog.jpg';
 
 // Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
@@ -86,7 +88,7 @@ const pillars = [
 		<section class="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-labelledby="hero-heading">
 			<div class="absolute inset-0 z-0 ">
 				<!-- Fallback image -->
-				<img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=1600&h=1200&fit=crop&q=80" alt="" role="presentation" loading="eager" class="absolute inset-0 w-full h-full object-cover" />
+				<img src={heroFallbackImage.src} alt="" role="presentation" loading="eager" class="absolute inset-0 w-full h-full object-cover" />
 				<!-- Vimeo video background -->
 				<iframe
 					src="https://player.vimeo.com/video/906709028?h=238bfbb4ec&autoplay=1&loop=1&muted=1&background=1&controls=0"
@@ -122,9 +124,9 @@ const pillars = [
 				>
 					<h1
 						x-text="phrases[current]"
-						:style="`opacity: ${opacity}; transition: opacity 1200ms ease-in-out;`"
+						:style="`opacity: ${opacity}; transition: opacity 1200ms ease-in-out; filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.3)) drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3)) drop-shadow(4px 8px 12px rgba(0, 0, 0, 0.3));`"
 						id="hero-heading"
-						class="text-6xl md:text-8xl font-bold tracking-wide leading-tight animated-gradient-text"
+						class="text-4xl md:text-8xl font-bold tracking-wide leading-tight animated-gradient-text"
 					>Love the Journey</h1>
 				</div>
 
@@ -194,7 +196,7 @@ const pillars = [
 			<div class="container mx-auto px-6">
 				<div class="grid md:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
 					<div>
-						<img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=1000&fit=crop&q=80" alt="Yoga studio atmosphere" loading="lazy" class="rounded-2xl shadow-md border border-warm-gray-200" />
+						<img src={aboutImage.src} alt="Yoga studio atmosphere" loading="lazy" class="rounded-2xl shadow-md border border-warm-gray-200" />
 					</div>
 
 					<div>
@@ -262,28 +264,6 @@ const pillars = [
 				</div>
 			</div>
 		</section>
-
-		<!--&lt;!&ndash; Nature Spa Divider &ndash;&gt;-->
-		<!--<section class="relative py-40 overflow-hidden">-->
-		<!--	<div class="absolute inset-0">-->
-		<!--		<img-->
-		<!--			src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1600&q=80"-->
-		<!--			alt=""-->
-		<!--			role="presentation"-->
-		<!--			class="w-full h-full object-cover"-->
-		<!--		/>-->
-		<!--		<div class="absolute inset-0 bg-gradient-to-r from-emerald-dark/40 via-emerald/30 to-emerald-dark/40"></div>-->
-		<!--		<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,61,50,0.2)_100%)]"></div>-->
-		<!--	</div>-->
-		<!--	<div class="container mx-auto px-6 relative z-10 text-center">-->
-		<!--		<p class="text-gold text-sm font-medium tracking-luxury-wide uppercase opacity-90">Nature • Wellness • Serenity</p>-->
-		<!--		<h2 class="text-5xl md:text-6xl font-display font-light text-white mt-6 mb-8 tracking-wide leading-tight max-w-4xl mx-auto">-->
-		<!--			Where natural beauty meets<br class="hidden md:block" />-->
-		<!--			<span class="italic text-gold">intentional practice</span>-->
-		<!--		</h2>-->
-		<!--		<Divider width="medium" />-->
-		<!--	</div>-->
-		<!--</section>-->
 
 		<!-- Email Signup Section -->
 		<section class="py-24 bg-cream-50" aria-labelledby="newsletter-heading">

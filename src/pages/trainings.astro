@@ -7,6 +7,7 @@ import Divider from '../components/Divider.astro';
 import EventCard from '../components/EventCard.astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import heroImage from '../assets/images/porch.jpeg';
 
 // Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
@@ -61,7 +62,7 @@ const trainings = trainingsResponse
 		<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="trainings-heading">
 			<div class="absolute inset-0 z-0">
 				<img
-					src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1698857393487-I0M9VNSSDU0WURO47UYG/IMG_5194.jpeg?format=1600w"
+					src={heroImage.src}
 					alt=""
 					role="presentation"
 					class="absolute inset-0 w-full h-full object-cover"
@@ -89,10 +90,7 @@ const trainings = trainingsResponse
 					</h2>
 					<Divider width="short" class="mb-8" />
 					<p class="text-lg text-neutral-600 leading-relaxed mb-6">
-						Whether you're looking to deepen your personal practice or embark on a journey to share yoga with others, our teacher training programs provide comprehensive education, hands-on experience, and mentorship from experienced instructors.
-					</p>
-					<p class="text-lg text-neutral-600 leading-relaxed">
-						Our programs are registered with Yoga Alliance and taught by experienced E-RYT® certified instructors who are passionate about supporting the next generation of yoga teachers.
+						Whether you're looking to deepen your personal practice or embark on a journey to share yoga with others, our teacher training programs provide comprehensive education, hands-on experience, and mentorship from experienced instructors. Our programs are registered with Yoga Alliance and taught by experienced E-RYT® certified instructors who are passionate about supporting the next generation of yoga teachers.
 					</p>
 				</div>
 			</div>
@@ -135,28 +133,28 @@ const trainings = trainingsResponse
 					</h2>
 
 					<div class="grid md:grid-cols-2 gap-8">
-						<div class="bg-white p-6 rounded-xl">
+						<div class="bg-white p-6 rounded-xl border border-warm-gray-200 hover:shadow-lg transition-all duration-300">
 							<h3 class="text-xl font-semibold text-charcoal mb-3">Experienced Faculty</h3>
 							<p class="text-neutral-600 leading-relaxed">
 								Learn from E-RYT® 500 certified teachers with years of teaching and training experience.
 							</p>
 						</div>
 
-						<div class="bg-white p-6 rounded-xl">
+						<div class="bg-white p-6 rounded-xl border border-warm-gray-200 hover:shadow-lg transition-all duration-300">
 							<h3 class="text-xl font-semibold text-charcoal mb-3">Small Class Sizes</h3>
 							<p class="text-neutral-600 leading-relaxed">
 								Benefit from personalized attention and mentorship in intimate training groups.
 							</p>
 						</div>
 
-						<div class="bg-white p-6 rounded-xl">
+						<div class="bg-white p-6 rounded-xl border border-warm-gray-200 hover:shadow-lg transition-all duration-300">
 							<h3 class="text-xl font-semibold text-charcoal mb-3">Comprehensive Curriculum</h3>
 							<p class="text-neutral-600 leading-relaxed">
 								Our programs exceed Yoga Alliance standards with additional hours of study and practice.
 							</p>
 						</div>
 
-						<div class="bg-white p-6 rounded-xl">
+						<div class="bg-white p-6 rounded-xl border border-warm-gray-200 hover:shadow-lg transition-all duration-300">
 							<h3 class="text-xl font-semibold text-charcoal mb-3">Community Support</h3>
 							<p class="text-neutral-600 leading-relaxed">
 								Join a supportive community of teachers and continue learning through our ongoing education programs.
