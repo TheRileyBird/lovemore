@@ -9,6 +9,8 @@ import { Heart, Users, Sparkles, Home } from 'lucide-astro';
 const memberships = [
 	{
 		name: 'MOVEMENT',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463725',
+		buttonLabel: '$129/mo',
 		icon: Heart,
 		features: [
 			'Access to 8 classes per month',
@@ -19,6 +21,8 @@ const memberships = [
 	},
 	{
 		name: 'COMMUNITY',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463739',
+		buttonLabel: '$159/mo',
 		icon: Users,
 		features: [
 			'Unlimited access to classes',
@@ -34,6 +38,8 @@ const memberships = [
 	},
 	{
 		name: 'CONNECTION',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463741',
+		buttonLabel: '$199/mo',
 		icon: Sparkles,
 		features: [
 			'Unlimited access to classes',
@@ -50,6 +56,8 @@ const memberships = [
 	},
 	{
 		name: 'FAMILY',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463743',
+		buttonLabel: '$219/mo',
 		icon: Home,
 		features: [
 			'Add up to 5 family members',
@@ -146,8 +154,8 @@ const memberships = [
 												))}
 											</ul>
 
-											<Button href="/start" variant="primary">
-												Get Started
+											<Button href={membership.url} variant="primary" external={true}>
+												{membership.buttonLabel}
 											</Button>
 										</div>
 									</div>
