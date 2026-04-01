@@ -16,6 +16,7 @@ interface Props {
 	ctaButtonUrl?: string;
 	backLink: string;
 	backLinkText: string;
+	price?: number;
 }
 
 const {
@@ -32,7 +33,8 @@ const {
 	ctaButtonLabel,
 	ctaButtonUrl,
 	backLink,
-	backLinkText
+	backLinkText,
+	price
 } = Astro.props;
 
 // Format dates for display
@@ -61,6 +63,16 @@ const dateDisplay = startDate && endDate
 					<p class="text-neutral-700 text-center font-medium">
 						⏰ This event has passed. Check out our <a href={backLink} class="text-brand hover:underline">{backLinkText}</a>.
 					</p>
+				</div>
+			)}
+
+			{/* Price Display */}
+			{price && (
+				<div class="mb-8 text-center">
+					<div class="inline-flex items-center gap-3 px-6 py-4 bg-white border-2 border-brand rounded-2xl shadow-sm">
+						<span class="text-neutral-600 font-medium text-lg">Investment:</span>
+						<span class="text-3xl font-bold text-brand">${price}</span>
+					</div>
 				</div>
 			)}
 

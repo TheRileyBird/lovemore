@@ -112,7 +112,6 @@ const isPastEvent = training.endDate && new Date(training.endDate) < new Date();
 			image={training.headerImage}
 			icon={GraduationCap}
 			dateDisplay={training.dateDisplay}
-			price={training.price}
 		/>
 
 		<EventDetailLayout
@@ -128,6 +127,7 @@ const isPastEvent = training.endDate && new Date(training.endDate) < new Date();
 			ctaButtonUrl={training.ctaLink}
 			backLink="/trainings"
 			backLinkText="View All Programs"
+			price={training.price}
 		/>
 	</main>
 

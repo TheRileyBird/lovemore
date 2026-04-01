@@ -6,7 +6,6 @@ interface Props {
 	image: string | null;
 	icon?: any;
 	dateDisplay?: string;
-	price?: number;
 }
 
 const {
@@ -15,8 +14,7 @@ const {
 	location,
 	image,
 	icon: Icon,
-	dateDisplay,
-	price
+	dateDisplay
 } = Astro.props;
 ---
 
@@ -42,15 +40,8 @@ const {
 		{location && (
 			<p class="text-2xl text-white/95 font-light">{location}</p>
 		)}
-		<div class="flex flex-wrap items-center justify-center gap-3 mt-4">
-			{dateDisplay && (
-				<p class="text-lg md:text-xl text-white/85 font-light">{dateDisplay}</p>
-			)}
-			{price && (
-				<span class="inline-flex items-center px-4 py-2 bg-brand text-white rounded-full text-lg font-semibold">
-					${price}
-				</span>
-			)}
-		</div>
+		{dateDisplay && (
+			<p class="text-lg md:text-xl text-white/85 font-light mt-2">{dateDisplay}</p>
+		)}
 	</div>
 </section>
