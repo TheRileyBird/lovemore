@@ -20,23 +20,29 @@ function processContent(content: string): string {
 }
 
 // Fetch events from Strapi
-const eventsResponse = await fetchAPI<any>({
-	endpoint: 'events',
-	query: {
-		'filters[active][$eq]': true,
-		'populate': 'image',
-		'sort': 'date:asc'
-	},
-	wrappedByKey: 'data'
-});
+let specialtyOfferings = [];
+try {
+	const eventsResponse = await fetchAPI<any>({
+		endpoint: 'events',
+		query: {
+			'filters[active][$eq]': true,
+			'populate': 'image',
+			'sort': 'date:asc'
+		},
+		wrappedByKey: 'data'
+	});
 
-const specialtyOfferings = eventsResponse.map((event: any) => ({
-	name: event.name,
-	type: event.type,
-	date: event.date,
-	description: processContent(event.description),
-	image: event.image?.url ? getStrapiMedia(event.image.url) : null
-}));
+	specialtyOfferings = eventsResponse?.map((event: any) => ({
+		name: event.name,
+		type: event.type,
+		date: event.date,
+		description: processContent(event.description),
+		image: event.image?.url ? getStrapiMedia(event.image.url) : null
+	})) || [];
+} catch (error) {
+	console.warn('Failed to fetch events from Strapi:', error);
+	// Continue with empty array - page will still render
+}
 ---
 
 <Layout title="Specialty Classes — Love More">
@@ -90,7 +96,20 @@ const specialtyOfferings = eventsResponse.map((event: any) => ({
 						Unique experiences designed to deepen your practice, expand your skills, and connect with our community in meaningful ways.
 					</p>
 
-					<div class="flex flex-col gap-y-8">
+					{specialtyOfferings.length === 0 ? (
+						<div class="text-center py-12">
+							<p class="text-lg text-neutral-600 mb-4">
+								Check our events calendar for upcoming specialty classes and workshops.
+							</p>
+							<a
+								href="/events"
+								class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-brand text-white hover:bg-charcoal hover:shadow-lg px-8 py-4 text-base"
+							>
+								View Events Calendar
+							</a>
+						</div>
+					) : (
+						<div class="flex flex-col gap-y-8">
 						{specialtyOfferings.map((offering, index) => (
 							<a
 								href="/schedule"
@@ -131,7 +150,8 @@ const specialtyOfferings = eventsResponse.map((event: any) => ({
 								</div>
 							</a>
 						))}
-					</div>
+						</div>
+					)}
 				</div>
 			</div>
 		</section>
