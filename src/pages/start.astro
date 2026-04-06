@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import logoImage from '../assets/images/logo.webp';
+import logoImage from '../assets/images/icon.webp';
 import { Heart, Clock, TrendingUp, Users, Sparkles } from 'lucide-astro';
 
 const benefits = [
@@ -62,26 +62,13 @@ const testimonials = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-		<!-- Primary Meta Tags -->
-		<meta name="title" content={fullTitle} />
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonicalURL} />
-
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:title" content={fullTitle} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={fullImage} />
 		<meta property="og:site_name" content="Love More" />
 		<meta property="og:locale" content="en_US" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={canonicalURL} />
-		<meta property="twitter:title" content={fullTitle} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={fullImage} />
 
 		<!-- Favicons -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
@@ -95,11 +82,6 @@ const testimonials = [
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Gilda+Display&display=swap"
 			rel="stylesheet"
 		/>
-
-		<!-- Structured Data -->
-		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-
-		<title>{fullTitle}</title>
 	</head>
 	<body class="bg-cream font-body text-charcoal antialiased">
 		<!-- Hero Section -->
@@ -114,15 +96,6 @@ const testimonials = [
 			</div>
 
 			<div class="relative z-10 container mx-auto px-6 text-center">
-				<!--&lt;!&ndash; Logo &ndash;&gt;-->
-				<!--<div class="mb-12">-->
-				<!--	<img-->
-				<!--		src={logoImage.src}-->
-				<!--		alt="Love More"-->
-				<!--		class="w-auto h-16 mx-auto"-->
-				<!--	/>-->
-				<!--</div>-->
-
 				<h1 class="text-5xl uppercase md:text-7xl font-display font-light text-white mb-6 tracking-wide">
 					Get Started
 				</h1>
@@ -168,7 +141,15 @@ const testimonials = [
 		<section class="py-24 bg-cream" id="book">
 			<div class="container mx-auto px-6">
 				<div class="max-w-4xl mx-auto">
-					<div class="text-center mb-12">
+					<div class="text-center">
+						<!-- Logo -->
+						<div class="mb-8">
+							<img
+								src={logoImage.src}
+								alt="Love More"
+								class="w-auto h-24 mx-auto"
+							/>
+						</div>
 						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal mb-6 tracking-wide">
 							Begin Your Transformation
 						</h2>
