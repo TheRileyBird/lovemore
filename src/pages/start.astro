@@ -61,6 +61,45 @@ const testimonials = [
 		<title>Get Started for $56 | Love More</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+		<!-- Primary Meta Tags -->
+		<meta name="title" content={fullTitle} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={fullImage} />
+		<meta property="og:site_name" content="Love More" />
+		<meta property="og:locale" content="en_US" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={fullTitle} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={fullImage} />
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+		<!--<link rel="icon" href="/favicon.ico" />-->
+		<!--<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />-->
+
+		<!-- Luxury Fonts - Optimized with font-display swap -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Gilda+Display&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+		<title>{fullTitle}</title>
 	</head>
 	<body class="bg-cream font-body text-charcoal antialiased">
 		<!-- Hero Section -->

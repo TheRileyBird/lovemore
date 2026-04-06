@@ -9,70 +9,45 @@ import heroImage from '../assets/images/porch.jpeg';
 
 const memberships = [
 	{
-		name: 'MOVEMENT',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463725',
-		buttonLabel: '$129/mo',
-		icon: Heart,
-		features: [
-			'Access to 8 classes per month',
-			'Diverse range of movement modalities',
-			'15% discount on retail items'
-		],
-		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/44e2950c-f9cb-479f-8e9a-a14f63c23261/8N7A8750+%282%29.jpg'
-	},
-	{
-		name: 'COMMUNITY',
+		name: 'COMMUNITY UNLIMITED',
 		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463739',
-		buttonLabel: '$159/mo',
+		buttonLabel: '$149/mo',
 		icon: Users,
 		features: [
-			'Unlimited access to classes',
-			'Complimentary mat rental and sweat towel use',
-			'Free mat storage service',
-			'Free refills of Stealth Detox Water',
-			'One free specialty class per month',
-			'15% discount on retail items',
-			'10% discount on Teacher Training programs',
-			'One Buddy Pass per month for new students'
+			'Unlimited in studio & online classes',
+			'15% off mats and LM items',
+			'Free mat, towel, and water fills',
+			'Free mat storage',
+			'1 Buddy Pass per month',
+			'$10 off 1 specialty class per month',
+			'1 Healing service per month (Red light or compression therapy)',
+			'10% off Reiki sessions',
+			'$200 off retreats and YTT'
 		],
 		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/a9289884-74dd-4261-a7ac-5c48768c119c/8N7A8829.jpg'
 	},
 	{
-		name: 'CONNECTION',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463741',
-		buttonLabel: '$199/mo',
-		icon: Sparkles,
+		name: 'MOVEMENT MINI',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463725',
+		buttonLabel: '$92/mo',
+		icon: Heart,
 		features: [
-			'Unlimited access to classes',
-			'Complimentary mat rental and sweat towel use',
-			'Free mat storage service',
-			'Free refills of Stealth Detox Water',
-			'One free specialty class per month',
-			'15% discount on retail items',
-			'10% discount on Teacher Training programs',
-			'One free 30-minute session: Performance coaching, Energy Reading, Reiki, or private yoga',
-			'Two Buddy Passes per month for new students'
+			'4 classes per month',
+			'15% off apparel and LM items',
+			'$5 off healing services'
 		],
-		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1694187213051-7OARL5X5LN5L9CY84V03/8N7A8805.jpg'
+		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/44e2950c-f9cb-479f-8e9a-a14f63c23261/8N7A8750+%282%29.jpg'
 	},
 	{
-		name: 'FAMILY',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463743',
-		buttonLabel: '$219/mo',
-		icon: Home,
+		name: '5 CLASS PACK',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=3463741',
+		buttonLabel: '$130',
+		icon: Sparkles,
 		features: [
-			'Add up to 5 family members',
-			'Unlimited access to classes',
-			'Complimentary mat rental and sweat towel use',
-			'Free mat storage service',
-			'Free refills of Stealth Detox Water',
-			'One free specialty class per month',
-			'15% discount on retail items',
-			'10% discount on Teacher Training programs',
-			'One free 30-minute session: Performance coaching, Energy Reading, Reiki, or private yoga',
-			'Two Buddy Passes per month for new students'
+			'5 classes included',
+			'3 month expiration'
 		],
-		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/0834eef3-45d7-42ab-9917-a76e01bd2a59/MBPL4917.jpg'
+		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1694187213051-7OARL5X5LN5L9CY84V03/8N7A8805.jpg'
 	}
 ];
 ---
@@ -141,11 +116,11 @@ const memberships = [
 											<div class="flex items-center gap-3 mb-6">
 												<Icon class="w-8 h-8 text-brand" aria-hidden="true" />
 												<h3 class="text-2xl md:text-3xl font-display font-bold text-charcoal tracking-wide">
-													{membership.name} MEMBERSHIP
+													{membership.name}
 												</h3>
 											</div>
 
-											<h4 class="text-lg font-semibold text-charcoal mb-4">Membership Includes:</h4>
+											<h4 class="text-lg font-semibold text-charcoal mb-4">Includes:</h4>
 											<ul class="space-y-2 mb-8">
 												{membership.features.map((feature) => (
 													<li class="flex items-start gap-3">
@@ -169,7 +144,7 @@ const memberships = [
 		</section>
 
 		<!-- Call to Action -->
-		<section class="py-20 bg-white">
+		<section class="pb-20 bg-white">
 			<div class="container mx-auto px-6">
 				<div class="max-w-3xl mx-auto text-center">
 					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
