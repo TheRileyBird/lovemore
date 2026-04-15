@@ -5,10 +5,6 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Allow Netlify Image CDN to proxy images from external origins
-[images]
-  remote_images = ["https://lovemore-cms\\.onrender\\.com/.*", "https://images\\.squarespace-cdn\\.com/.*"]
-
 # Form submissions
 [build.processing]
   skip_processing = false
