@@ -11,7 +11,10 @@ import Divider from '../components/Divider.astro';
 import { Heart, Calendar, Users, Sparkles, Mail, ArrowRight } from 'lucide-astro';
 import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
-import aboutImage from '../assets/images/team.webp';
+import aboutImage from '../assets/images/group2.jpg';
+import pillar1Image from '../assets/images/warrior1.jpg';
+import pillar2Image from '../assets/images/group3.jpg';
+import pillar3Image from '../assets/images/heart-kneel.jpg';
 import heroFallbackImage from '../assets/images/downdog.jpg';
 
 // Helper to handle both HTML and Markdown content
@@ -34,8 +37,11 @@ const teamMembersResponse = await fetchAPI<any>({
 	wrappedByKey: 'data'
 });
 
-// Featured teacher IDs: JoEllen Luke (65), Dom Luke (46), Jacqueline Hurst (63)
-const featuredTeacherIds = [65, 46, 63];
+// Since this is in the frontmatter (the --- section) of an Astro file, the console output will appear in your terminal when Astro builds or runs the development server, not in the browser console.
+// console.log(teamMembersResponse);
+
+// Featured teacher IDs: JoEllen Luke (65), Dom Luke (46), Teresa (47)
+const featuredTeacherIds = [65, 46, 47];
 
 // Filter and sort by the order we want them displayed
 const teamMembers = featuredTeacherIds
@@ -61,21 +67,21 @@ const pillars = [
 		title: 'Movement',
 		description: 'Meet us on the mat to unlock your inner strength and zen. Embark on the personal journey of connecting your mind, body, and spirit through movement.',
 		link: '/movement',
-		image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=1000&fit=crop&q=80'
+		image: pillar1Image.src
 	},
 	{
 		icon: Users,
 		title: 'Community',
 		description: 'Here is where play and unity come alive! Gather, as we share and explore classes, events, retreats, and trainings.',
 		link: '/community',
-		image: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&h=1000&fit=crop&q=80'
+		image: pillar2Image.src
 	},
 	{
 		icon: Sparkles,
 		title: 'Connection',
 		description: 'Find home in our healing services, where a range of offerings awaits to bring harmony and rejuvenation to both your physical and spiritual selves.',
 		link: '/connection',
-		image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=1000&fit=crop&q=80'
+		image: pillar3Image.src
 	}
 ];
 ---
@@ -200,7 +206,6 @@ const pillars = [
 					</div>
 
 					<div>
-						<p class="text-neutral-500 mb-2 text-sm font-medium tracking-luxury-wide uppercase">Our Story</p>
 						<h2 id="about-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">Who is Love More?</h2>
 						<!--<Divider width="short" class="mb-8" />-->
 						<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
