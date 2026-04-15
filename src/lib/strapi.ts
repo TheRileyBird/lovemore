@@ -42,14 +42,18 @@ export async function fetchAPI<T>(options: FetchOptions): Promise<T> {
 }
 
 /**
- * Helper to get image URL from Strapi media field
+ * Helper to get image URL from Strapi media field.
+ * In production, routes through Netlify Image CDN so images are cached at
+ * the edge and served without hitting the Render origin every time.
  */
 export function getStrapiMedia(url: string | null): string | null {
   if (!url) return null;
 
-  // If it's already a full URL, return it
-  if (url.startsWith('http')) return url;
+  const fullUrl = url.startsWith('http') ? url : `${STRAPI_URL}${url}`;
 
-  // Otherwise, prepend the Strapi URL
-  return `${STRAPI_URL}${url}`;
+  if (import.meta.env.PROD) {
+    return `/.netlify/images?url=${encodeURIComponent(fullUrl)}`;
+  }
+
+  return fullUrl;
 }

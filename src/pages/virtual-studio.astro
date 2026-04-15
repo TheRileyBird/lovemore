@@ -3,6 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { Video, Calendar } from 'lucide-astro';
+
+const SQUARESPACE_BANNER = "https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/94a3bccf-cecf-4131-a827-06e4a5699c7b/Campaign+Website+Assets+%5B2024%5D+%282%29.png";
+const bannerSrc = import.meta.env.PROD
+  ? `/.netlify/images?url=${encodeURIComponent(SQUARESPACE_BANNER)}`
+  : SQUARESPACE_BANNER;
 ---
 
 <Layout title="Virtual Studio — Love More">
@@ -14,7 +19,7 @@ import { Video, Calendar } from 'lucide-astro';
 			<div class="container mx-auto px-6">
 				<div class="max-w-5xl mx-auto">
 					<img
-						src="https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/94a3bccf-cecf-4131-a827-06e4a5699c7b/Campaign+Website+Assets+%5B2024%5D+%282%29.png"
+						src={bannerSrc}
 						alt="Virtual Studio"
 						loading="eager"
 						class="w-full rounded-2xl shadow-lg"
