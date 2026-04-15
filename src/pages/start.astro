@@ -1,53 +1,37 @@
 ---
 import '../styles/global.css';
-import logoImage from '../assets/images/icon.webp';
-import { Heart, Clock, TrendingUp, Users, Sparkles } from 'lucide-astro';
+import heroImage from '../assets/images/group5.jpg';
+import sideImage1 from '../assets/images/group2.jpg';
+import sideImage2 from '../assets/images/warrior1.jpg';
 
-const benefits = [
+const faqs = [
 	{
-		icon: Sparkles,
-		title: 'Start Strong',
-		description: 'Begin with intention and build a solid foundation for your practice'
+		question: 'What should I bring to my first class?',
+		answer: 'Wear comfortable clothing you can move freely in. We provide mats, blocks, straps, and all props — just bring water and yourself. Grip socks are a nice addition but never required.'
 	},
 	{
-		icon: Clock,
-		title: 'Consistency is Key',
-		description: 'Develop a sustainable routine that fits your lifestyle'
+		question: 'When should I arrive?',
+		answer: 'Plan to arrive 10–15 minutes before class so you can settle in, meet your instructor, and get comfortable in the space. First-time jitters are completely normal — we love them and so do our teachers.'
 	},
 	{
-		icon: TrendingUp,
-		title: 'Track Your Progress',
-		description: 'See real results and transformation by class 9'
+		question: 'Can I show up late?',
+		answer: 'We recommend arriving on time, especially for your first class. Our instructors hold a grounded opening that sets the tone for the practice. If you do arrive late, please wait for a natural pause before entering.'
 	},
 	{
-		icon: Heart,
-		title: 'Feel the Love',
-		description: 'Connect with our supportive community of like-minded souls'
+		question: 'What classes are best for beginners?',
+		answer: 'All of them! Every class at Love More is taught with modifications in mind — you will always be met exactly where you are. That said, our Flow and Foundations classes are a gentle entry point if you want to ease in.'
 	},
 	{
-		icon: Users,
-		title: 'Expert Guidance',
-		description: 'Learn from experienced instructors who care about your journey'
+		question: 'What member perks are included during the Intro Pass?',
+		answer: 'During your Intro Pass you\'ll enjoy full community access — workshops, events, and the same warm welcome as our long-term members. We want you to feel at home from day one.'
 	},
 	{
-		icon: Sparkles,
-		title: 'Unlimited Classes',
-		description: 'Attend as many classes as you want during your 21-day pass'
-	}
-];
-
-const testimonials = [
-	{
-		text: 'Love More has completely transformed my relationship with movement. The community is so warm and welcoming, and I feel stronger both physically and mentally.',
-		name: 'Sarah M.'
+		question: 'Do I need experience or flexibility?',
+		answer: 'Absolutely not. Flexibility is a result of practice, not a requirement for it. Our teachers are skilled at meeting every body where it is. The only qualification is a willingness to show up.'
 	},
 	{
-		text: 'I was nervous to start, but the 3-week intro was perfect. By week two I was hooked! The instructors are amazing and really help you find your practice.',
-		name: 'Jessica L.'
-	},
-	{
-		text: 'This studio feels like home. The energy, the people, the classes—everything about Love More just makes sense. Best decision I\'ve made for myself.',
-		name: 'Emily R.'
+		question: 'When does my Intro Pass activate?',
+		answer: 'Your pass activates on the day of your first visit — not the day you purchase. No pressure, no wasted days. You have time to plan your start around your schedule.'
 	}
 ];
 ---
@@ -58,78 +42,232 @@ const testimonials = [
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="Start your Love More journey with our 3-week intro pass for just $56. No hidden renewals, just 21 days of transformative yoga and movement." />
-		<title>Get Started for $56 | Love More</title>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<title>Get Started — Love More</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 
-		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Love More" />
 		<meta property="og:locale" content="en_US" />
-
-		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 
-		<!-- Favicons -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
-		<!--<link rel="icon" href="/favicon.ico" />-->
-		<!--<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />-->
-
-		<!-- Luxury Fonts - Optimized with font-display swap -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Gilda+Display&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Gilda+Display&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
 	<body class="bg-cream font-body text-charcoal antialiased">
-		<!-- Hero Section -->
-		<section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
+
+		<!-- Hero -->
+		<section class="relative min-h-[65vh] flex items-center justify-center overflow-hidden">
 			<div class="absolute inset-0">
 				<img
-					src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=1600&q=80"
+					src={heroImage.src}
 					alt=""
-					class="w-full h-full object-cover"
+					class="w-full h-full object-cover object-[0%_50%]"
 				/>
-				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/70"></div>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/50 via-neutral-900/55 to-neutral-900/65"></div>
 			</div>
-
 			<div class="relative z-10 container mx-auto px-6 text-center">
-				<h1 class="text-5xl uppercase md:text-7xl font-display font-light text-white mb-6 tracking-wide">
-					Get Started
+				<p class="text-white/70 text-xs tracking-[0.3em] uppercase mb-5 font-light">Love More · Covington, LA</p>
+				<h1 class="text-6xl md:text-8xl font-display font-light text-white tracking-wide leading-none mb-6">
+					Commit to You
 				</h1>
-				<p class="text-2xl md:text-3xl text-white/95 font-bold">
-					3 Week Intro Pass — $56
+				<div class="w-16 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent mx-auto mb-6"></div>
+				<p class="text-white/80 text-lg font-light tracking-wide">
+					3 Weeks of Unlimited Yoga · $56
 				</p>
 			</div>
 		</section>
 
-		<!-- Benefits Section -->
+		<!-- Jump Start Section -->
 		<section class="py-24 bg-white">
 			<div class="container mx-auto px-6">
-				<div class="max-w-6xl mx-auto">
+				<div class="max-w-5xl mx-auto">
+
 					<div class="text-center mb-16">
-						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal mb-6 tracking-wide">
-							Your Journey Starts Here
+						<p class="text-brand text-xs tracking-[0.25em] uppercase font-medium mb-3">Your First Step</p>
+						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal tracking-wide mb-5">
+							How to Make the Most of Your Intro Pass
 						</h2>
-						<p class="text-lg text-neutral-600 max-w-3xl mx-auto font-light leading-relaxed">
-							Our 3-week intro pass is designed to help you build consistency, see real results, and feel at home in our community.
-						</p>
+						<div class="w-16 h-0.5 bg-gradient-to-r from-gold/0 via-gold/60 to-gold/0 mx-auto"></div>
 					</div>
 
-					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{benefits.map((benefit) => (
-							<div class="bg-cream-50 border rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300 border border-neutral-900">
-								<div class="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center mb-4">
-									<benefit.icon class="w-6 h-6 text-brand" />
+					<div class="grid md:grid-cols-2 gap-16 items-center">
+						<div class="overflow-hidden rounded-lg aspect-[4/5]">
+							<img
+								src={sideImage1.src}
+								alt="Love More yoga class"
+								class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+							/>
+						</div>
+						<div>
+							<ul class="space-y-5 mb-10">
+								{[
+									'Book your first class and come back as often as you can — consistency is what makes the difference.',
+									'Aim for 3–5 classes each week. Each visit builds on the last and compounds.',
+									'Mix up styles and instructors to discover what truly resonates with your body.',
+									'Notice how good you feel after just 2–3 classes: better sleep, improved mood, more ease.',
+									'Immediately improve your sleep, digestion, flexibility, and stress levels.',
+									'Enjoy full member perks and community access throughout your entire Intro Pass.',
+								].map((item) => (
+									<li class="flex gap-4 text-neutral-600 leading-relaxed">
+										<span class="text-brand shrink-0 mt-1">
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+											</svg>
+										</span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+							<a
+								href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035272"
+								target="_blank"
+								class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md hover:-translate-y-px px-8 py-3.5 text-xs"
+							>
+								Get Your Intro Pass
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Mid CTA Banner -->
+		<section class="py-20 bg-brand text-center relative overflow-hidden">
+			<div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 50%, white 1px, transparent 1px); background-size: 60px 60px;"></div>
+			<div class="relative">
+				<p class="text-white/70 text-xs tracking-[0.3em] uppercase mb-4">Unlimited Access</p>
+				<h2 class="text-4xl md:text-6xl font-display font-light text-white tracking-wide mb-2">
+					3 Weeks of Unlimited Yoga
+				</h2>
+				<p class="text-5xl md:text-7xl font-display font-light text-white mb-6 tracking-wide">$56</p>
+				<p class="text-white/60 text-sm tracking-wide mb-10">
+					Activates on your first visit &nbsp;·&nbsp; No contracts &nbsp;·&nbsp; No hidden renewals
+				</p>
+				<a
+					href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035272"
+					target="_blank"
+					class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-white text-brand hover:bg-cream shadow-lg hover:shadow-xl hover:-translate-y-px px-10 py-4 text-xs"
+				>
+					Claim Your Intro Pass
+				</a>
+			</div>
+		</section>
+
+		<!-- What's Included Section -->
+		<section class="py-24 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-5xl mx-auto">
+
+					<div class="text-center mb-16">
+						<p class="text-brand text-xs tracking-[0.25em] uppercase font-medium mb-3">What You Get</p>
+						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal tracking-wide mb-5">
+							Your Intro Pass Includes
+						</h2>
+						<div class="w-16 h-0.5 bg-gradient-to-r from-gold/0 via-gold/60 to-gold/0 mx-auto"></div>
+					</div>
+
+					<div class="grid md:grid-cols-2 gap-16 items-center">
+						<div>
+							<ul class="space-y-5 mb-10">
+								{[
+									'Unlimited classes each week across a wide variety of styles — for all experience levels.',
+									'The opportunity to explore freely, find what moves you, and discover what you\'re capable of.',
+									'Expert instruction with real-time modifications so you\'re always meeting your edge, not someone else\'s.',
+									'Time and space to tune into what your mind and body actually need.',
+									'Full member perks and community access for the entire duration of your pass.',
+								].map((item) => (
+									<li class="flex gap-4 text-neutral-600 leading-relaxed">
+										<span class="text-brand shrink-0 mt-1">
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+											</svg>
+										</span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+							<a
+								href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035272"
+								target="_blank"
+								class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md hover:-translate-y-px px-8 py-3.5 text-xs"
+							>
+								Get Your Intro Pass
+							</a>
+						</div>
+						<div class="overflow-hidden rounded-lg aspect-[4/5]">
+							<img
+								src={sideImage2.src}
+								alt="Love More yoga community"
+								class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FAQ Section -->
+		<section class="py-24 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto">
+
+					<div class="text-center mb-14">
+						<p class="text-brand text-xs tracking-[0.25em] uppercase font-medium mb-3">Before You Arrive</p>
+						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal tracking-wide mb-5">
+							Common Questions
+						</h2>
+						<div class="w-16 h-0.5 bg-gradient-to-r from-gold/0 via-gold/60 to-gold/0 mx-auto"></div>
+					</div>
+
+					<div class="space-y-3">
+						{faqs.map((faq) => (
+							<div
+								x-data="{expanded: false}"
+								class="bg-cream rounded-xl border border-warm-gray-200 overflow-hidden"
+							>
+								<button
+									@click="expanded = !expanded"
+									aria-expanded="expanded"
+									class="w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-beige-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-inset"
+								>
+									<span class="text-base font-semibold text-charcoal pr-4">
+										{faq.question}
+									</span>
+									<svg
+										x-show="!expanded"
+										class="w-5 h-5 text-brand flex-shrink-0"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+									</svg>
+									<svg
+										x-show="expanded"
+										class="w-5 h-5 text-brand flex-shrink-0"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+										style="display: none;"
+									>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+									</svg>
+								</button>
+								<div
+									x-show="expanded"
+									x-collapse
+									class="px-6 pb-6"
+								>
+									<p class="text-neutral-500 leading-relaxed">
+										{faq.answer}
+									</p>
 								</div>
-								<h3 class="text-xl font-display font-medium text-charcoal mb-3">
-									{benefit.title}
-								</h3>
-								<p class="text-base text-neutral-600 leading-relaxed">
-									{benefit.description}
-								</p>
 							</div>
 						))}
 					</div>
@@ -137,82 +275,42 @@ const testimonials = [
 			</div>
 		</section>
 
-		<!-- Booking Section -->
-		<section class="py-24 bg-cream" id="book">
-			<div class="container mx-auto px-6">
-				<div class="max-w-4xl mx-auto">
-					<div class="text-center">
-						<!-- Logo -->
-						<div class="mb-8">
-							<img
-								src={logoImage.src}
-								alt="Love More"
-								class="w-auto h-24 mx-auto"
-							/>
-						</div>
-						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal mb-6 tracking-wide">
-							Begin Your Transformation
-						</h2>
-						<p class="text-2xl md:text-3xl text-brand font-bold mb-4 tracking-wide">
-							GET STARTED FOR $56!
-						</p>
-						<p class="text-lg text-neutral-600 font-light leading-relaxed mb-8">
-							Activates on your first visit. No hidden renewals—just 21 days of pure yoga.
-						</p>
-						<a
-							href="#book"
-							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md hover:translate-y-[-1px] px-8 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
-						>
-							Claim Your Intro Pass
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Testimonials Section -->
-		<section class="py-24 bg-white">
-			<div class="container mx-auto px-6">
-				<div class="max-w-6xl mx-auto">
-					<div class="text-center mb-16">
-						<p class="text-brand-dark text-sm font-medium tracking-wider uppercase mb-3">Love Letters</p>
-						<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal tracking-wide">
-							From the Mat
-						</h2>
-					</div>
-					<!-- BEGIN WELLNESSLIVING CODE -->
-					<div class="wl-widget" data="k_skin=199160&amp;k_business=288067"></div><!-- html check -->
-					<script src="https://www.wellnessliving.com/rs/skin-widget-static.js" type="text/javascript"></script>
-					<br clear="both" />
-					<!-- html check -->
-					<!-- END WELLNESSLIVING CODE -->
-				</div>
-			</div>
-		</section>
-
-		<!-- Final CTA -->
-		<section class="py-16 bg-brand">
-			<div class="container mx-auto px-6 text-center">
-				<h3 class="text-3xl md:text-4xl font-display font-light text-white mb-4 tracking-wide">
-					Ready to Begin?
-				</h3>
-				<p class="text-lg text-white/90 mb-8 font-light">
-					Scroll up to book your first class and activate your $56 intro pass.
+		<!-- Final CTA Banner -->
+		<section class="py-20 bg-brand text-center relative overflow-hidden">
+			<div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 50%, white 1px, transparent 1px); background-size: 60px 60px;"></div>
+			<div class="relative">
+				<p class="text-white/70 text-xs tracking-[0.3em] uppercase mb-4">Ready to Begin?</p>
+				<h2 class="text-4xl md:text-6xl font-display font-light text-white tracking-wide mb-2">
+					3 Weeks of Unlimited Yoga
+				</h2>
+				<p class="text-5xl md:text-7xl font-display font-light text-white mb-6 tracking-wide">$56</p>
+				<p class="text-white/60 text-sm tracking-wide mb-10">
+					Activates on your first visit &nbsp;·&nbsp; No contracts &nbsp;·&nbsp; No hidden renewals
 				</p>
 				<a
-					href="#book"
-					class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 bg-white text-brand hover:bg-cream-50 shadow-lg hover:shadow-xl px-8 py-4 text-sm"
+					href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035272"
+					target="_blank"
+					class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-white text-brand hover:bg-cream shadow-lg hover:shadow-xl hover:-translate-y-px px-10 py-4 text-xs"
 				>
-					Book Now
+					Claim Your Intro Pass
 				</a>
 			</div>
 		</section>
 
-		<!-- Simple Footer -->
+		<!-- Footer -->
 		<footer class="py-8 bg-charcoal text-center">
-			<p class="text-white/60 text-sm">
-				© {new Date().getFullYear()} Love More • Movement • Community • Connection
+			<p class="text-white/50 text-xs tracking-widest uppercase">
+				© {new Date().getFullYear()} Love More &nbsp;·&nbsp; Movement &nbsp;·&nbsp; Community &nbsp;·&nbsp; Connection
 			</p>
 		</footer>
+
+		<!-- Alpine.js with Collapse plugin -->
+		<script>
+			import Alpine from 'alpinejs';
+			import collapse from '@alpinejs/collapse';
+			Alpine.plugin(collapse);
+			window.Alpine = Alpine;
+			Alpine.start();
+		</script>
 	</body>
 </html>
