@@ -2,65 +2,86 @@
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
-import { Heart, Users, Sparkles, Home } from 'lucide-astro';
 import heroImage from '../assets/images/porch.jpeg';
-import membershipUnlimited from '../assets/images/group.jpg';
-import membershipMini from '../assets/images/warrior2.jpg';
-import membershipPack from '../assets/images/downdog.jpg';
 
 const memberships = [
 	{
-		name: 'COMMUNITY UNLIMITED',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035293',
-		buttonLabel: '$149/mo',
-		icon: Users,
+		eyebrow: 'Monthly Membership',
+		name: 'Community Unlimited',
+		price: '$149',
+		period: '/ mo',
+		badge: 'Most Popular',
+		badgeDark: true,
+		description: 'Unlimited studio and online classes, month-to-month. No contracts, no cancellation fees.',
+		featuresLabel: 'Membership Perks',
 		features: [
-			'Unlimited in studio & online classes',
+			'Unlimited in-studio & online classes',
 			'15% off mats and LM items',
 			'Free mat, towel, and water fills',
 			'Free mat storage',
 			'1 Buddy Pass per month',
 			'$10 off 1 specialty class per month',
-			'1 Healing service per month (Red light or compression therapy)',
+			'1 Healing service per month (red light or compression therapy)',
 			'10% off Reiki sessions',
-			'$200 off retreats and YTT'
+			'$200 off retreats and YTT',
 		],
-		image: membershipUnlimited.src
+		// valueCallout: 'Avg. 2×/week = ~$18 per class, plus all the perks',
+		finePrint: 'Members can pause their membership once per calendar year for up to 3 months. Cancellations require 30 days notice before the next billing cycle.',
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035293',
+		ctaLabel: 'Sign Up',
+		bg: 'bg-white',
 	},
 	{
-		name: 'MOVEMENT MINI',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035277',
-		buttonLabel: '$92/mo',
-		icon: Heart,
+		eyebrow: 'Monthly Membership',
+		name: 'Movement Mini',
+		price: '$92',
+		period: '/ mo',
+		badge: 'Flexible Access',
+		badgeDark: false,
+		description: '4 classes per month, month-to-month. The perfect way to maintain a consistent practice without a full unlimited commitment.',
+		featuresLabel: 'Membership Perks',
 		features: [
 			'4 classes per month',
 			'15% off apparel and LM items',
-			'$5 off healing services'
+			'$5 off healing services',
 		],
-		image: membershipMini.src
+		// valueCallout: 'Avg. 1×/week = ~$23 per class',
+		finePrint: null,
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035277',
+		ctaLabel: 'Sign Up',
+		bg: 'bg-cream',
 	},
 	{
-		name: '5 CLASS PACK',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035299',
-		buttonLabel: '$130',
-		icon: Sparkles,
+		eyebrow: 'Class Pack',
+		name: '5 Class Pack',
+		price: '$130',
+		period: '',
+		badge: 'No Subscription',
+		badgeDark: false,
+		description: '5 classes to use at your own pace. No monthly commitment — just show up when you\'re ready.',
+		featuresLabel: 'What\'s Included',
 		features: [
 			'5 classes included',
-			'3 month expiration'
+			'No monthly subscription required',
+			'Expires 3 months from date of purchase',
 		],
-		image: membershipPack.src
-	}
+		// valueCallout: 'Great for travelers or those without a monthly commitment — $26 per class',
+		finePrint: null,
+		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035299',
+		ctaLabel: 'Buy Now',
+		bg: 'bg-white',
+	},
 ];
 ---
 
-<Layout title="Pricing Options — Love More">
+<Layout title="Pricing — Love More">
 	<Navigation />
 
 	<main id="main-content">
-		<!-- Hero Section -->
-		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="pricing-heading">
+
+		<!-- Hero -->
+		<section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="pricing-heading">
 			<div class="absolute inset-0 z-0">
 				<img
 					src={heroImage.src}
@@ -69,108 +90,231 @@ const memberships = [
 					class="absolute inset-0 w-full h-full object-cover"
 					style="object-position: 100% 40%;"
 				/>
-				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/65"></div>
 			</div>
-
 			<div class="relative z-10 container mx-auto px-6 text-center">
-				<h1 id="pricing-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
-					Pricing Options
+				<p class="text-white/70 text-xs tracking-[0.3em] uppercase mb-5 font-light">Love More · Covington, LA</p>
+				<h1 id="pricing-heading" class="text-6xl md:text-8xl font-display font-light text-white tracking-wide leading-none mb-5">
+					Pricing
 				</h1>
+				<div class="w-16 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent mx-auto"></div>
 			</div>
 		</section>
 
-		<!-- Intro Section -->
-		<section class="py-16 bg-cream" aria-labelledby="intro-heading">
-			<div class="container mx-auto px-6">
-				<div class="max-w-3xl mx-auto text-center">
-					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
-						Find the Right Membership For You
-					</h2>
-					<Divider width="short" class="mb-6" />
-					<p class="text-lg text-neutral-600 leading-relaxed">
-						Choose the membership that fits your lifestyle and goals. From occasional practice to daily commitment, we have options designed to support your journey.
-					</p>
-				</div>
-			</div>
-		</section>
+		<!-- Membership Plans -->
+		{memberships.map((plan) => (
+			<section class={`py-24 ${plan.bg}`}>
+				<div class="container mx-auto px-6">
+					<div class="max-w-xl mx-auto">
 
-		<!-- Membership Cards -->
-		<section class="py-24 bg-white" aria-labelledby="memberships-heading">
-			<div class="container mx-auto px-6">
-				<div class="max-w-6xl mx-auto">
-					<h2 id="memberships-heading" class="sr-only">Membership Options</h2>
+						<!-- Section heading -->
+						<div class="text-center mb-10">
+							<p class="text-brand text-xs tracking-[0.25em] uppercase font-medium mb-3">{plan.eyebrow}</p>
+							<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal tracking-wide mb-1">
+								{plan.name}
+							</h2>
+							<p class="text-4xl md:text-5xl font-display font-light text-brand tracking-wide">
+								{plan.price}<span class="text-2xl text-neutral-400">{plan.period}</span>
+							</p>
+							<div class="w-16 h-0.5 bg-gradient-to-r from-gold/0 via-gold/60 to-gold/0 mx-auto mt-5"></div>
+						</div>
 
-					<div class="space-y-12">
-						{memberships.map((membership) => {
-							const Icon = membership.icon;
-							return (
-								<div class="bg-cream-50 rounded-3xl overflow-hidden shadow-lg border border-warm-gray-200">
-									<div class="grid md:grid-cols-5 gap-0">
-										<div class="md:col-span-2 relative h-64 md:h-auto">
-											<img
-												src={membership.image}
-												alt=""
-												loading="lazy"
-												class="absolute inset-0 w-full h-full object-cover"
-											/>
-										</div>
+						<!-- Card -->
+						<div class="border-2 border-charcoal rounded-2xl overflow-hidden hover:-translate-y-1 hover:scale-105 transition-all duration-500">
 
-										<div class="md:col-span-3 p-8 md:p-10">
-											<div class="flex items-center gap-3 mb-6">
-												<Icon class="w-8 h-8 text-brand" aria-hidden="true" />
-												<h3 class="text-2xl md:text-3xl font-display font-bold text-charcoal tracking-wide">
-													{membership.name}
-												</h3>
-											</div>
+							<!-- Badge -->
+							<div class={plan.badgeDark ? 'bg-charcoal py-3 text-center' : 'bg-cream-200 py-3 text-center'}>
+								<p class={`text-xs tracking-[0.25em] uppercase font-bold ${plan.badgeDark ? 'text-white' : 'text-charcoal'}`}>
+									{plan.badge}
+								</p>
+							</div>
 
-											<h4 class="text-lg font-semibold text-charcoal mb-4">Includes:</h4>
-											<ul class="space-y-2 mb-8">
-												{membership.features.map((feature) => (
-													<li class="flex items-start gap-3">
-														<span class="text-brand mt-1">•</span>
-														<span class="text-neutral-600">{feature}</span>
-													</li>
-												))}
-											</ul>
+							<div class="p-8">
+								<!-- Description -->
+								<p class="text-center text-neutral-500 text-sm leading-relaxed mb-7">
+									{plan.description}
+								</p>
 
-											<Button href={membership.url} variant="primary" external={true}>
-												{membership.buttonLabel}
-											</Button>
-										</div>
-									</div>
+								<!-- Features box -->
+								<div class="bg-cream rounded-xl p-6 mb-6">
+									<p class="text-xs tracking-[0.2em] uppercase font-bold text-charcoal mb-4">
+										{plan.featuresLabel}
+									</p>
+									<ul class="space-y-2">
+										{plan.features.map((feature) => (
+											<li class="flex gap-3 items-start text-sm text-neutral-600">
+												<span class="text-brand shrink-0 mt-0.5">
+													<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+													</svg>
+												</span>
+												<span class="uppercase tracking-wide text-xs leading-relaxed">{feature}</span>
+											</li>
+										))}
+									</ul>
 								</div>
-							);
-						})}
+
+								<!-- Fine print -->
+								{plan.finePrint && (
+									<p class="text-xs text-neutral-400 leading-relaxed mb-5 text-center">
+										{plan.finePrint}
+									</p>
+								)}
+
+								<!-- Value callout -->
+								{plan.valueCallout && (
+									<p class="text-xs text-brand/70 text-center italic mb-7">
+										{plan.valueCallout}
+									</p>
+								)}
+
+								<!-- CTA -->
+								<div class="text-center">
+									<a
+										href={plan.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-brand text-white hover:bg-brand-dark shadow-sm hover:shadow-md hover:-translate-y-px px-10 py-3.5 text-xs"
+									>
+										{plan.ctaLabel}
+									</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		))}
+
+		<!-- Intro Pass + Drop-In Dark Section -->
+		<section class="bg-charcoal py-20">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto">
+					<div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10">
+
+						<!-- Intro Pass -->
+						<div class="py-10 md:py-0 md:pr-16 text-center">
+							<p class="text-white/50 text-xs tracking-[0.25em] uppercase mb-3">New to Love More?</p>
+							<h3 class="text-3xl md:text-4xl font-display font-light text-white tracking-wide mb-1">
+								3 Week Intro Pass
+							</h3>
+							<p class="text-4xl font-display font-light text-brand mb-5">$56</p>
+							<ul class="text-white/60 text-xs space-y-1.5 mb-4 text-left inline-block">
+								<li class="flex gap-2 items-start">
+									<span class="text-brand mt-px">✓</span>
+									<span>3 weeks of unlimited classes</span>
+								</li>
+								<li class="flex gap-2 items-start">
+									<span class="text-brand mt-px">✓</span>
+									<span>Free mat &amp; towel rental</span>
+								</li>
+								<li class="flex gap-2 items-start">
+									<span class="text-brand mt-px">✓</span>
+									<span>2 Buddy Passes included</span>
+								</li>
+							</ul>
+							<p class="text-white/40 text-xs mb-2 tracking-wide italic">
+								$2.60/day · Invite 2 friends free
+							</p>
+							<p class="text-white/30 text-xs mb-8 tracking-wide">
+								Activates on your first visit &nbsp;·&nbsp; No renewals
+							</p>
+							<a
+								href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035272"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-white text-charcoal hover:bg-cream shadow-sm hover:shadow-md hover:-translate-y-px px-8 py-3.5 text-xs"
+							>
+								Buy Now
+							</a>
+						</div>
+
+						<!-- Drop-In -->
+						<div class="py-10 md:py-0 md:pl-16 text-center">
+							<p class="text-white/50 text-xs tracking-[0.25em] uppercase mb-3">Just Passing Through?</p>
+							<h3 class="text-3xl md:text-4xl font-display font-light text-white tracking-wide mb-1">
+								Drop-In
+							</h3>
+							<p class="text-4xl font-display font-light text-brand mb-5">$28</p>
+							<div class="mb-6 inline-block text-left">
+								<p class="text-white/40 text-xs tracking-[0.15em] uppercase mb-3">Discounted Rates</p>
+								<ul class="space-y-2">
+									<li class="flex justify-between gap-8 text-xs">
+										<span class="text-white/50">Students (12–25)</span>
+										<span class="text-white font-medium">$18</span>
+									</li>
+									<li class="flex justify-between gap-8 text-xs">
+										<span class="text-white/50">Teachers · Military · First Responders · Seniors</span>
+										<span class="text-white font-medium">$23</span>
+									</li>
+								</ul>
+							</div>
+							<p class="text-white/30 text-xs mb-8 tracking-wide">
+								All levels welcome &nbsp;·&nbsp; No commitment
+							</p>
+							<a
+								href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035334"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-white text-charcoal hover:bg-cream shadow-sm hover:shadow-md hover:-translate-y-px px-8 py-3.5 text-xs"
+							>
+								Buy Now
+							</a>
+						</div>
+
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Call to Action -->
-		<section class="pb-20 bg-white">
+		<!-- Gift Cards -->
+		<section class="py-20 bg-cream">
 			<div class="container mx-auto px-6">
-				<div class="max-w-3xl mx-auto text-center">
-					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
-						Ready to Join?
+				<div class="max-w-xl mx-auto text-center">
+					<p class="text-brand text-xs tracking-[0.25em] uppercase font-medium mb-3">Give the Gift of Health</p>
+					<h2 class="text-4xl md:text-5xl font-display font-light text-charcoal tracking-wide mb-5">
+						Gift Cards
 					</h2>
-					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
-						Have questions about which membership is right for you? Get in touch with us and we'll help you find the perfect fit.
+					<div class="w-16 h-0.5 bg-gradient-to-r from-gold/0 via-gold/60 to-gold/0 mx-auto mb-8"></div>
+					<p class="text-neutral-500 leading-relaxed mb-10">
+						Purchase a Love More gift card in any amount. The perfect gift for someone ready to invest in their wellbeing — or themselves.
 					</p>
-					<div class="flex flex-col sm:flex-row gap-4 justify-center">
-						<Button href="/start" variant="primary" size="large">
-							Get Started for $56
-						</Button>
-						<a
-							href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035334"
-							target="_blank"
-							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
-						>
-							Drop-in for $28
-						</a>
-					</div>
+					<a
+						href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035334"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-charcoal text-white hover:bg-brand shadow-sm hover:shadow-md hover:-translate-y-px px-10 py-3.5 text-xs"
+					>
+						Create a Gift Card
+					</a>
 				</div>
 			</div>
 		</section>
+
+		<!-- Questions CTA -->
+		<section class="py-16 bg-white border-t border-warm-gray-200">
+			<div class="container mx-auto px-6 text-center">
+				<p class="text-neutral-400 text-sm leading-relaxed max-w-2xl mx-auto">
+					Not sure which option is right for you? We're happy to help. Reach out at any time and we'll point you in the right direction.
+				</p>
+				<div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+					<a
+						href="/contact"
+						class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-charcoal text-white hover:bg-brand shadow-sm hover:shadow-md px-8 py-3.5 text-xs"
+					>
+						Contact Us
+					</a>
+					<a
+						href="/start"
+						class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-3.5 text-xs"
+					>
+						Start with the Intro Pass
+					</a>
+				</div>
+			</div>
+		</section>
+
 	</main>
 
 	<Footer />
