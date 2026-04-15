@@ -6,6 +6,9 @@ import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Heart, Users, Sparkles, Home } from 'lucide-astro';
 import heroImage from '../assets/images/porch.jpeg';
+import membershipUnlimited from '../assets/images/group.jpg';
+import membershipMini from '../assets/images/warrior2.jpg';
+import membershipPack from '../assets/images/downdog.jpg';
 
 const memberships = [
 	{
@@ -24,7 +27,7 @@ const memberships = [
 			'10% off Reiki sessions',
 			'$200 off retreats and YTT'
 		],
-		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/a9289884-74dd-4261-a7ac-5c48768c119c/8N7A8829.jpg'
+		image: membershipUnlimited.src
 	},
 	{
 		name: 'MOVEMENT MINI',
@@ -36,7 +39,7 @@ const memberships = [
 			'15% off apparel and LM items',
 			'$5 off healing services'
 		],
-		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/44e2950c-f9cb-479f-8e9a-a14f63c23261/8N7A8750+%282%29.jpg'
+		image: membershipMini.src
 	},
 	{
 		name: '5 CLASS PACK',
@@ -47,7 +50,7 @@ const memberships = [
 			'5 classes included',
 			'3 month expiration'
 		],
-		image: 'https://images.squarespace-cdn.com/content/v1/59d53a9459cc683b30818a39/1694187213051-7OARL5X5LN5L9CY84V03/8N7A8805.jpg'
+		image: membershipPack.src
 	}
 ];
 ---
