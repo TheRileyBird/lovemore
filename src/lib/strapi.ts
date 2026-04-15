@@ -52,7 +52,7 @@ export function getStrapiMedia(url: string | null): string | null {
   const fullUrl = url.startsWith('http') ? url : `${STRAPI_URL}${url}`;
 
   if (import.meta.env.PROD) {
-    return `/.netlify/images?url=${encodeURIComponent(fullUrl)}`;
+    return `/.netlify/images?url=${fullUrl}`;
   }
 
   return fullUrl;
