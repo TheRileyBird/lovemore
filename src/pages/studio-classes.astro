@@ -36,7 +36,7 @@ const heatedClassData = classesResponse
 		name: classItem.name,
 		temperature: classItem.temperature,
 		description: processContent(classItem.description),
-		image: classItem.image?.url ? getStrapiMedia(classItem.image.url) : null
+		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
 	}));
 
 const nonHeatedClassData = classesResponse
@@ -44,7 +44,7 @@ const nonHeatedClassData = classesResponse
 	.map((classItem: any) => ({
 		name: classItem.name,
 		description: processContent(classItem.description),
-		image: classItem.image?.url ? getStrapiMedia(classItem.image.url) : null
+		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
 	}));
 ---
 
