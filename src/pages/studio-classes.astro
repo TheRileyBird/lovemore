@@ -117,8 +117,8 @@ const nonHeatedClassData = classesResponse
 								class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
 							>
 								<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-									<header class="flex items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
-										<h3 class="text-xl font-bold text-charcoal">
+									<header class="flex flex-col items-center gap-y-2 border-b border-neutral-200 px-8 py-6 lg:flex-row lg:justify-between lg:gap-x-4">
+										<h3 class="text-xl font-bold text-charcoal text-center lg:text-left">
 											{classItem.name}
 										</h3>
 										<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm shrink-0">
