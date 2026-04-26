@@ -16,6 +16,7 @@ import pillar1Image from '../assets/images/warrior1.jpg';
 import pillar2Image from '../assets/images/group3.jpg';
 import pillar3Image from '../assets/images/heart-kneel.jpg';
 import heroFallbackImage from '../assets/images/downdog.jpg';
+import phoneImage from '../assets/images/phone.png';
 
 // Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
@@ -185,14 +186,23 @@ const pillars = [
 			</div>
 			<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
 			<div class="container mx-auto px-6 relative z-10">
-				<div class="text-center">
-					<Calendar class="w-14 h-14 text-brand mx-auto mb-6" aria-hidden="true" />
-					<h2 id="virtual-heading" class="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-wide">Join Our Virtual Studio</h2>
-					<Divider width="short" class="mb-6 h-0.5" />
-					<p class="text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Premium wellness on your schedule</p>
-					<Button href="/virtual" variant="primary">
-						Explore Virtual Classes
-					</Button>
+				<div class="relative max-w-6xl mx-auto">
+					<div class="text-center max-w-2xl mx-auto">
+						<Calendar class="w-14 h-14 text-brand mx-auto mb-6" aria-hidden="true" />
+						<h2 id="virtual-heading" class="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-wide">Join Our Virtual Studio</h2>
+						<Divider width="short" class="mb-6 h-0.5" />
+						<p class="text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light leading-relaxed">Premium wellness on your schedule</p>
+						<Button href="/virtual" variant="primary">
+							Explore Virtual Classes
+						</Button>
+					</div>
+					<img
+						src={phoneImage.src}
+						alt=""
+						aria-hidden="true"
+						loading="lazy"
+						class="hidden xl:block pointer-events-none select-none absolute right-10 bottom-[-10.5rem] w-[24rem]"
+					/>
 				</div>
 			</div>
 		</section>
