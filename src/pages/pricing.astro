@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
-import heroImage from '../assets/images/porch.jpeg';
+import heroImage from '../assets/images/closeup.jpg';
 
 const memberships = [
 	{
@@ -31,6 +31,7 @@ const memberships = [
 		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035293',
 		ctaLabel: 'Sign Up',
 		bg: 'bg-white',
+		cardBg: 'bg-cream',
 	},
 	{
 		eyebrow: 'Monthly Membership',
@@ -51,6 +52,7 @@ const memberships = [
 		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035277',
 		ctaLabel: 'Sign Up',
 		bg: 'bg-cream',
+		cardBg: 'bg-white',
 	},
 	{
 		eyebrow: 'Class Pack',
@@ -71,6 +73,7 @@ const memberships = [
 		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035299',
 		ctaLabel: 'Buy Now',
 		bg: 'bg-white',
+		cardBg: 'bg-cream',
 	},
 ];
 ---
@@ -120,7 +123,7 @@ const memberships = [
 						</div>
 
 						<!-- Card -->
-						<div class="border-2 border-charcoal rounded-2xl overflow-hidden hover:-translate-y-1 hover:scale-105 transition-all duration-500">
+						<div class={`${plan.cardBg} border-2 border-charcoal rounded-2xl overflow-hidden hover:-translate-y-1 hover:scale-105 transition-all duration-500`}>
 
 							<!-- Badge -->
 							<div class={plan.badgeDark ? 'bg-charcoal py-3 text-center' : 'bg-cream-200 py-3 text-center'}>
@@ -136,7 +139,7 @@ const memberships = [
 								</p>
 
 								<!-- Features box -->
-								<div class="bg-cream rounded-xl p-6 mb-6">
+								<div class={`${plan.bg} rounded-xl p-6 mb-6`}>
 									<p class="text-sm tracking-[0.2em] uppercase font-bold text-charcoal mb-4">
 										{plan.featuresLabel}
 									</p>
@@ -269,7 +272,7 @@ const memberships = [
 		</section>
 
 		<!-- Gift Cards -->
-		<section class="py-20 bg-cream">
+		<section class="py-20 bg-white">
 			<div class="container mx-auto px-6">
 				<div class="max-w-xl mx-auto text-center">
 					<p class="text-brand text-sm tracking-[0.25em] uppercase font-medium mb-3">Give the Gift of Health</p>
@@ -291,30 +294,6 @@ const memberships = [
 				</div>
 			</div>
 		</section>
-
-		<!-- Questions CTA -->
-		<section class="py-16 bg-white border-t border-warm-gray-200">
-			<div class="container mx-auto px-6 text-center">
-				<p class="text-neutral-400  leading-relaxed max-w-2xl mx-auto">
-					Not sure which option is right for you? We're happy to help. Reach out at any time and we'll point you in the right direction.
-				</p>
-				<div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-					<a
-						href="/contact"
-						class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-charcoal text-white hover:bg-brand shadow-sm hover:shadow-md px-8 py-3.5 text-sm"
-					>
-						Contact Us
-					</a>
-					<a
-						href="/start"
-						class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-3.5 text-sm"
-					>
-						Start with the Intro Pass
-					</a>
-				</div>
-			</div>
-		</section>
-
 	</main>
 
 	<Footer />

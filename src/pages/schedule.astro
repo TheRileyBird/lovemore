@@ -4,7 +4,7 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import { Calendar } from 'lucide-astro';
-import heroImage from '../assets/images/porch.jpeg';
+import heroImage from '../assets/images/class.jpg';
 ---
 
 <Layout title="Schedule — Love More">
@@ -24,32 +24,15 @@ import heroImage from '../assets/images/porch.jpeg';
 			</div>
 
 			<div class="relative z-10 container mx-auto px-6 text-center">
+				<Calendar class="w-14 h-14 text-brand mx-auto mb-6 opacity-90" aria-hidden="true" />
 				<h1 id="schedule-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
 					Schedule
 				</h1>
 			</div>
 		</section>
 
-		<!-- Intro Section -->
-		<section class="py-12 bg-cream" aria-labelledby="intro-heading">
-			<div class="container mx-auto px-6">
-				<div class="max-w-3xl mx-auto text-center">
-					<Calendar class="w-12 h-12 text-brand mx-auto mb-6" aria-hidden="true" />
-					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
-						We'll save a place just for you
-					</h2>
-					<p class="text-lg text-neutral-600 mb-8">
-						Can't make it into the studio? Check out our virtual studio with the button below!
-					</p>
-					<Button href="/virtual-studio" variant="primary">
-						Virtual Studio
-					</Button>
-				</div>
-			</div>
-		</section>
-
 		<!-- Schedule Widget Section -->
-		<section class="py-16 bg-white" aria-labelledby="booking-heading">
+		<section class="pb-16 bg-white" aria-labelledby="booking-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-6xl mx-auto">
 					<h2 id="booking-heading" class="sr-only">Book Your Class</h2>
@@ -65,22 +48,32 @@ import heroImage from '../assets/images/porch.jpeg';
 			</div>
 		</section>
 
-		<!-- Call to Action -->
-		<section class="py-20 bg-cream">
+
+		<!-- Intro Section -->
+		<section class="py-12 bg-cream" aria-labelledby="intro-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-3xl mx-auto text-center">
-					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
-						New to Love More?
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						We'll save a place just for you
 					</h2>
-					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
-						Start your journey with our 3-week intro pass. Perfect for beginners and experienced yogis alike.
+					<p class="text-lg text-neutral-600 mb-8">
+						Can't make it into the studio? Check out our virtual studio with the button below!
 					</p>
-					<Button href="/start" variant="primary" size="large">
-						Get Started — $56
-					</Button>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/start" variant="primary" size="large">
+							Virtual Studio
+						</Button>
+						<a
+							href="/start"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							NEW TO YOGA?
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
+
 	</main>
 
 	<Footer />

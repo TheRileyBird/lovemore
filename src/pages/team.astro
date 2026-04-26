@@ -36,7 +36,7 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 	return {
 		name: member?.name,
 		title: member?.title,
-		image: member?.image?.url ? getStrapiMedia(member.image.url) : null,
+		image: member?.image ? getStrapiMedia(member.image.formats?.medium?.url || member.image.url) : null,
 		bio: processContent(member?.bio),
 		socialLink: member?.socialLink || null
 	};
@@ -86,7 +86,7 @@ const teamMembers = teamMembersResponse?.map((member: any) => {
 		<section class="pb-24 bg-linear-to-b from-white to cream" aria-labelledby="instructors-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-7xl mx-auto">
-					<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
+					<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
 						{teamMembers.map((member: any, index: number) => (
 							<TeamMemberCard
 								name={member.name}

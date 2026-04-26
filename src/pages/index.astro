@@ -3,8 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import StepCard from '../components/StepCard.astro';
 import PillarCard from '../components/PillarCard.astro';
-import TeamMemberCard from '../components/TeamMemberCard.astro';
-import TeamMemberModal from '../components/TeamMemberModal.astro';
+import iconImage from '../assets/images/icon.webp';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
@@ -29,32 +28,24 @@ function processContent(content: string): string {
 	return marked(content);
 }
 
-// Fetch all team members from Strapi and filter for featured teachers
-const teamMembersResponse = await fetchAPI<any>({
-	endpoint: 'team-members',
-	query: {
-		'populate': '*'
+const values = [
+	{
+		title: 'LOVE The Journey',
+		description: 'YOUR journey is just that…it’s yours and unique to you. There are peaks and valleys in all of our journeys, and we’re here to guide you to LOVE every part of it, because each step brings you closer to what home feels like for you.'
 	},
-	wrappedByKey: 'data'
-});
-
-// Since this is in the frontmatter (the --- section) of an Astro file, the console output will appear in your terminal when Astro builds or runs the development server, not in the browser console.
-// console.log(teamMembersResponse);
-
-// Featured teacher IDs: JoEllen Luke (65), Dom Luke (46), Teresa (47)
-const featuredTeacherIds = [65, 46, 47];
-
-// Filter and sort by the order we want them displayed
-const teamMembers = featuredTeacherIds
-	.map(id => teamMembersResponse?.find((member: any) => member.id === id))
-	.filter(Boolean)
-	.map((member: any) => ({
-		name: member?.name,
-		title: member?.title,
-		image: member?.image?.url ? getStrapiMedia(member.image.url) : null,
-		bio: processContent(member?.bio),
-		socialLink: member?.socialLink || null
-	}));
+	{
+		title: 'Trust The Process',
+		description: 'We never know what life will throw at us. LOVE MORE supports you in trusting that every step along the way is part of the process—awakening your awareness to what you are experiencing and choosing to grow from it.'
+	},
+	{
+		title: 'Give Gratitude',
+		description: 'Giving gratitude means intentionally recognizing and appreciating the good in your life—both the big moments and the small ones—while acknowledging what you have, what you’ve learned, and the people and experiences that contribute to your growth.'
+	},
+	{
+		title: 'Receive MORE',
+		description: 'When you learn to love the journey, trust the process, and give gratitude it allows you to receive MORE of what life has to offer, while staying humble and sharing what you’ve learned to inspire that spark in others.'
+	}
+];
 
 const steps = [
 	{ number: 1, title: 'Buy Your 3 Week Intro Pass', description: 'Purchase your intro pass online or in person' },
@@ -246,37 +237,27 @@ const pillars = [
 			</div>
 		</section>
 
-		<!-- Meet Our Teachers Section -->
-		<section class="py-32 bg-cream" aria-labelledby="teachers-heading">
+		<!-- Our Values Section -->
+		<section class="py-32 bg-cream" aria-labelledby="values-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-3xl mx-auto text-center mb-16">
-					<h2 id="teachers-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-6 tracking-wide">
-						Meet Our Teachers
+					<h2 id="values-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Our Values
 					</h2>
-					<p class="text-lg text-neutral-600 leading-relaxed">
-						Warm, uplifting and embodied wellness experts dedicated to guiding you on your journey. Our teachers are selected for their ability to inspire, educate and support your wellbeing goals.
-					</p>
 				</div>
 
-				<div class="grid md:grid-cols-3 gap-x-6 gap-y-16 max-w-5xl mx-auto mb-12">
-					{teamMembers.map((member, index) => (
-						<TeamMemberCard
-							name={member.name}
-							title={member.title}
-							image={member.image}
-							index={index}
-							bio={member.bio}
-						/>
+				<div class="max-w-3xl mx-auto space-y-12">
+					{values.map((value) => (
+						<div class="flex items-start gap-8">
+							<div class="flex-shrink-0 w-16 h-16">
+								<img src={iconImage.src} alt="" aria-hidden="true" class="w-full h-full object-contain" />
+							</div>
+							<div>
+								<h3 class="font-display font-bold text-charcoal text-xl tracking-wide uppercase mb-3">{value.title}</h3>
+								<p class="text-neutral-600 leading-relaxed">{value.description}</p>
+							</div>
+						</div>
 					))}
-				</div>
-
-				<div class="text-center">
-					<a
-						href="/team"
-						class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-6 py-3 text-sm"
-					>
-						Get Know Our Team
-					</a>
 				</div>
 			</div>
 		</section>
@@ -324,30 +305,7 @@ const pillars = [
 			</div>
 		</section>
 
-		<!-- Team Member Modal -->
-		<TeamMemberModal />
 	</main>
 
 	<Footer />
 </Layout>
-
-<script define:vars={{ teamMembers }}>
-	// Store team members data in JavaScript
-	const members = teamMembers;
-
-	// Add click handlers after DOM loads
-	document.addEventListener('alpine:init', () => {
-		// Wait for Alpine to be ready
-		setTimeout(() => {
-			const cards = document.querySelectorAll('[data-member-index]');
-			cards.forEach((card) => {
-				card.addEventListener('click', () => {
-					const index = parseInt(card.getAttribute('data-member-index'));
-					const member = members[index];
-					// Dispatch custom event with member data
-					window.dispatchEvent(new CustomEvent('modal-open', { detail: member }));
-				});
-			});
-		}, 100);
-	});
-</script>

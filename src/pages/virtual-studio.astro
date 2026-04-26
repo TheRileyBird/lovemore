@@ -3,38 +3,33 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { Video, Calendar } from 'lucide-astro';
-import virtualBanner from '../assets/images/group5.jpg';
+import virtualBanner from '../assets/images/class.jpg';
 ---
 
 <Layout title="Virtual Studio — Love More">
 	<Navigation />
 
 	<main id="main-content">
-		<!-- Banner Section -->
-		<section class="py-20 pt-24 bg-cream" aria-labelledby="virtual-heading">
-			<div class="container mx-auto px-6">
-				<div class="max-w-5xl mx-auto">
-					<img
-						src={virtualBanner.src}
-						alt="Virtual Studio"
-						loading="eager"
-						class="w-full rounded-2xl shadow-lg"
-					/>
-				</div>
+		<!-- Hero Section -->
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="virtual-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src={virtualBanner.src}
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
 			</div>
-		</section>
 
-		<!-- Intro Section -->
-		<section class="py-12 bg-white" aria-labelledby="intro-heading">
-			<div class="container mx-auto px-6">
-				<div class="max-w-3xl mx-auto text-center">
-					<h1 id="intro-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-6 tracking-wide">
-						Practice Anywhere, Anytime
-					</h1>
-					<p class="text-lg text-neutral-600 leading-relaxed">
-						Can't make it to the studio? No problem. Our virtual studio brings the Love More experience directly to you, wherever you are.
-					</p>
-				</div>
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<Video class="w-14 h-14 text-brand mx-auto mb-6 opacity-90" aria-hidden="true" />
+				<h1 id="virtual-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide mb-4">
+					Virtual Studio
+				</h1>
+				<p class="text-2xl text-white/90 font-light">
+					Practice Anywhere, Anytime
+				</p>
 			</div>
 		</section>
 
@@ -43,7 +38,6 @@ import virtualBanner from '../assets/images/group5.jpg';
 			<div class="container mx-auto px-6">
 				<div class="max-w-6xl mx-auto">
 					<div class="text-center mb-8">
-						<Video class="w-12 h-12 text-brand mx-auto mb-4" aria-hidden="true" />
 						<h2 id="videos-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
 							On-Demand Videos
 						</h2>
@@ -57,7 +51,7 @@ import virtualBanner from '../assets/images/group5.jpg';
 							id="videoLibraryIframe"
 							src="https://app.arketa.co/iframe/theinvitation/videos?showFeatured=true"
 							width="100%"
-							style="height: 600px; border: none;"
+							style="height: 1050px; border: none;"
 							frameborder="0"
 							allow="payment;fullscreen"
 							allowfullscreen
