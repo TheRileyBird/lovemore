@@ -4,9 +4,10 @@ interface Props {
 	title: string;
 	image: string;
 	index: number;
+	bio?: string;
 }
 
-const { name, title, image, index } = Astro.props;
+const { name, title, image, index, bio } = Astro.props;
 ---
 
 <div
@@ -16,7 +17,7 @@ const { name, title, image, index } = Astro.props;
 	<div class="relative">
 		<div class="relative overflow-hidden rounded-2xl shadow-md aspect-square mb-10">
 			<img
-				src={image}
+				src={image || '/images/icon.webp'}
 				alt={name}
 				loading="lazy"
 				class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -32,8 +33,10 @@ const { name, title, image, index } = Astro.props;
 		</div>
 	</div>
 
-	<!-- Read Bio hint (appears on hover) -->
-	<div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-		<span class="text-brand text-sm font-medium">Read Bio →</span>
-	</div>
+	<!-- Read Bio hint (appears on hover, only if bio exists) -->
+	{bio && (
+		<div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+			<span class="text-brand text-sm font-medium">Read Bio →</span>
+		</div>
+	)}
 </div>
