@@ -16,7 +16,7 @@ const classesCollection = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/classes' }),
 	schema: z.object({
 		name: z.string(),
-		type: z.enum(['heated', 'non-heated', 'specialty']),
+		type: z.enum(['heated', 'non-heated', 'specialty', 'healing-room']),
 		image: z.string(),
 		description: z.string(),
 		order: z.number().default(100),

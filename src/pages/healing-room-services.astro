@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Divider from '../components/Divider.astro';
+import { ArrowRight, HeartHandshake } from 'lucide-astro';
+import { fetchAPI, getStrapiMedia } from '../lib/strapi';
+import { marked } from 'marked';
+import heroImage from '../assets/images/heart-kneel.jpg';
+
+function processContent(content: string): string {
+	if (!content) return '';
+	if (content.includes('<p>') || content.includes('<strong>')) {
+		return content;
+	}
+	return marked(content);
+}
+
+let healingRoomServices = [];
+try {
+	const classesResponse = await fetchAPI<any>({
+		endpoint: 'classes',
+		query: {
+			'filters[active][$eq]': true,
+			'filters[type][$eq]': 'healing-room',
+			'populate': 'image',
+			'sort': 'sortOrder:asc'
+		},
+		wrappedByKey: 'data'
+	});
+
+	healingRoomServices = classesResponse?.map((classItem: any) => ({
+		name: classItem.name,
+		description: processContent(classItem.description),
+		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
+	})) || [];
+} catch (error) {
+	console.warn('Failed to fetch healing room services from Strapi:', error);
+}
+---
+
+<Layout title="Healing Room Services — Love More">
+	<Navigation />
+
+	<main id="main-content">
+		<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20" aria-labelledby="healing-room-heading">
+			<div class="absolute inset-0 z-0">
+				<img
+					src={heroImage.src}
+					alt=""
+					role="presentation"
+					class="absolute inset-0 w-full h-full object-cover"
+					style="object-position: 50% 45%;"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-b from-neutral-900/60 via-neutral-900/50 to-neutral-900/60"></div>
+			</div>
+
+			<div class="relative z-10 container mx-auto px-6 text-center">
+				<HeartHandshake class="w-16 h-16 text-brand mx-auto mb-6" aria-hidden="true" />
+				<h1 id="healing-room-heading" class="text-5xl md:text-7xl font-display font-bold text-white tracking-wide">
+					Healing Room Services
+				</h1>
+			</div>
+		</section>
+
+		<section class="py-16 bg-cream" aria-labelledby="intro-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 id="intro-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
+						Support for Restoration and Renewal
+					</h2>
+					<Divider width="short" class="mb-6" />
+					<p class="text-lg text-neutral-600 leading-relaxed">
+						Our healing room offers supportive services designed to help you regulate, recover, and reconnect. Explore modalities that complement your movement practice and create more space for balance in daily life.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-24 bg-white" aria-labelledby="services-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-6xl mx-auto">
+					<h2 id="services-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-4 tracking-wide text-center">
+						Available Services
+					</h2>
+					<p class="text-center text-lg text-neutral-600 mb-16 max-w-3xl mx-auto">
+						Each offering is presented with the same guided, welcoming approach you know from our classes, with a focus on care, nervous system support, and whole-person wellness.
+					</p>
+
+					{healingRoomServices.length === 0 ? (
+						<div class="text-center py-12">
+							<p class="text-lg text-neutral-600 mb-4">
+								Healing room services will be listed here once they are published in the CMS.
+							</p>
+							<a
+								href="/contact"
+								class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-brand text-white hover:bg-charcoal hover:shadow-lg px-8 py-4 text-base"
+							>
+								Contact Us
+							</a>
+						</div>
+					) : (
+						<div class="flex flex-col gap-y-8">
+							{healingRoomServices.map((service, index) => (
+								<a
+									href="/contact"
+									class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
+								>
+									<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+										<header class="flex items-center border-b border-neutral-200 px-8 py-6">
+											<h3 class="text-xl font-bold text-charcoal">
+												{service.name}
+											</h3>
+										</header>
+										<div class="flex flex-col place-items-start gap-y-6 p-10 pb-20">
+											<div class="prose max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4" set:html={service.description} />
+										</div>
+										<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+											<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
+												Learn More
+												<ArrowRight class="w-4 h-4" aria-hidden="true" />
+											</span>
+										</div>
+									</div>
+									<div class={`relative select-none bg-neutral-50 h-full overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+										{service.image ? (
+											<img
+												src={service.image}
+												alt=""
+												class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+											/>
+										) : (
+											<div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand/10 to-cream-200">
+												<HeartHandshake class="w-24 h-24 text-brand/40" aria-hidden="true" />
+											</div>
+										)}
+									</div>
+								</a>
+							))}
+						</div>
+					)}
+				</div>
+			</div>
+		</section>
+
+		<section class="py-20 bg-cream">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Ready to Book a Service?
+					</h2>
+					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+						Reach out with questions or connect with us to find the healing room service that fits your needs.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<Button href="/contact" variant="primary" size="large">
+							Contact Us
+						</Button>
+						<a
+							href="/schedule"
+							class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+						>
+							View Schedule
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
