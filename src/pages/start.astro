@@ -3,6 +3,7 @@ import '../styles/global.css';
 import heroImage from '../assets/images/group5.jpg';
 import sideImage1 from '../assets/images/group2.jpg';
 import sideImage2 from '../assets/images/warrior1.jpg';
+import lovemoreLogo from '../assets/images/lovemorelogo.png';
 
 const faqs = [
 	{
@@ -34,6 +35,12 @@ const faqs = [
 		answer: 'Your pass activates on the day of your first visit — not the day you purchase. No pressure, no wasted days. You have time to plan your start around your schedule.'
 	}
 ];
+
+const pageTitle = 'Get Started - Love More';
+const pageDescription = 'Start your Love More journey with our 3-week intro pass for just $56. No hidden renewals, just 21 days of transformative yoga and movement.';
+const canonicalURL = 'https://lovemoremcc.com/start';
+const socialImage = new URL(lovemoreLogo.src, 'https://lovemoremcc.com').toString();
+const socialImageAlt = 'Love More logo with the tagline movement, community, connection';
 ---
 
 <!doctype html>
@@ -41,14 +48,29 @@ const faqs = [
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Start your Love More journey with our 3-week intro pass for just $56. No hidden renewals, just 21 days of transformative yoga and movement." />
-		<title>Get Started — Love More</title>
+		<meta name="title" content={pageTitle} />
+		<meta name="description" content={pageDescription} />
+		<link rel="canonical" href={canonicalURL} />
+		<title>{pageTitle}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:image:secure_url" content={socialImage} />
+		<meta property="og:image:width" content="1080" />
+		<meta property="og:image:height" content="1080" />
+		<meta property="og:image:alt" content={socialImageAlt} />
 		<meta property="og:site_name" content="Love More" />
 		<meta property="og:locale" content="en_US" />
-		<meta property="twitter:card" content="summary_large_image" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:image" content={socialImage} />
+		<meta name="twitter:image:alt" content={socialImageAlt} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
