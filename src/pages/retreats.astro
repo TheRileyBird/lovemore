@@ -102,21 +102,34 @@ const upcomingRetreats = retreatsResponse
 		<section class="pb-24 bg-white" aria-labelledby="upcoming-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-6xl mx-auto">
-					<div class="flex flex-col gap-y-8">
-						{upcomingRetreats.map((retreat, index) => (
-							<EventCard
-								title={retreat.name}
-								subtitle={retreat.subtitle}
-								slug={retreat.slug}
-								flyerImage={retreat.flyerImage}
-								body={retreat.body}
-								startDate={retreat.startDate}
-								endDate={retreat.endDate}
-								index={index}
-								basePath="/retreats"
-							/>
-						))}
-					</div>
+					{upcomingRetreats.length > 0 ? (
+						<div class="flex flex-col gap-y-8">
+							{upcomingRetreats.map((retreat, index) => (
+								<EventCard
+									title={retreat.name}
+									subtitle={retreat.subtitle}
+									slug={retreat.slug}
+									flyerImage={retreat.flyerImage}
+									body={retreat.body}
+									startDate={retreat.startDate}
+									endDate={retreat.endDate}
+									index={index}
+									basePath="/retreats"
+								/>
+							))}
+						</div>
+					) : (
+						<div class="text-center py-16">
+							<p class="text-2xl font-display text-charcoal mb-3">New journeys are taking shape.</p>
+							<p class="text-lg text-neutral-600 mb-8">Breathe, be present, and check back soon — something beautiful is on the horizon.</p>
+							<a
+								href="/contact"
+								class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-transparent border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 text-base"
+							>
+								Get Notified
+							</a>
+						</div>
+					)}
 				</div>
 			</div>
 		</section>
