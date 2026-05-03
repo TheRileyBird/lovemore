@@ -4,48 +4,23 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import { Flame, Snowflake, ArrowRight } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { classes } from '../data/classes';
 import heroImage from '../assets/images/childs.jpg';
 
-// Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch all classes from Strapi
-const classesResponse = await fetchAPI<any>({
-	endpoint: 'classes',
-	query: {
-		'populate': 'image',
-		'sort': 'sortOrder:asc'
-	},
-	wrappedByKey: 'data'
-});
+const heatedClassData = classes
+	.filter(c => c.type === 'heated')
+	.map(c => ({ ...c, description: processContent(c.description) }));
 
-// Separate classes by type
-const heatedClassData = classesResponse
-	.filter((classItem: any) => classItem.type === 'heated')
-	.map((classItem: any) => ({
-		name: classItem.name,
-		temperature: classItem.temperature,
-		description: processContent(classItem.description),
-		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
-	}));
-
-const nonHeatedClassData = classesResponse
-	.filter((classItem: any) => classItem.type === 'non-heated')
-	.map((classItem: any) => ({
-		name: classItem.name,
-		description: processContent(classItem.description),
-		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
-	}));
+const nonHeatedClassData = classes
+	.filter(c => c.type === 'non-heated')
+	.map(c => ({ ...c, description: processContent(c.description) }));
 ---
 
 <Layout title="Class Descriptions — Love More">

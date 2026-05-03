@@ -5,22 +5,17 @@ import Footer from '../../components/Footer.astro';
 import EventDetailHero from '../../components/EventDetailHero.astro';
 import EventDetailLayout from '../../components/EventDetailLayout.astro';
 import { Palmtree } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
-import { marked } from 'marked';
+import { retreats } from '../../data/retreats';
 
 export async function getStaticPaths() {
-	// Helper to handle both HTML and Markdown content
+	const { marked } = await import('marked');
+
 	function processContent(content: string): string {
 		if (!content) return '';
-		// If content contains HTML tags, return as-is
-		if (content.includes('<p>') || content.includes('<strong>')) {
-			return content;
-		}
-		// Otherwise treat as Markdown
+		if (content.includes('<p>') || content.includes('<strong>')) return content;
 		return marked(content);
 	}
 
-	// Helper to format date ranges intelligently
 	function formatDateRange(startDate: string, endDate: string): string {
 		if (!startDate && !endDate) return '';
 		if (!endDate) return new Date(startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -37,65 +32,27 @@ export async function getStaticPaths() {
 		const endDay = end.getDate();
 		const endYear = end.getFullYear();
 
-		// Same month and year: "May 21-23, 2026"
 		if (startMonth === endMonth && startYear === endYear) {
 			return `${startMonth} ${startDay}-${endDay}, ${startYear}`;
 		}
-
-		// Same year, different months: "May 21 - Jun 3, 2026"
 		if (startYear === endYear) {
 			return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
 		}
-
-		// Different years: "Dec 21, 2025 - Jan 3, 2026"
 		return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
 	}
 
-	try {
-		const retreatsResponse = await fetchAPI<any>({
-			endpoint: 'retreats',
-			query: {
-				// Fetch ALL retreats (past and future) to avoid 404s
-				'populate': '*'
-			},
-			wrappedByKey: 'data'
-		});
-
-		if (!retreatsResponse || retreatsResponse.length === 0) {
-			console.warn('No retreats found in Strapi - returning empty array');
-			return [];
-		}
-
-		// Filter out retreats without slugs
-		const validRetreats = retreatsResponse.filter((retreat: any) => retreat.slug);
-
-		if (validRetreats.length === 0) {
-			console.warn('No retreats with valid slugs found - returning empty array');
-			return [];
-		}
-
-		return validRetreats.map((retreat: any) => ({
-			params: { slug: retreat.slug },
+	return retreats
+		.filter(r => r.slug)
+		.map(r => ({
+			params: { slug: r.slug },
 			props: {
 				retreat: {
-					...retreat,
-					flyerImage: retreat.flyerImage?.url ? getStrapiMedia(retreat.flyerImage.url) : null,
-					headerImage: retreat.headerImage?.url ? getStrapiMedia(retreat.headerImage.url) : (retreat.flyerImage?.url ? getStrapiMedia(retreat.flyerImage.url) : null),
-					body: processContent(retreat.body),
-					gallery: retreat.gallery?.map((img: any) => ({
-						url: getStrapiMedia(img.url),
-						alternativeText: img.alternativeText || retreat.name
-					})) || [],
-					ctaButtonLabel: retreat.ctaButtonLabel,
-					ctaButtonUrl: retreat.ctaButtonUrl,
-					dateDisplay: formatDateRange(retreat.startDate, retreat.endDate)
+					...r,
+					body: processContent(r.body),
+					dateDisplay: formatDateRange(r.startDate, r.endDate)
 				}
 			}
 		}));
-	} catch (error) {
-		console.error('Error fetching retreats for static paths:', error);
-		return [];
-	}
 }
 
 const { retreat } = Astro.props;

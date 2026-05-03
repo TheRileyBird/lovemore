@@ -5,22 +5,17 @@ import Footer from '../../components/Footer.astro';
 import EventDetailHero from '../../components/EventDetailHero.astro';
 import EventDetailLayout from '../../components/EventDetailLayout.astro';
 import { GraduationCap } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
-import { marked } from 'marked';
+import { trainings } from '../../data/trainings';
 
 export async function getStaticPaths() {
-	// Helper to handle both HTML and Markdown content
+	const { marked } = await import('marked');
+
 	function processContent(content: string): string {
 		if (!content) return '';
-		// If content contains HTML tags, return as-is
-		if (content.includes('<p>') || content.includes('<strong>')) {
-			return content;
-		}
-		// Otherwise treat as Markdown
+		if (content.includes('<p>') || content.includes('<strong>')) return content;
 		return marked(content);
 	}
 
-	// Helper to format date ranges intelligently
 	function formatDateRange(startDate: string, endDate: string): string {
 		if (!startDate && !endDate) return '';
 		if (!endDate) return new Date(startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -37,63 +32,28 @@ export async function getStaticPaths() {
 		const endDay = end.getDate();
 		const endYear = end.getFullYear();
 
-		// Same month and year: "May 21-23, 2026"
 		if (startMonth === endMonth && startYear === endYear) {
 			return `${startMonth} ${startDay}-${endDay}, ${startYear}`;
 		}
-
-		// Same year, different months: "May 21 - Jun 3, 2026"
 		if (startYear === endYear) {
 			return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
 		}
-
-		// Different years: "Dec 21, 2025 - Jan 3, 2026"
 		return `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
 	}
 
-	try {
-		const trainingsResponse = await fetchAPI<any>({
-			endpoint: 'trainings',
-			query: {
-				// Fetch ALL trainings (past and future) to avoid 404s
-				'populate': '*'
-			},
-			wrappedByKey: 'data'
-		});
-
-		if (!trainingsResponse || trainingsResponse.length === 0) {
-			console.warn('No trainings found in Strapi - returning empty array');
-			return [];
-		}
-
-		// Filter out trainings without slugs
-		const validTrainings = trainingsResponse.filter((training: any) => training.slug);
-
-		if (validTrainings.length === 0) {
-			console.warn('No trainings with valid slugs found - returning empty array');
-			return [];
-		}
-
-		return validTrainings.map((training: any) => ({
-			params: { slug: training.slug },
+	return trainings
+		.filter(t => t.slug)
+		.map(t => ({
+			params: { slug: t.slug },
 			props: {
 				training: {
-					...training,
-					flyerImage: training.flyerImage?.url ? getStrapiMedia(training.flyerImage.url) : null,
-					headerImage: training.headerImage?.url ? getStrapiMedia(training.headerImage.url) : (training.flyerImage?.url ? getStrapiMedia(training.flyerImage.url) : null),
-					body: processContent(training.body),
-					gallery: training.gallery?.map((img: any) => ({
-						url: getStrapiMedia(img.url),
-						alternativeText: img.alternativeText || training.title
-					})) || [],
-					dateDisplay: formatDateRange(training.startDate, training.endDate)
+					...t,
+					body: processContent(t.body),
+					gallery: [],
+					dateDisplay: formatDateRange(t.startDate, t.endDate)
 				}
 			}
 		}));
-	} catch (error) {
-		console.error('Error fetching trainings for static paths:', error);
-		return [];
-	}
 }
 
 const { training } = Astro.props;

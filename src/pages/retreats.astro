@@ -6,53 +6,20 @@ import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import EventCard from '../components/EventCard.astro';
 import { Palmtree } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { retreats } from '../data/retreats';
 import heroImage from '../assets/images/retreats.jpg';
 
-// Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch retreats from Strapi
-const retreatsResponse = await fetchAPI<any>({
-	endpoint: 'retreats',
-	query: {
-		sort: 'startDate:asc',
-		'filters[active][$eq]': true,
-		'populate': 'flyerImage'
-	},
-	wrappedByKey: 'data'
-});
-
-// Filter for upcoming retreats only (not past events)
 const now = new Date();
-const upcomingRetreats = retreatsResponse
-	?.filter((retreat: any) => {
-		// Must have a slug
-		if (!retreat.slug) return false;
-		// If no endDate, show it (assume upcoming)
-		if (!retreat.endDate) return true;
-		// Only show if endDate is in the future
-		return new Date(retreat.endDate) >= now;
-	})
-	.map((retreat: any) => ({
-		name: retreat.name,
-		subtitle: retreat.subtitle,
-		slug: retreat.slug,
-		location: retreat.location,
-		flyerImage: retreat.flyerImage?.url ? getStrapiMedia(retreat.flyerImage.url) : null,
-		body: processContent(retreat.body),
-		startDate: retreat.startDate,
-		endDate: retreat.endDate
-	})) || [];
+const upcomingRetreats = retreats
+	.filter(r => r.slug && (!r.endDate || new Date(r.endDate) >= now))
+	.map(r => ({ ...r, body: processContent(r.body) }));
 ---
 
 <Layout title="Retreats - Elevate — Love More">

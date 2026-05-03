@@ -5,39 +5,19 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { ArrowRight, HeartHandshake } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { classes } from '../data/classes';
 import heroImage from '../assets/images/heart-kneel.jpg';
 
 function processContent(content: string): string {
 	if (!content) return '';
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-let healingRoomServices = [];
-try {
-	const classesResponse = await fetchAPI<any>({
-		endpoint: 'classes',
-		query: {
-			'filters[active][$eq]': true,
-			'filters[type][$eq]': 'healing-room',
-			'populate': 'image',
-			'sort': 'sortOrder:asc'
-		},
-		wrappedByKey: 'data'
-	});
-
-	healingRoomServices = classesResponse?.map((classItem: any) => ({
-		name: classItem.name,
-		description: processContent(classItem.description),
-		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
-	})) || [];
-} catch (error) {
-	console.warn('Failed to fetch healing room services from Strapi:', error);
-}
+const healingRoomServices = classes
+	.filter(c => c.type === 'healing-room')
+	.map(c => ({ ...c, description: processContent(c.description) }));
 ---
 
 <Layout title="Healing Room Services — Love More">

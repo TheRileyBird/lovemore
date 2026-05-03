@@ -5,53 +5,20 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import EventCard from '../components/EventCard.astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { trainings as allTrainings } from '../data/trainings';
 import heroImage from '../assets/images/halfmoon.jpg';
 
-// Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch trainings from Strapi
-const trainingsResponse = await fetchAPI<any>({
-	endpoint: 'trainings',
-	query: {
-		sort: 'startDate:asc',
-		'filters[active][$eq]': true,
-		'populate': 'flyerImage'
-	},
-	wrappedByKey: 'data'
-});
-
-// Filter for upcoming trainings only (not past events)
 const now = new Date();
-const trainings = trainingsResponse
-	?.filter((training: any) => {
-		// Must have a slug
-		if (!training.slug) return false;
-		// If no endDate, show it (assume upcoming)
-		if (!training.endDate) return true;
-		// Only show if endDate is in the future
-		return new Date(training.endDate) >= now;
-	})
-	.map((training: any) => ({
-		title: training.title,
-		subtitle: training.subtitle,
-		slug: training.slug,
-		flyerImage: training.flyerImage?.url ? getStrapiMedia(training.flyerImage.url) : null,
-		body: processContent(training.body),
-		startDate: training.startDate,
-		endDate: training.endDate,
-		price: training.price
-	})) || [];
+const trainings = allTrainings
+	.filter(t => t.slug && (!t.endDate || new Date(t.endDate) >= now))
+	.map(t => ({ ...t, body: processContent(t.body) }));
 ---
 
 <Layout title="Teacher Training & Workshops — Love More">

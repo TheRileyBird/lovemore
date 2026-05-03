@@ -5,45 +5,20 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Sparkles, ArrowRight, Calendar } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { specialtyEvents } from '../data/events';
 import heroImage from '../assets/images/moon.jpg';
 
-// Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch events from Strapi
-let specialtyOfferings = [];
-try {
-	const eventsResponse = await fetchAPI<any>({
-		endpoint: 'events',
-		query: {
-			'filters[active][$eq]': true,
-			'populate': 'image',
-			'sort': 'date:asc'
-		},
-		wrappedByKey: 'data'
-	});
-
-	specialtyOfferings = eventsResponse?.map((event: any) => ({
-		name: event.name,
-		type: event.type,
-		date: event.date,
-		description: processContent(event.description),
-		image: event.image?.url ? getStrapiMedia(event.image.url) : null
-	})) || [];
-} catch (error) {
-	console.warn('Failed to fetch events from Strapi:', error);
-	// Continue with empty array - page will still render
-}
+const now = new Date();
+const specialtyOfferings = specialtyEvents
+	.filter(e => new Date(e.date) >= now)
+	.map(e => ({ ...e, description: processContent(e.description) }));
 ---
 
 <Layout title="Specialty Classes — Love More">

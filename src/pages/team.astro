@@ -5,42 +5,17 @@ import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
 import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { team } from '../data/team';
 import heroImage from '../assets/images/porch.jpeg';
 
-// Helper to handle both HTML and Markdown content
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch team members directly from Strapi, sorted by sortOrder
-const teamMembersResponse = await fetchAPI<any>({
-	endpoint: 'team-members',
-	query: {
-		'sort': 'sortOrder:asc',
-		'populate': '*'
-	},
-	wrappedByKey: 'data'
-});
-
-// Map Strapi data to match existing structure
-// The order comes from the sortOrder field set via drag-and-drop in CMS
-const teamMembers = teamMembersResponse?.map((member: any) => {
-	return {
-		name: member?.name,
-		title: member?.title,
-		image: member?.image ? getStrapiMedia(member.image.formats?.medium?.url || member.image.url) : null,
-		bio: processContent(member?.bio),
-		socialLink: member?.socialLink || null
-	};
-}).filter((member: any) => member.name) || [];
+const teamMembers = team.map(m => ({ ...m, bio: processContent(m.bio) }));
 ---
 
 <Layout title="Team — Love More">
