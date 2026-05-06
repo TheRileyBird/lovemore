@@ -6,8 +6,247 @@ import Divider from '../components/Divider.astro';
 import TeamMemberModal from '../components/TeamMemberModal.astro';
 import TeamMemberCard from '../components/TeamMemberCard.astro';
 import { marked } from 'marked';
-import { team } from '../data/team';
+import type { ImageMetadata } from 'astro';
 import heroImage from '../assets/images/porch.jpeg';
+import fallbackIcon from '../assets/images/icon.webp';
+
+interface TeamMember {
+	name: string;
+	title: string;
+	image: ImageMetadata | null;
+	bio: string;
+	socialLink: { label: string; url: string } | null;
+}
+
+const teamImages = import.meta.glob('../assets/images/team/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+
+function getTeamImage(path: string): ImageMetadata {
+	const image = teamImages[path];
+	if (!image) throw new Error(`Missing team image: ${path}`);
+	return image;
+}
+
+const team: TeamMember[] = [
+  {
+    name: "JoEllen Luke",
+    title: "Owner, E-RYT® 500, YACEP",
+    image: getTeamImage("../assets/images/team/joellen-luke.jpg"),
+    bio: `JoEllen found Yoga while living in Las Vegas and teaching elementary children. Her now husband, Dom, would be the one to introduce her to the practice and help inspire her journey. It wasn’t until JoEllen moved to Southern Pines, NC where she found “her” yoga, which in turn helped her unlock and discover a newer, more authentic version of herself.
+
+JoEllen believes that yoga is meant for everyone and anyone, and in whatever form they choose. She believes that the beautiful thing about the practice of yoga is, that a person has the ability to make their practice whatever they want it to be. One of her aspirations at Love More is to have a space for anyone to come and be present on their mat and to connect with themselves for whatever they may need at that time. Everyone finds the opportunity to connect with what feels like alignment and truth to them.
+
+A lifelong Irish dancer and cheerleader, JoEllen has always found health and fitness as an important aspect in her life. It is the practice of yoga that has helped her understand a deeper meaning to being healthy. JoEllen’s classes are inspiring, educational, and impactful. Her focus on body alignment and mind awareness allows for anyone to have a memorable experience while in her class. Her calming demeanor and quirky personality gives someone the opportunity to move their body in a way that will feel good to them, in a safe supported environment.
+
+JoEllen received her 200 Hr RYT certification with Hot Asana Yoga University in Tulum, Mexico. Realizing her journey had just begun she later completed her 500 Hr RYT certification in Southern Pines, NC under the mentorship of Virginia Gallagher, Lisa Rischitelli, and Casey Backus at Hot Asana Yoga University.
+
+JoEllen and her husband realize that the best way to guide others to LOVE MORE is through their three pillars: Movement, Community, and Connection. Whether you are here for the Movement, the Community, or the Connection, Love More is here for YOU whatever step along your journey you are on!
+
+Love More invites you to LOVE the journey, Trust the process, Give gratitude, and Receive MORE!`,
+    socialLink: {"label":"Instagram","url":"https://www.instagram.com/joellen__luke"},
+  },
+  {
+    name: "Dom Luke",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/dom-luke.jpg"),
+    bio: `Dominic discovered yoga while training to become an Air Force Special Operations Pararescueman or PJ back in 2012. Initially, Dom practiced yoga to stretch and relieve stress from the physically and mentally demanding job. As Dom connected with his practice he discovered something much deeper within himself and within the yoga journey. Upon separating from Active Duty and transitioning back into civilian life, Dom found yoga as a way to navigate this journey.
+
+Looking for a way to continue to live by the PJ’s motto of “These Things We Do, That Other’s May Live,” Dom decided to deepen his practice and get certified as a Yoga Alliance, 200 hr RYT through Reyn Studios in New Orleans, LA. Dom has a passion for helping people and offering opportunities for someone to learn to become the best version of themselves. Join Dominic in one of his classes as he will guide you through your journey of connecting deeply with yourself.`,
+    socialLink: null,
+  },
+  {
+    name: "Teresa Cantrelle",
+    title: "ERYT-500/YACEP",
+    image: getTeamImage("../assets/images/team/teresa-cantrelle.jpg"),
+    bio: `Teresa began practicing yoga in 2012 and quickly discovered the positive impact it had on both her physical and mental well-being. After several years of consistent practice, her curiosity expanded beyond the physical poses, leading her to explore the deeper philosophy and meaning of yoga. A yoga retreat to Costa Rica in 2016 proved to be a life-changing experience, shifting the way she viewed and approached her practice.
+With a focus on alignment and stability, Teresa approaches yoga with mindfulness and self-compassion, allowing her practice to evolve and meet her where she is each day.
+
+After spending twenty years as a stay-at-home mom, Teresa felt called to deepen her personal journey by enrolling in a 200-hour yoga teacher training. Initially, she had no intention of teaching and simply wanted to learn more about herself and her practice. However, upon completing the training, she realized that becoming a yoga teacher was the natural next step on her path.
+
+Teresa received her 200-hour certification from Hot Asana Yoga University in Southern Pines, North Carolina, and completed her 500-hour certification through Hot Asana in 2022. Her training includes specialized certifications in Yin Yoga, LSD (Long, Slow Deep), Hot Holds, and Reiki, through which she has become a Reiki Master.
+
+Today, Teresa serves as the HOM (Head Operations Mamma) and Studio Manager at Love More, where she teaches classes, co-teaches Love More University’s 200-hour Yoga Teacher Training program and also offers Reiki sessions at the studio.  She also leads a Yin Yoga teacher training through Hot Asana Yoga University, sharing her passion for slow, intentional practice and helping others deepen their understanding of both yoga and themselves.`,
+    socialLink: null,
+  },
+  {
+    name: "Jacqueline Hurst",
+    title: "Brand Engagement/E-200RYT, Yoga Sculpt, Sematic Yoga",
+    image: getTeamImage("../assets/images/team/jacqueline-hurst.jpg"),
+    bio: `**Jacqueline “Jax” Hurst** has been teaching yoga since 2017, creating spaces rooted in authenticity, inner work, and light. In 2023, she began working alongside Love More and its founders to support their soft rebrand — helping bring their vision and mission to life in a way that feels embodied, intentional, and aligned.
+
+Through her business, **The Invitation**, Jax partners with Love More to offer virtual yoga and meditation classes so students can stay connected to their practice wherever they are in the world. She also leads yoga sculpt teacher trainings at the studio and co-hosts the Women’s Wellness Retreat in Sedona with JoEllen.
+
+Jax’s classes are holistic and empowering — blending movement, breath, strength, and reflection to guide you back to yourself. Her approach invites you into deeper inner work while holding space for you to feel seen, safe, and supported. Expect to leave feeling grounded, clear, and reconnected to your own light.
+
+Outside of the studio, Jax offers 1:1 and group coaching and intuitive guidance to help women reconnect with their bodies and embody their most empowered, peaceful selves.`,
+    socialLink: {"label":"Instagram","url":"https://www.instagram.com/theinvitationbyjax/"},
+  },
+  {
+    name: "Mandolin Barberito",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/mandolin-barberito.jpg"),
+    bio: `Mandolin began practicing yoga in 2019 as a freshman in college and instantly felt a connection to the practice. Since then, yoga has been a constant source of calm and positive energy in her life. With a background in psychology and mental health care, she is drawn to the reflective, mindful, and nurturing values that yoga emphasizes physically and emotionally. The goal of her classes is to remind you to move through life as a student on and off your mat - we all have something new to offer! As someone who loves learning and sharing growth with others, her classes are focused around exploring and honing movement in a safe and supportive learning environment, where feedback and suggestions are encouraged. She is excited to share this intention with everyone she has the pleasure of practicing with!`,
+    socialLink: null,
+  },
+  {
+    name: "Lauren Dudley",
+    title: "200HR RYT + 300HR Kundalini",
+    image: getTeamImage("../assets/images/team/lauren-dudley.jpg"),
+    bio: `Lauren grew up on the Northshore, took yoga as an elective in college in 2008, and quickly fell in love with the practice. She practiced off and on since then at different studios as she moved to Dallas and then to Colorado. When she landed back in Covington in September of 2020, she found Love More and established her new yoga home here, and soon after enrolled in teacher training through Hot Asana Yoga University. She completed her 200-hour certification in May 2021 and started teaching at Love More in July 2021. Immediately upon completing teacher training, she enrolled in a 300-hour Kundalini teacher certification course through Full Circle Yoga School, and was certified in December 2023. Lauren offers Vinyasa, Yin, and Kundalini yoga classes at Love More.
+
+Lauren believes that every human has the spark of divinity, an inner light that has the potential to shine brightly. She believes that among other things, practicing asana and Kundalini Yoga can help people find and grow their inner light. In 2023, she started a service called Inner Light Yoga - a medium to offer donation-based yoga classes, to make community yoga available to everyone. This service has since expanded to include Kambo ceremonies, and is now called Inner Light Wellness.
+
+Outside of the studio, you can find Lauren in nature, roller skating, learning something new, enjoying live music, or spending time with her Pomeranian, Ziggy. You can follow Lauren on Instagram and Facebook, @innerlightlauren.`,
+    socialLink: null,
+  },
+  {
+    name: "Kara Feringa",
+    title: "200HR, Bikram Certified, Spin & Aerobics",
+    image: getTeamImage("../assets/images/team/kara-feringa.jpg"),
+    bio: `Kara has been teaching yoga since 2003 and practicing yoga for over 20 years.  Her first yoga certification was from Argie Ligeros Tang, founder of the Yoga for Athletes Program and also a former Bikram Yoga teacher and AAU Champion Gymnast.  In 2009, Kara received her Bikram Hot Yoga certification and has continued to practice and teach both Vinyasa style yoga and well as Hatha style hot Bikram Yoga sequence.
+
+Kara is also a certified Spin instructor and aerobics instructor. In addition to teaching at LOVE MORE Hot Yoga, she also teaches traditional Bikram classes at Bikram Yoga New Orleans and spin and regular yoga classes at Stone Creek Club and Spa in Covington.
+
+
+Kara is married to Peter Feringa III, Veterinarian and Owner of Hillside Veterinary Hospital and the proud mom of 21 year old triplets, Megan, Ellen and Brett Feringa, now juniors in college. Her hobbies include yoga, running and tennis. Kara teaches Warm and Hot flow classes.`,
+    socialLink: null,
+  },
+  {
+    name: "Amy Gonzales",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/amy-gonzales.jpg"),
+    bio: `Amy found hot yoga in college as a way to sweat and relieve stress and not much has changed over the last 15 years. Yoga is a great tool to move her body, connect to her breath, to love herself and share it with others.  Expect to work hard, sweat, and leave it all on the mat!`,
+    socialLink: null,
+  },
+  {
+    name: "Jessica Haley",
+    title: "E-RYT200, RTY500, NKT & FST Therapist",
+    image: getTeamImage("../assets/images/team/jessica-haley.jpg"),
+    bio: `Jessica Haley has been on this incredible fitness journey for nearly three decades, and it's her passion that fuels everything she does. Armed with a BA in Kinesiology, Jessica has stacked up certifications in various fitness classes and personal training, crafting a path that's uniquely hers. As a ERT200 and RYT500 certified yoga instructor, she’s all about diving deep into the holistic side of well-being.
+
+For Jessica’s latest adventures, she has immersed herself in Neuro Kinetic Therapy (NKT), where she gets to play with muscle challenges, release work, and corrective exercises. It's like unraveling the puzzle of the body and finding those sweet spots of relief.
+
+But that's not all—She’s also certified in Fascial Stretch Therapy (FST), a release technique that's all about improving mobility, boosting athletic performance, and easing nagging pains. Jessica’s approach is dynamic and grounded in a strong kinesthetic foundation, offering you a transformative experience for your body, mind, and spirit.`,
+    socialLink: null,
+  },
+  {
+    name: "Tori Junot",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/tori-junot.jpg"),
+    bio: `Tori found yoga in February 2020 after a friend reached out and invited her to take a yoga class at the new studio she was teaching at. She was extremely hesitant and not sure yoga was for her. She had been making excuses for years using the most common excuse she is NOT flexible & won't be able to do any of the poses. She went to the first class and it was amazing!!! She left feeling strong and like she could do anything. She was hooked from that moment on & started practicing 2 to 3 times a week.
+
+As she continued to practice something shifte, she felt happier, healthier and less stressed. She became more confident and comfortable in her own skin. Her practice became stronger and stronger and even got the calling to become an instructor. She found herself through her practice. She learned to love and accept herself, even her flaws.
+
+She is so excited be a part of this amazing supportive community and want to share it with her students. She hopes to encourage them to believe they are strong, amazing souls and to love and accept themselves, even the flaws. In her free time, she loves to travel with her husband enjoying mountain biking, kayaking and hiking.`,
+    socialLink: null,
+  },
+  {
+    name: "Victoria Richardson",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/victoria-richardson.jpg"),
+    bio: `Victoria is a wife and mother of 26-year-old triplets and 3 adult stepchildren. She is a graduate of LSU and a licensed Physical Therapist for 35 years. She is also a certified personal trainer through the National Academy of Sports Medicine. She has been a triathlete for over 25years and has completed many marathons, triathlons including a full Ironman.
+
+Victoria has been active her entire life and in the fitness industry since she was 18. She was introduced to yoga 27years ago and has always come back to it for active recovery during triathlon training. In 2019, she pursued her 200 hour RYT certification and completed her 300 hourRYT certification in 2024. She was initially drawn to power yoga and the philosophy of Brian Kest because of its incorporation of strength, balance, and stretchcomponents holding poses for longer durations. As her yoga knowledge deepened, she has realized the importance of meditation and the calming effects on and off the mat.
+
+Her intent is to encourage and inspire others and share her passion for yoga and fitness with everyone she meets. Victoria wants everyone to realize they can do yoga regardless of their age, past injuries or fitness level.During her free time she and her husband Jody enjoy being outdoors, paddle boarding, traveling, drinking good wine and spending time with their friends and family.
+`,
+    socialLink: null,
+  },
+  {
+    name: "Katelyn Sonnier",
+    title: "500HR RYT",
+    image: getTeamImage("../assets/images/team/katelyn-sonnier.jpg"),
+    bio: `Everyone is on a yoga journey, a path to union of body, mind, and soul. It’s called life. Some choose the mat as a place of movement and deep reflection for part of this journey. Katelyn first found her way to the mat in 2009 after a big transition and has since then been using her mat to move through whatever it is that needs transforming. On her mat, Katelyn has found presence, and empowerment, and has learned how to regulate her emotional state through movements linked with breath. 
+
+This journey has taken her through a 200-hour yoga teacher training program, completed in 2013, and a 500-hour program completed in 2019. Through these studies and dealing with her own health challenges, Katelyn found the ancient science of Ayurveda to be invaluable in healing. After experiencing firsthand how an Ayurvedic lifestyle can enhance one’s life, Katelyn felt called to study Ayurveda – the world’s oldest health science system and sister science of yoga based on the mind-body connection – so she could reconceptualize this ancient knowledge for a modern audience. Katelyn completed a M.S. in Ayurvedic and Integrative Medicine from Maharishi International University. 
+
+Katelyn uses the science of Ayurvedic studies, the power of breath- _pranayama_, and the movement of yoga _asana_- postures, to create a well-aligned experience for her students on the mat. She is excited and eager to share all that she has learned and is learning. `,
+    socialLink: null,
+  },
+  {
+    name: "Shelley Ford",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/shelley-ford.jpg"),
+    bio: ``,
+    socialLink: null,
+  },
+  {
+    name: "Mallory Guillot",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/mallory-guillot.jpg"),
+    bio: `I was born and raised in the Midwest. Sweet home Chicago! I grew up as an elite soccer and basketball player as well as an avid runner. For college, I ventured to Louisiana playing my way all the way to Louisiana Tech University where I met my best friend and husband of 10 years, Richard. In my 15 years of living in Louisiana, I became the mom to an amazing set of 9 year triplets James, Wyatt and Kathryn and our caboose, six year old, Grayson.
+
+I tried my first hot yoga class twelve years ago and my passion was ignited. Now along with running on the trails, I can be found on my yoga mat or playing soccer with our four active kids. I recently obtained my 200hr RYT certification in 2018 to dive deeper into my own practice and share my love for yoga with others.  I have always loved kids and after having kids of my own, I realized that I wanted to make an impact in kids' learning by jumping into the teaching world. I am very passionate about growing minds of all ages, creating a safe and welcoming environment for kids to grow and learn. I also obtained my certification to teach kids yoga as well through Kids Yoga & Mindfulness at Love More Yoga in 2019.
+
+I love the energy as well as the relief it gives my body from all of the strenuous running and college athlete challenges. I aim to empower students to push themselves to their edge and discover their own inner strength and determination.  I can be found teaching Warm and Hot flow classes at Love MORE Hot Yoga in downtown Covington!
+`,
+    socialLink: null,
+  },
+  {
+    name: "Kelsey DeVries",
+    title: "DPT, 200HR RYT",
+    image: getTeamImage("../assets/images/team/kelsey-devries.jpg"),
+    bio: `Kelsea DeVries is a native Coloradoan, but military spouse most recently moved to the Northshore from the Washington, DC area. She is a Doctor of Physical Therapy and a 200 hr RYT. She has 18 years experience in the physical therapy field, 5 years of teaching, and over 15 years yoga practice. Kelsea teaches from a place of wanting everyone to see their potential and encouraging students to go for it. Her classes are energetic and fun, possibly challenging at times, but always with modifications and the ability to meet students where they are at the present moment. Her playlists are often an eclectic mix of music ranging from oldies to new pop with pretty much anything in between. She also enjoys running, strength training, and Pilates. When not teaching or working out, Kelsea can be found exploring her new surroundings in Louisiana, enjoying time with her husband and two kids (8 and 11), playing with her new puppy, spending time outdoors, and traveling. 
+`,
+    socialLink: null,
+  },
+  {
+    name: "Amber Ostoff",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/amber-ostoff.jpg"),
+    bio: `Amber believes yoga is for every body and every season of life. Yoga offers a space to return to yourself, cultivate resilience, and create balance amidst life’s challenges. Amber’s classes are designed to leave you feeling grounded, empowered, and glowing—from the inside out.
+
+Yoga has been a meaningful part of Amber’s life for many years. She was first introduced to the practice 18 years ago, while earning her Bachelor’s of Science in Exercise Science, Business Administration and Communication Studies. She quickly fell in love with the way yoga united breath and movement, while building both physical strength and inner calm. What began as a tool for athletics soon became a lifelong practice of grounding, healing, and discovery.
+
+About five years ago, Amber deepened her connection to yoga even more through Love More, as she reignited her devotion to the practice. Since deepening her yoga practice on and off the mat, Amber has felt inspired to build her knowledge through spiritual trainings and continued education to enhance the container and space for all. 
+Amber welcomes even more wisdom, light and joy to the spaces she holds as a Certified Pranic Healer, and with the knowledge and experience she gained through the Academy of Breath.
+
+Amber brings a deep passion for helping others feel confident, balanced, and connected. By day, she is a master holistic advanced practice aesthetician and owner of Glowing Skin by AmberWavezzz. In her business she specializes in advanced facials, nervous system regulation, energy work, non-toxic living, whole-body skincare, root-cause approach, and personalized treatments that support beauty from the inside out. She holds private and group containers for connection and healing, as well immersive sessions. 
+
+When she’s not teaching or working in her studio, you can find Amber spending time in nature, gardening, cooking, swimming, paddle boarding, wake surfing, enjoying live music, or relaxing with her beloved fur babies.`,
+    socialLink: null,
+  },
+  {
+    name: "Kat Parker",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/kat-parker.jpg"),
+    bio: `Kat Parker is a Certified Yoga Instructor, NLP-Certified Leadership & Life Coach, and space-holder for transformation, on and off the mat.
+Kat found yoga in 2023 after being invited to Love More yoga class. She had never practiced before, but what started as trying something new quickly became something she couldn’t live without.
+Yoga became her reset. Her release. Her way back to herself.
+As a student, Kat experienced what it felt like to be challenged physically while also being called to slow down, breathe, and be present in a way life doesn’t always allow. 
+That experience is what led Kat to become a yoga teacher. In 2025, she received her 200 RYT certification from Love More University.
+Her classes are powerful, intentional, and rooted in real life. You’ll be guided through strong, dynamic flows that build heat and strength but you’ll also be invited to pause, to breathe, and to check in with yourself in a deeper way. Kat creates a space where you don’t have to have it all together. You just have to show up.
+Expect to be challenged. Expect to feel. Expect to leave different than you came in because in Kat’s class, it’s not just about how deep you go into a pose, it’s about how deeply you connect to yourself while you’re in it.
+Whether you’re new to yoga or returning to your mat, Kat’s goal is simple: to help you move with intention, build confidence, and remind you of your strength.
+Outside of the studio, Kat uses yoga as an extension of her leadership coaching, helping women to build strength in their bodies, clarity in their minds, and confidence in how they show up in their lives. 
+
+
+Follow Kat on IG at @thekatparker
+`,
+    socialLink: {"label":"Instagram","url":"https://www.instagram.com/thekatparker/"},
+  },
+  {
+    name: "Allison Poswalk",
+    title: "200HR RYT",
+    image: getTeamImage("../assets/images/team/allison-poswalk.jpg"),
+    bio: `Allison is a 200-hour certified yoga teacher, trained through Love More University (November 2025) with over 30 years of personal practice, leading dynamic, strong and fun hot, warm and non-heated flows. Her classes are playful and real. You will move, build strength, laugh and try new things in a supportive, no-pressure space. Expect guided flow, options for all levels, and the freedom to push or pause as you need. You’ll leave feeling better than when you walked in.  `,
+    socialLink: null,
+  },
+  {
+    name: "Michelle Crosby",
+    title: "200HR RYT",
+    image: null,
+    bio: ``,
+    socialLink: null,
+  },
+  {
+    name: "Kasey Moore",
+    title: "200HR RYT",
+    image: null,
+    bio: ``,
+    socialLink: null,
+  },
+];
+
 
 function processContent(content: string): string {
 	if (!content) return '';
@@ -16,6 +255,10 @@ function processContent(content: string): string {
 }
 
 const teamMembers = team.map(m => ({ ...m, bio: processContent(m.bio) }));
+const modalTeamMembers = teamMembers.map(member => ({
+	...member,
+	image: member.image?.src ?? fallbackIcon.src,
+}));
 ---
 
 <Layout title="Team — Love More">
@@ -103,7 +346,7 @@ const teamMembers = team.map(m => ({ ...m, bio: processContent(m.bio) }));
 	<Footer />
 </Layout>
 
-<script define:vars={{ teamMembers }}>
+<script define:vars={{ teamMembers: modalTeamMembers }}>
 	// Store team members data in JavaScript
 	const members = teamMembers;
 

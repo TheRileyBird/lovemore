@@ -1,13 +1,15 @@
 ---
 import Button from './Button.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
 	title: string;
 	subtitle?: string;
 	location?: string;
-	image: string | null;
+	image: ImageMetadata | null;
 	body: string;
-	gallery?: Array<{ url: string; alternativeText: string }>;
+	gallery?: Array<{ image: ImageMetadata; alt: string }>;
 	startDate?: string;
 	endDate?: string;
 	date?: string;
@@ -69,7 +71,7 @@ const dateDisplay = startDate && endDate
 			<div class="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 mb-12">
 				{image && (
 					<div class="lg:sticky lg:top-24 h-fit">
-						<img
+						<Image
 							src={image}
 							alt={title}
 							class="w-full h-auto rounded-lg"
@@ -121,10 +123,11 @@ const dateDisplay = startDate && endDate
 				}`}>
 					{gallery.map((image: any) => (
 						<div class="aspect-square overflow-hidden rounded-lg">
-							<img
-								src={image.url}
-								alt={image.alternativeText}
+							<Image
+								src={image.image}
+								alt={image.alt}
 								class="w-full h-full object-cover"
+								loading="lazy"
 							/>
 						</div>
 					))}
