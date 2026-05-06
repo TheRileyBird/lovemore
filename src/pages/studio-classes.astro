@@ -4,48 +4,109 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import { Flame, Snowflake, ArrowRight } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import heroImage from '../assets/images/childs.jpg';
+import bikramHotImage from '../assets/images/classes/bikram-hot.jpg';
+import flowWarmImage from '../assets/images/classes/flow-warm.jpg';
+import flowImage from '../assets/images/classes/flow.jpg';
+import functionalFlowWarmImage from '../assets/images/classes/functional-flow-warm.jpg';
+import longSlowDeepImage from '../assets/images/classes/long-slow-deep-lsd.jpg';
+import powerFlowHotImage from '../assets/images/classes/power-flow-hot.jpg';
+import yinYogaImage from '../assets/images/classes/yin-yoga.jpg';
+import yogaSculptWarmImage from '../assets/images/classes/yoga-sculpt-warm.jpg';
 
-// Helper to handle both HTML and Markdown content
+type ClassType = 'heated' | 'non-heated';
+
+interface StudioClass {
+	name: string;
+	type: ClassType;
+	description: string;
+	temperature: string | null;
+	image: ImageMetadata;
+}
+
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch all classes from Strapi
-const classesResponse = await fetchAPI<any>({
-	endpoint: 'classes',
-	query: {
-		'populate': 'image',
-		'sort': 'sortOrder:asc'
+const studioClasses: StudioClass[] = [
+	{
+		name: "Bikram (Hot)",
+		type: "heated",
+		description: `This is your Classic 26/2 Hot Yoga (Bikram style) class. It is a set sequence of 26 asanas (postures) and 2 pranayamas (breathing exercises). This sequence is completed twice throughout the 90-minute class. Designed to warm and stretch your muscles, ligaments, and tendons in the order that is most beneficial to the body. This is a 90-minute class practiced in a room heated to 104° F with 40% humidity.`,
+		temperature: "104°F",
+		image: bikramHotImage,
 	},
-	wrappedByKey: 'data'
-});
+	{
+		name: "Functional Flow (Warm)",
+		type: "heated",
+		description: `Come experience the combination of vinyasa, core, and mobility exercises to enhance balance, strength, and flexibility. Our Functional Flow practice focuses on creating stability and comfort through precise alignment and mindful movement. This class will help you further develop your physical stability which may positively impact your emotional and mental well-being. The practice encourages a dynamic yet grounded and expressive experience within each pose. Each class will end with an extended period of relaxation (savasana) and cool lavender cloths. (Warm) is heated to below body temperature.`,
+		temperature: "90-94°F",
+		image: functionalFlowWarmImage,
+	},
+	{
+		name: "Flow (Warm)",
+		type: "heated",
+		description: `Flow (warm) is a yoga class that typically focuses on slow and smooth movements combined with deep breathing and relaxation techniques. It is great for all levels, including beginners, and those looking for a more soothing and grounding practice. You can expect gentle stretches, poses, and sequences that promote flexibility, balance, and stress relief. This class is a great way to unwind, release tensions, and connect with your body and breath. 
 
-// Separate classes by type
-const heatedClassData = classesResponse
-	.filter((classItem: any) => classItem.type === 'heated')
-	.map((classItem: any) => ({
-		name: classItem.name,
-		temperature: classItem.temperature,
-		description: processContent(classItem.description),
-		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
-	}));
+*Each class will end with an extended period of relaxation (savasana) and cool lavender cloths. Flow (warm) is heated to below body temperature and approximately 40% humidity to maximize your flow, increase oxygen levels, and improve the mind and body connection.`,
+		temperature: "90-94°F",
+		image: flowWarmImage,
+	},
+	{
+		name: "Power Flow (Hot)",
+		type: "heated",
+		description: `Power Flow is a vinyasa yoga class that focuses on building strength, alignment, flexibility, core, and stamina. This faster paced class combines traditional yoga postures with more intense movements and cardiovascular exercises while promoting focused breathing and mindfulness. Power Flow includes a series of challenging sequences designed to challenge both the body and the mind. It’ll help build muscle tone, aid in stress relief, and mental clarity.  
 
-const nonHeatedClassData = classesResponse
-	.filter((classItem: any) => classItem.type === 'non-heated')
-	.map((classItem: any) => ({
-		name: classItem.name,
-		description: processContent(classItem.description),
-		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
-	}));
+Each class will end with an extended period of relaxation (savasana) and cool lavender cloths.  Power Flow (hot) is heated to above body temperature and approximately 40% humidity to maximize your flow, increase oxygen levels and improve the mind and body connection.`,
+		temperature: "104°F",
+		image: powerFlowHotImage,
+	},
+	{
+		name: "Yoga Sculpt (Warm)",
+		type: "heated",
+		description: `Yoga Sculpt is a dynamic class that includes yoga poses with strength training exercises for a full-body workout. You may use light weights (dumbbells) to tone and define targeted muscle groups. This class is set to an upbeat playlist and often includes cardio bursts to raise the heart rate and get the body moving. 
+
+The practice ends with a cool-down and relaxation period to calm the body and mind. This class is perfect for anyone looking for a challenging, full-body workout that combines the benefits of yoga and strength training. Whether you're a beginner or an experienced yogi, our Yoga Sculpt class is sure to leave you feeling energized and empowered.`,
+		temperature: "90-94°F",
+		image: yogaSculptWarmImage,
+	},
+	{
+		name: "Flow",
+		type: "non-heated",
+		description: `Flow (Non-Heated)  is a yoga class that typically focuses on slow and smooth movements combined with deep breathing and relaxation techniques without worrying about a heated room. It is great for all levels, including beginners, and those looking for a more soothing and grounding practice. You can expect gentle stretches, poses, and sequences that promote flexibility, balance, and stress relief. This class is a great way to unwind, release tensions, and connect with your body and breath. 
+
+*Each class will end with an extended period of relaxation (savasana) and cool lavender cloths. `,
+		temperature: null,
+		image: flowImage,
+	},
+	{
+		name: "Yin Yoga",
+		type: "non-heated",
+		description: `A gentle practice intended to stretch the body, using longer holds to get beyond the muscle tissue into the connective tissue. Most poses are floor based with various props available for support throughout your Yin practice. The slower nature of this class is often described as a “moving meditation”. A great compliment to your strengthening practice. All levels are welcome!`,
+		temperature: null,
+		image: yinYogaImage,
+	},
+	{
+		name: "Long, Slow, Deep (LSD)",
+		type: "non-heated",
+		description: `This 90-minute set sequence is designed to open up and work into the muscles all around the hip joint.  In this non-heated class, you will release all muscle groups surrounding the hip joint, which in turn leads to more mobility, less compression, healthier pelvis and spinal alignment.  All poses are floor based with various props available to support your body throughout your practice. All levels are welcome!`,
+		temperature: null,
+		image: longSlowDeepImage,
+	},
+];
+
+const heatedClassData = studioClasses
+	.filter(c => c.type === 'heated')
+	.map(c => ({ ...c, description: processContent(c.description) }));
+
+const nonHeatedClassData = studioClasses
+	.filter(c => c.type === 'non-heated')
+	.map(c => ({ ...c, description: processContent(c.description) }));
 ---
 
 <Layout title="Class Descriptions — Love More">
@@ -137,10 +198,11 @@ const nonHeatedClassData = classesResponse
 									</div>
 								</div>
 								<div class={`relative select-none bg-neutral-50 h-full overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-									<img
+									<Image
 										src={classItem.image}
-										alt=""
+										alt={classItem.name}
 										class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+										loading={index < 2 ? 'eager' : 'lazy'}
 									/>
 								</div>
 							</a>
@@ -168,8 +230,8 @@ const nonHeatedClassData = classesResponse
 								class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-white lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
 							>
 								<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-									<header class="flex items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
-										<h3 class="text-xl font-bold text-charcoal">
+									<header class="flex flex-col items-center gap-y-2 border-b border-neutral-200 px-8 py-6 lg:flex-row lg:justify-between lg:gap-x-4">
+										<h3 class="text-xl font-bold text-charcoal text-center lg:text-left">
 											{classItem.name}
 										</h3>
 										<span class="inline-flex items-center gap-1 px-3 py-1 bg-cream rounded-full border border-neutral-200 text-sm shrink-0">
@@ -188,10 +250,11 @@ const nonHeatedClassData = classesResponse
 									</div>
 								</div>
 								<div class={`relative select-none bg-neutral-50 h-full overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-									<img
+									<Image
 										src={classItem.image}
-										alt=""
+										alt={classItem.name}
 										class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+										loading="lazy"
 									/>
 								</div>
 							</a>

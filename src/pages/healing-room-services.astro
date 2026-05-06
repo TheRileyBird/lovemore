@@ -5,39 +5,60 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { ArrowRight, HeartHandshake } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import heroImage from '../assets/images/heart-kneel.jpg';
+import compressionTherapyImage from '../assets/images/classes/compression-therapy.jpg';
+import intuitiveGuidanceImage from '../assets/images/classes/intuitive-guidance-coaching.jpg';
+import redLightTherapyImage from '../assets/images/classes/red-light-therapy.jpg';
+import reikiImage from '../assets/images/classes/reiki.jpg';
+import sriYantraSoundHealingImage from '../assets/images/classes/sri-yantra-sound-healing.jpg';
+
+interface HealingRoomService {
+	name: string;
+	description: string;
+	image: ImageMetadata;
+}
 
 function processContent(content: string): string {
 	if (!content) return '';
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-let healingRoomServices = [];
-try {
-	const classesResponse = await fetchAPI<any>({
-		endpoint: 'classes',
-		query: {
-			'filters[active][$eq]': true,
-			'filters[type][$eq]': 'healing-room',
-			'populate': 'image',
-			'sort': 'sortOrder:asc'
-		},
-		wrappedByKey: 'data'
-	});
-
-	healingRoomServices = classesResponse?.map((classItem: any) => ({
-		name: classItem.name,
-		description: processContent(classItem.description),
-		image: classItem.image ? getStrapiMedia(classItem.image.formats?.medium?.url || classItem.image.url) : null
-	})) || [];
-} catch (error) {
-	console.warn('Failed to fetch healing room services from Strapi:', error);
-}
+const healingRoomServices: HealingRoomService[] = [
+	{
+		name: "Compression Therapy",
+		description: `Through the compression pant sleeves and Hyperice compression system, this 20 minute recovery session is flushing the toxins and allowing new oxygen and blood into your lower extremities. With the lights drawn low, you are allowed to lay in comfort and extend your savassana practice an extra 10 or 20 minutes while getting amazing recovery benefits.`,
+		image: compressionTherapyImage,
+	},
+	{
+		name: "Reiki",
+		description: `Reiki is a gentle, energy-based healing experience designed to promote relaxation, balance, and overall well-being. Reiki is often used to:
+- Reduce stress and anxiety
+- Support emotional release
+- Improve sleep and relaxation
+- Enhance overall energy flow
+After a session, you may feel lighter, more grounded, or deeply calm. Some people also notice shifts in mood, clarity, or physical tension over the following days. It’s a subtle yet powerful practice that meets you exactly where you are—whether you’re seeking rest, healing, or simply a moment to reconnect with yourself.`,
+		image: reikiImage,
+	},
+	{
+		name: "Intuitive Guidance & Coaching",
+		description: `This 90-minute 1:1 session is for moms, creators, entrepreneurs, or anyone feeling the pull toward a more aligned and intentional life. Together, we’ll explore what’s holding you back, clarify your next steps, and build practical tools you can use in your daily life.`,
+		image: intuitiveGuidanceImage,
+	},
+	{
+		name: "Red Light Therapy",
+		description: `Red light sessions are 15 mins, red light blankets, which incorporate red light therapy, offer a variety of potential benefits, including muscle recovery, pain relief, improved skin health, and enhanced sleep. They work by exposing the body to specific wavelengths of light that can stimulate various cellular processes, promoting healing and overall well-being.`,
+		image: redLightTherapyImage,
+	},
+	{
+		name: "Sri Yantra Sound Healing",
+		description: `This personalized session combines VoiceBio Voice Analysis, prescribed sound bath therapy, and Tuning Fork Therapy to support your healing journey. Using Cymatic Frequencies through Body Pod body speakers and the Sound Lounge Sound Bed (included in the first session), the therapy is designed to restore balance and well-being. Each private, 60-90 minute session equips you with resources and quidance to continue your on practice of healing.`,
+		image: sriYantraSoundHealingImage,
+	},
+].map(service => ({ ...service, description: processContent(service.description) }));
 ---
 
 <Layout title="Healing Room Services — Love More">
@@ -108,8 +129,8 @@ try {
 									class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
 								>
 									<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-										<header class="flex items-center border-b border-neutral-200 px-8 py-6">
-											<h3 class="text-xl font-bold text-charcoal">
+										<header class="flex items-center justify-center border-b border-neutral-200 px-8 py-6 lg:justify-start">
+											<h3 class="text-xl font-bold text-charcoal text-center lg:text-left">
 												{service.name}
 											</h3>
 										</header>
@@ -124,17 +145,12 @@ try {
 										</div>
 									</div>
 									<div class={`relative select-none bg-neutral-50 h-full overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-										{service.image ? (
-											<img
-												src={service.image}
-												alt=""
-												class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-											/>
-										) : (
-											<div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand/10 to-cream-200">
-												<HeartHandshake class="w-24 h-24 text-brand/40" aria-hidden="true" />
-											</div>
-										)}
+										<Image
+											src={service.image}
+											alt={service.name}
+											class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+											loading={index < 2 ? 'eager' : 'lazy'}
+										/>
 									</div>
 								</a>
 							))}

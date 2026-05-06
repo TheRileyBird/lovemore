@@ -5,45 +5,92 @@ import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import Divider from '../components/Divider.astro';
 import { Sparkles, ArrowRight, Calendar } from 'lucide-astro';
-import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import { marked } from 'marked';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import heroImage from '../assets/images/moon.jpg';
 
-// Helper to handle both HTML and Markdown content
+interface SpecialtyEvent {
+	name: string;
+	type: string;
+	date: string;
+	description: string;
+	image: ImageMetadata | null;
+}
+
+const eventImages = import.meta.glob('../assets/images/events/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+
+function getEventImage(path: string): ImageMetadata {
+	const image = eventImages[path];
+	if (!image) throw new Error(`Missing event image: ${path}`);
+	return image;
+}
+
+const specialtyEvents: SpecialtyEvent[] = [
+  {
+    name: "Aerial Yoga",
+    type: "special-event",
+    date: "2026-04-17",
+    description: `Join Danielle for a fun and supportive aerial yoga class designed for all levels from first-timers to seasoned yogis.`,
+    image: getEventImage("../assets/images/events/aerial-yoga.jpg"),
+  },
+  {
+    name: "Ecstatic Dance Event",
+    type: "special-event",
+    date: "2026-05-01",
+    description: `An evening of movement in a welcoming, judgment-free space. Let the rhythm guide you to self-expression, connection, and release. 
+No experience needed!
+$15`,
+    image: getEventImage("../assets/images/events/ecstatic-dance-event.png"),
+  },
+  {
+    name: "Inner-G",
+    type: "community-gathering",
+    date: "2026-05-09",
+    description: `You are invited into a living, breathing circle of beauty, expression, and remembrance- where daughters, mothers, grandmothers, aunties, and women of all ages come together.
+Saturday May 9th at 4pm - $33`,
+    image: getEventImage("../assets/images/events/inner-g.png"),
+  },
+  {
+    name: "Gong Soundbath",
+    type: "special-event",
+    date: "2026-05-30",
+    description: `Experience the power of gongs, sound bowls and other instruments as you relax and enjoy the powerful healing benefits.
+Join Joe Saturday, May 30th @ 6:00 pm
+$35`,
+    image: getEventImage("../assets/images/events/gong-soundbath.png"),
+  },
+  {
+    name: "Yoga on the Patio @ Meribo",
+    type: "special-event",
+    date: "2026-05-31",
+    description: `Join us at Meribo for a donation based class and outdoor flow. All donations will go to NAMI! 
+Sunday, May 31st @ 9:00 am - Donations based`,
+    image: getEventImage("../assets/images/events/yoga-on-the-patio-meribo.png"),
+  },
+  {
+    name: "Kids Camp",
+    type: "special-event",
+    date: "2026-06-22",
+    description: `Our camp offers a blend of activities, including movement exercises, crafts, cooking, gardening, social-emotional development, mindfulness, and plenty of playtime, encouraging kids to explore their potential.
+
+Monday, June 22nd- Friday, June 26th
+9:00 AM - 2:00 PM`,
+    image: getEventImage("../assets/images/events/kids-camp.png"),
+  },
+];
+
+
 function processContent(content: string): string {
 	if (!content) return '';
-	// If content contains HTML tags, return as-is
-	if (content.includes('<p>') || content.includes('<strong>')) {
-		return content;
-	}
-	// Otherwise treat as Markdown
+	if (content.includes('<p>') || content.includes('<strong>')) return content;
 	return marked(content);
 }
 
-// Fetch events from Strapi
-let specialtyOfferings = [];
-try {
-	const eventsResponse = await fetchAPI<any>({
-		endpoint: 'events',
-		query: {
-			'filters[active][$eq]': true,
-			'populate': 'image',
-			'sort': 'date:asc'
-		},
-		wrappedByKey: 'data'
-	});
-
-	specialtyOfferings = eventsResponse?.map((event: any) => ({
-		name: event.name,
-		type: event.type,
-		date: event.date,
-		description: processContent(event.description),
-		image: event.image?.url ? getStrapiMedia(event.image.url) : null
-	})) || [];
-} catch (error) {
-	console.warn('Failed to fetch events from Strapi:', error);
-	// Continue with empty array - page will still render
-}
+const now = new Date();
+const specialtyOfferings = specialtyEvents
+	.filter(e => new Date(e.date) >= now)
+	.map(e => ({ ...e, description: processContent(e.description) }));
 ---
 
 <Layout title="Specialty Classes — Love More">
@@ -117,8 +164,8 @@ try {
 								class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
 							>
 								<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-									<header class="flex items-center justify-between gap-x-4 border-b border-neutral-200 px-8 py-6">
-										<h3 class="text-xl font-bold text-charcoal">
+									<header class="flex flex-col items-center gap-y-2 border-b border-neutral-200 px-8 py-6 lg:flex-row lg:justify-between lg:gap-x-4">
+										<h3 class="text-xl font-bold text-charcoal text-center lg:text-left">
 											{offering.name}
 										</h3>
 										<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm shrink-0">
@@ -137,17 +184,12 @@ try {
 									</div>
 								</div>
 								<div class={`relative select-none bg-neutral-50 h-full overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-									{offering.image ? (
-										<img
-											src={offering.image}
-											alt=""
-											class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-										/>
-									) : (
-										<div class="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-50">
-											<Sparkles class="w-24 h-24 text-purple-300" aria-hidden="true" />
-										</div>
-									)}
+									<Image
+										src={offering.image}
+										alt={offering.name}
+										class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+										loading={index < 2 ? 'eager' : 'lazy'}
+									/>
 								</div>
 							</a>
 						))}
