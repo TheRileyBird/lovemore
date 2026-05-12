@@ -88,27 +88,27 @@ const cleanBody = stripHtml(body);
 	class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
 >
 	<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-		<header class="flex flex-col items-center gap-y-2 border-b border-neutral-200 px-8 py-6 lg:flex-row lg:justify-between lg:gap-x-4">
-			<h3 class="text-xl font-bold text-charcoal text-center lg:text-left">
-				{title}
-			</h3>
-			<div class="flex flex-col items-center gap-2 shrink-0 sm:flex-row">
-				{dateDisplay && (
-					<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm">
-						<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
-						{dateDisplay}
-					</span>
-				)}
+		<header class="flex flex-col gap-y-2 border-b border-neutral-200 px-8 py-6">
+			<div class="flex items-center justify-between gap-4">
+				<h3 class="text-2xl font-bold text-charcoal line-clamp-1 min-w-0">
+					{title}
+				</h3>
 				{price && (
-					<span class="inline-flex items-center px-3 py-1 bg-brand text-white rounded-full text-sm font-semibold">
+					<span class="inline-flex items-center shrink-0 px-3 py-1 bg-brand text-white rounded-full text-sm font-semibold">
 						${price}
 					</span>
 				)}
 			</div>
+			{dateDisplay && (
+				<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm self-start">
+					<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
+					{dateDisplay}
+				</span>
+			)}
 		</header>
 		<div class="p-10 pb-20">
 			{subtitle && (
-				<p class="text-lg text-neutral-600 font-medium mb-3">{subtitle}</p>
+				<p class="font-bold uppercase text-black font-display mb-3">{subtitle}</p>
 			)}
 			<div class="prose line-clamp-6 max-w-none text-neutral-600 leading-relaxed [&_p]:mb-4">{cleanBody}</div>
 		</div>

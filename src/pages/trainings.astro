@@ -33,16 +33,64 @@ function getTrainingImage(path: string): ImageMetadata {
 
 const trainings: Training[] = [
   {
+    title: "200HR-RYT Yoga Teacher Training",
+    subtitle: "at Hattiesburg Hot Yoga",
+    slug: "hattiesburg-ytt",
+    startDate: "2026-09-11",
+    endDate: "2027-03-21",
+    price: 3250,
+    flyerImage: getTrainingImage("../assets/images/trainings/HtsburgYTT.jpg"),
+    headerImage: getTrainingImage("../assets/images/trainings/HtsburgYTT.jpg"),
+    ctaText: "Sign Up & Explore Payment Options",
+    ctaLink: "https://www.wellnessliving.com/rs/event/lovemore?k_class=966114&k_class_tab=39794",
+    body: `Step Into the Journey of A Lifetime. . .a deeper understanding to your yoga practice and your own personal self.
+
+This training is through Love More University and held at Hattiesburg Hot Yoga in Hattiesburg, MS.
+
+Get Certified in 8 Weekends!
+
+Dates for the next session are:
+
+- September 11th–13th
+- October 2nd–4th
+- November 6th–8th
+- December 4th–6th
+- January 8th–10th, 2027
+- January 22nd–24th
+- February 26th–28th
+- March 19th–21st *(Graduation Weekend)*
+
+Fridays from 5:00pm–9:00pm
+
+Saturdays from 8:00am–8:00pm
+
+Sundays from 8:00am–3:00pm
+
+This 200+ hour yoga teacher training is designed to take your personal practice and understanding of yoga to a whole new level and provide you with the skillset to offer students an intelligent, dynamic and inspiring yoga class. The course is ideal for serious students and aspiring teachers. With thousands of hours of teaching experience, this teacher training program will provide an in-depth exploration into the practice, process and science of yoga.
+
+The day consists of lecture time, meditation, posture clinics, self study, practice teaching and asana practice. Topics covered include: Detailed, alignment-based posture clinics, Multiple methods of sequencing a Vinyasa class, Meditation, Philosophy of yoga, Physical and energetic anatomy, Heat management, Daily physical practice.
+
+This training is designed to adequately prepare you to teach a dynamic and inspiring vinyasa yoga class.
+
+You will have a vinyasa sequence that you are prepared to deliver in a safe and professional manner as well as be able to modify or intensify this sequence depending on your audience.
+
+You will have the information to build your own sequences, understanding the how and why in creating a class.
+
+You will understand yourself better and have a more informed personal practice.
+
+You will have completed all of the requirements of a Yoga Alliance Recognized Teacher Training program and be qualified to request registration with Yoga Alliance.`,
+  },
+  {
     title: "200+ RYT Yoga Teacher Training with ayurveda philosophy & asanas",
     subtitle: null,
     slug: "training",
     startDate: "2026-05-15",
     endDate: "2026-07-12",
-    price: null,
+    price: 3250,
     flyerImage: getTrainingImage("../assets/images/trainings/training.jpg"),
     headerImage: getTrainingImage("../assets/images/trainings/training-header.jpg"),
-    ctaText: "Learn More",
-    ctaLink: "/contact",
+    ctaText: "Sign Up & Explore Payment Options",
+    ctaLink: "https://www.wellnessliving.com/rs/event/lovemore?k_class=963493&k_class_tab=39794",
     body: `Step Into the Journey of A Lifetime. . .a deeper understanding to your yoga practice and your own personal self.
 
 This training is through Love More University and held at Love More studio in beautiful downtown Covington, LA.
@@ -167,6 +215,7 @@ function processContent(content: string): string {
 const now = new Date();
 const currentTrainings = trainings
 	.filter(t => t.slug && (!t.endDate || new Date(t.endDate) >= now))
+	.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
 	.map(t => ({ ...t, body: processContent(t.body) }));
 ---
 

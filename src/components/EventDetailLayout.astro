@@ -97,7 +97,7 @@ const dateDisplay = startDate && endDate
 			<!-- Buttons -->
 			<div class="flex flex-col mb-12 sm:flex-row gap-4 justify-center">
 				{ctaButtonLabel && ctaButtonUrl ? (
-					<Button href={ctaButtonUrl} variant="primary" size="large">
+					<Button href={ctaButtonUrl} variant="primary" size="large" external={true}>
 						{ctaButtonLabel}
 					</Button>
 				) : (
