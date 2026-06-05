@@ -9,6 +9,7 @@ import { marked } from 'marked';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import heroImage from '../assets/images/moon.jpg';
+import layingImage from '../assets/images/laying.jpg';
 
 interface SpecialtyEvent {
 	name: string;
@@ -52,13 +53,25 @@ Saturday May 9th at 4pm - $33`,
     image: getEventImage("../assets/images/events/inner-g.png"),
   },
   {
-    name: "Gong Soundbath",
+    name: "Relaxation Breathwork",
     type: "special-event",
-    date: "2026-05-30",
-    description: `Experience the power of gongs, sound bowls and other instruments as you relax and enjoy the powerful healing benefits.
-Join Joe Saturday, May 30th @ 6:00 pm
-$35`,
-    image: getEventImage("../assets/images/events/gong-soundbath.png"),
+    date: "2026-06-11",
+    description: `Relaxation Breathwork is a gentle breathing practice that uses slow, controlled breaths to calm the nervous system, reduce stress, and promote a sense of ease in the body and mind. Techniques often emphasize longer exhales and steady, natural rhythms.`,
+    image: layingImage,
+  },
+  {
+    name: "Relaxation Breathwork",
+    type: "special-event",
+    date: "2026-06-25",
+    description: `Relaxation Breathwork is a gentle breathing practice that uses slow, controlled breaths to calm the nervous system, reduce stress, and promote a sense of ease in the body and mind. Techniques often emphasize longer exhales and steady, natural rhythms.`,
+    image: layingImage,
+  },
+  {
+    name: "Yoga on the Patio",
+    type: "special-event",
+    date: "2026-06-28",
+    description: `Join us outdoors for a refreshing flow on the patio. All levels welcome.`,
+    image: getEventImage("../assets/images/events/yoga-on-the-patio-meribo.png"),
   },
   {
     name: "Yoga on the Patio @ Meribo",
