@@ -4,11 +4,11 @@ import tailwindcss from '@tailwindcss/vite';
 import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   site: 'https://lovemoremcc.com',
   output: 'static',
-  adapter: command === 'build' ? netlify() : undefined,
+  adapter: netlify(),
   vite: {
     plugins: [tailwindcss()]
   }
-}));
+});
