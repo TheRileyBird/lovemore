@@ -245,6 +245,17 @@ When editors update content in Strapi CMS:
 2. Frontend fetches fresh content on next build
 3. To trigger a frontend rebuild: push a commit or manually trigger in Netlify
 
+### Weekly Auto-Deploy
+
+The frontend is configured to rebuild automatically every Sunday via GitHub Actions. The workflow lives at `.github/workflows/weekly-netlify-deploy.yml` and calls a Netlify build hook.
+
+Setup:
+1. In Netlify, open the Love More site and go to Site configuration > Build & deploy > Build hooks
+2. Create a build hook named `Weekly GitHub deploy` for the production branch
+3. In GitHub, add the hook URL as a repository secret named `NETLIFY_BUILD_HOOK_URL`
+
+The workflow also supports manual runs from GitHub Actions > Weekly Netlify Deploy > Run workflow.
+
 ## API Integration
 
 ### Fetching Content from Strapi
@@ -340,7 +351,7 @@ git commit --allow-empty -m "Trigger rebuild for content update"
 git push origin master
 ```
 
-**Automatic**: Set up a webhook from Strapi to Netlify (Future Enhancement)
+**Automatic**: Wait for the Sunday GitHub Actions workflow or manually run `Weekly Netlify Deploy` from GitHub Actions.
 
 ## Database Management
 

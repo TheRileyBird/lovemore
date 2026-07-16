@@ -1,0 +1,24 @@
+name: Weekly Netlify Deploy
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Sundays at 11:00 UTC. GitHub Actions schedules always use UTC.
+    - cron: "0 11 * * 0"
+
+jobs:
+  trigger-netlify-build:
+    name: Trigger Netlify build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger production deploy
+        env:
+          NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK_URL" ]; then
+            echo "NETLIFY_BUILD_HOOK_URL repository secret is not set."
+            exit 1
+          fi
+
+          curl --fail --silent --show-error --request POST "$NETLIFY_BUILD_HOOK_URL"
