@@ -15,6 +15,7 @@ interface SpecialtyEvent {
 	name: string;
 	type: string;
 	date: string;
+	endDate?: string;
 	description: string;
 	image: ImageMetadata | null;
 }
@@ -91,6 +92,57 @@ Monday, June 22nd- Friday, June 26th
 9:00 AM - 2:00 PM`,
     image: getEventImage("../assets/images/events/kids-camp.png"),
   },
+  {
+    name: "Budukon Workshop",
+    type: "workshop",
+    date: "2026-08-07",
+    description: `The Budokon Primary Series is a unique blend of yoga, martial arts, and mobility training that emphasizes advanced mobility, strength, and control through seven signature movement sequences. It integrates principles from various movement arts to cultivate coordination, balance, and agility, while also focusing on mindfulness and self-awareness.
+
+Join JoEllen, Certified 50hr Budokon Primary Series Coach, as she guides you through portions of the 7 Step Series and introduces the key elements of what the six-week series offers.
+
+Friday, August 7th
+4:30 PM - 6:30 PM
+$35`,
+    image: getEventImage("../assets/images/events/Aug-2.png"),
+  },
+  {
+    name: "Budukon 6-week Series",
+    type: "series",
+    date: "2026-08-13",
+    endDate: "2026-09-24",
+    description: `Each week, we will break down a new section of the 7 Step Series and build each week to flow into the entire series by week six.
+
+Thursdays, August 13th - September 24th
+No class on September 17th
+4:30 PM - 5:45 PM
+$120 members / $150 non-members`,
+    image: getEventImage("../assets/images/events/Aug-7.png"),
+  },
+  {
+    name: "Inner-G: The Art of Remembering",
+    type: "community-gathering",
+    date: "2026-08-14",
+    description: `A gathering for the woman who's ready to come home to herself.
+
+Have you been moving through life on autopilot? Taking care of everyone else while quietly losing touch with yourself. Ignoring the whispers of your body. Setting aside the desires of your heart. Wondering why you feel disconnected from the woman you were created to be.
+
+INNER-G is an invitation to slow down, soften, and remember. Through guided reflection, embodied movement practices, meaningful conversation, and prayer, you'll leave feeling more grounded, more connected, and more at home in yourself.
+
+Friday, August 14th
+6:00 PM
+$33`,
+    image: getEventImage("../assets/images/events/Aug-4.png"),
+  },
+  {
+    name: "Yoga on the Patio",
+    type: "special-event",
+    date: "2026-08-30",
+    description: `Join us outdoors for a donation-based class at Meribo benefitting NAMI. All levels welcome.
+
+Sunday, August 30th
+9:00 AM`,
+    image: getEventImage("../assets/images/events/Aug-5.png"),
+  },
 ];
 
 
@@ -100,10 +152,16 @@ function processContent(content: string): string {
 	return marked(content);
 }
 
+function parseLocalDate(value: string): Date {
+	const [year, month, day] = value.split('-').map(Number);
+	return new Date(year, month - 1, day);
+}
+
 const now = new Date();
+now.setHours(0, 0, 0, 0);
 const specialtyOfferings = specialtyEvents
-	.filter(e => new Date(e.date) >= now)
-	.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+	.filter(e => parseLocalDate(e.endDate ?? e.date) >= now)
+	.sort((a, b) => parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime())
 	.map(e => ({ ...e, description: processContent(e.description) }));
 ---
 

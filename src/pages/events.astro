@@ -3,8 +3,92 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
-import { Sparkles } from 'lucide-astro';
+import { ArrowRight, Calendar, Sparkles } from 'lucide-astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import heroImage from '../assets/images/porch.jpeg';
+
+interface UpcomingEvent {
+	title: string;
+	date: string;
+	endDate?: string;
+	dateLabel: string;
+	price: string;
+	host: string;
+	description: string[];
+	image: ImageMetadata;
+}
+
+const eventImages = import.meta.glob('../assets/images/events/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+
+function getEventImage(path: string): ImageMetadata {
+	const image = eventImages[path];
+	if (!image) throw new Error(`Missing event image: ${path}`);
+	return image;
+}
+
+function parseLocalDate(value: string): Date {
+	const [year, month, day] = value.split('-').map(Number);
+	return new Date(year, month - 1, day);
+}
+
+const events: UpcomingEvent[] = [
+	{
+		title: 'Budukon Workshop',
+		date: '2026-08-07',
+		dateLabel: 'Friday, August 7, 2026 | 4:30 PM - 6:30 PM',
+		price: '$35',
+		host: 'with JoEllen',
+		description: [
+			'The Budokon Primary Series is a unique blend of yoga, martial arts, and mobility training that emphasizes advanced mobility, strength, and control through seven signature movement sequences.',
+			'Join JoEllen, Certified 50hr Budokon Primary Series Coach, as she guides you through portions of the 7 Step Series and introduces the key elements of what the six-week series offers.'
+		],
+		image: getEventImage('../assets/images/events/Aug-2.png')
+	},
+	{
+		title: 'Budukon 6-week Series',
+		date: '2026-08-13',
+		endDate: '2026-09-24',
+		dateLabel: 'Thursdays, August 13 - September 24, 2026 | 4:30 PM - 5:45 PM',
+		price: '$120 members / $150 non-members',
+		host: 'with JoEllen',
+		description: [
+			'Each week, we will break down a new section of the 7 Step Series and build each week to flow into the entire series by week six.',
+			'No class on September 17.'
+		],
+		image: getEventImage('../assets/images/events/Aug-7.png')
+	},
+	{
+		title: 'Inner-G: The Art of Remembering',
+		date: '2026-08-14',
+		dateLabel: 'Friday, August 14, 2026 | 6:00 PM',
+		price: '$33',
+		host: 'with Katelyn & JoEllen',
+		description: [
+			"A gathering for the woman who's ready to come home to herself. INNER-G is an invitation to slow down, soften, and remember.",
+			"Through guided reflection, embodied movement practices, meaningful conversation, and prayer, you'll leave feeling more grounded, more connected, and more at home in yourself."
+		],
+		image: getEventImage('../assets/images/events/Aug-4.png')
+	},
+	{
+		title: 'Yoga on the Patio',
+		date: '2026-08-30',
+		dateLabel: 'Sunday, August 30, 2026 | 9:00 AM',
+		price: 'Donation-based',
+		host: 'at Meribo',
+		description: [
+			'Join us outdoors for a donation-based class at Meribo benefitting NAMI. All levels are welcome.'
+		],
+		image: getEventImage('../assets/images/events/Aug-5.png')
+	}
+];
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcomingEvents = events
+	.filter((event) => parseLocalDate(event.endDate ?? event.date) >= today)
+	.sort((a, b) => parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime());
 ---
 
 <Layout title="Events — Love More">
@@ -47,27 +131,74 @@ import heroImage from '../assets/images/porch.jpeg';
 			</div>
 		</section>
 
-		<!-- Events Widget Section -->
-		<section class="py-16 bg-white" aria-labelledby="upcoming-heading">
+		<!-- Upcoming Events -->
+		<section class="py-20 bg-white" aria-labelledby="upcoming-events-heading">
 			<div class="container mx-auto px-6">
 				<div class="max-w-6xl mx-auto">
-					<h2 id="upcoming-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-12 text-center tracking-wide">
-						Upcoming Events
-					</h2>
+					<div class="text-center mb-16">
+						<h2 id="upcoming-events-heading" class="text-4xl md:text-5xl font-display font-bold text-charcoal mb-4 tracking-wide">
+							Upcoming Events
+						</h2>
+						<p class="text-lg text-neutral-600 leading-relaxed max-w-3xl mx-auto">
+							Unique experiences designed to deepen your practice, expand your skills, and connect with our community in meaningful ways.
+						</p>
+					</div>
 
-					<!-- WellnessLiving Events Widget -->
-					<div class="wl-widget" data="k_skin=199162&url_page=-Ci1wHmoMPSorFhoqfa4zK4BqJE%3Ahttps%3A%2F%2Fwww.lovemorehotyoga.com%2Fevents"></div>
-
-					<noscript>
-						<div class="bg-cream-50 p-12 rounded-2xl text-center mt-8">
-							<p class="text-lg text-neutral-600 mb-6">
-								JavaScript is required to view upcoming events. Please enable JavaScript in your browser.
-							</p>
-							<p class="text-neutral-600">
-								Or contact us directly to learn about upcoming events and workshops.
+					{upcomingEvents.length === 0 ? (
+						<div class="text-center py-12">
+							<p class="text-lg text-neutral-600 mb-4">
+								Check our events calendar for upcoming specialty classes and workshops.
 							</p>
 						</div>
-					</noscript>
+					) : (
+						<div class="flex flex-col gap-y-8">
+							{upcomingEvents.map((event, index) => (
+								<a
+									href="/schedule"
+									class={`group grid grid-cols-1 overflow-clip rounded-[1.875rem] border border-neutral-200 bg-cream lg:grid-cols-2 lg:grid-rows-1 transition-all duration-500 hover:shadow-2xl ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
+								>
+									<div class={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+										<header class="flex flex-col gap-y-2 border-b border-neutral-200 px-8 py-6">
+											<div class="flex items-center justify-between gap-4">
+												<h3 class="text-2xl font-bold text-charcoal line-clamp-1 min-w-0">
+													{event.title}
+												</h3>
+												<span class="inline-flex items-center shrink-0 px-3 py-1 bg-brand text-white rounded-full text-sm font-semibold">
+													{event.price}
+												</span>
+											</div>
+											<span class="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full border border-neutral-200 text-sm self-start">
+												<Calendar class="w-4 h-4 text-brand" aria-hidden="true" />
+												{event.dateLabel}
+											</span>
+										</header>
+										<div class="p-10 pb-20">
+											<p class="font-bold uppercase text-black font-display mb-3">{event.host}</p>
+											<div class="space-y-4 text-neutral-600 leading-relaxed">
+												{event.description.map((paragraph) => (
+													<p>{paragraph}</p>
+												))}
+											</div>
+										</div>
+										<div class="absolute bottom-0 left-0 right-0 px-10 pb-6 translate-y-0 opacity-100 lg:translate-y-full lg:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+											<span class="inline-flex items-center gap-2 py-3 text-brand font-bold tracking-wider uppercase text-sm">
+												Book Now
+												<ArrowRight class="w-4 h-4" aria-hidden="true" />
+											</span>
+										</div>
+									</div>
+									<div class={`relative select-none bg-neutral-50 h-full min-h-[300px] overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+										<Image
+											src={event.image}
+											alt={event.title}
+											class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+											loading={index < 2 ? 'eager' : 'lazy'}
+										/>
+									</div>
+								</a>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 		</section>
@@ -95,11 +226,3 @@ import heroImage from '../assets/images/porch.jpeg';
 
 	<Footer />
 </Layout>
-
-<script>
-	// Load WellnessLiving widget script
-	const script = document.createElement('script');
-	script.src = 'https://widgets.wellnessliving.com/static/js/widget.js';
-	script.async = true;
-	document.body.appendChild(script);
-</script>
