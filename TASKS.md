@@ -33,16 +33,31 @@ unchecked task unless you are starting it.
       Community Unlimited "1 Buddy Pass per month" -> 3 (line 23). Movement Mini,
       5 Class Pack and General Admission grant no guest passes and the site
       claims none. start.astro does not mention buddy passes at all.
-- [x] Add a monthly automated check that every WellnessLiving link on the site
-      still resolves. WellnessLiving serves "Systems Error: Promotion does not
-      exist" with HTTP 200, so the check must grep the response body, not just
-      the status code.
-      Done 2026-09-01: added scripts/check-wellnessliving-links.mjs (no deps,
-      Node stdlib only) plus `npm run check:links`, and
-      .github/workflows/monthly-link-check.yml running it on the 1st at 12:00
-      UTC. The script scrapes every WellnessLiving URL out of src/, fetches
-      each, and fails on error signatures in the body ("Systems Error",
-      "... does not exist", the 10s meta-refresh bounce to catalog-list). It
-      reports which source file holds each dead link. Exit 1 = dead link,
-      exit 2 = unreachable after 3 tries (transient). Regression-tested by
-      reintroducing k_id=4035272: correctly failed and named start.astro.
+- [x] Add an automated weekly check that every WellnessLiving link on the site
+      still resolves, and repair changed product ids automatically without
+      needing human input. WellnessLiving serves "Systems Error: Promotion does
+      not exist" with HTTP 200, so checks must read the response body.
+      Done 2026-09-01:
+      - Moved all catalog ids into src/data/wellnessliving-products.json with a
+        typed helper at src/data/wellnessliving.ts. Pages now call
+        wlCatalogUrl('introPass') instead of hardcoding URLs, so the healer only
+        ever rewrites one pure-data file. Verified byte-identical output.
+      - scripts/check-wellnessliving-links.mjs (`npm run check:links`): fast,
+        no-dependency body-level check for humans.
+      - scripts/heal-wellnessliving-links.mjs (`npm run heal:links`): drives a
+        real browser because WellnessLiving's catalog API is request-signed.
+        Requires two independent signals to agree before writing an id: the
+        store's own ordered product feed for discovery, then the candidate's own
+        product page must render the expected title AND price. Refuses and asks
+        for a human on any mismatch or ambiguity.
+      - .github/workflows/weekly-link-check.yml: Sundays 12:00 UTC (an hour
+        after the deploy). Repairs, verifies the build, commits, pushes,
+        triggers a Netlify deploy. Files/updates one `broken-link` issue for
+        anything it cannot confirm, and closes it once links are healthy.
+      Verified: healthy state untouched; the real 4035272 bug auto-repaired to
+      4244018; refused to repoint the $56 pass at a $2,600 retreat (price
+      guard); partial repair commits the fix AND still reports the failure.
+      NOTE: repo is public, so GitHub auto-disables scheduled workflows after
+      60 days with no repo activity. This job pushing a commit resets that
+      clock whenever it actually repairs something, but a long quiet stretch
+      with no breakage can still disable both this and the weekly deploy.

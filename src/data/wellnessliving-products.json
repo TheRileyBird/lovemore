@@ -1,0 +1,41 @@
+{
+  "_comment": "WellnessLiving product ids. MACHINE-WRITTEN: scripts/heal-wellnessliving-links.mjs rewrites kId here when WellnessLiving changes a product's id. Keep this file pure data so that rewrite stays safe. Add or rename products by hand; 'match' is the store title to look for and 'price' guards against repointing a link at the wrong product.",
+  "business": "288067",
+  "products": {
+    "introPass": {
+      "label": "3 Week Intro Pass",
+      "match": "INTRO SPECIAL",
+      "idSale": 1,
+      "kId": 4244018,
+      "price": "$56.00"
+    },
+    "movementMini": {
+      "label": "Movement Mini",
+      "match": "Movement MINI",
+      "idSale": 1,
+      "kId": 4035277,
+      "price": "$92.00"
+    },
+    "communityUnlimited": {
+      "label": "Community Unlimited",
+      "match": "Community UNLIMITED",
+      "idSale": 1,
+      "kId": 4035293,
+      "price": "$149.00"
+    },
+    "fiveClassPack": {
+      "label": "5 Class Pack",
+      "match": "5 CLASS PACK",
+      "idSale": 1,
+      "kId": 4035299,
+      "price": "$130.00"
+    },
+    "generalAdmission": {
+      "label": "General Admission",
+      "match": "GENERAL ADMISSION",
+      "idSale": 1,
+      "kId": 4035334,
+      "price": "$28.00"
+    }
+  }
+}

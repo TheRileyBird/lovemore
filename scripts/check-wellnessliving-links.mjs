@@ -41,7 +41,29 @@ async function collectSourceFiles(dir) {
 
 async function findLinks() {
 	const links = new Map(); // url -> Set of files referencing it
+	const add = (url, file) => {
+		if (!links.has(url)) links.set(url, new Set());
+		links.get(url).add(file);
+	};
+
+	// Catalog products are built from the products file rather than hardcoded in
+	// pages, so read the ids from there.
+	const catalogPath = join(SRC_DIR, 'data', 'wellnessliving-products.json');
+	const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
+	for (const [key, product] of Object.entries(catalog.products)) {
+		const params = new URLSearchParams({
+			k_business: catalog.business,
+			id_sale: String(product.idSale),
+			k_id: String(product.kId),
+		});
+		add(`https://www.wellnessliving.com/rs/catalog-view.html?${params}`, `${catalogPath} (${key})`);
+	}
+
+	// Event/class links are still written inline in pages.
 	for (const file of await collectSourceFiles(SRC_DIR)) {
+		// The helper above builds its URLs at runtime; scraping its source would
+		// just yield the template literal.
+		if (file === join(SRC_DIR, 'data', 'wellnessliving.ts')) continue;
 		const contents = await readFile(file, 'utf8');
 		for (const match of contents.matchAll(URL_PATTERN)) {
 			// Astro escapes & as &amp; in some contexts; normalise so the request
@@ -49,8 +71,9 @@ async function findLinks() {
 			const url = match[0].replace(/&amp;/g, '&');
 			// Static assets (widget scripts) have no product behind them.
 			if (/\.(js|css|png|jpe?g|svg|webp)$/i.test(url)) continue;
-			if (!links.has(url)) links.set(url, new Set());
-			links.get(url).add(file);
+			// An unresolved template placeholder is not a real link.
+			if (/[${}]/.test(url)) continue;
+			add(url, file);
 		}
 	}
 	return links;

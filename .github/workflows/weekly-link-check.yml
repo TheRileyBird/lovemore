@@ -1,0 +1,166 @@
+name: Weekly WellnessLiving Link Repair
+
+# WellnessLiving changes a product's id when staff edit or recreate it. The stale
+# link then serves "Systems Error: Promotion does not exist" with HTTP 200, so
+# customers hit an error page and nothing on our side notices. On 2026-09-01 that
+# cost us an intro pass sale before a student reported it.
+#
+# This job finds changed ids and repairs them without human input. It only ever
+# rewrites k_id values in src/data/wellnessliving-products.json, and only after
+# confirming the new id renders the expected product name AND price on its own
+# product page. Anything it cannot confirm becomes a GitHub issue instead.
+#
+# Runs an hour after the weekly Netlify deploy so the two never overlap.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Sundays at 12:00 UTC. GitHub Actions schedules always use UTC.
+    - cron: "0 12 * * 0"
+
+# Least privilege: the job commits a data file and files an issue, nothing more.
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: wellnessliving-link-repair
+  cancel-in-progress: false
+
+jobs:
+  repair-links:
+    name: Repair WellnessLiving links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Find and repair changed product ids
+        id: heal
+        run: |
+          set +e
+          npm run heal:links 2>&1 | tee heal-output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # A dead link we could not confirm a replacement for needs a person. Keep
+      # one issue open rather than filing a new one every Sunday.
+      - name: Open or update an issue for anything needing a human
+        if: steps.heal.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create broken-link \
+            --color b60205 \
+            --description "A WellnessLiving purchase link is dead" \
+            --force
+
+          {
+            echo "A WellnessLiving purchase link is broken and could not be repaired automatically."
+            echo
+            echo "**Customers cannot buy the affected product until this is fixed.**"
+            echo
+            echo "\`\`\`"
+            cat heal-output.txt
+            echo "\`\`\`"
+            echo
+            echo "Store: https://www.wellnessliving.com/rs/catalog-list.html?k_business=288067"
+            echo
+            echo "To fix by hand: find the product in the store, then update its \`kId\` in"
+            echo "\`src/data/wellnessliving-products.json\`. If a price legitimately changed,"
+            echo "update \`price\` there too and the repair will succeed on its own next time."
+            echo
+            echo "[Workflow run]($RUN_URL)"
+          } > issue-body.md
+
+          EXISTING=$(gh issue list --label broken-link --state open --limit 1 --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file issue-body.md
+            echo "Commented on existing issue #$EXISTING"
+          else
+            gh issue create \
+              --title "WellnessLiving purchase link is broken" \
+              --label broken-link \
+              --body-file issue-body.md
+          fi
+
+      - name: Verify the site still builds
+        if: steps.heal.outputs.repaired != '' && steps.heal.outputs.repaired != '0'
+        run: npm run build
+
+      - name: Commit the repaired ids
+        id: commit
+        if: steps.heal.outputs.repaired != '' && steps.heal.outputs.repaired != '0'
+        env:
+          # Via env, not template interpolation, so the summary text can never
+          # break out of the command.
+          SUMMARY: ${{ steps.heal.outputs.summary }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/wellnessliving-products.json
+          if git diff --cached --quiet; then
+            echo "Nothing staged; skipping commit."
+            exit 0
+          fi
+          git commit -F - <<EOF
+          fix: repair WellnessLiving product ids ($SUMMARY)
+
+          WellnessLiving changed these product ids, which broke the purchase
+          links. Repaired automatically by .github/workflows/weekly-link-check.yml
+          after confirming the new ids render the expected product name and price.
+
+          Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+          EOF
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Netlify only rebuilds on its own schedule, so push the fix live now.
+      - name: Deploy the fix
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK_URL" ]; then
+            echo "::warning::NETLIFY_BUILD_HOOK_URL is not set; the fix is committed but not deployed."
+            exit 0
+          fi
+          curl --fail --silent --show-error --request POST "$NETLIFY_BUILD_HOOK_URL"
+          echo "Triggered a Netlify deploy."
+
+      # Close the issue once the links are healthy again.
+      - name: Resolve the issue when everything is fixed
+        if: steps.heal.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for number in $(gh issue list --label broken-link --state open --json number --jq '.[].number'); do
+            gh issue comment "$number" --body "All WellnessLiving purchase links resolve again. Closing automatically."
+            gh issue close "$number"
+          done
+
+      # A store we could not read at all is usually a transient outage. Warn
+      # rather than fail, so a WellnessLiving blip does not cry wolf every week.
+      - name: Note an unreachable store
+        if: steps.heal.outputs.exit_code == '2'
+        run: echo "::warning::Could not inspect the WellnessLiving store this run. Will retry next week."
+
+      - name: Fail the run if a link is still broken
+        if: steps.heal.outputs.exit_code == '1'
+        run: |
+          echo "::error::A WellnessLiving purchase link is broken and needs a human. See the issue."
+          exit 1

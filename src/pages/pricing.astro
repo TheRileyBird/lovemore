@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Divider from '../components/Divider.astro';
 import heroImage from '../assets/images/closeup.jpg';
+import { wlCatalogUrl } from '../data/wellnessliving';
 
 const memberships = [
 	{
@@ -28,7 +29,7 @@ const memberships = [
 		],
 		// valueCallout: 'Avg. 2×/week = ~$18 per class, plus all the perks',
 		finePrint: 'Members can pause their membership once per calendar year for up to 3 months. Cancellations require 30 days notice before the next billing cycle.',
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035293',
+		url: wlCatalogUrl('communityUnlimited'),
 		ctaLabel: 'Sign Up',
 		bg: 'bg-white',
 		cardBg: 'bg-cream',
@@ -49,7 +50,7 @@ const memberships = [
 		],
 		// valueCallout: 'Avg. 1×/week = ~$23 per class',
 		finePrint: null,
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035277',
+		url: wlCatalogUrl('movementMini'),
 		ctaLabel: 'Sign Up',
 		bg: 'bg-cream',
 		cardBg: 'bg-white',
@@ -70,7 +71,7 @@ const memberships = [
 		],
 		// valueCallout: 'Great for travelers or those without a monthly commitment — $26 per class',
 		finePrint: null,
-		url: 'https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035299',
+		url: wlCatalogUrl('fiveClassPack'),
 		ctaLabel: 'Buy Now',
 		bg: 'bg-white',
 		cardBg: 'bg-cream',
@@ -224,7 +225,7 @@ const memberships = [
 								Activates on your first visit &nbsp;·&nbsp; No renewals
 							</p>
 							<a
-								href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4244018"
+								href={wlCatalogUrl('introPass')}
 								target="_blank"
 								rel="noopener noreferrer"
 								class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-white text-charcoal hover:bg-cream shadow-sm hover:shadow-md hover:-translate-y-px px-8 py-3.5 text-sm"
@@ -257,7 +258,7 @@ const memberships = [
 								All levels welcome &nbsp;·&nbsp; No commitment
 							</p>
 							<a
-								href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035334"
+								href={wlCatalogUrl('generalAdmission')}
 								target="_blank"
 								rel="noopener noreferrer"
 								class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-white text-charcoal hover:bg-cream shadow-sm hover:shadow-md hover:-translate-y-px px-8 py-3.5 text-sm"
@@ -284,7 +285,7 @@ const memberships = [
 						Purchase a Love More gift card in any amount. The perfect gift for someone ready to invest in their wellbeing — or themselves.
 					</p>
 					<a
-						href="https://www.wellnessliving.com/rs/catalog-view.html?k_business=288067&id_sale=1&k_id=4035334"
+						href={wlCatalogUrl('generalAdmission')}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="inline-flex items-center justify-center font-medium tracking-[0.15em] uppercase rounded-full transition-all duration-200 bg-charcoal text-white hover:bg-brand shadow-sm hover:shadow-md hover:-translate-y-px px-10 py-3.5 text-sm"
