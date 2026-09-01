@@ -61,3 +61,11 @@ unchecked task unless you are starting it.
       60 days with no repo activity. This job pushing a commit resets that
       clock whenever it actually repairs something, but a long quiet stretch
       with no breakage can still disable both this and the weekly deploy.
+      Proven in CI 2026-09-01 (runs 33555748029, 33556518879): read 39 live
+      products, verified all against their own product pages, then repaired a
+      deliberately stale Family Membership id (4035272 -> 3463743), committed as
+      github-actions[bot], pushed to master and triggered a Netlify deploy.
+      Family Membership stays in the products file: it is a real store product
+      no page links to yet, and it is now monitored and ready to link.
+      Also bumped actions/checkout and actions/setup-node to v5 to clear the
+      Node 20 deprecation warning.
