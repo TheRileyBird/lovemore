@@ -1,0 +1,34 @@
+name: Monthly WellnessLiving Link Check
+
+# WellnessLiving changes a product's id when staff edit or recreate it, and the
+# dead link then serves "Systems Error: Promotion does not exist" with HTTP 200.
+# Nothing else on the site notices, so customers hit the error until someone
+# reports it. This job checks the response bodies once a month.
+#
+# When this fails: the log names the dead link and the file it lives in.
+# Get the current id from the store, then update the k_id in that file.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 1st of the month at 12:00 UTC. GitHub Actions schedules always use UTC.
+    - cron: "0 12 1 * *"
+
+jobs:
+  check-links:
+    name: Check WellnessLiving links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # No dependencies needed — the script uses only the Node standard library,
+      # so this skips npm install entirely.
+      - name: Check that every WellnessLiving link resolves
+        run: npm run check:links
