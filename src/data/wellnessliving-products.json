@@ -36,6 +36,13 @@
       "idSale": 1,
       "kId": 4035334,
       "price": "$28.00"
+    },
+    "familyMembership": {
+      "label": "Family Membership",
+      "match": "FAMILY Membership",
+      "idSale": 1,
+      "kId": 4035272,
+      "price": "$219.00"
     }
   }
 }
