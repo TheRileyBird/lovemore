@@ -2,8 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-import { Video, Calendar } from 'lucide-astro';
+import Button from '../components/Button.astro';
+import { Video, Clock, Smartphone, Infinity as InfinityIcon } from 'lucide-astro';
+import { wlFitVidUrl } from '../data/wellnessliving';
 import virtualBanner from '../assets/images/class.jpg';
+
+// FitVID lives on WellnessLiving and cannot be embedded — see wlFitVidUrl().
+const fitVidUrl = wlFitVidUrl();
+
+const benefits = [
+	{
+		icon: Clock,
+		title: 'Short and Doable',
+		description: 'Classes designed to fit the time you actually have, not the time you wish you had.'
+	},
+	{
+		icon: Smartphone,
+		title: 'Anywhere You Are',
+		description: 'Watch on your phone, tablet, or laptop — at home, travelling, or on a lunch break.'
+	},
+	{
+		icon: InfinityIcon,
+		title: 'Yours On Demand',
+		description: 'Press play whenever it suits you and repeat your favorites as often as you like.'
+	}
+];
 ---
 
 <Layout title="Virtual Studio — Love More">
@@ -33,60 +56,50 @@ import virtualBanner from '../assets/images/class.jpg';
 			</div>
 		</section>
 
-		<!-- Video Library Section -->
-		<section class="py-16 bg-cream-50" aria-labelledby="videos-heading">
+		<!-- FitVID Section -->
+		<section class="py-20 bg-cream-50" aria-labelledby="fitvid-heading">
 			<div class="container mx-auto px-6">
-				<div class="max-w-6xl mx-auto">
-					<div class="text-center mb-8">
-						<h2 id="videos-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
-							On-Demand Videos
-						</h2>
-						<p class="text-lg text-neutral-600">
-							Access our library of recorded classes and practice at your own pace.
-						</p>
-					</div>
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 id="fitvid-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						Introducing FitVID
+					</h2>
+					<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
+						FitVID is our library of short online classes, free for Love More members. Roll
+						out your mat at home and move with us whenever the day allows.
+					</p>
+					<p class="text-lg text-neutral-600 mb-10 leading-relaxed">
+						Your videos live in your WellnessLiving account — the same account you use to
+						book classes. Sign in and the whole library is waiting for you.
+					</p>
 
-					<div class="bg-white rounded-2xl shadow-md overflow-hidden" style="min-height: 600px;">
-						<iframe
-							id="videoLibraryIframe"
-							src="https://app.arketa.co/iframe/theinvitation/videos?showFeatured=true"
-							width="100%"
-							style="height: 1050px; border: none;"
-							frameborder="0"
-							allow="payment;fullscreen"
-							allowfullscreen
-							title="Virtual Studio Video Library"
-						></iframe>
-					</div>
+					<Button href={fitVidUrl} variant="primary" size="large" external>
+						Browse FitVID Classes
+					</Button>
+
+					<p class="text-sm text-neutral-500 mt-4">
+						Opens WellnessLiving in a new tab. Sign in with your Love More account to watch.
+					</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- Live Schedule Section -->
-		<section class="py-16 bg-white" aria-labelledby="schedule-heading">
+		<!-- Benefits -->
+		<section class="py-16 bg-white" aria-labelledby="benefits-heading">
 			<div class="container mx-auto px-6">
-				<div class="max-w-6xl mx-auto">
-					<div class="text-center mb-8">
-						<Calendar class="w-12 h-12 text-brand mx-auto mb-4" aria-hidden="true" />
-						<h2 id="schedule-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-4 tracking-wide">
-							Live Virtual Classes
-						</h2>
-						<p class="text-lg text-neutral-600">
-							Join us for live-streamed classes and connect with our community in real-time.
-						</p>
-					</div>
-
-					<div class="bg-white rounded-2xl shadow-md overflow-hidden" style="min-height: 800px;">
-						<iframe
-							id="virtualScheduleIframe"
-							src="https://app.arketa.co/iframe/theinvitation/schedule"
-							width="100%"
-							style="height: 800px; border: none;"
-							frameborder="0"
-							allow="payment"
-							allowfullscreen
-							title="Virtual Studio Live Schedule"
-						></iframe>
+				<div class="max-w-5xl mx-auto">
+					<h2 id="benefits-heading" class="sr-only">Why practice with FitVID</h2>
+					<div class="grid md:grid-cols-3 gap-10">
+						{benefits.map((benefit) => (
+							<div class="text-center">
+								<benefit.icon class="w-10 h-10 text-brand mx-auto mb-5" aria-hidden="true" />
+								<h3 class="text-xl font-display font-bold text-charcoal mb-3 tracking-wide">
+									{benefit.title}
+								</h3>
+								<p class="text-neutral-600 leading-relaxed">
+									{benefit.description}
+								</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>
@@ -102,12 +115,9 @@ import virtualBanner from '../assets/images/class.jpg';
 					<p class="text-lg text-neutral-600 mb-8 leading-relaxed">
 						Nothing beats the energy of practicing together in our studio. Check out our in-studio schedule and join us on the mat.
 					</p>
-					<a
-						href="/schedule"
-						class="inline-flex items-center justify-center gap-2 font-medium tracking-wider uppercase rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2 bg-brand text-white hover:bg-brand-dark hover:shadow-lg px-8 py-4 text-base"
-					>
+					<Button href="/schedule" variant="primary" size="large">
 						View Studio Schedule
-					</a>
+					</Button>
 				</div>
 			</div>
 		</section>

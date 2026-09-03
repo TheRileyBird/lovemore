@@ -69,3 +69,35 @@ unchecked task unless you are starting it.
       no page links to yet, and it is now monitored and ready to link.
       Also bumped actions/checkout and actions/setup-node to v5 to clear the
       Node 20 deprecation warning.
+- [x] Add FitVID access to the site, replacing the Virtual Studio (Arketa) embeds.
+      FitVID catalog: https://www.wellnessliving.com/Wl/Video/Catalog/Catalog.html?k_business=288067&k_video_category=I5kfh5Sa
+      Embed if possible; otherwise link out.
+      Done 2026-09-03: embedding is not possible, so this links out.
+      - Embed research: every response from wellnessliving.com sends
+        `X-Frame-Options: DENY` (verified against the FitVID URL itself, the
+        /rs/ catalog and schedule routes), so no browser will render it in an
+        iframe on our site. WellnessLiving's widget system — the
+        skin-widget-static.js embeds already used on /schedule and the homepage
+        signup — has no video widget: Schedule, Custom Schedule, FitBUILDER,
+        Appointment, Event, Book-a-Spot, Lead Capture, Review, Store and Staff
+        are the only types. The catalog also requires a client sign-in.
+      - Rewrote src/pages/virtual-studio.astro: removed both Arketa iframes
+        (the on-demand video library and the live virtual schedule, per the
+        user's call) and replaced them with a FitVID intro, a link-out button
+        and three benefit cards. Page keeps the "Virtual Studio" name and URL.
+      - Added wlFitVidUrl() to src/data/wellnessliving.ts so the catalog URL
+        lives with the other WellnessLiving links. It is NOT covered by
+        `npm run check:links`: that checker only scans /rs/ URLs, and this one
+        redirects to the login page, which its body check would read as a
+        failure. If the video category is recreated, k_video_category changes
+        there by hand.
+      - Fixed a pre-existing broken link found on the way: the homepage
+        "Explore Virtual Classes" button pointed at /virtual, which has never
+        existed and had no redirect. Now /virtual-studio.
+      - Dropped https://app.arketa.co from the CSP in netlify.toml; nothing
+        references Arketa any more.
+      Verified: build clean (21 pages), zero iframes and zero Arketa references
+      in dist/, FitVID href in the built page matches the given URL, and
+      `npm run check:links` still passes all 10 links. Also confirmed a
+      signed-out visitor is returned to the video library after logging in —
+      WellnessLiving preserves url_return back to the catalog.

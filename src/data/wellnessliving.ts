@@ -30,3 +30,28 @@ export function wlCatalogUrl(key: WlProductKey): string {
 	});
 	return `https://www.wellnessliving.com/rs/catalog-view.html?${params}`;
 }
+
+// FitVID on Demand — our library of short online classes.
+//
+// This is a link-out, not an embed, and it cannot become one: every response
+// from wellnessliving.com carries `X-Frame-Options: DENY`, so no browser will
+// render it inside an iframe on our site. WellnessLiving's widget system
+// (skin-widget-static.js, used on /schedule and the homepage signup) offers no
+// video widget either — Schedule, Custom Schedule, FitBUILDER, Appointment,
+// Event, Book-a-Spot, Lead Capture, Review, Store and Staff are the only types.
+// Verified 2026-09-03.
+//
+// Not covered by `npm run check:links`: that checker only scans /rs/ catalog
+// URLs, and this one redirects to the WellnessLiving login, which the body
+// check would read as a failure. If the video category is ever recreated,
+// `k_video_category` changes here by hand.
+const WL_FITVID_CATEGORY = 'I5kfh5Sa';
+
+/** Our FitVID on Demand video catalog. Requires a client sign-in. */
+export function wlFitVidUrl(): string {
+	const params = new URLSearchParams({
+		k_business: WL_BUSINESS,
+		k_video_category: WL_FITVID_CATEGORY,
+	});
+	return `https://www.wellnessliving.com/Wl/Video/Catalog/Catalog.html?${params}`;
+}
