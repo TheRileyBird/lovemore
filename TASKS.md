@@ -158,4 +158,19 @@ unchecked task unless you are starting it.
       slot blank once — checked and it was a screenshot artifact, not a real
       failure: img.complete is true and the 400w variant loads with no failed
       requests.)
-- [ ] Hide the new /virtual-studio FitVID photo on mobile (requested 2026-09-04).
+- [x] Hide the new /virtual-studio FitVID photo on mobile (requested 2026-09-04).
+      Done 2026-09-04: wrapper is now `hidden md:block`, and the <Image> switched
+      from loading="eager" to loading="lazy".
+      The lazy switch is load-bearing, not cosmetic: a display:none image is
+      still fetched when it is eager, so mobile would have downloaded a ~27kB
+      picture it never shows. Lazy + hidden skips it entirely. Desktop is
+      unaffected because the image sits ~620px down a 900px viewport, well
+      inside the browser's lazy-load threshold, so it still loads during page
+      load rather than popping in.
+      Verified on a COLD cache (restarted the browser between runs — a warm
+      cache masked this and first suggested the opposite):
+      - 390x844: wrapper display:none, naturalWidth 0, ZERO network requests
+        for the image.
+      - 1440x900: visible at 544x680, loads the 550w variant (42kB) immediately
+        on page load.
+      Build clean, 21 pages, no console errors.

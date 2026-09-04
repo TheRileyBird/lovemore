@@ -69,7 +69,12 @@ const benefits = [
 							src={fitVidImage}
 							alt="Love More students seated on colorful mats, arms raised in a studio class"
 							class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-							loading="eager"
+							{/* lazy, not eager: the wrapper is `hidden` below md, and a display:none
+							    image is still fetched when eager — mobile would download a picture it
+							    never shows. Lazy skips it there, and on desktop the image sits ~620px
+							    down, inside the browser's lazy-load threshold, so it still loads
+							    immediately rather than popping in. */}
+							loading="lazy"
 							widths={[400, 550, 800, 1100]}
 							sizes="(min-width: 768px) 544px, 100vw"
 						/>
