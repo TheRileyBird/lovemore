@@ -3,12 +3,16 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
-import { Video, Clock, Smartphone, Infinity as InfinityIcon } from 'lucide-astro';
+import { Image } from 'astro:assets';
+import { Video, Clock, Smartphone, Gift, Infinity as InfinityIcon } from 'lucide-astro';
 import { wlFitVidUrl } from '../data/wellnessliving';
 import virtualBanner from '../assets/images/class.jpg';
+import fitVidImage from '../assets/images/seated.jpg';
 
 // FitVID lives on WellnessLiving and cannot be embedded — see wlFitVidUrl().
 const fitVidUrl = wlFitVidUrl();
+// The free category has no viewing restriction, so it plays without an account.
+const fitVidFreeUrl = wlFitVidUrl('free');
 
 const benefits = [
 	{
@@ -59,26 +63,39 @@ const benefits = [
 		<!-- FitVID Section -->
 		<section class="py-20 bg-cream-50" aria-labelledby="fitvid-heading">
 			<div class="container mx-auto px-6">
-				<div class="max-w-3xl mx-auto text-center">
-					<h2 id="fitvid-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
-						Introducing FitVID
-					</h2>
-					<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
-						FitVID is our library of short online classes, free for Love More members. Roll
-						out your mat at home and move with us whenever the day allows.
-					</p>
-					<p class="text-lg text-neutral-600 mb-10 leading-relaxed">
-						Your videos live in your WellnessLiving account — the same account you use to
-						book classes. Sign in and the whole library is waiting for you.
-					</p>
+				<div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+					<div class="hidden md:block overflow-hidden rounded-lg aspect-[4/5]">
+						<Image
+							src={fitVidImage}
+							alt="Love More students seated on colorful mats, arms raised in a studio class"
+							class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+							loading="eager"
+							widths={[400, 550, 800, 1100]}
+							sizes="(min-width: 768px) 544px, 100vw"
+						/>
+					</div>
 
-					<Button href={fitVidUrl} variant="primary" size="large" external>
-						Browse FitVID Classes
-					</Button>
+					<div class="text-center md:text-left">
+						<h2 id="fitvid-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+							Introducing FitVID
+						</h2>
+						<p class="text-lg text-neutral-600 mb-6 leading-relaxed">
+							FitVID is our library of short online classes, free for Love More members. Roll
+							out your mat at home and move with us whenever the day allows.
+						</p>
+						<p class="text-lg text-neutral-600 mb-10 leading-relaxed">
+							Your videos live in your WellnessLiving account — the same account you use to
+							book classes. Sign in and the whole library is waiting for you.
+						</p>
 
-					<p class="text-sm text-neutral-500 mt-4">
-						Opens WellnessLiving in a new tab. Sign in with your Love More account to watch.
-					</p>
+						<Button href={fitVidUrl} variant="primary" size="large" external>
+							Browse FitVID Classes
+						</Button>
+
+						<p class="text-sm text-neutral-500 mt-4">
+							Opens WellnessLiving in a new tab. Sign in with your Love More account to watch.
+						</p>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -101,6 +118,31 @@ const benefits = [
 							</div>
 						))}
 					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Free Classes — open to anyone, no account needed -->
+		<section class="py-20 bg-cream-50" aria-labelledby="free-heading">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto text-center">
+					<Gift class="w-12 h-12 text-brand mx-auto mb-6" aria-hidden="true" />
+					<h2 id="free-heading" class="text-3xl md:text-4xl font-display font-bold text-charcoal mb-6 tracking-wide">
+						New Here? Start Free
+					</h2>
+					<p class="text-lg text-neutral-600 mb-10 leading-relaxed">
+						You don't need an account to try us out. A short meditation with Dom and a
+						vinyasa flow with JoEllen are free for anyone to watch — press play and see
+						how it feels.
+					</p>
+
+					<Button href={fitVidFreeUrl} variant="outline" size="large" external>
+						Watch Free Classes
+					</Button>
+
+					<p class="text-sm text-neutral-500 mt-4">
+						No sign-up, no card. Opens in a new tab.
+					</p>
 				</div>
 			</div>
 		</section>

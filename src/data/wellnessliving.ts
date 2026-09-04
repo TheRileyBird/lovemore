@@ -42,16 +42,32 @@ export function wlCatalogUrl(key: WlProductKey): string {
 // Verified 2026-09-03.
 //
 // Not covered by `npm run check:links`: that checker only scans /rs/ catalog
-// URLs, and this one redirects to the WellnessLiving login, which the body
-// check would read as a failure. If the video category is ever recreated,
-// `k_video_category` changes here by hand.
-const WL_FITVID_CATEGORY = 'I5kfh5Sa';
+// URLs, and the members category redirects to the WellnessLiving login, which
+// the body check would read as a failure. If a video category is ever recreated
+// in WellnessLiving, its id changes here by hand.
+//
+// The two categories differ by who can watch, which is a setting on the
+// category inside WellnessLiving, not something we control from this file:
+//   members — viewing restricted, so it bounces to the login page first.
+//   free    — no viewing restriction, so it plays for anyone, signed out.
+// Free access verified 2026-09-04 in a clean browser: no redirect, no paywall,
+// video source loads and plays.
+const WL_FITVID_CATEGORIES = {
+	members: 'I5kfh5Sa',
+	free: 'tWU81DxwdJMzTHBHPHswhm',
+} as const;
 
-/** Our FitVID on Demand video catalog. Requires a client sign-in. */
-export function wlFitVidUrl(): string {
+export type WlFitVidCategory = keyof typeof WL_FITVID_CATEGORIES;
+
+/**
+ * A FitVID on Demand video catalog.
+ *
+ * 'members' (the default) requires a client sign-in; 'free' is open to anyone.
+ */
+export function wlFitVidUrl(category: WlFitVidCategory = 'members'): string {
 	const params = new URLSearchParams({
 		k_business: WL_BUSINESS,
-		k_video_category: WL_FITVID_CATEGORY,
+		k_video_category: WL_FITVID_CATEGORIES[category],
 	});
 	return `https://www.wellnessliving.com/Wl/Video/Catalog/Catalog.html?${params}`;
 }
